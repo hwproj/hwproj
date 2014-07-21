@@ -4,4 +4,7 @@ class Task < ActiveRecord::Base
 	
 	has_many :submissions
 
+	enum status: [ :not_submitted, :not_accepted, :accepted_partially, :accepted ]
 end
+
+
