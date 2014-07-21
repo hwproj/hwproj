@@ -5,4 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   enum user_type: [ :student, :teacher ]
+
+  has_many :submissions
+  has_many :tasks, through: :submissions
 end

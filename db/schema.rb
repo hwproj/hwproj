@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140716094209) do
+ActiveRecord::Schema.define(version: 20140721074357) do
 
   create_table "homeworks", force: true do |t|
     t.integer  "number"
@@ -19,11 +19,32 @@ ActiveRecord::Schema.define(version: 20140716094209) do
     t.datetime "updated_at"
   end
 
-  create_table "tasks", force: true do |t|
-    t.integer  "number"
-    t.string   "problem"
+  create_table "marks", force: true do |t|
+    t.integer  "mark"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "problems", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "homework_id"
+    t.string   "text"
+  end
+
+  create_table "submissions", force: true do |t|
+    t.string   "note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "task_id"
+    t.integer  "user_id"
+  end
+
+  create_table "tasks", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "problem_id"
   end
 
   create_table "users", force: true do |t|

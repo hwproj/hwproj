@@ -1,0 +1,14 @@
+<% if @homeworks.any? %>
+  <ul>
+    <% @homeworks.each do |hw| %>
+      <li> <b> Домашняя работа <%= hw.number %> </b> </li>
+        <ol>
+        <% hw.problems.each do |problem| %>
+          <li> <%= problem.text %> </li>
+          <% end %>
+        </ol>
+    <% end %>
+  </ul>
+<% else %>
+  <h2> Нет домашних работ </h2>
+<% end %>

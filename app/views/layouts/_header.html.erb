@@ -1,0 +1,28 @@
+<nav class="navbar navbar-default navbar-static-top navbar-inverse" role="navigation">
+		<div class="container">
+			<div class="navbar-header">	        	
+	        	<%= link_to "hwproj", root_path, class: "navbar-brand" %>
+	        </div>
+        	<div class="navbar-right"> <!-- collapse navbar-collapse  -->
+          		<ul class="nav navbar-nav">
+          			<% if user_signed_in? %>
+                  <% if current_user.teacher? %>
+                    <li> <%= link_to "Добавить задание", new_homework_path %> </li>
+
+                  <% elsif %>
+                    <li> <%= link_to "Загрузить решение", '#' %>
+                  <% end %>
+            			 <!-- </li> <li class="active"> -->
+            			<li> <%= link_to "Задачи", homeworks_path %> </li>
+            			<li> <%= link_to "Группа", tasks_path %> </li>
+            			<!-- <li> <%= link_to "Статьи", '#' %> </li> -->
+            			<li> <%= link_to "Выход", destroy_user_session_path, method: :delete %> </li> <!-- class: "btn btn-default navbar-btn" -->
+    				<% else %>
+    					<li> <%= link_to "Регистрация", new_user_registration_path %> </li>
+    					<li> <%= link_to "Вход", new_user_session_path %> </li>
+    				<% end %>
+
+          		</ul>
+        	</div>
+		</div>
+	</nav>
