@@ -1,15 +1,13 @@
 <%= simple_form_for Submission.new do |f| %>
 
 
-  <%= simple_fields_for :task do |t| %>
-    <%= t.input :homework_id do %>
-      <%= t.select :homework_id, Homework.all.map { |hw| [hw.number] } %>
-    <% end %>
-
+  <%= f.simple_fields_for :task do |t| %>
     <%= t.input :problem_id do %>
-      <%= t.grouped_collection_select :problem_id, Homework.order(:number), :problems, :number, :id, :id, include_blank: true %>
+      <%= t.grouped_collection_select :problem_id, Homework.order(:number), :problems, :number, :id, :id, include_blank: false %>
     <% end %>
 
   <% end %>
+
+  <%= f.submit %>
 
 <% end %>

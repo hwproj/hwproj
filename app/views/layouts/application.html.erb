@@ -16,6 +16,8 @@
 		<div class="jumbotron">
 			<%= yield %>
 		</div>
+
+		<%= debug(params) if Rails.env.development? %>
 	</div>
 </body>
 </html>
