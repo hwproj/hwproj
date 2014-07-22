@@ -8,4 +8,6 @@ class User < ActiveRecord::Base
 
   has_many :submissions
   has_many :tasks, through: :submissions
+
+  accepts_nested_attributes_for :tasks, :reject_if => :all_blank, :allow_destroy => true 
 end

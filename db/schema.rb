@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140721130811) do
+ActiveRecord::Schema.define(version: 20140722092109) do
 
   create_table "homeworks", force: true do |t|
     t.integer  "number"
@@ -25,19 +25,28 @@ ActiveRecord::Schema.define(version: 20140721130811) do
     t.datetime "updated_at"
   end
 
+  create_table "notes", force: true do |t|
+    t.boolean  "fixed"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "submission_id"
+  end
+
   create_table "problems", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "homework_id"
     t.string   "text"
+    t.integer  "number"
   end
 
   create_table "submissions", force: true do |t|
-    t.string   "note"
+    t.string   "text"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "task_id"
     t.integer  "user_id"
+    t.string   "file"
   end
 
   create_table "tasks", force: true do |t|

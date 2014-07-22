@@ -13,7 +13,16 @@
        <td> <%= student.name %> </td>
 
         <% student.tasks.each do |task| %>
-          <td> <%= task.status.humanize %> </td>
+          <td> 
+            <% case task.status 
+              when "accepted" %>
+              qeqwq
+
+            <% when "not_submitted" %>
+              ns
+
+            <% end %> 
+          </td>
         <% end %>
 
        </tr>
