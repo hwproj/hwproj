@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { registrations: 'registrations' }
 
   resources :homeworks
-  resources :tasks, only: [ :index ]
+  resources :tasks, only: [ :index, :show ]
   resources :submissions, only: [ :new, :create, :index ]
 
   # The priority is based upon order of creation: first created -> highest priority.

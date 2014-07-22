@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
   def index
-  	@submissions = Submission.all
+  	@submissions = Submission.paginate(page: params[:page])
   end
 end
