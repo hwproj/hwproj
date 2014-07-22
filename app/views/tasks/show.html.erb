@@ -1,0 +1,9 @@
+<h2>Задача <%= @task.problem.homework.number %>.<%= @task.problem.id %> </h2>
+<h5> <%= @task.problem.text %>
+
+<%= form_for @task, method: :put do |f| %>
+	<%= f.hidden_field :status, value: "accepted" %>
+
+	<%= f.submit "Approve" %>
+
+<% end %>

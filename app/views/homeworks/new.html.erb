@@ -2,8 +2,6 @@
   
   <h2> Домашняя работа <%= @homework_number %> </h2>
 
-  <%= f.hidden_field :number, value: @homework_number %>
-
   <%= f.simple_fields_for :problems do |problem| %>
     <%= render 'problem_fields', f: problem %>
   <% end %>

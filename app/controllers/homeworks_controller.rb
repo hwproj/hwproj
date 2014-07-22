@@ -17,6 +17,7 @@ class HomeworksController < ApplicationController
 
   private
     def homework_params
+      params[:homework][:number] = @homework_number
       params.require(:homework).permit(:number, problems_attributes: [:id, :text, :_destroy])
   end
 
