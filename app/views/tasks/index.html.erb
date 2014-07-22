@@ -1,31 +1,42 @@
-<table class="table table-bordered">
-  <thead>
-    <tr>
-      <td align="center"><strong>Фамилия</strong></td>
-      <% for i in 1..@problems.count %>
-        <td> <%= i %> </td>
-      <% end %>
-    </tr>
-  </thead>
+<div class="table-responsive">
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <td align="center"><strong>Фамилия</strong></td>
+        <td align="center"><strong>TODO</strong></td>
+        <% for i in 1..@homeworks.count %>
+          <td align="center" colspan="<%= @homeworks[i - 1].problems.count %>"> <%= i %> </td>
+        <% end %>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <% for i in 1..@problems.count %>
+          <td align="center"> <%= i %> </td>
+        <% end %>
+      </tr>
+    </thead>
 
     <% @students.each do |student| %>
-       <tr> 
-       <td> <%= student.name %> </td>
+      <tr> 
+        <td> <%= student.surname %> <%= student.name.first %>. </td>
+        <td> <%= student.tasks.select{ |x| x.status != "accepted" }.count %> </td>
 
         <% student.tasks.each do |task| %>
-          <td> 
-            <% case task.status 
+          <% case task.status 
               when "accepted" %>
-              qeqwq
-
-            <% when "not_submitted" %>
-              ns
-
-            <% end %> 
-          </td>
+              <td class="success"></td>
+              <% when "not_accepted" %>
+              <td class="danger"></td>
+              <% when "not_submitted" %>
+              <td></td>
+              <% when "accepted_partially" %>
+              <td class="warning"></td>
+          <% end %>
         <% end %>
 
-       </tr>
+      </tr>
     <% end %>
-  
-</table>
+    
+  </table>
+</div>
