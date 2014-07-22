@@ -18,7 +18,7 @@
             <li> <%= link_to "Добавить задание", new_homework_path %> </li>
 
           <% elsif %>
-            <li> <%= link_to "Загрузить решение", '#' %>
+            <li> <%= link_to "Загрузить решение", new_submission_path %>
           <% end %>
     			 <!-- </li> <li class="active"> -->
     			<li> <%= link_to "Задачи", homeworks_path %> </li>

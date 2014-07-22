@@ -5,7 +5,6 @@
     <%= t.input :problem_id do %>
       <%= t.grouped_collection_select :problem_id, Homework.order(:number), :problems, :number, :id, :id, include_blank: false %>
     <% end %>
-
   <% end %>
 
   <%= f.submit %>

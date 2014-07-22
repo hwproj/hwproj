@@ -3,12 +3,14 @@ class SubmissionsController < ApplicationController
   end
 
   def create
-    current_user.tasks.find(2)
-    Submission.create(submission_params)
+    @task = current_user.tasks.where(problem_id: params[:submission][:task][:problem_id]).first
+    @submission = @task.submissions.create(submission_params)
   end
 
   private
     def submission_params
-      params.require(:submission).permit(:task)
+      params[:submission][:user_id] = current_user.id
+      params[:submission][:version] = @task.submissions.count + 1
+      params.require(:submission).permit(:text, :user_id, :version)
     end
 end
