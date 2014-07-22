@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <title>Hwproj</title>
+  <title>hwProj</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -15,9 +15,8 @@
 			<div class="col-md-12">
 				<%= render 'layouts/messages' %>
 
-				<div class="jumbotron">
-					<%= yield %>
-				</div> 
+				<%= yield %>
+				 
 			</div>
 		</div>
 
