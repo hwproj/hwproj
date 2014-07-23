@@ -12,11 +12,11 @@
   <% if @task.submissions.any? %>
     <h3>Последнее решение</h3>
     <%= @last_submission.text %>
-    <% if @last_submission.notes.any? %>
 
+    <% if @task.notes.any? %>
       <h3> Замечания </h3>
         <ul>
-          <% @last_submission.notes.each do |note| %>
+          <% @task.notes.each do |note| %>
             <li> <h5>
               <%= "(fixed)" if note.fixed? %>
 
