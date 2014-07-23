@@ -7,7 +7,7 @@
     </small> 
   </h1>
 
-  <div class="row"><div class="col-md-4 well well-small"> <%= @task.problem.text %> </div></div>
+  <div class="row"><div class="well well-small"> <%= @task.problem.text %> </div></div>
 
   <% if @task.submissions.any? %>
     <h3>Последнее решение</h3>
@@ -71,4 +71,7 @@
 
   <% end %>
 
+</div>
+<div class="col-md-4">
+<h1>Обсуждение</h1>
 </div>
