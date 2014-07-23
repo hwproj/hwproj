@@ -7,6 +7,8 @@ class TasksController < ApplicationController
 
   def show
   	@task = Task.find(params[:id])
+    @user = @task.user
+    @submissions = @task.submissions
   end
 
   def update

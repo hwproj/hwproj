@@ -4,15 +4,17 @@
       <tr>
         <td align="center"><strong>Фамилия</strong></td>
         <td align="center"><strong>TODO</strong></td>
-        <% for i in 1..@homeworks.count %>
-          <td align="center" colspan="<%= @homeworks[i - 1].problems.count %>"> <%= i %> </td>
+        <% @homeworks.each do |homework| %>
+          <td align="center" colspan="<%= homework.problems.count %>"> <%= homework.number %> </td>
         <% end %>
       </tr>
       <tr>
         <td></td>
         <td></td>
-        <% for i in 1..@problems.count %>
-          <td align="center"> <%= i %> </td>
+        <% @problems.each do |problem| %>
+          <td align="center"> 
+            <%= problem.number %>
+          </td>
         <% end %>
       </tr>
     </thead>
