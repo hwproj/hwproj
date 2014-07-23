@@ -31,7 +31,7 @@
       <div class="links">
         <%= link_to_add_association 'Добавить замечание', f, :notes %>
       </div>
-      <%= f.submit %>
+      <%= f.submit "Сохранить замечания" %>
     <% end %>
 
   <% end %>
@@ -39,7 +39,7 @@
   <%= form_for @task, method: :put do |f| %>
     <%= f.hidden_field :status, value: "accepted" %>
 
-    <%= f.submit "Approve" %>
+    <%= f.submit "Принять задачу" %>
 
   <% end %>
 

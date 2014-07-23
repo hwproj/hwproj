@@ -7,7 +7,7 @@
           <h5>  
             <%= link_to submission.user.name, '#' %> добавил 
             <%= link_to "версию #{submission.version}", submission.task %> решения 
-            <%= link_to "задачи #{submission.task.problem.id}", submission.task.problem %> 
+            <%= link_to "задачи #{submission.task.problem.homework.number}.#{submission.task.problem.number}", submission.task.problem %> 
 
             <small><%= submission.created_at %></small>
           </h5>
