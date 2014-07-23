@@ -1,67 +1,74 @@
-<h2>
-  Задача <%= @task.problem.homework.number %>.<%= @task.problem.number %> 
-  <small> 
-    <%= "#{@user.name} #{@user.surname}" %> 
-    <%= " v.#{@submissions.first.version}" if @submissions.any? %>
-  </small> 
-</h2>
+<div class="col-md-8">
+  <h1>
+    Задача <%= @task.problem.homework.number %>.<%= @task.problem.number %> 
+    <small> 
+      <%= "#{@user.name} #{@user.surname}" %> 
+      <%= " v.#{@submissions.first.version}" if @submissions.any? %>
+    </small> 
+  </h1>
 
-<mark> <%= @task.problem.text %> </mark>
+  <div class="row"><div class="col-md-4 well well-small"> <%= @task.problem.text %> </div></div>
 
-<% if @task.submissions.any? %>
-  <% if @last_submission.notes.any? %>
-
-    <h3> Замечания </h3>
-      <ul>
-        <% @last_submission.notes.each do |note| %>
-          <li> <h5>
-            <%= "(fixed)" if note.fixed? %>
-
-            <%= note.text %> <small> <%= "v.#{note.submission.version}, #{note.created_at.to_date}" %> </small> 
-
-              <%= form_for note, method: :put do |f| %>
-                <%= f.hidden_field :id, value: note.id %>
-                <%= f.hidden_field :fixed, value: true %>
-                <%= f.submit "Исправлено" %>
-              <% end %>
-
-          </h5> </li>
-        <% end %>
-      </ul>
-  <% end %>
-<% end %>
-
-
-<% if signed_in? && current_user.teacher? %> <br> 
-  <% if @submissions.any? %>
-
+  <% if @task.submissions.any? %>
+    <h3>Последнее решение</h3>
+    <%= @last_submission.text %>
     <% if @last_submission.notes.any? %>
-      <h4> Редактировать замечания </h4> 
+
+      <h3> Замечания </h3>
+        <ul>
+          <% @last_submission.notes.each do |note| %>
+            <li> <h5>
+              <%= "(fixed)" if note.fixed? %>
+
+              <%= note.text %> <small> <%= "v.#{note.submission.version}, #{note.created_at.to_date}" %> </small> 
+
+                <% if current_user.teacher? %>
+                  <%= form_for note, method: :put do |f| %>
+                    <%= f.hidden_field :id, value: note.id %>
+                    <%= f.hidden_field :fixed, value: true %>
+                    <%= f.submit "Исправлено" %>
+                  <% end %>
+                <% end %>
+
+            </h5> </li>
+          <% end %>
+        </ul>
     <% end %>
+  <% end %>
 
-    
-    <%= simple_form_for @last_submission, url: {controller: :submissions, action: :update} do |f| %>
 
-      <%= f.hidden_field :id, value: @last_submission.id %>
+  <% if signed_in? && current_user.teacher? %> <br> 
+    <% if @submissions.any? %>
 
-      <%= f.simple_fields_for :notes do |note| %>
-        <%= render 'note_fields', f: note %>
+      <% if @last_submission.notes.any? %>
+        <h4> Редактировать замечания </h4> 
       <% end %>
 
-      <br>
-      <div class="links">
-        <%= link_to_add_association 'Добавить замечание', f, :notes %>
-      </div>
-      <%= f.submit "Сохранить замечания" %>
+      
+      <%= simple_form_for @last_submission, url: {controller: :submissions, action: :update} do |f| %>
+
+        <%= f.hidden_field :id, value: @last_submission.id %>
+
+        <%= f.simple_fields_for :notes do |note| %>
+          <%= render 'note_fields', f: note %>
+        <% end %>
+
+        <br>
+        <div class="links">
+          <%= link_to_add_association 'Добавить замечание', f, :notes %>
+        </div>
+        <%= f.submit "Сохранить замечания" %>
+      <% end %>
+
+    <% end %>
+    <br>
+    <%= form_for @task, method: :put do |f| %>
+      <%= f.hidden_field :status, value: "accepted" %>
+
+      <%= f.submit "Принять задачу" %>
+
     <% end %>
 
   <% end %>
-  <br>
-  <%= form_for @task, method: :put do |f| %>
-    <%= f.hidden_field :status, value: "accepted" %>
 
-    <%= f.submit "Принять задачу" %>
-
-  <% end %>
-
-<% end %>
+</div>
