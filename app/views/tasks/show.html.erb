@@ -14,11 +14,16 @@
     <ul>
       <% @last_submission.notes.each do |note| %>
         <li> <h5>
+          <%= "(fixed)" if note.fixed? %>
+
           <%= note.text %> <small> <%= "v.#{note.submission.version}, #{note.created_at.to_date}" %> </small> 
-            <%= form_for note, url: {controller: :notes, action: :update, method: :put} do |f| %>
-              <% f.hidden_field :fixed, value: true %>
-              <% f.submit "Исправлено" %>
+
+            <%= form_for note, method: :put do |f| %>
+              <%= f.hidden_field :id, value: note.id %>
+              <%= f.hidden_field :fixed, value: true %>
+              <%= f.submit "Исправлено" %>
             <% end %>
+
         </h5> </li>
       <% end %>
     </ul>
