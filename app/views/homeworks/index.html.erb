@@ -1,7 +1,7 @@
 <% if @homeworks.any? %>
   <ul>
     <% @homeworks.each do |hw| %>
-      <li> <b> Домашняя работа <%= hw.number %> </b> </li>
+      <li> <b> Домашняя работа <%= hw.number %> <%= link_to "Редактировать", edit_homework_path(hw) if signed_in? && current_user.teacher?%> </b> </li>
         <ol>
         <% hw.problems.each do |problem| %>
           <li> <%= problem.text %> </li>

@@ -11,15 +11,28 @@
 <% if @last_submission.notes.any? %>
 
   <h3> Замечания </h3>
-  <% @last_submission.notes.each do |note| %>
-    <%= note.text %> <br>
-  <% end %>
+    <ul>
+      <% @last_submission.notes.each do |note| %>
+        <li> <h5>
+          <%= note.text %> <small> <%= "v.#{note.submission.version}, #{note.created_at.to_date}" %> </small> 
+            <%= form_for note, url: {controller: :notes, action: :update, method: :put} do |f| %>
+              <% f.hidden_field :fixed, value: true %>
+              <% f.submit "Исправлено" %>
+            <% end %>
+        </h5> </li>
+      <% end %>
+    </ul>
 <% end %>
 
 
-<% if signed_in? && current_user.teacher? %>
-  
+<% if signed_in? && current_user.teacher? %> <br> 
   <% if @submissions.any? %>
+
+    <% if @last_submission.notes.any? %>
+      <h4> Редактировать замечания </h4> 
+    <% end %>
+
+    
     <%= simple_form_for @last_submission, url: {controller: :submissions, action: :update} do |f| %>
 
       <%= f.hidden_field :id, value: @last_submission.id %>
@@ -28,6 +41,7 @@
         <%= render 'note_fields', f: note %>
       <% end %>
 
+      <br>
       <div class="links">
         <%= link_to_add_association 'Добавить замечание', f, :notes %>
       </div>
@@ -35,7 +49,7 @@
     <% end %>
 
   <% end %>
-
+  <br>
   <%= form_for @task, method: :put do |f| %>
     <%= f.hidden_field :status, value: "accepted" %>
 

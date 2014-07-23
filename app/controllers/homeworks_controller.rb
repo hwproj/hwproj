@@ -17,6 +17,16 @@ class HomeworksController < ApplicationController
     @homeworks = Homework.all
   end
 
+  def edit
+    @homework = Homework.find(params[:id])
+  end
+
+  def update
+    @homework = Homework.find(params[:id])
+    @homework.update(homework_params)
+    redirect_to homeworks_path
+  end
+
   private
     def homework_params
       params[:homework][:number] = Homework.count + 1

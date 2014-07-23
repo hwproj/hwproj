@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :tasks, only: [ :index, :show, :update ]
   resources :submissions, only: [ :new, :create, :index, :update ]
   resources :problems, only: [ :show ]
+  resources :notes, only: :update
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
