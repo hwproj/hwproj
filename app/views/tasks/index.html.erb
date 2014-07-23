@@ -5,7 +5,7 @@
         <td align="center"><strong>Фамилия</strong></td>
         <td align="center"><strong>TODO</strong></td>
         <% @homeworks.each do |homework| %>
-          <td align="center" colspan="<%= homework.problems.count %>"> <%= homework.number %> </td>
+          <td align="center" colspan="<%= homework.problems.count %>"><strong> <%= homework.number %> </strong></td>
         <% end %>
       </tr>
       <tr>

@@ -17,6 +17,10 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+.navbar {
+	padding-left: 10px;
+}
+
 .navbar-inverse .navbar-btn {
   background-color: #444444;
   border-color: #333333;
