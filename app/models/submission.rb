@@ -6,4 +6,6 @@ class Submission < ActiveRecord::Base
 	mount_uploader :file, SubmissionUploader
 
 	default_scope -> { order('created_at DESC') }
+
+	accepts_nested_attributes_for :notes, :reject_if => :all_blank, :allow_destroy => true   
 end

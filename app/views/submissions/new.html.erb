@@ -2,8 +2,8 @@
 
 
   <%= f.simple_fields_for :task do |t| %>
-    <%= t.input :problem_id do %>
-      <%= t.grouped_collection_select :problem_id, Homework.order(:number), :problems, :number, :id, :id, include_blank: false %>
+    <%= t.input :problem_id, required: false do %>
+      <%= t.grouped_collection_select :problem_id, Homework.order(:number), :problems, :number, :id, :number, include_blank: false %>
     <% end %>
   <% end %>
 

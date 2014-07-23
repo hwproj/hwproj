@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   resources :homeworks
   resources :tasks, only: [ :index, :show, :update ]
-  resources :submissions, only: [ :new, :create, :index ]
+  resources :submissions, only: [ :new, :create, :index, :update ]
   resources :problems, only: [ :show ]
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -9,6 +9,7 @@ class TasksController < ApplicationController
   	@task = Task.find(params[:id])
     @user = @task.user
     @submissions = @task.submissions
+    @last_submission = @submissions.first
   end
 
   def update

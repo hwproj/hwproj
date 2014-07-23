@@ -2,15 +2,45 @@
   Задача <%= @task.problem.homework.number %>.<%= @task.problem.number %> 
   <small> 
     <%= "#{@user.name} #{@user.surname}" %> 
-    <%= " v.#{@submissions.last.version}" if @submissions.any? %>
+    <%= " v.#{@submissions.first.version}" if @submissions.any? %>
   </small> 
 </h2>
 
 <h5> <%= @task.problem.text %> </h5>
 
-<%= form_for @task, method: :put do |f| %>
-  <%= f.hidden_field :status, value: "accepted" %>
+<% if @last_submission.notes.any? %>
 
-  <%= f.submit "Approve" %>
+  <h3> Замечания </h3>
+  <% @last_submission.notes.each do |note| %>
+    <%= note.text %> <br>
+  <% end %>
+<% end %>
+
+
+<% if signed_in? && current_user.teacher? %>
+  
+  <% if @submissions.any? %>
+    <%= simple_form_for @last_submission, url: {controller: :submissions, action: :update} do |f| %>
+
+      <%= f.hidden_field :id, value: @last_submission.id %>
+
+      <%= f.simple_fields_for :notes do |note| %>
+        <%= render 'note_fields', f: note %>
+      <% end %>
+
+      <div class="links">
+        <%= link_to_add_association 'Добавить замечание', f, :notes %>
+      </div>
+      <%= f.submit %>
+    <% end %>
+
+  <% end %>
+
+  <%= form_for @task, method: :put do |f| %>
+    <%= f.hidden_field :status, value: "accepted" %>
+
+    <%= f.submit "Approve" %>
+
+  <% end %>
 
 <% end %>
