@@ -8,25 +8,27 @@
 
 <mark> <%= @task.problem.text %> </mark>
 
-<% if @last_submission.notes.any? %>
+<% if @task.submissions.any? %>
+  <% if @last_submission.notes.any? %>
 
-  <h3> Замечания </h3>
-    <ul>
-      <% @last_submission.notes.each do |note| %>
-        <li> <h5>
-          <%= "(fixed)" if note.fixed? %>
+    <h3> Замечания </h3>
+      <ul>
+        <% @last_submission.notes.each do |note| %>
+          <li> <h5>
+            <%= "(fixed)" if note.fixed? %>
 
-          <%= note.text %> <small> <%= "v.#{note.submission.version}, #{note.created_at.to_date}" %> </small> 
+            <%= note.text %> <small> <%= "v.#{note.submission.version}, #{note.created_at.to_date}" %> </small> 
 
-            <%= form_for note, method: :put do |f| %>
-              <%= f.hidden_field :id, value: note.id %>
-              <%= f.hidden_field :fixed, value: true %>
-              <%= f.submit "Исправлено" %>
-            <% end %>
+              <%= form_for note, method: :put do |f| %>
+                <%= f.hidden_field :id, value: note.id %>
+                <%= f.hidden_field :fixed, value: true %>
+                <%= f.submit "Исправлено" %>
+              <% end %>
 
-        </h5> </li>
-      <% end %>
-    </ul>
+          </h5> </li>
+        <% end %>
+      </ul>
+  <% end %>
 <% end %>
 
 
