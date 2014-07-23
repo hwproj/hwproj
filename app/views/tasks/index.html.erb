@@ -5,7 +5,7 @@
         <td align="center"><strong>Фамилия</strong></td>
         <td align="center"><strong></strong></td>
         <% @homeworks.each do |homework| %>
-          <td class="active"></td>
+          <td class="separator"></td>
           <td align="center" colspan="<%= homework.problems.count %>"><strong> <%= homework.number %> </strong></td>
         <% end %>
       </tr>
@@ -14,7 +14,7 @@
         <td></td>
         <% @problems.each do |problem| %>
           <% if problem.number == 1 %>
-            <td class="active"></td> 
+            <td class="separator"></td> 
           <% end %>
 
           <td align="center">  
@@ -31,18 +31,18 @@
 
         <% student.tasks.each do |task| %>
           <% if task.problem.number == 1 %>
-            <td class="active"></td> 
+            <td class="separator"></td> 
           <% end %>
 
           <% case task.status 
               when "accepted" %>
-              <td class="success"></td>
+              <td class="accepted"></td>
               <% when "not_accepted" %>
-              <td class="danger"></td>
+              <td class="not_accepted"></td>
               <% when "not_submitted" %>
               <td></td>
               <% when "accepted_partially" %>
-              <td class="warning"></td>
+              <td class="accepted_partially"></td>
           <% end %>
         <% end %>
 
