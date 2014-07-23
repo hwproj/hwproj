@@ -19,12 +19,6 @@ ActiveRecord::Schema.define(version: 20140723094031) do
     t.datetime "updated_at"
   end
 
-  create_table "marks", force: true do |t|
-    t.integer  "mark"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "notes", force: true do |t|
     t.boolean  "fixed"
     t.datetime "created_at"

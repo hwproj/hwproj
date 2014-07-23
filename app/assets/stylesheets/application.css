@@ -31,3 +31,19 @@
   color: #ffffff;
   background-color: #555555;
 }
+
+.accepted {
+	background-color: #7ad67a;
+}
+
+.not_accepted {
+	background-color: #f7716d;
+}
+
+.accepted_partially {
+	background-color: #ffcb6c;
+}
+
+.separator {
+	background-color: #eeeeee;
+}
