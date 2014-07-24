@@ -30,11 +30,13 @@
             <h5> 
               К задаче <%= link_to "#{task.problem.homework.number}.#{task.problem.number}", task %>
               добавлены замечания.
+              <small><%= task.notes.last.created_at.to_date %></small>
             </h5>
           <% end %>
           <% if task.status == "accepted" %>
             <h5>
               Задача <%= link_to "#{task.problem.homework.number}.#{task.problem.number}", task %> принята.
+              <small><%= task.updated_at.to_date %></small>
             </h5>
           <% end %>
         <% end %>
