@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 
   enum user_type: [ :student, :teacher ]
 
+  belongs_to :group
+
   has_many :tasks
   has_many :submissions, through: :tasks
 

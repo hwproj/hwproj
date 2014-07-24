@@ -11,10 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140723094031) do
+ActiveRecord::Schema.define(version: 20140724103252) do
+
+  create_table "groups", force: true do |t|
+    t.integer  "number"
+    t.integer  "year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "homeworks", force: true do |t|
     t.integer  "number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "group_id"
+  end
+
+  create_table "marks", force: true do |t|
+    t.integer  "mark"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -69,6 +83,7 @@ ActiveRecord::Schema.define(version: 20140723094031) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.integer  "user_type",              default: 0
+    t.integer  "group_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
