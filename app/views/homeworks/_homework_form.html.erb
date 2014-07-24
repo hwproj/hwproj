@@ -1,13 +1,21 @@
 <%= simple_form_for @homework  do |f| %>
   
-  <h2> Домашняя работа <%= @homework_number %> </h2>
+  <h1> Домашняя работа <%= @homework_number %> </h1>
 
   <%= f.simple_fields_for :problems do |problem| %>
     <%= render 'problem_fields', f: problem %>
   <% end %>
     
   <div class="links">
-    <%= link_to_add_association 'Добавить задачу', f, :problems %>
-    </div>
-  <%= f.submit %>
+    <%= link_to_add_association 'Добавить задачу', f, :problems, class: "btn btn-default" %>
+  </div>
+  <%= f.button :submit, "Создать", class: "btn btn-primary" %>
 <% end %>
+
+<!--
+<%= form_tag("/search", method: "get") do %>
+  <%= label_tag(:q, "Search for:") %>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("Search", class: "btn btn-primary") %>
+<% end %> 
+-->
