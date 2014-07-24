@@ -27,7 +27,7 @@
     			<li> <%= link_to "Выход", destroy_user_session_path, method: :delete %> </li> <!-- class: "btn btn-default navbar-btn" -->
     		<% else %>
     			<li> <%= link_to "Регистрация", new_user_registration_path %> </li>
-    			<li> <%= button_to "Вход", new_user_session_path, class: "btn btn-default navbar-btn" %> </li>
+    			<li> <%= link_to "Вход", new_user_session_path%> </li>
     		<% end %>
       </ul>
     </div>
