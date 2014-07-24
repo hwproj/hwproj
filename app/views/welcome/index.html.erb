@@ -1,59 +1,7 @@
 <% if signed_in? %>
   <% if current_user.teacher? %>
-    <div class="row">
-      <div class="col-md-8">
-        <h1>Новости</h1>
-        <% @submissions.each do |submission| %>
-          <h5>  
-            <%= link_to submission.user.name, '#' %> добавил 
-            <%= link_to "версию #{submission.version}", submission.task %> решения задачи
-            <%= link_to "#{submission.task.problem.homework.number}.#{submission.task.problem.number}", submission.task.problem %> 
-            <small><%= submission.created_at %></small>
-          </h5>
-        <% end %>
-      </div>
-      <div class="col-md-4">
-        <div class="row">
-          <div class="col-md-12"><h1>Дедлайн</h1></div>
-        </div>
-        <div class="row">
-          <div class="col-md-12"><h1>Вопросы по задачам</h1></div>
-        </div>
-      </div>
-    </div>
+    <%= render 'teacher_feed' %>
   <% else %>
-    <div class="row">
-      <div class="col-md-8">
-        <h1>Новости</h1>
-        <% current_user.tasks.each do |task| %>
-          <% if task.notes.count != 0 %>
-            <h5> 
-              К задаче <%= link_to "#{task.problem.homework.number}.#{task.problem.number}", task %>
-              добавлены замечания.
-              <small><%= task.notes.last.created_at.to_date %></small>
-            </h5>
-          <% end %>
-          <% if task.status == "accepted" %>
-            <h5>
-              Задача <%= link_to "#{task.problem.homework.number}.#{task.problem.number}", task %> принята.
-              <small><%= task.updated_at.to_date %></small>
-            </h5>
-          <% end %>
-        <% end %>
-      </div>
-
-      <div class="col-md-4">
-        <div class="row">
-          <div class="col-md-12">
-            <h1>Дедлайн</h1>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <h1>Просроченные задачи</h1>
-          </div>
-        </div>
-      </div>
-    </div>
+    <%= render 'student_feed' %>
   <% end %>
 <% end %>

@@ -11,20 +11,19 @@
 
       <%= link_to "hwproj", root_path, class: "navbar-brand" %>
     </div>
-    <div class="navbar-right collapse navbar-collapse" id="navbar-main"> <!-- collapse navbar-collapse  -->
+    <div class="navbar-right collapse navbar-collapse" id="navbar-main">
   		<ul class="nav navbar-nav">
   			<% if user_signed_in? %>
           <% if current_user.teacher? %>
             <li> <%= link_to "Добавить задание", new_homework_path %> </li>
 
           <% elsif %>
-            <li> <%= link_to "Загрузить решение", new_submission_path %>
+            <li> <%= link_to "Загрузить решение", new_submission_path %></li>
           <% end %>
-    			 <!-- </li> <li class="active"> -->
     			<li> <%= link_to "Задачи", homeworks_path %> </li>
     			<li> <%= link_to "Группа", tasks_path %> </li>
     			<!-- <li> <%= link_to "Статьи", '#' %> </li> -->
-    			<li> <%= link_to "Выход", destroy_user_session_path, method: :delete %> </li> <!-- class: "btn btn-default navbar-btn" -->
+    			<li> <%= link_to "Выход", destroy_user_session_path, method: :delete %> </li>
     		<% else %>
     			<li> <%= link_to "Регистрация", new_user_registration_path %> </li>
     			<li> <%= link_to "Вход", new_user_session_path%> </li>
