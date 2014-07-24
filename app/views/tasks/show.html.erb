@@ -11,7 +11,8 @@
 
   <% if @task.submissions.any? %>
     <h3>Последнее решение</h3>
-    <%= @last_submission.text %>
+    <%= @last_submission.text %> <br>
+    <%= link_to "Скачать файл", @last_submission.file.url %>
 
     <% if @task.notes.any? %>
       <h3> Замечания </h3>
@@ -20,7 +21,7 @@
             <li> <h5>
               <%= "(fixed)" if note.fixed? %>
 
-              <%= note.text %> <small> <%= "v.#{note.submission.version}, #{note.created_at.to_date}" %> </small> 
+              <%= note.text %> <small> <strong><%= "v.#{note.submission.version}" %></strong><%=", #{note.created_at.to_date}" %> </small> 
 
                 <% if current_user.teacher? %>
                   <%= form_for note, method: :put do |f| %>

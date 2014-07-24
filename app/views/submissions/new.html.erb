@@ -1,5 +1,4 @@
-<%= simple_form_for Submission.new do |f| %>
-
+<%= simple_form_for Submission.new, html: {multipart: true} do |f| %>
 
   <%= f.simple_fields_for :task do |t| %>
     <%= t.input :problem_id, required: false, label: "Задача" do %>
@@ -8,6 +7,8 @@
   <% end %>
 
   <%= f.input :text, label: "Текст к решению" %>
+
+  <%= f.input :file %>
 
  <br>
 
