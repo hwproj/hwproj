@@ -6,6 +6,7 @@ class GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
+    @homeworks = @group.homeworks
   end
 
 end
