@@ -22,11 +22,30 @@
     <div class="row">
       <div class="col-md-12">
         <h1>Дедлайн</h1>
+        <% if @deadline_tasks.any? %>
+          Осталась неделя:
+          <ul>
+          <% @deadline_tasks.each do |task| %>
+            <li><%= link_to task.name, task %></li>
+          <% end %>
+          </ul>
+        <% else %>
+          Всё идёт по плану! :)
+        <% end %>
       </div>
     </div>
     <div class="row">
       <div class="col-md-12">
         <h1>Просроченные задачи</h1>
+        <% if @overdue_tasks.any? %>
+          <ul>
+          <% @overdue_tasks.each do |task| %>
+            <li><%= link_to task.name, task %></li>
+          <% end %>
+          </ul>
+        <% else %>
+          Просроченных нет.
+        <% end %>
       </div>
     </div>
   </div>
