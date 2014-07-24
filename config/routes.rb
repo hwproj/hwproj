@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :problems, only: [ :show ]
   resources :notes, only: :update
   resources :groups
+  resources :links
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
