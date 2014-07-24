@@ -2,16 +2,18 @@
   <% if current_user.teacher? %>
     <div class="row">
       <div class="col-md-8">
-        <h1>Новости</h1>
-        <% @submissions.each do |submission| %>
-          <h5>  
-            <%= link_to submission.user.name, '#' %> добавил 
-            <%= link_to "версию #{submission.version}", submission.task %> решения 
-            <%= link_to "задачи #{submission.task.problem.id}", submission.task.problem %> 
+      	<div class="row">
+          <h1>Новости</h1>
+          <% @submissions.each do |submission| %>
+            <h5>  
+              <%= link_to submission.user.name, '#' %> добавил 
+              <%= link_to "версию #{submission.version}", submission.task %> решения 
+              <%= link_to "задачи #{submission.task.problem.id}", submission.task.problem %> 
 
-            <small><%= submission.created_at %></small>
-          </h5>
-        <% end %>
+              <small><%= submission.created_at %></small>
+            </h5>
+          <% end %>
+        </div>
       </div>
       <div class="col-md-4">
         <div class="row">
