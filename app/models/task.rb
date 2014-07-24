@@ -6,7 +6,11 @@ class Task < ActiveRecord::Base
 
     enum status: [ :not_submitted, :not_accepted, :accepted_partially, :accepted ]
 
-    accepts_nested_attributes_for :submissions, :reject_if => :all_blank, :allow_destroy => true 
+    accepts_nested_attributes_for :submissions, :reject_if => :all_blank, :allow_destroy => true
+
+    def name
+    	problem.homework.number.to_s + "." + problem.number.to_s
+    end
 end
 
 

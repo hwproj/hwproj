@@ -2,6 +2,8 @@
   
   <h1> Домашняя работа <%= @homework_number %> </h1>
 
+  <%= f.association :group %>
+
   <%= f.simple_fields_for :problems do |problem| %>
     <%= render 'problem_fields', f: problem %>
   <% end %>
