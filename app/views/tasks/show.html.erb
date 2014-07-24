@@ -40,18 +40,13 @@
 
   <% if signed_in? && current_user.teacher? %> <br> 
     <% if @submissions.any? %>
-
-      <% if @last_submission.notes.any? %>
-        <h4> Редактировать замечания </h4> 
-      <% end %>
-
-      
+    
       <%= simple_form_for @last_submission, url: {controller: :submissions, action: :update} do |f| %>
 
         <%= f.hidden_field :id, value: @last_submission.id %>
 
         <%= f.simple_fields_for :notes do |note| %>
-          <%= render 'note_fields', f: note %>
+          
         <% end %>
 
         <br>
