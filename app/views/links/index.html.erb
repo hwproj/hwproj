@@ -1,0 +1,9 @@
+<h1>Полезные ссылки</h1>
+<ul>
+	<% @links.each do |link| %>
+		<li><%= link_to link.name, "http://#{link.url}" %></li>
+	<% end %>
+</ul>
+<% if signed_in? && current_user.teacher? %>
+	<%= link_to "Добавить", new_link_path, class: "btn btn-primary" %>
+<% end %>

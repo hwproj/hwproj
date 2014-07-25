@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140724103252) do
+ActiveRecord::Schema.define(version: 20140724161842) do
 
   create_table "groups", force: true do |t|
     t.integer  "number"
@@ -27,10 +27,11 @@ ActiveRecord::Schema.define(version: 20140724103252) do
     t.integer  "group_id"
   end
 
-  create_table "marks", force: true do |t|
-    t.integer  "mark"
+  create_table "links", force: true do |t|
+    t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
   end
 
   create_table "notes", force: true do |t|
