@@ -17,3 +17,5 @@
 
 //= require bootstrap
 //= require cocoon
+
+//= require bootstrap-sprockets
