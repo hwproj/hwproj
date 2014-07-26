@@ -4,13 +4,14 @@ class HomeworksController < ApplicationController
   def new
     @homework = Homework.new()
     @homework_number = Homework.count + 1
+    @groups = Group.all
   end
 
   def create
     @homework = Homework.create(homework_params)
     enumerate_problems
     create_tasks
-    redirect_to homeworks_path
+    redirect_to @homework.group
   end
 
   def index
@@ -19,18 +20,19 @@ class HomeworksController < ApplicationController
 
   def edit
     @homework = Homework.find(params[:id])
+    @homework_number = @homework.number
+    @groups = Group.all
   end
 
   def update
     @homework = Homework.find(params[:id])
     @homework.update(homework_params)
-    redirect_to homeworks_path
+    redirect_to @homework.group
   end
 
   private
     def homework_params
-      params[:homework][:number] = Homework.count + 1
-      params.require(:homework).permit(:number, problems_attributes: [:id, :text, :_destroy])
+      params.require(:homework).permit(:number, :group_id, problems_attributes: [:id, :text, :_destroy])
   end
 
   def enumerate_problems

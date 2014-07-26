@@ -1,53 +1,55 @@
-<div class="table-responsive">
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <td align="center"><strong>Фамилия</strong></td>
-        <td align="center"><strong></strong></td>
-        <% @group.homeworks.each do |homework| %>
-          <td class="separator"></td>
-          <td align="center" colspan="<%= homework.problems.count %>"><strong> <%= homework.number %> </strong></td>
-        <% end %>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <% @group.problems.each do |problem| %>
-          <% if problem.number == 1 %>
-            <td class="separator"></td> 
+<% if @group.users.any? %>
+  <div class="table-responsive">
+    <table class="table table-bordered table-condensed">
+      <thead>
+        <tr>
+          <td align="center"><strong>Фамилия</strong></td>
+          <td align="center"><strong></strong></td>
+          <% @group.homeworks.each do |homework| %>
+            <td class="separator"></td>
+            <td align="center" colspan="<%= homework.problems.count %>"><strong> <%= homework.number %> </strong></td>
+          <% end %>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <% @group.problems.each do |problem| %>
+            <% if problem.number == 1 %>
+              <td class="separator"></td> 
+            <% end %>
+
+            <td align="center">  
+              <%= problem.number %>
+            </td>
+          <% end %>
+        </tr>
+      </thead>
+
+      <% @group.users.each do |student| %>
+        <tr> 
+          <td> <%= student.surname %> <%= student.name.first %>. </td>
+          <td> <%= student.tasks.select{ |x| x.status != "accepted" }.count %> </td>
+
+          <% student.tasks.each do |task| %>
+            <% if task.problem.number == 1 %>
+              <td class="separator"></td> 
+            <% end %>
+
+            <% case task.status 
+                when "accepted" %>
+                <td class="accepted"></td>
+                <% when "not_accepted" %>
+                <td class="not_accepted"></td>
+                <% when "not_submitted" %>
+                <td></td>
+                <% when "accepted_partially" %>
+                <td class="accepted_partially"></td>
+            <% end %>
           <% end %>
 
-          <td align="center">  
-            <%= problem.number %>
-          </td>
-        <% end %>
-      </tr>
-    </thead>
-
-    <% @group.users.each do |student| %>
-      <tr> 
-        <td> <%= student.surname %> <%= student.name.first %>. </td>
-        <td> <%= student.tasks.select{ |x| x.status != "accepted" }.count %> </td>
-
-        <% student.tasks.each do |task| %>
-          <% if task.problem.number == 1 %>
-            <td class="separator"></td> 
-          <% end %>
-
-          <% case task.status 
-              when "accepted" %>
-              <td class="accepted"></td>
-              <% when "not_accepted" %>
-              <td class="not_accepted"></td>
-              <% when "not_submitted" %>
-              <td></td>
-              <% when "accepted_partially" %>
-              <td class="accepted_partially"></td>
-          <% end %>
-        <% end %>
-
-      </tr>
-    <% end %>
-    
-  </table>
-</div>
+        </tr>
+      <% end %>
+      
+    </table>
+  </div>
+<% end %>

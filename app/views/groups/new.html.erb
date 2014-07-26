@@ -1,0 +1,5 @@
+<%= simple_form_for Group.new do |f| %>
+  <%= f.input :number, label: "Номер группы" %>
+  <%= f.input :year, label: "Курс" %> 
+  <%= f.button :submit, "Создать группу" %>
+<% end %>

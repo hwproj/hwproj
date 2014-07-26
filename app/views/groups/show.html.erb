@@ -1,3 +1,7 @@
 <h1>Группа <%= @group.name %></h1>
-<%= render 'group_table' %>
-<%= render 'group_homeworks' %>
+<% if @group.homeworks.empty? %>
+  <h1> Нет домашних работ.</h1>
+<% else %>
+  <%= render 'group_table' %>
+  <%= render 'group_homeworks' %>
+<% end %>

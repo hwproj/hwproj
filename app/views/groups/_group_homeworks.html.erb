@@ -1,13 +1,9 @@
 <h1>Задачи</h1>
-<% if @homeworks.any? %>
-  <% @homeworks.each do |hw| %>
-    <strong> Домашняя работа <%= hw.number %> <%= link_to "Редактировать", edit_homework_path(hw) if signed_in? && current_user.teacher?%> </strong>
-      <ol>
-      <% hw.problems.each do |problem| %>
-        <li> <%= problem.text %> </li>
-        <% end %>
-      </ol>
-  <% end %>
-<% else %>
-  <h1> Нет домашних работ.</h1>
+<% @homeworks.each do |hw| %>
+<strong> Домашняя работа <%= hw.number %> <%= link_to "Редактировать", edit_homework_path(hw) if signed_in? && current_user.teacher?%> </strong>
+  <ol>
+  <% hw.problems.each do |problem| %>
+    <li> <%= problem.text %> </li>
+    <% end %>
+  </ol>
 <% end %>
