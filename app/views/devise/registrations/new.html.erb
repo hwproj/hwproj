@@ -8,6 +8,7 @@
     <%= f.input :name, autofocus: true %>
     <%= f.input :surname %>
     <%= f.association :group %>
+    <%= f.input :gender, collection: [ :male, :female ] %> 
     <%= f.input :password %>
     <%= f.input :password_confirmation %>
   </div>
