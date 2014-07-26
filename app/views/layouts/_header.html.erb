@@ -20,8 +20,7 @@
           <% elsif %>
             <li> <%= link_to "Загрузить решение", new_submission_path %></li>
           <% end %>
-    			<li> <%= link_to "Задачи", homeworks_path %> </li>
-    			<li> <%= link_to "Группа", tasks_path %> </li>
+    			<li> <%= link_to "Группы", groups_path %> </li>
     			<!-- <li> <%= link_to "Статьи", '#' %> </li> -->
     			<li> <%= link_to "Выход", destroy_user_session_path, method: :delete %> </li>
     		<% else %>
