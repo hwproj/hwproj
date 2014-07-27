@@ -20,6 +20,6 @@ class User < ActiveRecord::Base
   end
 
   def overdue_tasks
-    tasks.select { |t| t.created_at < Time.now - 1.day }
+    tasks.select { |t| t.created_at < Time.now - 2.weeks }
   end
 end
