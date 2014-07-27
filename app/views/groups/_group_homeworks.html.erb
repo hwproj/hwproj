@@ -1,4 +1,4 @@
-<h1>Задачи</h1>
+<h2>Задачи</h2>
 <% @homeworks.each do |hw| %>
 <strong> Домашняя работа <%= hw.number %> <%= link_to "Редактировать", edit_homework_path(hw) if signed_in? && current_user.teacher?%> </strong>
   <ol>

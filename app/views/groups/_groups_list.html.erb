@@ -1,0 +1,10 @@
+<h1>Группы</h1>
+<% if @groups.any? %>
+	<ul>
+	<% @groups.each do |group| %>
+		<li><h3><%= link_to group.name, group %></h3></li>
+	<% end %>
+	</ul>
+<% else %>
+<h2>Групп нет.</h2>
+<% end %>
