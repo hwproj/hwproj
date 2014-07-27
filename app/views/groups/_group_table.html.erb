@@ -27,7 +27,7 @@
 
       <% @group.users.each do |student| %>
         <tr> 
-          <td> <%= student.surname %> <%= student.name.first %>. </td>
+          <td><%= student.surname %> <%= student.name %></td>
           <td> <%= student.tasks.select{ |x| x.status != "accepted" }.count %> </td>
 
           <% student.tasks.each do |task| %>
