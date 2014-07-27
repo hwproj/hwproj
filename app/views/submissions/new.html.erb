@@ -6,12 +6,14 @@
     <% end %>
   <% end %>
 
-  <%= f.input :text, label: "Текст к решению" %>
+  <%= f.input :file, label: "Решение" %>
 
-  <%= f.input :file %>
+  <%= f.input :text, label: "Комментарий к решению" %>
+
+
 
  <br>
 
-  <%= f.submit "Отправить решение" %>
+  <%= f.submit "Отправить" %>
 
 <% end %>
