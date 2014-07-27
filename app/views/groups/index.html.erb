@@ -2,6 +2,7 @@
   <%= link_to group.name, group %>
 <% end %>
 
-<h3>
+
+<% if signed_in? && current_user.teacher? %>
 <%= link_to "Добавить группу", new_group_path, class: "btn btn-primary" %>
-</h3>
+<% end %>
