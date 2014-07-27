@@ -16,14 +16,16 @@
   			<% if user_signed_in? %>
           <% if current_user.teacher? %>
             <li> <%= link_to "Добавить задание", new_homework_path %> </li>
-
+            <li> <%= link_to "Группы", groups_path %> </li>
           <% elsif %>
             <li> <%= link_to "Загрузить решение", new_submission_path %></li>
+            <li> <%= link_to "Группа", current_user.group %> </li>
           <% end %>
-    			<li> <%= link_to "Группы", groups_path %> </li>
+    			
     			<!-- <li> <%= link_to "Статьи", '#' %> </li> -->
     			<li> <%= link_to "Выход", destroy_user_session_path, method: :delete %> </li>
     		<% else %>
+          <li> <%= link_to "Группы", groups_path %> </li>
     			<li> <%= link_to "Регистрация", new_user_registration_path %> </li>
     			<li> <%= link_to "Вход", new_user_session_path%> </li>
     		<% end %>
