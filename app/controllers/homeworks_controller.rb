@@ -27,6 +27,8 @@ class HomeworksController < ApplicationController
   def update
     @homework = Homework.find(params[:id])
     @homework.update(homework_params)
+    enumerate_problems
+    create_tasks
     redirect_to @homework.group
   end
 
@@ -45,7 +47,9 @@ class HomeworksController < ApplicationController
   def create_tasks
     @homework.problems.each do |problem|
       User.all.each do |user|
-        user.tasks.create(problem_id: problem.id) if user.student?
+        if user.student?
+          user.tasks.create(problem_id: problem.id)
+        end
       end
     end
   end
