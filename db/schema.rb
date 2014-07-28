@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140726132947) do
+ActiveRecord::Schema.define(version: 20140728215524) do
 
   create_table "groups", force: true do |t|
     t.integer  "number"
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20140726132947) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "homework_id"
-    t.string   "text"
+    t.text     "text",        limit: 255
     t.integer  "number"
   end
 
