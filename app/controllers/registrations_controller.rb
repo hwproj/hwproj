@@ -1,5 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
-  after_action :add_tasks, only: :create
+  after_action :add_tasks, only: :save
 
 
   private

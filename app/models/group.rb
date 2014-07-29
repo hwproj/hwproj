@@ -1,5 +1,5 @@
 class Group < ActiveRecord::Base
-
+	validates :number, :year, presence: true
 	has_many :homeworks
 	has_many :users
 	has_many :problems, through: :homeworks
