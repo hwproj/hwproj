@@ -61,7 +61,19 @@
     <%= form_for @task, method: :put do |f| %>
       <%= f.hidden_field :status, value: "accepted" %>
 
-      <%= f.submit "Принять задачу" %>
+      <%= f.submit "Принять" %>
+    <% end %>
+
+    <%= form_for @task, method: :put do |f| %>
+      <%= f.hidden_field :status, value: "accepted_partially" %>
+
+      <%= f.submit "Частично" %>
+    <% end %>
+
+    <%= form_for @task, method: :put do |f| %>
+      <%= f.hidden_field :status, value: "not_accepted" %>
+
+      <%= f.submit "Не принять" %>
 
     <% end %>
 
