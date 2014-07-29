@@ -11,7 +11,11 @@ class HomeworksController < ApplicationController
     @homework = Homework.create(homework_params)
     enumerate_problems
     create_tasks
-    redirect_to @homework.group
+    if @homework.valid?
+      redirect_to @homework.group
+    else
+      redirect_to :back
+    end
   end
 
   def index
@@ -29,7 +33,11 @@ class HomeworksController < ApplicationController
     @homework.update(homework_params)
     enumerate_problems
     create_tasks
-    redirect_to @homework.group
+    if @homework.valid?
+      redirect_to @homework.group
+    else
+      redirect_to :back
+    end
   end
 
   private
