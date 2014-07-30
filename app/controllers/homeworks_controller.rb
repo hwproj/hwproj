@@ -3,15 +3,16 @@ class HomeworksController < ApplicationController
 
   def new
     @homework = Homework.new()
-    @homework_number = Homework.count + 1
     @groups = Group.all
   end
 
   def create
-    @homework = Homework.create(homework_params)
-    enumerate_problems
-    create_tasks
+    @homework = Homework.new(homework_params)
     if @homework.valid?
+      @homework.number = @homework.group.homeworks.count + 1
+      @homework.save  
+      enumerate_problems
+      create_tasks
       redirect_to @homework.group
     else
       redirect_to :back
@@ -30,10 +31,10 @@ class HomeworksController < ApplicationController
 
   def update
     @homework = Homework.find(params[:id])
-    @homework.update(homework_params)
-    enumerate_problems
-    create_tasks
     if @homework.valid?
+      @homework.update(homework_params)
+      enumerate_problems
+      create_tasks
       redirect_to @homework.group
     else
       redirect_to :back
@@ -47,17 +48,15 @@ class HomeworksController < ApplicationController
 
   def enumerate_problems
     problems = @homework.problems
-    for i in 1..problems.count
-      problems[i-1].update(number: i)
+    for i in 0..problems.count - 1
+      problems[i].update(number: i + 1)
     end
   end
 
   def create_tasks
     @homework.problems.each do |problem|
-      User.all.each do |user|
-        if user.student?
+      @homework.group.users.each do |user|
           user.tasks.create(problem_id: problem.id)
-        end
       end
     end
   end
