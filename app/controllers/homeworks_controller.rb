@@ -1,9 +1,8 @@
 class HomeworksController < ApplicationController
-
+  before_action :set_homework, only: [ :edit, :update, :destroy ]
 
   def new
     @homework = Homework.new()
-    @groups = Group.all
   end
 
   def create
@@ -24,13 +23,9 @@ class HomeworksController < ApplicationController
   end
 
   def edit
-    @homework = Homework.find(params[:id])
-    @homework_number = @homework.number
-    @groups = Group.all
   end
 
   def update
-    @homework = Homework.find(params[:id])
     if @homework.valid?
       @homework.update(homework_params)
       enumerate_problems
@@ -42,17 +37,25 @@ class HomeworksController < ApplicationController
   end
 
   def destroy
-    @homework = Homework.find(params[:id])
-    @group = @homework.group
+    group = @homework.group
     @homework.destroy
-    redirect_to @group
+    redirect_to group
   end
 
 
   private
+
+    def set_homework
+      @homework = Homework.find(params[:id])
+    end
+
+    def set_group
+      
+    end
+
     def homework_params
       params.require(:homework).permit(:number, :group_id, problems_attributes: [:id, :text, :_destroy])
-  end
+    end
 
   def enumerate_problems
     problems = @homework.problems
