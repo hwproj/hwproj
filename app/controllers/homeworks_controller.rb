@@ -41,6 +41,14 @@ class HomeworksController < ApplicationController
     end
   end
 
+  def destroy
+    @homework = Homework.find(params[:id])
+    @group = @homework.group
+    @homework.destroy
+    redirect_to @group
+  end
+
+
   private
     def homework_params
       params.require(:homework).permit(:number, :group_id, problems_attributes: [:id, :text, :_destroy])
