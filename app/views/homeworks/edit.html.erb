@@ -1,3 +1,5 @@
+<h1> Домашняя работа <%= @homework.number %></h1>
+
 <%= render 'homework_form' %>
 
 <%= button_to 'Удалить домашнюю работу', @homework, method: :delete, data: { confirm: 'Удалить?' }, class: "btn btn-primary" %>
