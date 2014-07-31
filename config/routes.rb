@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :submissions, only: [ :new, :create, :index, :update ]
   resources :problems, only: [ :show ]
   resources :notes, only: :update
-  resources :groups
+  resources :groups, only: [ :index, :show, :new, :edit, :create, :update ]
   resources :links
 
   # The priority is based upon order of creation: first created -> highest priority.

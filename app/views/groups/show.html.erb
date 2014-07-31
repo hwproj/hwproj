@@ -1,4 +1,11 @@
-<h1>Группа <%= @group.name %></h1>
+<h1>
+  Группа <%= @group.name %>
+  <small>
+    <% if signed_in? && current_user.teacher? %>
+      <%= link_to "Редактировать", edit_group_path %>
+    <% end %>
+  </small>
+</h1>
 <% if @group.homeworks.empty? %>
   <h1> Нет домашних работ.</h1>
 <% else %>
