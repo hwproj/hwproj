@@ -12,8 +12,11 @@
   <% if @task.submissions.any? %>
     <h3>Последнее решение</h3>
     <%= @last_submission.text %> <br>
-    <%= link_to "Скачать файл", @last_submission.file.url %>
 
+    <% if @last_submission.file? %>
+      <%= link_to "Скачать файл", @last_submission.file.url %>
+    <% end %>
+    
     <% if @task.notes.any? %>
       <h3> Замечания </h3>
         <ul>

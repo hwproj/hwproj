@@ -42,15 +42,10 @@ class HomeworksController < ApplicationController
     redirect_to group
   end
 
-
   private
 
     def set_homework
       @homework = Homework.find(params[:id])
-    end
-
-    def set_group
-      
     end
 
     def homework_params
