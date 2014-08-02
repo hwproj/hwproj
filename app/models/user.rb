@@ -15,6 +15,9 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :tasks, :reject_if => :all_blank, :allow_destroy => true 
 
+  def tasks_left
+    tasks.select{ |x| x.status != "accepted" }.count 
+  end
 
   def deadline_tasks
     tasks.select { |t| t.created_at > Time.now - 2.weeks && t.created_at < Time.now - 1.weeks }
