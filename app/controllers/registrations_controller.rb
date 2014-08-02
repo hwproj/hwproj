@@ -1,14 +1,13 @@
 class RegistrationsController < Devise::RegistrationsController
-  after_action :add_tasks, only: :save
+  after_action :add_tasks, only: :create
 
 
   private
    
     def add_tasks
-      Problem.all.each do |problem|
+      @user.group.problems.each do |problem|
         @user.tasks.create(problem_id: problem.id) 
       end
-      
     end
 
     def sign_up_params
