@@ -2,7 +2,7 @@
 
   <%= f.simple_fields_for :task do |t| %>
     <%= t.input :problem_id, required: false, label: "Задача" do %>
-      <%= t.grouped_collection_select :problem_id, current_user.group.homeworks.order(:number), :problems, :number, :id, :name, include_blank: false %>
+      <%= t.grouped_collection_select :problem_id, current_user.group.homeworks.order(:number).select{|x| x.problems.any?}, :problems, :number, :id, :name, include_blank: false %>
     <% end %>
   <% end %>
 
