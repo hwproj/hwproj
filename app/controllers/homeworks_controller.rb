@@ -37,6 +37,12 @@ class HomeworksController < ApplicationController
   def destroy
     group = @homework.group
     @homework.destroy
+
+    group_homeworks = @homework.group.homeworks
+    for i in 0..group_homeworks.count - 1
+      group_homeworks[i].update(number: i + 1)
+    end
+
     redirect_to group
   end
 

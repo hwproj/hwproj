@@ -1,7 +1,7 @@
 <h1>
   Домашняя работа <%= @homework.number %>
   <small>
-    <%= "#{@homework.group.name} группа" %>
+    <%= link_to "#{@homework.group.name} группа", @homework.group %>
   </small>
 </h1>
 
