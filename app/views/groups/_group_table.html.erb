@@ -6,8 +6,10 @@
           <td align="center"><strong>Студент</strong></td>
           <td align="center"><strong></strong></td>
           <% @group.homeworks.each do |homework| %>
-            <td class="separator"></td>
-            <td align="center" colspan="<%= homework.problems.count %>"><strong> <%= homework.number %> </strong></td>
+            <% if homework.problems.any? %>
+              <td class="separator"></td>
+              <td align="center" colspan="<%= homework.problems.count %>"><strong> <%= homework.number %> </strong></td>
+            <% end %>
           <% end %>
         </tr>
         <tr>
