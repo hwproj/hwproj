@@ -19,34 +19,30 @@
   </div>
 
   <div class="col-md-4">
-    <div class="row">
-      <div class="col-md-12">
-        <h1>Дедлайн</h1>
-        <% if @deadline_tasks.any? %>
+    <% if @deadline_tasks.any? %>
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Дедлайн</h2>
           Осталась неделя:
           <ul>
-          <% @deadline_tasks.each do |task| %>
-            <li><%= link_to task.name, task %></li>
-          <% end %>
+            <% @deadline_tasks.each do |task| %>
+              <li><%= link_to task.name, task %></li>
+            <% end %>
           </ul>
-        <% else %>
-          Всё идёт по плану! :)
-        <% end %>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <h1>Просроченные задачи</h1>
-        <% if @overdue_tasks.any? %>
+    <% end %>
+    <% if @overdue_tasks.any? %>
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Просроченные задачи</h2>
           <ul>
-          <% @overdue_tasks.each do |task| %>
-            <li><%= link_to task.name, task %></li>
-          <% end %>
+            <% @overdue_tasks.each do |task| %>
+              <li><%= link_to task.name, task %></li>
+            <% end %>
           </ul>
-        <% else %>
-          Просроченных нет.
-        <% end %>
+        </div>
       </div>
-    </div>
+    <% end %>
   </div>
 </div>

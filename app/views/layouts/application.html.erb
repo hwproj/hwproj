@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-	<meta charset="utf-8">
+  <meta charset="utf-8">
   <title>hwProj</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -9,23 +9,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-	
+  
   <%= render 'layouts/header' %>
 
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<%= render 'layouts/messages' %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <%= render 'layouts/messages' %>
+        <%= yield %>
+      </div>
+      
+      <%= render 'layouts/footer' %>
+    </div>
 
-				<%= yield %>
-
-				<%= render 'layouts/footer' %>
-				 
-			</div>
-		</div>
-
-		<br>
-		<%= debug(params) if Rails.env.development? %>
-	</div>
+    <br>
+    <%= debug(params) if Rails.env.development? %>
+  </div>
 </body>
 </html>
