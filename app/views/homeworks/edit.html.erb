@@ -1,5 +1,21 @@
-<h1> Домашняя работа <%= @homework.number %></h1>
+<h1>
+  Домашняя работа <%= @homework.number %>
+  <small>
+    <%= "#{@homework.group.name} группа" %>
+  </small>
+</h1>
 
-<%= render 'homework_form' %>
+<%= simple_form_for @homework  do |f| %>
 
-<%= button_to 'Удалить домашнюю работу', @homework, method: :delete, data: { confirm: 'Удалить?' }, class: "btn btn-primary" %>
+  <%= f.simple_fields_for :problems do |problem| %>
+    <%= render 'problem_fields', f: problem %>
+  <% end %>
+    
+  <div class="links">
+    <%= link_to_add_association 'Добавить задачу', f, :problems, class: "btn btn-default" %>
+  </div>
+
+  <%= f.button :submit, "Сохранить", class: "btn btn-primary" %>
+<% end %>
+
+<%= button_to 'Удалить домашнюю работу', @homework, method: :delete, data: { confirm: 'Удалить?' }, class: "btn btn-danger" %>

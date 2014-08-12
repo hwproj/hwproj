@@ -10,9 +10,7 @@ class HomeworksController < ApplicationController
     if @homework.valid?
       @homework.number = @homework.group.homeworks.count + 1
       @homework.save  
-      enumerate_problems
-      create_tasks
-      redirect_to @homework.group
+      redirect_to edit_homework_path(@homework)
     else
       redirect_to :back
     end

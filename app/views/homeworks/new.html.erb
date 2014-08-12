@@ -1,3 +1,6 @@
 <h1> Новая домашняя работа </h1>
 
-<%= render 'homework_form' %>
+<%= simple_form_for @homework  do |f| %>
+  <%= f.association :group %>
+  <%= f.button :submit, "Продолжить", class: "btn btn-primary" %>
+<% end %>
