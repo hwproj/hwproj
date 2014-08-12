@@ -17,3 +17,6 @@
 
 # Ignore file uploads
 /public/uploads
+
+# mac junk
+.DS_Store
