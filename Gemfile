@@ -44,3 +44,6 @@ gem 'carrierwave'
 # Deploy on Heroku 
 gem 'pg', group: :production
 gem 'rails_12factor', group: :production
+
+# Secure keys
+gem 'figaro'
