@@ -5,6 +5,7 @@ class SubmissionsController < ApplicationController
   def create
     @task = current_user.tasks.where(problem_id: params[:submission][:task][:problem_id]).first
     @submission = @task.submissions.create(submission_params)
+    UserMailer.new_submission_notify(@submission).deliver
     redirect_to @submission.task
   end
 
