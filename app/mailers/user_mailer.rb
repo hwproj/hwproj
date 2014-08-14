@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "no-reply@hwproj.heroku.com"
+  default from: "no-reply@hwproj.herokuapp.com"
 
   def new_submission_notify(submission)
   	teacher = submission.user.group.teacher
