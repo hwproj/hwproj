@@ -33,7 +33,7 @@
 
               <%= note.text %> <small> <strong><%= "v.#{note.submission.version}" %></strong><%=", #{note.created_at.to_date}" %> </small> 
 
-              <% if current_user.teacher? && (not note.fixed?) %>
+              <% if signed_in? && current_user.teacher? && (not note.fixed?) %>
                   <%= form_for note, method: :put do |f| %>
                     <%= f.hidden_field :id, value: note.id %>
                     <%= f.hidden_field :fixed, value: true %>
