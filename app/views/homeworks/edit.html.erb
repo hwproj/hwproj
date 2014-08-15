@@ -12,10 +12,12 @@
   <% end %>
     
   <div class="links">
+    <br>
     <%= link_to_add_association 'Добавить задачу', f, :problems, class: "btn btn-default" %>
   </div>
 
-  <%= f.button :submit, "Сохранить", class: "btn btn-primary" %>
-<% end %>
+  <br>
 
-<%= button_to 'Удалить домашнюю работу', @homework, method: :delete, data: { confirm: 'Удалить?' }, class: "btn btn-danger" %>
+  <%= f.button :submit, "Сохранить", class: "btn btn-primary" %>
+  <%= link_to 'Удалить домашнюю работу', @homework, method: :delete, class: "btn btn-danger" %>
+<% end %>

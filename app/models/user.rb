@@ -16,14 +16,19 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :tasks, :reject_if => :all_blank, :allow_destroy => true 
 
   def tasks_left
-    tasks.select{ |x| x.status != "accepted" }.count 
+    tasks.select{ |task| task.status != "accepted" }
   end
 
   def deadline_tasks
-    tasks.select { |t| t.created_at > Time.now - 2.weeks && t.created_at < Time.now - 1.weeks }
+    tasks_left.select{ |task| task.created_at > Time.now - 2.weeks && task.created_at < Time.now - 1.weeks }
   end
 
   def overdue_tasks
-    tasks.select { |t| t.created_at < Time.now - 2.weeks }
+    tasks_left.select{ |task| task.created_at < Time.now - 2.weeks }
+  end
+
+  def student_feed
+    (tasks.select{|task| task.accepted? } + submissions.select{ |submission| submission.notes.any? }).sort_by{ |entry| entry.updated_at }.reverse
   end
 end
+

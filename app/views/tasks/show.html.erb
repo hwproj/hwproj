@@ -24,26 +24,27 @@
     
     <% if @task.notes.any? %>
       <h3> Замечания </h3>
-        <ul>
           <% @task.notes.each do |note| %>
-            <li> <h5>
+            <h5>
               <% if note.fixed? %>
                 <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
+              <% else %>
+                <span style="color:#f0ad4e" class="glyphicon glyphicon-exclamation-sign"></span>
               <% end %>
 
-              <%= note.text %> <small> <strong><%= "v.#{note.submission.version}" %></strong><%=", #{note.created_at.to_date}" %> </small> 
+              <%= note.text %>
+              <small><strong><%= "v.#{note.submission.version}" %></strong><%=", #{note.created_at.strftime("%d.%m.%y")}" %></small> 
 
               <% if signed_in? && current_user.teacher? && (not note.fixed?) %>
                   <%= form_for note, method: :put do |f| %>
                     <%= f.hidden_field :id, value: note.id %>
                     <%= f.hidden_field :fixed, value: true %>
-                    <%= f.submit "Исправлено" %>
+                    <%= f.submit "Исправлено", class: "btn btn-success btn-xs"%>
                   <% end %>
                 <% end %>
 
-            </h5> </li>
+            </h5>
           <% end %>
-        </ul>
     <% end %>
   <% end %>
 
@@ -64,7 +65,7 @@
             <%= f.hidden_field :status, value: "accepted" %>
             <%= f.submit "Принять решение", class: "btn btn-success" %>
           <% end %>
-<% end %>
+      <% end %>
   <% end %>
 
 </div>

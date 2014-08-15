@@ -1,21 +1,24 @@
 <div class="row">
   <div class="col-md-8">
     <h1>Новости</h1>
-    <% current_user.tasks.each do |task| %>
-      <% if task.notes.count != 0 %>
-        <h5> 
-          К задаче <%= link_to "#{task.problem.homework.number}.#{task.problem.number}", task %>
-          добавлены замечания.
-          <small><%= task.notes.last.created_at.to_date %></small>
-        </h5>
-      <% end %>
-      <% if task.status == "accepted" %>
-        <h5>
-          Задача <%= link_to "#{task.problem.homework.number}.#{task.problem.number}", task %> принята.
-          <small><%= task.updated_at.to_date %></small>
-        </h5>
-      <% end %>
+    
+    <% current_user.student_feed.each do |entry| %>
+      <h5>
+        <% if entry.class.name == "Task" %>
+          <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
+          Задача <%= link_to entry.name, entry %> принята.
+        <% elsif entry.class.name == "Submission" %>
+          <span style="color:#f0ad4e" class="glyphicon glyphicon-exclamation-sign"></span>
+          К задаче <%= link_to entry.task.name, entry.task %> добавлены замечания.
+        <% end %>
+
+        <small>
+          <strong><%= entry.updated_at.strftime("%H:%M") %></strong>
+          <%= entry.updated_at.strftime("%d.%m.%y") if entry.updated_at.to_date != Time.now.to_date %>
+        </small>
+      </h5>
     <% end %>
+
   </div>
 
   <div class="col-md-4">
@@ -23,7 +26,7 @@
       <div class="row">
         <div class="col-md-12">
           <h2>Дедлайн</h2>
-          Осталась неделя:
+          <h5>Осталось меньше недели:</h5>
           <ul>
             <% @deadline_tasks.each do |task| %>
               <li><%= link_to task.name, task %></li>

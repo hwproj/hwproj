@@ -9,7 +9,7 @@
   </small>
 </h1>
 <% if @group.homeworks.empty? %>
-  <h1> Нет домашних работ.</h1>
+  <h3> Нет домашних работ.</h3>
 <% else %>
   <%= render 'group_table' %>
   <%= render 'group_homeworks' %>
