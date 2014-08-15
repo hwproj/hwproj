@@ -22,11 +22,13 @@
         <ul>
           <% @task.notes.each do |note| %>
             <li> <h5>
-              <%= "(fixed)" if note.fixed? %>
+              <% if note.fixed? %>
+                <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
+              <% end %>
 
               <%= note.text %> <small> <strong><%= "v.#{note.submission.version}" %></strong><%=", #{note.created_at.to_date}" %> </small> 
 
-                <% if current_user.teacher? %>
+              <% if current_user.teacher? && (not note.fixed?) %>
                   <%= form_for note, method: :put do |f| %>
                     <%= f.hidden_field :id, value: note.id %>
                     <%= f.hidden_field :fixed, value: true %>
@@ -40,46 +42,24 @@
     <% end %>
   <% end %>
 
-
-  <% if signed_in? && current_user.teacher? %> <br> 
-    <% if @submissions.any? %>
+  <% if signed_in? && current_user.teacher? && (not @task.accepted?) && @submissions.any? %> <br> 
     
       <%= simple_form_for @last_submission, url: {controller: :submissions, action: :update} do |f| %>
-
         <%= f.hidden_field :id, value: @last_submission.id %>
 
-        <%= f.simple_fields_for :notes do |note| %>
+          <br>
+          <div class="links">
+            <%= link_to_add_association 'Добавить замечание', f, :notes, class: "btn btn-warning" %>
+            <%= f.submit "Сохранить замечания", class: "btn btn-default" %>
+          </div>
           
-        <% end %>
+          <br>
 
-        <br>
-        <div class="links">
-          <%= link_to_add_association 'Добавить замечание', f, :notes %>
-        </div>
-        <%= f.submit "Сохранить замечания" %>
-      <% end %>
-
-    <% end %>
-    <br>
-    <%= form_for @task, method: :put do |f| %>
-      <%= f.hidden_field :status, value: "accepted" %>
-
-      <%= f.submit "Принять" %>
-    <% end %>
-
-    <%= form_for @task, method: :put do |f| %>
-      <%= f.hidden_field :status, value: "accepted_partially" %>
-
-      <%= f.submit "Частично" %>
-    <% end %>
-
-    <%= form_for @task, method: :put do |f| %>
-      <%= f.hidden_field :status, value: "not_accepted" %>
-
-      <%= f.submit "Не принять" %>
-
-    <% end %>
-
+          <%= form_for @task, method: :put do |f| %>
+            <%= f.hidden_field :status, value: "accepted" %>
+            <%= f.submit "Принять решение", class: "btn btn-success" %>
+          <% end %>
+<% end %>
   <% end %>
 
 </div>

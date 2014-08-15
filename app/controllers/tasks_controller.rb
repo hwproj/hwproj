@@ -9,6 +9,11 @@ class TasksController < ApplicationController
 
   def update
   	@task.update(task_params)
+    if @task.accepted?
+      @task.notes.each do |note|
+        note.update(fixed: true)
+      end
+    end
   	redirect_to @task
   end
 

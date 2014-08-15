@@ -2,7 +2,9 @@
   Группа <%= @group.name %>
   <small>
     <% if signed_in? && current_user.teacher? %>
-      <%= link_to "Редактировать", edit_group_path %>
+      <%= link_to edit_group_path do %>
+      	<span class="glyphicon glyphicon-pencil"></span>
+      <% end %>
     <% end %>
   </small>
 </h1>
