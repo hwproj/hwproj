@@ -12,6 +12,11 @@ class SubmissionsController < ApplicationController
   def update
     @submission = Submission.find(params[:submission][:id])
     @submission.update_attributes(notes_params)
+
+    if @submission.notes.any?
+      @submission.task.update(status: "accepted_partially")
+    end
+
     redirect_to @submission.task
   end
 

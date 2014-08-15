@@ -1,5 +1,10 @@
 <div class="col-md-8">
   <h1>
+  <% if @task.accepted? %>
+    <span style="color:#5cb85c" class="glyphicon glyphicon-ok-sign"></span>
+  <% elsif @task.accepted_partially? %>
+    <span style="color:#f0ad4e" class="glyphicon glyphicon-exclamation-sign"></span>
+  <% end %>
     Задача <%= @task.problem.homework.number %>.<%= @task.problem.number %> 
     <small> 
       <%= "#{@user.name} #{@user.surname}" %> 
