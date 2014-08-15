@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: [ :show, :update ]
 
   def show
-    if (not signed_in?) || (not current_user.teacher? && current_user.id != @task.user.id)
+    if (not signed_in?) || ((not current_user.teacher?) && current_user.id != @task.user.id)
       redirect_to root_path
     end
     @user = @task.user
