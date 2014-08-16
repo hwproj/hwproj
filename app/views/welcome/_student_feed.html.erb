@@ -27,23 +27,26 @@
         <div class="col-md-12">
           <h2>Дедлайн</h2>
           <h5>Осталось меньше недели:</h5>
-          <ul>
             <% @deadline_tasks.each do |task| %>
-              <li><%= link_to task.name, task %></li>
+              <h5> <span style="color:#f0ad4e" class="glyphicon glyphicon-info-sign"></span>
+                <%= link_to task.name, task %>
+
+              </h5>
             <% end %>
-          </ul>
         </div>
       </div>
     <% end %>
+
     <% if @overdue_tasks.any? %>
       <div class="row">
         <div class="col-md-12">
           <h2>Просроченные задачи</h2>
-          <ul>
-            <% @overdue_tasks.each do |task| %>
-              <li><%= link_to task.name, task %></li>
+          <% @overdue_tasks.each do |task| %>
+            <h5> <span style="color:#d9534f" class="glyphicon glyphicon-exclamation-sign"></span>
+                <%= link_to task.name, task %>
+                (<%= (Time.now - task.created_at - 2.weeks).to_i / 1.day + 1 %> дн.)
+            </h5>
             <% end %>
-          </ul>
         </div>
       </div>
     <% end %>
