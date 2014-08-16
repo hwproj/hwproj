@@ -16,12 +16,17 @@
 
   <% if @task.submissions.any? %>
     <h3>Последнее решение</h3>
-    <%= @last_submission.text %> <br>
 
-    <% if @last_submission.file? %>
-      <%= link_to "Скачать файл", @last_submission.file.url %>
-    <% end %>
-    
+    <h5>
+      <%= link_to @last_submission.file.url, class: "btn btn-default", disabled: (not @last_submission.file?) do %>
+        <span class="glyphicon glyphicon-cloud-download"></span> <%= "v.#{@last_submission.version}" %>
+      <% end %>
+      
+      <%= @last_submission.text %> 
+      
+      <small><%= @last_submission.created_at.strftime("%H:%M %d.%m.%y") %></small>
+    </h5>
+
     <% if @task.notes.any? %>
       <h3> Замечания </h3>
           <% @task.notes.each do |note| %>
@@ -48,12 +53,11 @@
     <% end %>
   <% end %>
 
-  <% if signed_in? && current_user.teacher? && (not @task.accepted?) && @submissions.any? %> <br> 
+  <% if signed_in? && current_user.teacher? && (not @task.accepted?) && @submissions.any? %>
     
       <%= simple_form_for @last_submission, url: {controller: :submissions, action: :update} do |f| %>
         <%= f.hidden_field :id, value: @last_submission.id %>
 
-          <br>
           <div class="links">
             <%= link_to_add_association 'Добавить замечание', f, :notes, class: "btn btn-warning" %>
             <%= f.submit "Сохранить замечания", class: "btn btn-default" %>
@@ -68,7 +72,23 @@
       <% end %>
   <% end %>
 
+  <% if @task.submissions.count > 1 %>
+    <h3>Предыдущие решения</h3>
+      <% @task.submissions.select{|s| s.id != @last_submission.id}.each do |submission| %>
+        <h5>
+            <%= link_to submission.file.url, class: "btn btn-default", disabled: (not submission.file?) do %>
+              <span class="glyphicon glyphicon-cloud-download"></span> <%= "v.#{submission.version}" %>
+            <% end %>
+          
+          <%= submission.text %> 
+          
+          <small><%= submission.created_at.strftime("%H:%M %d.%m.%y") %></small>
+        </h5>
+
+      <% end %>
+  <% end %>
+
 </div>
-<div class="col-md-4">
+<!-- <div class="col-md-4">
 <h1>Обсуждение</h1>
-</div>
+</div> -->
