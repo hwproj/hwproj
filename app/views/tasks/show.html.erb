@@ -64,11 +64,11 @@
           </div>
           
           <br>
+      <% end %>
 
-          <%= form_for @task, method: :put do |f| %>
-            <%= f.hidden_field :status, value: "accepted" %>
-            <%= f.submit "Принять решение", class: "btn btn-success" %>
-          <% end %>
+      <%= form_for @task, method: :put do |f| %>
+        <%= f.hidden_field :status, value: "accepted" %>
+        <%= f.submit "Принять решение", class: "btn btn-success" %>
       <% end %>
   <% end %>
 
