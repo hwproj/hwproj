@@ -1,4 +1,4 @@
-<h1>
+<h2>
   Группа <%= @group.name %>
   <small>
     <% if signed_in? && current_user.teacher? %>
@@ -7,9 +7,9 @@
       <% end %>
     <% end %>
   </small>
-</h1>
+</h2>
 <% if @group.homeworks.empty? %>
-  <h3> Нет домашних работ.</h3>
+  <h4> Нет домашних работ.</h4>
 <% else %>
   <%= render 'group_table' %>
   <%= render 'group_homeworks' %>

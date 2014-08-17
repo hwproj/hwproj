@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-8">
-    <h1>Новости</h1>
+    <h3>Новости</h3>
     
     <% current_user.student_feed.each do |entry| %>
       <h5>
@@ -40,7 +40,7 @@
     <% if @overdue_tasks.any? %>
       <div class="row">
         <div class="col-md-12">
-          <h2>Просроченные задачи</h2>
+          <h3>Просроченные задачи</h3>
           <% @overdue_tasks.each do |task| %>
             <h5> <span style="color:#d9534f" class="glyphicon glyphicon-exclamation-sign"></span>
                 <%= link_to task.name, task %>
