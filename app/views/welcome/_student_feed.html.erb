@@ -2,24 +2,27 @@
   <div class="col-md-8">
     <h3>Новости</h3>
     
-    <% @student_feed.each do |entry| %>
-      <h5>
-        <% if entry.class.name == "Task" %>
-          <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
-          Задача <%= link_to entry.name, entry %> принята.
-        <% elsif entry.class.name == "Submission" %>
-          <span style="color:#f0ad4e" class="glyphicon glyphicon-exclamation-sign"></span>
-          К задаче <%= link_to entry.task.name, entry.task %> добавлены замечания.
-        <% end %>
+    <% if @student_feed.empty? %>
+      <h4>Нет новостей.</h4>
+    <% else %>
+      <% @student_feed.each do |entry| %>
+        <h5>
+          <% if entry.class.name == "Task" %>
+            <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
+            Задача <%= link_to entry.name, entry %> принята.
+          <% elsif entry.class.name == "Submission" %>
+            <span style="color:#f0ad4e" class="glyphicon glyphicon-exclamation-sign"></span>
+            К задаче <%= link_to entry.task.name, entry.task %> добавлены замечания.
+          <% end %>
 
-        <small>
-          <strong><%= entry.updated_at.strftime("%H:%M") %></strong>
-          <%= entry.updated_at.strftime("%d.%m.%y") if entry.updated_at.to_date != Time.now.to_date %>
-        </small>
-      </h5>
+          <small>
+            <strong><%= entry.updated_at.strftime("%H:%M") %></strong>
+            <%= entry.updated_at.strftime("%d.%m.%y") if entry.updated_at.to_date != Time.now.to_date %>
+          </small>
+        </h5>
+      <% end %>
+      <%= will_paginate @student_feed %>
     <% end %>
-    <%= will_paginate @student_feed %>
-
   </div>
 
   <div class="col-md-4">

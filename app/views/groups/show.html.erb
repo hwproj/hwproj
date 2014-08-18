@@ -1,9 +1,13 @@
 <h2>
   Группа <%= @group.name %>
   <small>
-    <% if signed_in? && current_user.teacher? %>
-      <%= link_to edit_group_path do %>
-      	<span class="glyphicon glyphicon-pencil"></span>
+    <% if signed_in? %>
+      <% if current_user.teacher? %>
+        <%= link_to edit_group_path do %>
+        	<span class="glyphicon glyphicon-pencil"></span>
+        <% end %>
+      <% else %>
+        <%= "#{@group.teacher.name} #{@group.teacher.surname}" %>
       <% end %>
     <% end %>
   </small>
