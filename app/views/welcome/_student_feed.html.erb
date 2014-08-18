@@ -44,7 +44,7 @@
           <% @overdue_tasks.each do |task| %>
             <h5> <span style="color:#d9534f" class="glyphicon glyphicon-exclamation-sign"></span>
                 <%= link_to task.name, task %>
-                (<%= (Time.now - task.created_at - 2.weeks).to_i / 1.day + 1 %> дн.)
+                (<%= (Time.now.beginning_of_day - task.created_at.beginning_of_day - 2.weeks).to_i / 1.day + 1 %> дн.)
             </h5>
             <% end %>
         </div>
