@@ -16,7 +16,16 @@
   			<% if user_signed_in? %>
           <% if current_user.teacher? %>
             <li> <%= link_to "Добавить задание", new_homework_path %> </li>
-            <li> <%= link_to "Группы", groups_path %> </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Группы <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <% Group.all.each do |group| %>
+                  <li> <%= link_to group.name, group %> </li>
+                <% end %>
+                <li class="divider"></li>
+                <li> <%= link_to "Добавить группу", new_group_path %> </li>
+              </ul>
+            </li>
           <% elsif %>
             <li> <%= link_to "Загрузить решение", new_submission_path %></li>
             <li> <%= link_to "Группа", current_user.group %> </li>
