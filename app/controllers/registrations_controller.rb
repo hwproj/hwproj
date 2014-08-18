@@ -5,8 +5,10 @@ class RegistrationsController < Devise::RegistrationsController
   private
    
     def add_tasks
-      @user.group.problems.each do |problem|
-        @user.tasks.create(problem_id: problem.id) 
+      if @user.valid?
+        @user.group.problems.each do |problem|
+          @user.tasks.create(problem_id: problem.id) 
+        end
       end
     end
 
