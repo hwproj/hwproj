@@ -3,10 +3,24 @@
     <h1>Новости</h1>
     <% @submissions.each do |submission| %>
       <h5>  
-        <%= link_to submission.user.name, '#' %> добавил 
-        <%= link_to "версию #{submission.version}", submission.task %> решения задачи
-        <%= link_to "#{submission.task.problem.homework.number}.#{submission.task.problem.number}", submission.task.problem %> 
-        <small><%= submission.created_at %></small>
+        <%= submission.user.full_name %>
+        <%= "добавил#{"а" if submission.user.female?} решение " %>
+
+        <%= link_to submission.task.name, submission.task %>
+
+        <% if submission.task.accepted? %>
+          <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
+        <% elsif submission.task.accepted_partially? %>
+          <span style="color:#f0ad4e" class="glyphicon glyphicon-exclamation-sign"></span>
+        <% end %>
+        
+        <small>
+          <strong>
+            <%= "(v.#{submission.version})," %>
+            <%= submission.updated_at.strftime("%H:%M") %>
+          </strong>
+          <%= submission.updated_at.strftime("%d.%m.%y") if submission.updated_at.to_date != Time.now.to_date %>
+        </small>
       </h5>
     <% end %>
     <%= will_paginate @submissions %>

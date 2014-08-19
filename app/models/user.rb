@@ -30,5 +30,9 @@ class User < ActiveRecord::Base
   def student_feed
     (tasks.select{|task| task.accepted? } + submissions.select{ |submission| submission.notes.any? }).sort_by{ |entry| entry.updated_at }.reverse
   end
+
+  def full_name
+    "#{name} #{surname}"
+  end
 end
 
