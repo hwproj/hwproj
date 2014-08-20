@@ -1,6 +1,11 @@
-<h3>Задачи <%= link_to "Добавить задание", new_homework_path, class: "btn btn-default" %></h3>
-<% @homeworks.each do |hw| %>
+<h3>
+  Задачи
+  <% if signed_in? && current_user.teacher? %>
+    <%= link_to "Добавить задание", new_homework_path, class: "btn btn-default" %>
+  <% end %>
+</h3>
 
+<% @homeworks.each do |hw| %>
 <strong>
   Домашняя работа <%= hw.number %> <small><%= hw.created_at.strftime("%d.%m.%y") %> </small>
   <% if signed_in? && current_user.teacher? %>
