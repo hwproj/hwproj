@@ -15,7 +15,7 @@
   <% end %> 
 </strong>
 
-<% hw.links.each do |link| %>
+<% hw.links.order(:id).each do |link| %>
   <br>
   <%= link_to link.name, link.url %>
 <% end %>
