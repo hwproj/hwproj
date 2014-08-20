@@ -4,6 +4,7 @@
     <% @submissions.each do |submission| %>
       <h5>  
         <%= submission.user.full_name %>
+        (<%= link_to submission.user.group.name, submission.user.group %> гр.)
         <%= "добавил#{"а" if submission.user.female?} решение " %>
 
         <%= link_to submission.task.name, submission.task %>
