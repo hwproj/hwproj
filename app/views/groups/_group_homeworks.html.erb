@@ -1,14 +1,19 @@
-<h3>Задачи</h3>
+<h3>Задачи <%= link_to "Добавить задание", new_homework_path, class: "btn btn-default" %></h3>
 <% @homeworks.each do |hw| %>
 
 <strong>
-  Домашняя работа <%= hw.number %>
+  Домашняя работа <%= hw.number %> <small><%= hw.created_at.strftime("%d.%m.%y") %> </small>
   <% if signed_in? && current_user.teacher? %>
     <%= link_to edit_homework_path(hw) do %>
       <span class="glyphicon glyphicon-pencil"></span>
     <% end %>
   <% end %> 
 </strong>
+
+<% hw.links.each do |link| %>
+  <br>
+  <%= link_to link.name, link.url %>
+<% end %>
 
   <ol>
   <% hw.problems.each do |problem| %>

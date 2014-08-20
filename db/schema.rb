@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140813183130) do
+ActiveRecord::Schema.define(version: 20140820095313) do
 
   create_table "groups", force: true do |t|
     t.integer  "number"
@@ -33,7 +33,11 @@ ActiveRecord::Schema.define(version: 20140813183130) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
+    t.integer  "parent_id"
+    t.string   "parent_type"
   end
+
+  add_index "links", ["parent_id", "parent_type"], name: "index_links_on_parent_id_and_parent_type"
 
   create_table "notes", force: true do |t|
     t.boolean  "fixed"
