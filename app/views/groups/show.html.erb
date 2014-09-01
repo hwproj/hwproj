@@ -1,16 +1,14 @@
 <h2>
   Группа <%= @group.name %>
-  <small>
-    <% if signed_in? %>
-      <% if current_user.teacher? %>
-        <%= link_to edit_group_path do %>
-        	<span class="glyphicon glyphicon-pencil"></span>
-        <% end %>
-      <% else %>
-        <%= "#{@group.teacher.name} #{@group.teacher.surname}" %>
+  <% if signed_in? %>
+    <% if current_user.teacher? %>
+      <%= link_to edit_group_path do  %>
+        <span class="glyphicon glyphicon-pencil"></span>
       <% end %>
     <% end %>
-  </small>
+  <% else %>
+    <small> <%= "#{@group.teacher.name} #{@group.teacher.surname}" %> </small>
+  <% end %>
 </h2>
 <% if @group.homeworks.empty? %>
   <h4> Нет домашних работ.</h4>
