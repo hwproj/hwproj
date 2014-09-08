@@ -6,6 +6,12 @@ class GroupsController < ApplicationController
   end
 
   def show
+    if signed_in? && current_user.teacher?
+      @students = @group.users
+    else
+      @students = @group.users.select{ |student| student.approved }
+    end
+
     @homeworks = @group.homeworks
   end
 

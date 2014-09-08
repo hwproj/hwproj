@@ -11,9 +11,9 @@
   <% end %>
 </h2>
 
-<% if @group.homeworks.empty? %>
-  <h4> Нет домашних работ.</h4>
-<% else %>
+<% if @group.problems.any? %>
   <%= render 'group_table' %>
   <%= render 'group_homeworks' %>
+<% else %>
+  <h4> Нет домашних работ.</h4>
 <% end %>

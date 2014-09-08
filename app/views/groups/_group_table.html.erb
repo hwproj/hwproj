@@ -1,4 +1,4 @@
-<% if @group.users.any? %>
+<% if @students.any? %>
   <div class="table-responsive">
     <table class="table table-bordered table-condensed">
       <thead>
@@ -27,9 +27,21 @@
         </tr>
       </thead>
 
-      <% @group.users.each do |student| %>
+      <% @students.each do |student| %>
         <tr> 
-          <td><%= student.surname %> <%= student.name %></td>
+          <td>
+            <%= student.full_name %>
+
+            <% if signed_in? && current_user.teacher? && (not student.approved?) %>
+              <%= link_to approve_student_path(student), method: :put do %>
+                <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
+              <% end %>
+
+              <%= link_to destroy_student_path(student), method: :delete do %>
+                <span style="color:#d9534f" class="glyphicon glyphicon-remove"></span>
+              <% end %>
+            <% end %>
+          </td>
           <td align="center"><%= student.tasks_left.count %></td>
 
           <% student.tasks.sort_by{|x| x.problem.name}.each do |task| %>

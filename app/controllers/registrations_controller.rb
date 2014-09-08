@@ -1,6 +1,25 @@
 class RegistrationsController < Devise::RegistrationsController
   after_action :add_tasks, only: :create
 
+  def approve_student
+    redirect_to :root if (not current_user.teacher?)
+
+    @student = User.find(params[:id])
+    redirect_to :back if @student.nil?
+
+    @student.update(approved: true)
+    redirect_to group_path(@student.group)
+  end
+
+  def destroy_student
+    redirect_to :root if (not current_user.teacher?)
+
+    @student = User.find(params[:id])
+    @group = @student.group
+
+    @student.destroy
+    redirect_to @group
+  end
 
   private
    
