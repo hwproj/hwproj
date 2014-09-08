@@ -1,4 +1,4 @@
-К задаче <%= link_to @task.name, url_for(@task) %> добавлены замечания:
+К задаче <%= link_to @task.name, task_url(@task) %> добавлены замечания:
 <ul>
   <% @notes.each do |note| %>
     <li> <%= note.text %>
