@@ -7,7 +7,7 @@
       <% end %>
     <% end %>
   <% else %>
-    <small> <%= "#{@group.teacher.name} #{@group.teacher.surname}" %> </small>
+    <small> <%= "#{@group.teacher.name} #{@group.teacher.surname}" unless @group.teacher.nil? %> </small>
   <% end %>
 </h2>
 <% if @group.homeworks.empty? %>
