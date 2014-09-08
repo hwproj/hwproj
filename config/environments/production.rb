@@ -66,6 +66,7 @@ Rails.application.configure do
 
   # Needed for devise
   config.action_mailer.default_url_options = { host: 'hwproj.herokuapp.com' }
+  config.action_mailer.asset_host = "https://hwproj.herokuapp.com"
   # ActionMailer Config
   # Setup for production - deliveries, no errors raised
   config.action_mailer.delivery_method = :smtp
