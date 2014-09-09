@@ -1,5 +1,11 @@
 class SubmissionsController < ApplicationController
   def new
+    @submission = Submission.new
+    unless params[:problem_id].nil?
+      @submission.task = Task.where(user_id: current_user.id, problem_id: params[:problem_id]).first
+    else
+      @submission.task = Task.new
+    end
   end
 
   def create
