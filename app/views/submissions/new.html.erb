@@ -8,7 +8,7 @@
 
   <%= f.input :file, label: "Решение" %>
 
-  <%= f.input :text, label: "Комментарий к решению" %>
+  <%= f.input :text, as: 'text', label: "Комментарий к решению", input_html: { rows: 5, cols: 30 } %>
 
  <br>
 
