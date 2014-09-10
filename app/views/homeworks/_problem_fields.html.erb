@@ -1,4 +1,4 @@
 <div class='nested-fields'>
-    <%= f.input :text, autofocus: true %>
+    <%= f.input :text, autofocus: true, input_html: { rows: 5, cols: 30 } %>
     <%= link_to_remove_association "Удалить задачу", f, class: "btn btn-danger"%>
 </div>

@@ -1,4 +1,4 @@
 <div class='nested-fields'>
-    <%= f.input :text %>
+    <%= f.input :text, as: 'text', input_html: { cols: 30, rows: 5 } %>
     <%= link_to_remove_association "Удалить замечание", f %>
 </div>
