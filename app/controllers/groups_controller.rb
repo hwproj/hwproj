@@ -14,7 +14,9 @@ class GroupsController < ApplicationController
   end
 
   def create
-    @group = Group.create(groups_params)
+    @group = Group.new(groups_params)
+    @group.teacher_id = current_user.id
+    @group.save
     redirect_to @group
   end
 
