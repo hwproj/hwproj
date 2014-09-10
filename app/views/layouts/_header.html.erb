@@ -27,7 +27,7 @@
               </ul>
             </li>
           <% elsif %>
-            <li> <%= link_to "Загрузить решение", new_submission_path %></li>
+            <li> <%= link_to "Загрузить решение", new_submission_path if current_user.has_tasks %></li>
             <li> <%= link_to "Группа", current_user.group %> </li>
           <% end %>
     			

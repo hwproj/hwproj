@@ -34,5 +34,9 @@ class User < ActiveRecord::Base
   def full_name
     "#{name} #{surname}"
   end
+
+  def has_tasks
+    tasks.select{|task| task.status != "accepted"}.any?
+  end
 end
 

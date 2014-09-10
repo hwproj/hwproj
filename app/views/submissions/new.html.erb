@@ -1,9 +1,5 @@
 <%= simple_form_for @submission, html: {multipart: true} do |f| %>
-  <%= f.simple_fields_for @submission.task do |t| %>
-    <%= t.input :problem_id, required: false, label: "Задача" do %>
-      <%= t.grouped_collection_select :problem_id, current_user.group.homeworks.order(:number).select{|x| x.problems.any?}, :problems, :number, :id, :name, include_blank: false %>
-    <% end %>
-  <% end %>
+  <%= f.collection_select :task_id, current_user.tasks.select{|x| x.status != "accepted"}, :id, :name, label: "Задача" %>
 
   <%= f.input :file, label: "Решение" %>
 
