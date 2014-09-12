@@ -10,6 +10,7 @@
     <small> <%= "#{@group.teacher.name} #{@group.teacher.surname}" unless @group.teacher.nil? %> </small>
   <% end %>
 </h2>
+
 <% if @group.homeworks.empty? %>
   <h4> Нет домашних работ.</h4>
 <% else %>

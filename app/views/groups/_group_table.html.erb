@@ -4,11 +4,11 @@
       <thead>
         <tr>
           <td align="center"><strong>Студент</strong></td>
-          <td align="center"><strong></strong></td>
+          <td align="center"><strong>TODO</strong></td>
           <% @group.homeworks.each do |homework| %>
             <% if homework.problems.any? %>
               <td class="separator"></td>
-              <td align="center" colspan="<%= homework.problems.count %>"><strong> <%= homework.number %> </strong></td>
+              <td align="center" colspan="<%= homework.problems.count %>"><strong> №<%= homework.number %> </strong></td>
             <% end %>
           <% end %>
         </tr>
@@ -30,7 +30,7 @@
       <% @group.users.each do |student| %>
         <tr> 
           <td><%= student.surname %> <%= student.name %></td>
-          <td><%= student.tasks_left.count %></td>
+          <td align="center"><%= student.tasks_left.count %></td>
 
           <% student.tasks.sort_by{|x| x.problem.name}.each do |task| %>
             <% if task.problem.number == 1 %>
@@ -52,6 +52,20 @@
         </tr>
       <% end %>
       
+      
     </table>
+    
   </div>
+  <table align="right" width="290px" class="table-bordered">
+      <tr>
+        <td style="width: 30px;" class="accepted">
+        </td>
+        <td align="center">Задача зачтена
+        </td>
+        <td style="width: 30px;" class="accepted_partially">
+        </td>
+        <td align="center">Есть замечания
+        </td>
+      </tr>
+    </table>
 <% end %>

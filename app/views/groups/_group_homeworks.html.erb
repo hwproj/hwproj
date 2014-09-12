@@ -1,19 +1,21 @@
 <h3>
   Задачи
   <% if signed_in? && current_user.teacher? %>
-    <%= link_to "Добавить задание", new_homework_path, class: "btn btn-default" %>
+    <small>
+      <%= link_to new_homework_path do %>
+        <span class="glyphicon glyphicon-plus"></span>
+      <% end %>
+    </small>
   <% end %>
 </h3>
 
 <% @homeworks.each do |hw| %>
-<strong>
-  Домашняя работа <%= hw.number %> <small><%= hw.created_at.strftime("%d.%m.%y") %> </small>
+  <strong> Домашняя работа <%= hw.number %>. </strong> <small><%= hw.created_at.strftime("%d.%m.%y") %> </small>
   <% if signed_in? && current_user.teacher? %>
     <%= link_to edit_homework_path(hw) do %>
       <span class="glyphicon glyphicon-pencil"></span>
     <% end %>
   <% end %> 
-</strong>
 
 <% hw.links.order(:id).each do |link| %>
   <br>
