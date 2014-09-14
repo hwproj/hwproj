@@ -4,17 +4,18 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
-    <%= f.input :name, label: "Имя" %>
-    <%= f.input :surname, label: "Фамилия" %>
-    <%= f.association :group, label: "Группа" %>
-    <%= f.input :gender, collection: { "мужской" => :male, "женский" => :female }, label: "Пол" %> 
+    <%= f.input :name, label: "Имя", autofocus: true, required: false %>
+    <%= f.input :surname, label: "Фамилия", required: false %>
+    <%= f.input :email %>
+    <%= f.association :group, label: "Группа", required: false %>
+    <%= f.input :gender, collection: { "мужской" => :male, "женский" => :female }, label: "Пол", required: false %> 
     <%= f.input :password, label: "Пароль" %>
     <%= f.input :password_confirmation, label: "Подтверждение" %>
   </div>
+  <br>
 
   <div class="form-actions">
-    <%= f.button :submit, "Регистрация" %>
+    <%= f.button :submit, "Регистрация", class: "btn btn-primary" %>
   </div>
 <% end %>
 
