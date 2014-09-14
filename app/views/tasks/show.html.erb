@@ -5,10 +5,17 @@
   <% elsif @task.accepted_partially? %>
     <span style="color:#f0ad4e" class="glyphicon glyphicon-exclamation-sign"></span>
   <% end %>
-    Задача <%= @task.problem.homework.number %>.<%= @task.problem.number %> 
-    <small> 
-      <%= "#{@user.name} #{@user.surname}" if current_user.teacher? %>
-    </small> 
+    Задача <%= @task.problem.homework.number %>.<%= @task.problem.number %>
+
+    <% if current_user.teacher? %>
+      <small> 
+        <%= @user.full_name %>
+        <%= mail_to @user.email do %>
+          <span class="glyphicon glyphicon-envelope"></span>
+        <% end %>
+      </small> 
+    <% end %>
+    
   </h2>
 
   <div class="row"><div class="well well-small"> <%= @task.problem.text %> </div></div>
@@ -18,17 +25,6 @@
   <% end %>
 
   <% if @task.submissions.any? %>
-    <h3>Последнее решение</h3>
-
-    <h5>
-      <%= link_to @last_submission.file.url, class: "btn btn-default", disabled: (not @last_submission.file?) do %>
-        <span class="glyphicon glyphicon-cloud-download"></span> <%= "v.#{@last_submission.version}" %>
-      <% end %>
-      
-      <%= @last_submission.text %> 
-      
-      <small><%= @last_submission.created_at.strftime("%H:%M %d.%m.%y") %></small>
-    </h5>
 
     <% if @task.notes.any? %>
       <h3> Замечания </h3>
@@ -76,8 +72,8 @@
   <% end %>
 
   <% if @task.submissions.count > 1 %>
-    <h3>Предыдущие решения</h3>
-      <% @task.submissions.select{|s| s.id != @last_submission.id}.each do |submission| %>
+    <h3>Решения</h3>
+      <% @task.submissions.each do |submission| %>
         <h5>
             <%= link_to submission.file.url, class: "btn btn-default", disabled: (not submission.file?) do %>
               <span class="glyphicon glyphicon-cloud-download"></span> <%= "v.#{submission.version}" %>
