@@ -1,5 +1,6 @@
 class HomeworksController < ApplicationController
   before_action :set_homework, only: [ :edit, :update, :destroy ]
+  before_action :check_teacher, only: [ :new, :edit ]
 
   def new
     @homework = Homework.new()
@@ -50,6 +51,12 @@ class HomeworksController < ApplicationController
 
     def set_homework
       @homework = Homework.find(params[:id])
+    end
+
+    def check_teacher
+      if (not signed_in?) || (not current_user.teacher?)
+        raise ActionController::RoutingError.new('Not Found')
+      end
     end
 
     def homework_params
