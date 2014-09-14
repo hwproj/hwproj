@@ -3,7 +3,7 @@ class TasksController < ApplicationController
 
   def show
     if (not signed_in?) || ((not current_user.teacher?) && current_user.id != @task.user.id)
-      redirect_to root_path
+      raise ActionController::RoutingError.new('Not Found')
     end
     @user = @task.user
     @submissions = @task.submissions
