@@ -4,6 +4,11 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => { registrations: 'registrations' }
 
+  devise_scope :user do
+    put 'users/approve/:id', to: 'registrations#approve_student', as: "approve_student"
+    delete 'users/:id', to:'registrations#destroy_student', as: "destroy_student"
+  end
+
   resources :homeworks
   resources :tasks, only: [ :show, :update ]
   resources :submissions, only: [ :new, :create, :index, :update ]
