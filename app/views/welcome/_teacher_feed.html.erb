@@ -1,10 +1,9 @@
 <div class="row">
   <div class="col-md-8">
-    <h1>Новости</h1>
+    <h3>Новости</h3>
     <% @submissions.each do |submission| %>
       <h5>  
-        <%= submission.user.full_name %>
-        (<%= link_to submission.user.group.name, submission.user.group %> гр.)
+        <%= "#{submission.user.full_name} (#{submission.user.group.name} гр.)" %>
         <%= "добавил#{"а" if submission.user.female?} решение " %>
 
         <%= link_to submission.task.name, submission.task %>
