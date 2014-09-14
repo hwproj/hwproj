@@ -30,7 +30,7 @@
       <% @students.each do |student| %>
         <tr> 
           <td>
-            <%= student.full_name %>
+            <%= "#{student.surname} #{student.name}" %>
 
             <% if signed_in? && current_user.teacher? && (not student.approved?) %>
               <%= link_to approve_student_path(student), method: :put do %>
@@ -62,22 +62,7 @@
           <% end %>
 
         </tr>
-      <% end %>
-      
-      
+      <% end %>  
     </table>
-    
   </div>
-  <table align="right" width="290px" class="table-bordered">
-      <tr>
-        <td style="width: 30px;" class="accepted">
-        </td>
-        <td align="center">Задача зачтена
-        </td>
-        <td style="width: 30px;" class="accepted_partially">
-        </td>
-        <td align="center">Есть замечания
-        </td>
-      </tr>
-    </table>
 <% end %>

@@ -1,17 +1,20 @@
-<h2>Редактировать профиль <%= resource_name.to_s.humanize %></h2>
+<h2>Редактировать профиль</h2>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :email, label: "Email", autofocus: true %>
+    <%= f.input :name, label: "Имя", autofocus: true, required: false %>
+    <%= f.input :surname, label: "Фамилия", required: false %>
+
+    <%= f.input :email, label: "Email" %>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <p>Ожидает подтверждения: <%= resource.unconfirmed_email %></p>
     <% end %>
 
-    <%= f.input :password, label: "Пароль", autocomplete: "off", hint: "Оставьте пустым, если не хотите менять", required: false %>
-    <%= f.input :password_confirmation, label: "Подтверждение", required: false %>
+    <%= f.input :password, label: "Пароль", autocomplete: "off", hint: "Оставьте пустым, если не хотите менять пароль", required: false %>
+    <%= f.input :password_confirmation, label: "Подтверждение", hint: "Оставьте пустым, если не хотите менять пароль", required: false %>
     <%= f.input :current_password, label: "Текущий пароль", hint: "Введите текущий пароль, чтобы сохранить изменения" %>
   </div>
   <br>

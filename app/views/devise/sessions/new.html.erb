@@ -7,9 +7,13 @@
     <%= f.input :remember_me, label: "Оставаться в системе", as: :boolean if devise_mapping.rememberable? %>
   </div>
 
+  <br>
+
   <div class="form-actions">
-    <%= f.button :submit, "Вход" %>
+    <%= f.button :submit, "Вход", class: "btn btn-primary" %>
   </div>
 <% end %>
+
+<br>
 
 <%= render "devise/shared/links" %>

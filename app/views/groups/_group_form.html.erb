@@ -1,5 +1,6 @@
 <%= simple_form_for @group do |f| %>
-  <%= f.input :number, label: "Номер группы" %>
-  <%= f.input :year, label: "Курс" %> 
+  <%= f.input :number, label: "Номер группы", required: false %>
+  <%= f.input :year, label: "Курс", required: false %> 
+  <br>
   <%= f.button :submit, "Сохранить", class: "btn btn-primary" %>
 <% end %>

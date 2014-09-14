@@ -1,5 +1,5 @@
 <%= simple_form_for Link.new do |f| %>
-<%= f.input :name %>
+<%= f.input :name, autofocus: true %>
 <%= f.input :url %>
-<%= f.submit class: "btn btn-primary" %>
+<%= f.submit "Сохранить", class: "btn btn-primary" %>
 <% end %>

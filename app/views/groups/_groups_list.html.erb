@@ -1,8 +1,8 @@
-<h2>Группы</h2>
+<h3>Группы</h3>
 <% if @groups.any? %>
 	<ul>
 	<% @groups.each do |group| %>
-		<li><h3><%= link_to group.name, group %></h3></li>
+		<li><h4><%= link_to group.name, group %></h4></li>
 	<% end %>
 	</ul>
 <% else %>

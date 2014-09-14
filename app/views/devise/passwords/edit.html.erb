@@ -7,12 +7,14 @@
   <%= f.full_error :reset_password_token %>
 
   <div class="form-inputs">
-    <%= f.input :password, label: "Новый пароль", required: true, autofocus: true %>
-    <%= f.input :password_confirmation, label: "Подтверждение", required: true %>
+    <%= f.input :password, label: "Новый пароль", autofocus: true %>
+    <%= f.input :password_confirmation, label: "Подтверждение" %>
   </div>
+  
+  <br>
 
   <div class="form-actions">
-    <%= f.button :submit, "Сохранить" %>
+    <%= f.button :submit, "Сохранить", class: "btn btn-primary" %>
   </div>
 <% end %>
 

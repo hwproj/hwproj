@@ -1,9 +1,9 @@
-<h1>
+<h2>
   Домашняя работа <%= @homework.number %>
   <small>
     <%= link_to "#{@homework.group.name} группа", @homework.group %>
   </small>
-</h1>
+</h2>
 
 <%= simple_form_for @homework  do |f| %>
 
