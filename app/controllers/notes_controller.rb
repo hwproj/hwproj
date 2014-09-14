@@ -6,6 +6,11 @@ class NotesController < ApplicationController
     redirect_to task_path(@note.submission.task)
   end
 
+  def destroy
+    Note.find(params[:id]).destroy
+    redirect_to :back
+  end
+
   private
 
     def notes_params

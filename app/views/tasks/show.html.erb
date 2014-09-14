@@ -39,13 +39,21 @@
               <%= note.text %>
               <small><strong><%= "v.#{note.submission.version}" %></strong><%=", #{note.created_at.strftime("%d.%m.%y")}" %></small> 
 
-              <% if signed_in? && current_user.teacher? && (not note.fixed?) %>
-                  <%= form_for note, method: :put do |f| %>
-                    <%= f.hidden_field :id, value: note.id %>
-                    <%= f.hidden_field :fixed, value: true %>
-                    <%= f.submit "Исправлено", class: "btn btn-success btn-xs"%>
+              <% if signed_in? && current_user.teacher? %>
+                <% if not note.fixed? %>
+                  <%= link_to note_path(note, note: { fixed: true }), method: :put, title: "Принять" do %>
+                    <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
+                  <% end %>
+                <% else %>
+                  <%= link_to note_path(note, note: { fixed: false }), method: :put, title: "Отменить" do %>
+                    <span style="color:#d9534f" class="glyphicon glyphicon-remove"></span>
                   <% end %>
                 <% end %>
+
+                <%= link_to note_path(note), method: :delete do %>
+                  <span class="glyphicon glyphicon-trash"></span>
+                <% end %>
+              <% end %>
 
             </h5>
           <% end %>
