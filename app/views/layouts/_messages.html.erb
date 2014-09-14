@@ -2,7 +2,14 @@
   <div class="alert alert-success" role="alert">Logged in as teacher.</div>
 <% end %>
 <% flash.each do |key, value| %>
-  <div class="alert alert-<%= key %>" role="alert">
-    <%= value %>
+  <% if key == "alert" %>
+    <div class="alert alert-danger" role="alert">
+      <%= value %>
+    </div>
+  <% end %>
+<% end %>
+<% if signed_in? && (not current_user.approved?) %>
+  <div class="alert alert-warning" role="alert">
+    Преподаватель скоро активирует Вашу учётную запись.
   </div>
 <% end %>
