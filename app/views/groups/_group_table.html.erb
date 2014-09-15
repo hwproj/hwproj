@@ -27,7 +27,7 @@
         </tr>
       </thead>
 
-      <% @students.each do |student| %>
+      <% @students.sort_by{|x| x.surname}.each do |student| %>
         <tr> 
           <td>
             <%= "#{student.surname} #{student.name}" %>
