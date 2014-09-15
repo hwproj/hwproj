@@ -1,3 +1,3 @@
 Новый студент: <br>
 <%= "#{@student.full_name}, #{@student.email}, #{@student.group.name} гр." %>
-<%= link_to "Перейти на страницу группы", @student.group %>
+<%= link_to "Перейти на страницу группы", group_url(@student.group) %>
