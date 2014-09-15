@@ -23,7 +23,7 @@
 <% end %>
 
   <ol>
-  <% hw.problems.order(:id)each do |problem| %>
+  <% hw.problems.order(:id).each do |problem| %>
     <li> <%= problem.text %> </li>
     <% end %>
   </ol>
