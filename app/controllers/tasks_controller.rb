@@ -17,8 +17,6 @@ class TasksController < ApplicationController
         note.update(fixed: true)
       end
       UserMailer.task_accepted_notify(@task).deliver
-    else
-      UserMailer.new_notes_notify(@task.submissions.first).deliver
     end
   	redirect_to @task
   end

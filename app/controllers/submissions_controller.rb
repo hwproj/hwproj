@@ -19,6 +19,7 @@ class SubmissionsController < ApplicationController
 
     if @submission.notes.any?
       @submission.task.update(status: "accepted_partially")
+      UserMailer.new_notes_notify(@submission).deliver
     end
 
     redirect_to @submission.task
