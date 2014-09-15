@@ -16,6 +16,6 @@ class UserMailer < ActionMailer::Base
   def new_notes_notify(submission)
     @task = submission.task
     @notes = submission.notes
-    mail(to: submission.user.email, subject: 'Замечания')
+    mail(to: submission.user.email, subject: "Замечания к задаче #{@task.name}")
   end
 end
