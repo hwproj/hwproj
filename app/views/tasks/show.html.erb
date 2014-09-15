@@ -79,7 +79,7 @@
       <% end %>
   <% end %>
 
-  <% if @task.submissions.count > 1 %>
+  <% if @task.submissions.any? %>
     <h3>Решения</h3>
       <% @task.submissions.each do |submission| %>
         <h5>
