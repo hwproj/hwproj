@@ -15,7 +15,7 @@
         <tr>
           <td></td>
           <td></td>
-          <% @group.problems.sort_by{|x| x.name}.each do |problem| %>
+          <% @group.problems.sort_by{|x| x.id}.each do |problem| %>
             <% if problem.number == 1 %>
               <td class="separator"></td> 
             <% end %>
@@ -44,7 +44,7 @@
           </td>
           <td align="center"><%= student.tasks_left.count %></td>
 
-          <% student.tasks.sort_by{|x| x.problem.name}.each do |task| %>
+          <% student.tasks.sort_by{|x| x.id}.each do |task| %>
             <% if task.problem.number == 1 %>
               <td class="separator"></td> 
             <% end %>
