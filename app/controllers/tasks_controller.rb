@@ -18,7 +18,7 @@ class TasksController < ApplicationController
       end
       UserMailer.task_accepted_notify(@task).deliver
     else
-      UserMailer.new_notes_notify(@task).deliver
+      UserMailer.new_notes_notify(@task.submissions.first).deliver
     end
   	redirect_to @task
   end
