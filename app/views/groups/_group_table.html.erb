@@ -44,7 +44,7 @@
           </td>
           <td align="center"><%= student.tasks_left.count %></td>
 
-          <% student.tasks.sort_by{|x| x.id}.each do |task| %>
+          <% student.tasks.sort_by{|x| x.problem.number}.each do |task| %>
             <% if task.problem.number == 1 %>
               <td class="separator"></td> 
             <% end %>
