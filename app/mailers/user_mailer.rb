@@ -18,4 +18,10 @@ class UserMailer < ActionMailer::Base
     @notes = submission.notes
     mail(to: submission.user.email, subject: "Замечания к задаче #{@task.name}")
   end
+
+  def new_student_notify(user)
+    @group = user.group
+    @student = user
+    mail(to: @group.teacher.email, subject: "Новый студент")
+  end
 end

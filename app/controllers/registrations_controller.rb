@@ -1,5 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
   after_action :add_tasks, only: :create
+  after_action :send_notify, only: :create
 
   def approve_student
     redirect_to :root if (not current_user.teacher?)
@@ -29,6 +30,10 @@ class RegistrationsController < Devise::RegistrationsController
           @user.tasks.create(problem_id: problem.id) 
         end
       end
+    end
+
+    def send_notify
+      UserMailer.new_student_notify(@user).deliver
     end
 
     def sign_up_params
