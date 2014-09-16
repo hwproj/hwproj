@@ -9,7 +9,7 @@
   <% end %>
 </h3>
 
-<% @homeworks.each do |hw| %>
+<% @homeworks.order(:number).each do |hw| %>
   <strong> Домашняя работа <%= hw.number %>. </strong> <small><%= hw.created_at.strftime("%d.%m.%y") %> </small>
   <% if signed_in? && current_user.teacher? %>
     <%= link_to edit_homework_path(hw) do %>
@@ -23,8 +23,15 @@
 <% end %>
 
   <ol>
-  <% hw.problems.order(:id).each do |problem| %>
-    <li> <%= problem.text %> </li>
+    <% hw.problems.order(:number).each do |problem| %>
+      <li>
+        <%= problem.text %>
+        <% if signed_in? && current_user.student? %>
+          <%= link_to task_path(@student_tasks.select{|x| x.problem.id == problem.id}.first) do %>
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          <% end %>
+        <% end %>
+      </li>
     <% end %>
   </ol>
 <% end %>

@@ -10,6 +10,7 @@ class GroupsController < ApplicationController
       @students = @group.users
     else
       @students = @group.users.select{ |student| student.approved }
+      @student_tasks = current_user.tasks if signed_in?
     end
 
     @homeworks = @group.homeworks
