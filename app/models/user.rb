@@ -10,8 +10,8 @@ class User < ActiveRecord::Base
 
   belongs_to :group
 
-  has_many :tasks
-  has_many :submissions, through: :tasks
+  has_many :tasks, dependent: :destroy
+  has_many :submissions, through: :tasks, dependent: :destroy
 
   accepts_nested_attributes_for :tasks, :reject_if => :all_blank, :allow_destroy => true 
 
