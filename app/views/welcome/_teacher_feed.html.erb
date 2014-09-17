@@ -10,7 +10,7 @@
 
         <% if submission.task.accepted? %>
           <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
-        <% elsif submission.task.accepted_partially? %>
+        <% elsif submission.notes.any? %>
           <span style="color:#f0ad4e" class="glyphicon glyphicon-exclamation-sign"></span>
         <% end %>
         
