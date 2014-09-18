@@ -28,7 +28,7 @@
 
     <% if @task.notes.any? %>
       <h3> Замечания </h3>
-          <% @task.notes.each do |note| %>
+          <% @task.notes.order(:id).reverse.each do |note| %>
             <h5>
               <% if note.fixed? %>
                 <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
