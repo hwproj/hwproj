@@ -22,6 +22,6 @@ class UserMailer < ActionMailer::Base
   def new_student_notify(user)
     @group = user.group
     @student = user
-    mail(to: @group.teacher.email, subject: "Новый студент")
+    mail(to: @group.teacher.email, subject: "Новый студент") unless @group.teacher.nil?
   end
 end
