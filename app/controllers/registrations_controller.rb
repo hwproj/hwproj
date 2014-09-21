@@ -27,7 +27,7 @@ class RegistrationsController < Devise::RegistrationsController
     def add_tasks
       if @user.valid?
         @user.group.problems.each do |problem|
-          @user.tasks.create(problem_id: problem.id) 
+          @user.tasks.create(problem_id: problem.id, homework_id: problem.homework_id)
         end
       end
     end

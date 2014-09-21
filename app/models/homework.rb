@@ -1,6 +1,7 @@
 class Homework < ActiveRecord::Base
   belongs_to :group
   has_many :problems, dependent: :destroy
+  has_many :tasks
   has_many :links, as: :parent, dependent: :destroy
   validates_associated :problems
   validates :group_id, presence: true

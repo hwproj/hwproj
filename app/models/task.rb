@@ -1,6 +1,7 @@
 class Task < ActiveRecord::Base
     belongs_to :problem
     belongs_to :user
+    belongs_to :homework
     has_many :submissions, dependent: :destroy
     has_many :notes, through: :submissions
 

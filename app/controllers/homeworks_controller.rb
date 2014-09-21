@@ -73,7 +73,7 @@ class HomeworksController < ApplicationController
   def create_tasks
     @homework.problems.each do |problem|
       @homework.group.users.each do |user|
-          user.tasks.create(problem_id: problem.id)
+          user.tasks.create(problem_id: problem.id, homework_id: problem.homework_id)
       end
     end
   end
