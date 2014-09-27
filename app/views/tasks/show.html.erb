@@ -37,7 +37,7 @@
               <% end %>
 
               <%= note.text %>
-              <small><strong><%= "v.#{note.submission.version}" %></strong><%=", #{note.created_at.strftime("%d.%m.%y")}" %></small> 
+              <small><strong><%= "v.#{note.submission.version}" %></strong><%=", #{note.created_at.strftime("%H:%M %d.%m.%y")}" %></small> 
 
               <% if signed_in? && current_user.teacher? %>
                 <% if not note.fixed? %>
