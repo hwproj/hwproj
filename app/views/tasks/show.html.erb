@@ -60,8 +60,10 @@
     <% end %>
   <% end %>
 
-  <% if signed_in? && current_user.teacher? && (not @task.accepted?) && @submissions.any? %>
-    
+  <% if signed_in? && current_user.teacher? %>
+    <% if @task.accepted? %>
+      <%= link_to "Раззачесть", task_path(@task, task: {status: "accepted_partially"}), method: :put, class: "btn btn-default" %>
+    <% else %>
       <%= simple_form_for @last_submission, url: {controller: :submissions, action: :update} do |f| %>
         <%= f.hidden_field :id, value: @last_submission.id %>
 
@@ -71,13 +73,11 @@
           </div>
           
           <br>
-      <% end %>
-
-      <%= form_for @task, method: :put do |f| %>
-        <%= f.hidden_field :status, value: "accepted" %>
-        <%= f.submit "Принять решение", class: "btn btn-success" %>
-      <% end %>
+        <% end %>
+      <%= link_to "Принять решение", task_path(@task, task: {status: "accepted"}), method: :put, class: "btn btn-success" %>
+    <% end %>
   <% end %>
+
 
   <% if @task.submissions.any? %>
     <h3>Решения</h3>
