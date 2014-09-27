@@ -13,6 +13,8 @@ class GroupsController < ApplicationController
       @student_tasks = current_user.tasks if signed_in?
     end
 
+    @tasks_left = @group.tasks_left
+
     @homeworks = @group.homeworks
   end
 
