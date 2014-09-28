@@ -71,9 +71,11 @@ class HomeworksController < ApplicationController
   end
 
   def create_tasks
-    @homework.problems.each do |problem|
-      @homework.group.users.each do |user|
-          user.tasks.create(problem_id: problem.id, homework_id: problem.homework_id)
+    @homework.group.users.each do |user|
+      job = user.jobs.create(homework_id: @homework.id)
+
+      @homework.problems.each do |problem|
+          user.tasks.create(problem_id: problem.id, homework_id: problem.homework_id, job_id: job.id)
       end
     end
   end

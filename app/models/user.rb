@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
 
   belongs_to :group
 
+  has_many :jobs, dependent: :destroy
   has_many :tasks, dependent: :destroy
   has_many :submissions, through: :tasks, dependent: :destroy
 
