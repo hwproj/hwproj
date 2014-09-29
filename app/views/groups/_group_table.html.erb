@@ -18,7 +18,7 @@
           <td align="center"><%= @tasks_left if @tasks_left != 0 %></td>
           <td class="separator"></td>
           <% @group.homeworks.order(:id).each do |homework| %>
-            <% homework.problems.each do |problem| %>
+            <% homework.problems.order(:id).each do |problem| %>
               <td align="center">
               <%= problem.number %>
             </td>
