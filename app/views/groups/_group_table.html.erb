@@ -18,7 +18,7 @@
           <td align="center"><%= @tasks_left if @tasks_left != 0 %></td>
           <td class="separator"></td>
           <% @group.homeworks.order(:id).each do |homework| %>
-            <% homework.problems.order(:id).each do |problem| %>
+            <% homework.problems.order(:number).each do |problem| %>
               <td align="center">
               <%= problem.number %>
             </td>
@@ -47,7 +47,7 @@
 
           <td class="separator"></td>
           <% student.jobs.order(:id).each do |job| %>
-            <% job.tasks.order(:id).each do |task| %>
+            <% job.tasks.sort_by{|x| x.problem.number}.each do |task| %>
 
               <% case task.status when "accepted" %>
                 <td class="accepted"></td>
