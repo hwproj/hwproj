@@ -22,6 +22,7 @@ class TasksController < ApplicationController
       end
       UserMailer.task_accepted_notify(@task).deliver
     end
+    update_job
   	redirect_to @task
   end
 
@@ -34,4 +35,12 @@ class TasksController < ApplicationController
   	def task_params
   		params.require(:task).permit(:status)
   	end
+
+    def update_job
+      @job = @task.job
+      @job.update(done: @job.tasks.select{|x| x.status != "accepted"}.empty?)
+      if @job.done? && @job.homework.awards.count < 3
+        @job.awards.create(rank: @job.homework.awards.count + 1)
+      end
+    end
 end

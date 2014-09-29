@@ -10,7 +10,8 @@ class HomeworksController < ApplicationController
     @homework = Homework.new(homework_params)
     if @homework.valid?
       @homework.number = @homework.group.homeworks.count + 1
-      @homework.save  
+      @homework.save
+      create_jobs
       redirect_to edit_homework_path(@homework)
     else
       redirect_to :back
@@ -70,12 +71,18 @@ class HomeworksController < ApplicationController
     end
   end
 
+  def create_jobs
+    @homework.group.users.each do |user|
+      user.jobs.create(homework_id: @homework.id)
+    end
+  end
+
   def create_tasks
     @homework.group.users.each do |user|
-      job = user.jobs.create(homework_id: @homework.id)
+      job = user.jobs.find_by(homework_id: @homework.id)
 
       @homework.problems.each do |problem|
-          user.tasks.create(problem_id: problem.id, homework_id: problem.homework_id, job_id: job.id)
+        user.tasks.create(problem_id: problem.id, homework_id: problem.homework_id, job_id: job.id)
       end
     end
   end

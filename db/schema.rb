@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140928104401) do
+ActiveRecord::Schema.define(version: 20140928163059) do
+
+  create_table "awards", force: true do |t|
+    t.integer  "job_id"
+    t.integer  "rank"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "groups", force: true do |t|
     t.integer  "number"
