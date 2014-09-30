@@ -15,7 +15,7 @@ Bundler.require(*Rails.groups)
 
 module Hwproj
   class Application < Rails::Application
-    WillPaginate.per_page = 10
+    WillPaginate.per_page = 18
 
     config.time_zone = 'Moscow'
     # Settings in config/environments/* take precedence over those specified here.
