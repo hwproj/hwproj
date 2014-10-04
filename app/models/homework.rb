@@ -1,7 +1,7 @@
 class Homework < ActiveRecord::Base
   belongs_to :group
   has_many :problems, dependent: :destroy
-  has_one :job, dependent: :destroy
+  has_many :jobs, dependent: :destroy
   has_many :tasks
   has_many :links, as: :parent, dependent: :destroy
   has_many :awards, through: :job
