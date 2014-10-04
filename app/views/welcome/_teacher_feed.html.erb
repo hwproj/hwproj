@@ -8,10 +8,12 @@
 
         <%= link_to submission.task.name, submission.task %>
 
-        <% if submission.task.accepted? %>
-          <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
-        <% elsif submission.notes.any? %>
+        <% task = submission.task %>
+        <% notes = submission.task.notes %>
+        <% if notes.any? && notes.order(created_at: :asc).reverse.last.created_at > submission.created_at %>
           <span style="color:#f0ad4e" class="glyphicon glyphicon-exclamation-sign"></span>
+        <% elsif task.accepted? %>
+          <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
         <% end %>
         
         <small>
