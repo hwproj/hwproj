@@ -21,7 +21,7 @@
           </small>
         </h5>
       <% end %>
-      <%= will_paginate @student_feed %>
+      <%= will_paginate @student_feed, :inner_window => 1, :outer_window => 1 %>
     <% end %>
   </div>
 
