@@ -33,7 +33,7 @@ gem 'devise'
 # Styling
 gem 'bootstrap-sass', '~> 3.2.0.0'
 gem 'autoprefixer-rails'
-gem 'simple_form'
+gem 'simple_form', github: 'plataformatec/simple_form', branch: 'master'
 gem 'cocoon'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
