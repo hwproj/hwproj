@@ -11,11 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140928163059) do
+ActiveRecord::Schema.define(version: 20141010103112) do
 
   create_table "awards", force: true do |t|
     t.integer  "job_id"
     t.integer  "rank"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "courses", force: true do |t|
+    t.string   "name"
+    t.string   "group_name"
+    t.integer  "teacher_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -33,6 +41,8 @@ ActiveRecord::Schema.define(version: 20140928163059) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "group_id"
+    t.integer  "term_id"
+    t.integer  "assignment_type"
   end
 
   create_table "jobs", force: true do |t|
@@ -70,6 +80,14 @@ ActiveRecord::Schema.define(version: 20140928163059) do
     t.integer  "number"
   end
 
+  create_table "students", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "term_id"
+    t.boolean  "approved",   default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "submissions", force: true do |t|
     t.text     "text",       limit: 255
     t.datetime "created_at"
@@ -88,6 +106,13 @@ ActiveRecord::Schema.define(version: 20140928163059) do
     t.integer  "status",      default: 0
     t.integer  "homework_id"
     t.integer  "job_id"
+  end
+
+  create_table "terms", force: true do |t|
+    t.integer  "course_id"
+    t.integer  "number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|

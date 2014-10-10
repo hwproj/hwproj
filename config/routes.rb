@@ -9,7 +9,9 @@ Rails.application.routes.draw do
     delete 'users/:id', to:'registrations#destroy_student', as: "destroy_student"
   end
 
-  
+  resources :courses
+  resources :students
+  resources :assignments
 
   resources :homeworks
   resources :tasks, only: [ :show, :update ]

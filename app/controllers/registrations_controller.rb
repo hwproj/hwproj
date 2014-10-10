@@ -1,6 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
   after_action :add_tasks, only: :create
-  after_action :send_notify, only: :create
+  # after_action :send_notify, only: :create
 
   def approve_student
     redirect_to :root if (not current_user.teacher?)
