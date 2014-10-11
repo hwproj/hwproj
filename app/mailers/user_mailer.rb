@@ -2,26 +2,50 @@ class UserMailer < ActionMailer::Base
   default from: "no-reply@hwproj.herokuapp.com"
 
   def new_submission_notify(submission)
-    teacher = submission.user.group.teacher
-    @student = submission.user
+    teacher = submission.student.term.course.teacher
+    @student = submission.student
     @task = submission.task
-    mail(to: teacher.email, subject: 'Новое решение')
+    mail(to: teacher.email, subject 'Новое решение')
   end
+
+  # def new_submission_notify(submission)
+  #   teacher = submission.user.group.teacher
+  #   @student = submission.user
+  #   @task = submission.task
+  #   mail(to: teacher.email, subject: 'Новое решение')
+  # end
 
   def task_accepted_notify(task)
     @task = task
-    mail(to: task.user.email, subject: 'Задача принята')
+    mail(to: task.student.user.email, subject: 'Задача принята')
   end
+
+  # def task_accepted_notify(task)
+  #   @task = task
+  #   mail(to: task.user.email, subject: 'Задача принята')
+  # end
 
   def new_notes_notify(submission)
     @task = submission.task
     @notes = submission.notes
-    mail(to: submission.user.email, subject: "Замечания к задаче #{@task.name}")
+    mail(to: submission.student.user.email, subject: "Замечания к задаче #{@task.name}")
   end
 
-  def new_student_notify(user)
-    @group = user.group
-    @student = user
-    mail(to: @group.teacher.email, subject: "Новый студент") unless @group.teacher.nil?
+  # def new_notes_notify(submission)
+  #   @task = submission.task
+  #   @notes = submission.notes
+  #   mail(to: submission.user.email, subject: "Замечания к задаче #{@task.name}")
+  # end
+
+  def new_student_notify(student)
+    @student = student
+    @term = student.term
+    mail(to: @term.course.teacher, subject: "Новый студент")
   end
+
+  # def new_student_notify(user)
+  #   @group = user.group
+  #   @student = user
+  #   mail(to: @group.teacher.email, subject: "Новый студент") unless @group.teacher.nil?
+  # end
 end

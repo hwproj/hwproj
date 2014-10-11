@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
   validates :name, :surname, :gender, presence: true
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -10,11 +9,20 @@ class User < ActiveRecord::Base
 
   belongs_to :group
 
+  # when user is teacher
+  has_many :courses, dependent: :destroy
+
+  #when user is student
   has_many :jobs, dependent: :destroy
-  has_many :tasks, dependent: :destroy
-  has_many :submissions, through: :tasks, dependent: :destroy
+  has_many :tasks, through: :jobs
+  has_many :submissions, through: :tasks
 
   accepts_nested_attributes_for :tasks, :reject_if => :all_blank, :allow_destroy => true 
+
+  before_create do
+    self.name = self.name.strip
+    self.surname = self.surname.strip
+  end
 
   def tasks_left
     tasks.select{ |task| task.status != "accepted" }

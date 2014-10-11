@@ -16,3 +16,18 @@
   <% end %>
 </div>
 
+<div class="col-md-12">
+<ul>
+  <% @term.assignments.each do |assignment| %>
+    <li>
+      <%= assignment.type %>
+      <%= assignment.number %>
+      <ol>
+        <% assignment.problems.each do |problem| %>
+          <li> <%= problem.text %> </li>
+        <% end %>
+      </ol>
+    </li>
+  <% end %>
+</ul>
+</div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141010103112) do
+ActiveRecord::Schema.define(version: 20141011164411) do
 
   create_table "awards", force: true do |t|
     t.integer  "job_id"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20141010103112) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "student_id"
   end
 
   create_table "links", force: true do |t|
@@ -96,6 +97,7 @@ ActiveRecord::Schema.define(version: 20141010103112) do
     t.integer  "user_id"
     t.string   "file"
     t.integer  "version"
+    t.integer  "student_id"
   end
 
   create_table "tasks", force: true do |t|

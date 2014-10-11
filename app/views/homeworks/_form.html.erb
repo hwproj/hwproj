@@ -1,0 +1,17 @@
+<%= simple_form_for @assignment do |f| %>
+
+  <% if params[:action] == "new" %>
+    <%= f.input :assignment_type, collection: { "Домашняя работа" => :homework, "Тест" => :test }, label: "Тип" %>
+    <%= f.association :term, label_method: :group_name, label: "Группа" %>
+  <% end %>
+
+  <%= f.simple_fields_for :problems do |problem| %>
+    <%= render 'problem_fields', f: problem %>
+  <% end %>
+
+  <div class="links">
+    <%= link_to_add_association 'Добавить задачу', f, :problems, class: "btn btn-default" %>
+  </div>
+
+  <%= f.button :submit, "Сохранить работу" %>
+<% end %>

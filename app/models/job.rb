@@ -1,6 +1,7 @@
 class Job < ActiveRecord::Base
-	belongs_to :student, foreign_key: "user_id"
-  belongs_to :homework
-  has_many :tasks
+  belongs_to :student
+  belongs_to :assignment, class_name: "Homework", foreign_key: "homework_id"
+
+  has_many :tasks, dependent: :destroy
   has_many :awards, dependent: :destroy
 end

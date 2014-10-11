@@ -10,10 +10,10 @@ Rails.application.routes.draw do
   end
 
   resources :courses
+  resources :terms
   resources :students
-  resources :assignments
-
   resources :homeworks
+
   resources :tasks, only: [ :show, :update ]
   resources :submissions, only: [ :new, :create, :index, :update ]
   resources :problems, only: [ :show ]
