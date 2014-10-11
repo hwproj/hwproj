@@ -6,23 +6,23 @@ class TasksController < ApplicationController
       authenticate_user!
     end
 
-    if (not current_user.teacher?) && current_user.id != @task.user.id
+    if (not current_user.teacher?) && current_user.id != @task.student.user.id
       raise ActionController::RoutingError.new('Not Found')
     end
-    @user = @task.user
-    @submissions = @task.submissions
-    @last_submission = @submissions.first
+
+    @student = @task.student
+    @submissions = @task.submissions #reverse order
   end
 
   def update
-  	@task.update(task_params)
+  	@task.update(params.require(:task).permit(:status))
     if @task.accepted?
       @task.notes.each do |note|
         note.update(fixed: true)
       end
       UserMailer.task_accepted_notify(@task).deliver
     end
-    update_job
+    update_job #needs update
   	redirect_to @task
   end
 
@@ -32,15 +32,11 @@ class TasksController < ApplicationController
       @task = Task.find(params[:id])
     end
 
-  	def task_params
-  		params.require(:task).permit(:status)
-  	end
-
     def update_job
       @job = @task.job
       @job.update(done: @job.tasks.select{|x| x.status != "accepted"}.empty?)
-      if @job.done? && @job.homework.awards.count < 3
-        @job.awards.create(rank: @job.homework.awards.count + 1)
+      if @job.done? && @job.assignment.awards.count < 3
+        @job.awards.create(rank: @job.assignment.awards.count + 1)
       end
     end
 end

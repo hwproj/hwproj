@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :courses, dependent: :destroy
 
   #when user is student
+  has_many :subscriptions, class_name: 'Student'
   has_many :jobs, dependent: :destroy
   has_many :tasks, through: :jobs
   has_many :submissions, through: :tasks
