@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   belongs_to :group
 
   # when user is teacher
-  has_many :courses, dependent: :destroy
+  has_many :courses, foreign_key: "teacher_id" ,dependent: :destroy
 
   #when user is student
   has_many :subscriptions, class_name: 'Student'
