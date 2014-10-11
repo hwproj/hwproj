@@ -11,9 +11,20 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find(params[:id])
-    @term = @course.terms.last
+
+    term_number = params[:term_number] || @course.terms.count - 1
+    @term = @course.terms.where(number: term_number).first
+
+    raise ActionController::RoutingError.new('Not Found') if @term.nil?
 
     @subscription = @term.students.where(user_id: current_user.id).first  
+  end
+
+  def add_term
+    @course = Course.find(params[:id])
+    @course.create_term
+
+    redirect_to :back
   end
 
   private

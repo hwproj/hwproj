@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     delete 'users/:id', to:'registrations#destroy_student', as: "destroy_student"
   end
 
+  get 'courses/:id/terms/:term_number', to: 'courses#show'
+  put 'courses/:id/terms/new', to: 'courses#add_term', as: "add_term"
+
   resources :courses
   resources :terms
   resources :students
