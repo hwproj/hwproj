@@ -7,7 +7,6 @@
     <%= f.input :name, label: "Имя", autofocus: true %>
     <%= f.input :surname, label: "Фамилия" %>
     <%= f.input :email %>
-    <%= f.association :group, label: "Группа" %>
     <%= f.input :gender, collection: { "мужской" => :male, "женский" => :female }, label: "Пол" %> 
     <%= f.input :password, label: "Пароль" %>
     <%= f.input :password_confirmation, label: "Подтверждение" %>
