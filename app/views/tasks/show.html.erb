@@ -84,10 +84,16 @@
     <h3>Решения</h3>
       <% @task.submissions.each do |submission| %>
         <h5>
+          <div class="btn-group">
             <%= link_to submission.file.url, class: "btn btn-default", disabled: (not submission.file?) do %>
               <span class="glyphicon glyphicon-cloud-download"></span> <%= "v.#{submission.version}" %>
             <% end %>
-          
+            <% if submission.url %>
+              <%= link_to submission.url, class: "btn btn-default" do %>
+                <span class="glyphicon glyphicon-link"></span> <%= URI(submission.url).host %>
+              <% end %>
+            <% end %>
+          </div>
           <%= submission.text %> 
           
           <small><%= submission.created_at.strftime("%H:%M %d.%m.%y") %></small>

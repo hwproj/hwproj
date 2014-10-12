@@ -1,4 +1,8 @@
 class Submission < ActiveRecord::Base
+  include AddProtocol
+
+  before_save :add_protocol
+
 	belongs_to :student
 	belongs_to :task
   belongs_to :teacher, class_name: 'User'

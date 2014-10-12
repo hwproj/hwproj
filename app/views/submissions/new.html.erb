@@ -3,7 +3,7 @@
   <%= f.collection_select :task_id, current_user.tasks.select{|x| x.status != "accepted"}, :id, :name, label: "Задача" %>
 
   <%= f.input :file, label: "Решение" %>
-
+  <%= f.input :url, label: "Ссылка на решение", placeholder: "Коммит на GitHub, etc" %>
   <%= f.input :text, as: 'text', label: "Комментарий к решению", input_html: { rows: 3 } %>
 
  <br>
