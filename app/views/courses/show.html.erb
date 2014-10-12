@@ -2,24 +2,26 @@
   <div class="col-md-8 page-heading hwproj-div">
     <h1> <%= @course.name %> </h1>
     <h3> <%= "#{@course.group_name} группа" %> </h3>
+
+    <% if @subscription && (not @subscription.approved?) %>
+      <div class="alert alert-warning" role="alert">
+        Преподаватель должен подтвердить Вашу запись.
+      </div>
+    <% end %>
   </div>
 
   <div class="col-md-4 hwproj-div" align="right">
     <h3> <%= @course.teacher.full_name %> </h3>
-    <h3> 
-      <%= mail_to @course.teacher.email do %>
-        <%= @course.teacher.email %>
+    <h3>
+      <% if (signed_in? && current_user.teacher?) || (@subscription && @subscription.approved?) %>
+        <%= mail_to @course.teacher.email do %>
+          <%= @course.teacher.email %>
+        <% end %>
       <% end %>
     </h3>
 
     <% if signed_in? && current_user.student? %>
-      <% if @subscription.nil? %> 
-        <%= link_to 'Записаться', students_path(student: {term_id: @term.id}), method: :post, class: 'btn btn-success' %>
-      <% elsif (not @subscription.approved?) %>
-        <div class="alert alert-warning" role="alert">
-          Преподаватель скоро активирует Вашу учётную запись.
-        </div>
-      <% end %>
+        <%= link_to 'Записаться', students_path(student: {term_id: @term.id}), method: :post, class: 'btn btn-success' if @subscription.nil? %>
     <% end %>
   </div>
 </div>

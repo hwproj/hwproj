@@ -21,6 +21,10 @@ class CoursesController < ApplicationController
     raise ActionController::RoutingError.new('Not Found') if @term.nil?
 
     @subscription = @term.students.where(user_id: current_user.id).first if signed_in?
+
+    if signed_in? && current_user.student?
+      @student = @term.students.where(user_id: current_user.id).first
+    end
   end
 
   def index
