@@ -18,6 +18,7 @@ class HomeworksController < ApplicationController
   end
 
   def update
+    @assignment.update(assignment_params)
     enumerate_problems
     
     @assignment.problems.each do |problem|
