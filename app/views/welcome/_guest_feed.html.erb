@@ -1,14 +1,11 @@
 <div class="row">
-	<div class="col-md-9">
-    <div class="jumbotron"><h4><strong>HwProj</strong> — сайт для проверки домашних работ.<br> Сейчас он доступен для студентов 144 группы, подгруппы Тимофея Брыксина.</h4></div>
-
-    <div class="well hidden"><strong>HwProj</strong> — это круто! Больше не нужно писать множество писем преподавателю, бесконечно ждать ответа (если письмо не дойдёт), вы получаете замечания, выкладываете исправленную версию решения и сразу узнаёте, когда задача принята.</div>
-		
+	<div class="col-md-12">
+    <div class="well">
+      <h1><strong>HwProj</strong> — сайт для проверки домашних работ.</h1>
+      <h3>Курсы:</h3>
+      <%= render 'courses/index' %>
+    </div>
 	</div>
-
-  <div class="col-md-3 well">
-    <%= render 'courses/index' %>
-  </div>
 
 </div>
 <div class="row">
