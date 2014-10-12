@@ -1,7 +1,7 @@
 class Submission < ActiveRecord::Base
   include AddProtocol
 
-  before_save :add_protocol
+  before_create :add_protocol
 
 	belongs_to :student
 	belongs_to :task
