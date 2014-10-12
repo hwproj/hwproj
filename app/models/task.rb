@@ -9,8 +9,6 @@ class Task < ActiveRecord::Base
 
     accepts_nested_attributes_for :submissions, :reject_if => :all_blank, :allow_destroy => true
 
-    validates_uniqueness_of :user_id, :scope => :problem_id
-
     def name
     	problem.homework.number.to_s + "." + problem.number.to_s
     end
