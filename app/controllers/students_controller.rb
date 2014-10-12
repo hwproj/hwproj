@@ -3,8 +3,8 @@ class StudentsController < ApplicationController
   def create
     @student = Student.create(student_params)
     
-    @student.term.assignments do |assignment|
-      job = @student.jobs.create(homework_id: homework.id)
+    @student.term.assignments.each do |assignment|
+      job = @student.jobs.create(homework_id: assignment.id)
 
       assignment.problems.each do |problem|
         job.tasks.create(problem_id: problem.id)
