@@ -1,92 +1,88 @@
-<% if @term.students.any? %>
-  <div class="table-responsive">
-    <table class="table table-bordered table-condensed">
-      <thead>
-        <tr>
-          <td align="center"><strong>Студент</strong></td>
-          <td align="center"><strong>TODO</strong></td>
-          <td class="separator"></td>
+<div class="table-responsive">
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <td align="center"><strong>Студент</strong></td>
+        <td align="center"><strong>TODO</strong></td>
+        <td class="separator"></td>
 
-          <% @term.assignments.each do |assignment| %>
-            <% if assignment.problems.any? %>
-              <td align="center" colspan="<%= assignment.problems.count %>">
-                <strong>
-                  <% if assignment.assignment_type == "test" %>
-                    <%= "Тест #{assignment.number}" %>
-                  <% else %>
-                    <%= "№#{assignment.number}" %>
-                  <% end %>
-                </strong>
-              </td>
-              <td class="separator"></td>
-            <% end %>
-          <% end %>
-        </tr>
-
-        <tr>
-          <td></td>
-          <td align="center"><%= @tasks_left if @tasks_left != 0 %></td>
-          <td class="separator"></td>
-          <% @term.assignments.order(:id).each do |assignment| %>
-            <% assignment.problems.order(:number).each do |problem| %>
-              <td align="center">
-              <%= problem.number %>
+        <% @term.assignments.each do |assignment| %>
+          <% if assignment.problems.any? %>
+            <td align="center" colspan="<%= assignment.problems.count %>">
+              <strong>
+                <% if assignment.assignment_type == "test" %>
+                  <%= "Тест #{assignment.number}" %>
+                <% else %>
+                  <%= "№#{assignment.number}" %>
+                <% end %>
+              </strong>
             </td>
-            <% end %>
             <td class="separator"></td>
           <% end %>
-        </tr>
-      </thead>
+        <% end %>
+      </tr>
 
-      <% @term.students.sort_by{|x| x.user.surname}.each do |student| %>
-        <tr> 
-          <td>
-            <%= "#{student.user.surname} #{student.user.name}" %>
+      <tr>
+        <td></td>
+        <td align="center"><%= @tasks_left if @tasks_left != 0 %></td>
+        <td class="separator"></td>
+        <% @term.assignments.order(:id).each do |assignment| %>
+          <% assignment.problems.order(:number).each do |problem| %>
+            <td align="center">
+            <%= problem.number %>
+          </td>
+          <% end %>
+          <td class="separator"></td>
+        <% end %>
+      </tr>
+    </thead>
 
-            <% if signed_in? && current_user.teacher? && (not student.approved?) %>
-              <%= link_to student_path(student, student: { approved: true }), method: :put do %>
-                <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
-              <% end %>
+    <% @students.sort_by{|x| x.user.surname}.each do |student| %>
+      <tr>
+        <td>
+          <%= "#{student.user.surname} #{student.user.name}" %>
 
-              <%= link_to student, method: :delete do %>
-                <span style="color:#d9534f" class="glyphicon glyphicon-remove"></span>
+          <% if signed_in? && current_user.teacher? && (not student.approved?) %>
+            <%= link_to student_path(student, student: { approved: true }), method: :put do %>
+              <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
+            <% end %>
+
+            <%= link_to student, method: :delete do %>
+              <span style="color:#d9534f" class="glyphicon glyphicon-remove"></span>
+            <% end %>
+          <% end %>
+        </td>
+        <td align="center"><%= student.user.tasks_left.count if student.user.tasks_left.count != 0 %></td>
+
+        <td class="separator"></td>
+        <% student.jobs.order(:id).each do |job| %>
+          <% job.tasks.sort_by{|x| x.problem.number}.each do |task| %>
+
+            <% case task.status when "accepted" %>
+              <td class="accepted"></td>
+              <% when "not_accepted" %>
+              <td class="not_accepted"></td>
+              <% when "not_submitted" %>
+              <td></td>
+              <% when "accepted_partially" %>
+              <td class="accepted_partially"></td>
+            <% end %>
+          <% end %>
+
+          <td class="separator" align="center
+          ">
+            <% if job.awards.any? %>
+              <% case job.awards.last.rank when 1 %>
+                <span style="color:#EEC900" class="glyphicon glyphicon-certificate"></span>
+              <% when 2 %>
+                <span style="color:#B0A6A4" class="glyphicon glyphicon-certificate"></span>
+              <% when 3 %>
+                <span style="color:#D98719" class="glyphicon glyphicon-certificate"></span>
               <% end %>
             <% end %>
           </td>
-          <td align="center"><%= student.user.tasks_left.count if student.user.tasks_left.count != 0 %></td>
-
-          <td class="separator"></td>
-          <% student.jobs.order(:id).each do |job| %>
-            <% job.tasks.sort_by{|x| x.problem.number}.each do |task| %>
-
-              <% case task.status when "accepted" %>
-                <td class="accepted"></td>
-                <% when "not_accepted" %>
-                <td class="not_accepted"></td>
-                <% when "not_submitted" %>
-                <td></td>
-                <% when "accepted_partially" %>
-                <td class="accepted_partially"></td>
-              <% end %>
-            <% end %>
-
-            <td class="separator" align="center
-            ">
-              <% if job.awards.any? %>
-                <% case job.awards.last.rank when 1 %>
-                  <span style="color:#EEC900" class="glyphicon glyphicon-certificate"></span>
-                <% when 2 %>
-                  <span style="color:#B0A6A4" class="glyphicon glyphicon-certificate"></span>
-                <% when 3 %>
-                  <span style="color:#D98719" class="glyphicon glyphicon-certificate"></span>
-                <% end %>
-              <% end %>
-            </td>
-          <% end %>
-        </tr>
-      <% end %>  
-    </table>
-  </div>
-<% else %>
-<h1>Нет студентов, подписанных на курс.</h1>
-<% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+</div>

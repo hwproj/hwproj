@@ -38,14 +38,13 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Курсы <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <% subscriptions = current_user.subscriptions.map{ |x| x.term.course }.uniq %>
-                  <% if subscriptions.empty? %>
-                    <li class="disabled"> <%= link_to "Нет групп", '#'%> </li>
-                  <% end %>
-                  <% subscriptions.sort_by{ |x| x.name }.each do |course| %>
-                    <li> <%= link_to course.name, course %> </li>
-                  <% end %>
+                  <% if subscriptions.any? %>
+                    <% subscriptions.sort_by{ |x| x.name }.each do |course| %>
+                      <li> <%= link_to course.name, course %> </li>
+                    <% end %>
 
-                  <li class="divider"></li>
+                    <li class="divider"></li>
+                  <% end %>
                   <li> <%= link_to "Все курсы", courses_path %> </li>
                 </ul>
               </li>
