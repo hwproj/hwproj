@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-8">
-    <h3>Новости</h3>
+    <h1>Новости</h1>
     
     <% if @student_feed.empty? %>
       <h4>Нет новостей.</h4>
@@ -9,10 +9,18 @@
         <h5>
           <% if entry.class.name == "Task" %>
             <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
-            Задача <%= link_to entry.name, entry %> принята.
+            <% if entry.job.assignment.assignment_type == "homework" %>
+              Задача <%= link_to entry.name, entry %> принята (<%= "#{entry.job.assignment.term.course.name}, #{entry.job.assignment.term.course.group_name} группа" %>).
+            <% else %>
+              Тест: <%= link_to "задача #{entry.problem.number}", entry %> принята (<%= "#{entry.job.assignment.term.course.name}, #{entry.job.assignment.term.course.group_name} группа" %>).
+            <% end %>
           <% elsif entry.class.name == "Submission" %>
             <span style="color:#f0ad4e" class="glyphicon glyphicon-exclamation-sign"></span>
-            К задаче <%= link_to entry.task.name, entry.task %> добавлены замечания.
+            <% if entry.job.assignment.assignment_type == "homework" %>
+              К задаче <%= link_to entry.task.name, entry.task %> добавлены замечания (<%= "#{entry.job.assignment.term.course.name}, #{entry.job.assignment.term.course.group_name} группа" %>).
+            <% else %>
+              Тест: к <%= link_to "решению #{entry.problem.number}", entry %> добавлены замечания (<%= "#{entry.job.assignment.term.course.name}, #{entry.job.assignment.term.course.group_name} группа" %>).
+            <% end %>
           <% end %>
 
           <small>
