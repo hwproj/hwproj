@@ -13,8 +13,8 @@
 <div class="col-md-4">
   <% if current_user.teacher? %>
   <h4 align="right">
-    <%= @user.full_name %> <br>
-    <%= mail_to @user.email, @user.email %>
+    <%= @student.full_name %> <br>
+    <%= mail_to @student.user.email, @student.user.email %>
   </h4>
   <% end %>
   </div>
@@ -65,8 +65,8 @@
     <% if @task.accepted? %>
       <%= link_to "Раззачесть", task_path(@task, task: {status: "accepted_partially"}), method: :put, class: "btn btn-default" %>
     <% else %>
-      <%= simple_form_for @last_submission, url: {controller: :submissions, action: :update} do |f| %>
-        <%= f.hidden_field :id, value: @last_submission.id %>
+      <%= simple_form_for @submissions.first, url: {controller: :submissions, action: :update} do |f| %>
+        <%= f.hidden_field :id, value: @submissions.first.id %>
 
           <div class="links">
             <%= link_to_add_association 'Добавить замечание', f, :notes, class: "btn btn-warning" %>
