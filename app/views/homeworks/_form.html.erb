@@ -9,8 +9,13 @@
     <%= render 'problem_fields', f: problem %>
   <% end %>
 
+  <%= f.simple_fields_for :links do |link| %>
+    <%= render 'link_fields', f: link %>
+  <% end %>
+
   <div class="links">
     <%= link_to_add_association 'Добавить задачу', f, :problems, class: "btn btn-default" %>
+    <%= link_to_add_association 'Добавить ссылку', f, :links, class: "btn btn-default" %>
   </div>
 
   <%= f.button :submit, "Сохранить работу", class: "btn btn-primary" %>
