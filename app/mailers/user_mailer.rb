@@ -5,7 +5,7 @@ class UserMailer < ActionMailer::Base
     teacher = submission.student.term.course.teacher
     @student = submission.student
     @task = submission.task
-    mail(to: teacher.email, subject 'Новое решение')
+    mail(to: teacher.email, subject: 'Новое решение')
   end
 
   # def new_submission_notify(submission)
@@ -40,7 +40,7 @@ class UserMailer < ActionMailer::Base
   def new_student_notify(student)
     @student = student
     @term = student.term
-    mail(to: @term.course.teacher, subject: "Новый студент")
+    mail(to: @term.course.teacher.email, subject: "Новый студент")
   end
 
   # def new_student_notify(user)

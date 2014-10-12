@@ -1,2 +1,2 @@
-<%= @student.full_name %> <%= "добавил#{ "a" if @student.female? }" %> решение для задачи
+<%= @student.full_name %> <%= "добавил#{ "a" if @student.user.female? }" %> решение для задачи
 <%= link_to "#{@task.name}", task_url(@task) %>
