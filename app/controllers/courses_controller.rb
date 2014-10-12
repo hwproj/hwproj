@@ -31,6 +31,8 @@ class CoursesController < ApplicationController
     if signed_in? && current_user.student?
       @student = @term.students.where(user_id: current_user.id).first
     end
+
+    @tasks_left = @term.tasks.select{|x| x.status != "accepted"}.count
   end
 
   def index
