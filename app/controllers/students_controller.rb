@@ -15,14 +15,14 @@ class StudentsController < ApplicationController
   end
 
   def update
-    student.update(params.require(:student).permit(:approved))
+    @student.update(params.require(:student).permit(:approved))
 
-    redirect_to student.term.course
+    redirect_to @student.term.course
   end
 
   def destroy
-    course = student.term.course
-    student.destroy
+    course = @student.term.course
+    @student.destroy
 
     redirect_to course
   end
