@@ -13,9 +13,9 @@ class User < ActiveRecord::Base
   has_many :courses, foreign_key: "teacher_id" ,dependent: :destroy
 
   #when user is student
-  has_many :subscriptions, class_name: 'Student'
+  has_many :subscriptions, class_name: 'Student', dependent: :destroy
   has_many :jobs, dependent: :destroy
-  has_many :tasks, through: :jobs
+  has_many :tasks
   has_many :submissions, through: :tasks
 
   accepts_nested_attributes_for :tasks, :reject_if => :all_blank, :allow_destroy => true 

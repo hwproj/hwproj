@@ -7,7 +7,7 @@ class StudentsController < ApplicationController
       job = @student.jobs.create(homework_id: assignment.id)
 
       assignment.problems.each do |problem|
-        t = Task.create(job_id: job.id, problem_id: problem.id)
+        job.tasks.create(user_id: @student.user.id, problem_id: problem.id)
       end
     end
 

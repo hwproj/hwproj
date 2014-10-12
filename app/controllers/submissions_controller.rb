@@ -32,6 +32,6 @@ class SubmissionsController < ApplicationController
     end
 
     def submission_params
-      params.require(:submission).permit(:text, :task_id, :file).merge(student_id: @task.student.id, version: @task.submissions.count + 1)
+      params.require(:submission).permit(:text, :task_id, :file).merge(user_id: current_user.id, student_id: @task.student.id, version: @task.submissions.count + 1)
     end
 end

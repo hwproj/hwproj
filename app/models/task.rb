@@ -1,6 +1,8 @@
 class Task < ActiveRecord::Base
     belongs_to :problem
     belongs_to :job
+    belongs_to :student
+    belongs_to :user
 
     has_many :submissions, dependent: :destroy
     has_many :notes, through: :submissions
@@ -10,7 +12,7 @@ class Task < ActiveRecord::Base
     accepts_nested_attributes_for :submissions, :reject_if => :all_blank, :allow_destroy => true
 
     def name
-    	problem.homework.number.to_s + "." + problem.number.to_s
+      problem.name
     end
 end
 

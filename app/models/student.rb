@@ -6,4 +6,12 @@ class Student < ActiveRecord::Base
   has_many :tasks, through: :jobs
   has_many :awards, through: :jobs
   has_many :submissions, through: :tasks
+
+  def full_name
+    user.full_name
+  end
+
+  def table_name
+    user.surname + " " + user.name
+  end
 end
