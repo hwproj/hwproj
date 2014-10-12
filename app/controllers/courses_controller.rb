@@ -23,6 +23,9 @@ class CoursesController < ApplicationController
     @subscription = @term.students.where(user_id: current_user.id).first if signed_in?
   end
 
+  def index
+  end
+
   def add_term
     @course = Course.find(params[:id])
     @course.create_term
