@@ -27,6 +27,8 @@ class HomeworksController < ApplicationController
         end
       end
     end
+
+    redirect_to @assignment.term.course
   end
 
   def destroy

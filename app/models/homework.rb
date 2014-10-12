@@ -19,9 +19,9 @@ class Homework < ActiveRecord::Base
   def type
     case assignment_type
     when "homework"
-      "Домашечка"
+      "Домашняя работа"
     when "test"
-      "Контрольная"
+      "Контрольная работа"
     end
   end
 end
