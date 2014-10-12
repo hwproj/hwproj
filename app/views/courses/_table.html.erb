@@ -6,19 +6,29 @@
           <td align="center"><strong>Студент</strong></td>
           <td align="center"><strong>TODO</strong></td>
           <td class="separator"></td>
-          <% @term.homeworks.each do |homework| %>
-            <% if homework.problems.any? %>
-              <td align="center" colspan="<%= homework.problems.count %>"><strong> №<%= homework.number %> </strong></td>
+
+          <% @term.assignments.each do |assignment| %>
+            <% if assignment.problems.any? %>
+              <td align="center" colspan="<%= assignment.problems.count %>">
+                <strong>
+                  <% if assignment.assignment_type == "test" %>
+                    <%= "Тест #{assignment.number}" %>
+                  <% else %>
+                    <%= "№#{assignment.number}" %>
+                  <% end %>
+                </strong>
+              </td>
               <td class="separator"></td>
             <% end %>
           <% end %>
         </tr>
+
         <tr>
           <td></td>
           <td align="center"><%= @tasks_left if @tasks_left != 0 %></td>
           <td class="separator"></td>
-          <% @term.homeworks.order(:id).each do |homework| %>
-            <% homework.problems.order(:number).each do |problem| %>
+          <% @term.assignments.order(:id).each do |assignment| %>
+            <% assignment.problems.order(:number).each do |problem| %>
               <td align="center">
               <%= problem.number %>
             </td>
@@ -33,15 +43,15 @@
           <td>
             <%= "#{student.user.surname} #{student.user.name}" %>
 
-            <!--<% if signed_in? && current_user.teacher? && (not student.approved?) %>
-              <%= link_to approve_student_path(student), method: :put do %>
+            <% if signed_in? && current_user.teacher? && (not student.approved?) %>
+              <%= link_to student_path(student, student: { approved: true }), method: :put do %>
                 <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
               <% end %>
 
-              <%= link_to destroy_student_path(student), method: :delete do %>
+              <%= link_to student, method: :delete do %>
                 <span style="color:#d9534f" class="glyphicon glyphicon-remove"></span>
               <% end %>
-            <% end %>  тут должны быть другие ссылки --> 
+            <% end %>
           </td>
           <td align="center"><%= student.user.tasks_left.count if student.user.tasks_left.count != 0 %></td>
 
@@ -60,7 +70,8 @@
               <% end %>
             <% end %>
 
-            <td class="separator">
+            <td class="separator" align="center
+            ">
               <% if job.awards.any? %>
                 <% case job.awards.last.rank when 1 %>
                   <span style="color:#EEC900" class="glyphicon glyphicon-certificate"></span>
