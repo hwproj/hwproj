@@ -11,7 +11,7 @@ class StudentsController < ApplicationController
       end
     end
 
-    redirect_to @student.term.course 
+    redirect_to :back 
   end
 
   def update

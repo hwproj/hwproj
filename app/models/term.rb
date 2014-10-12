@@ -3,7 +3,7 @@ class Term < ActiveRecord::Base
 
   has_many :students, dependent: :destroy
   has_many :assignments, class_name: 'Homework', dependent: :destroy
-
+  has_many :jobs, through: :assignments
   def group_name
     course.group_name
   end

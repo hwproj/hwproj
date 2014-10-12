@@ -20,7 +20,7 @@ class CoursesController < ApplicationController
 
     raise ActionController::RoutingError.new('Not Found') if @term.nil?
 
-    @subscription = @term.students.where(user_id: current_user.id).first  
+    @subscription = @term.students.where(user_id: current_user.id).first if signed_in?
   end
 
   def add_term
