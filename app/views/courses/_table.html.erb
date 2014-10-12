@@ -1,0 +1,81 @@
+<% if @term.students.any? %>
+  <div class="table-responsive">
+    <table class="table table-bordered table-condensed">
+      <thead>
+        <tr>
+          <td align="center"><strong>Студент</strong></td>
+          <td align="center"><strong>TODO</strong></td>
+          <td class="separator"></td>
+          <% @term.homeworks.each do |homework| %>
+            <% if homework.problems.any? %>
+              <td align="center" colspan="<%= homework.problems.count %>"><strong> №<%= homework.number %> </strong></td>
+              <td class="separator"></td>
+            <% end %>
+          <% end %>
+        </tr>
+        <tr>
+          <td></td>
+          <td align="center"><%= @tasks_left if @tasks_left != 0 %></td>
+          <td class="separator"></td>
+          <% @term.homeworks.order(:id).each do |homework| %>
+            <% homework.problems.order(:number).each do |problem| %>
+              <td align="center">
+              <%= problem.number %>
+            </td>
+            <% end %>
+            <td class="separator"></td>
+          <% end %>
+        </tr>
+      </thead>
+
+      <% @term.students.sort_by{|x| x.user.surname}.each do |student| %>
+        <tr> 
+          <td>
+            <%= "#{student.user.surname} #{student.user.name}" %>
+
+            <!--<% if signed_in? && current_user.teacher? && (not student.approved?) %>
+              <%= link_to approve_student_path(student), method: :put do %>
+                <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
+              <% end %>
+
+              <%= link_to destroy_student_path(student), method: :delete do %>
+                <span style="color:#d9534f" class="glyphicon glyphicon-remove"></span>
+              <% end %>
+            <% end %>  тут должны быть другие ссылки --> 
+          </td>
+          <td align="center"><%= student.user.tasks_left.count if student.user.tasks_left.count != 0 %></td>
+
+          <td class="separator"></td>
+          <% student.jobs.order(:id).each do |job| %>
+            <% job.tasks.sort_by{|x| x.problem.number}.each do |task| %>
+
+              <% case task.status when "accepted" %>
+                <td class="accepted"></td>
+                <% when "not_accepted" %>
+                <td class="not_accepted"></td>
+                <% when "not_submitted" %>
+                <td></td>
+                <% when "accepted_partially" %>
+                <td class="accepted_partially"></td>
+              <% end %>
+            <% end %>
+
+            <td class="separator">
+              <% if job.awards.any? %>
+                <% case job.awards.last.rank when 1 %>
+                  <span style="color:#EEC900" class="glyphicon glyphicon-certificate"></span>
+                <% when 2 %>
+                  <span style="color:#B0A6A4" class="glyphicon glyphicon-certificate"></span>
+                <% when 3 %>
+                  <span style="color:#D98719" class="glyphicon glyphicon-certificate"></span>
+                <% end %>
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>  
+    </table>
+  </div>
+<% else %>
+<h1>Нет студентов, подписанных на курс.</h1>
+<% end %>

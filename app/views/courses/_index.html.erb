@@ -1,0 +1,5 @@
+<ul>
+	<% Course.all.each do |course| %>
+		<li> <%= link_to "#{course.name}", course %> </li>
+	<% end %>
+</ul>

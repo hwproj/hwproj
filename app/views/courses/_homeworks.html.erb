@@ -1,0 +1,28 @@
+<h2>Задачи</h2>
+
+<% @term.homeworks.each do |hw| %>
+  <strong> Домашняя работа <%= hw.number %>. </strong> <small><%= hw.created_at.strftime("%d.%m.%y") %> </small>
+  <% if signed_in? && current_user.teacher? %>
+    <%= link_to edit_homework_path(hw) do %>
+      <span class="glyphicon glyphicon-pencil"></span>
+    <% end %>
+  <% end %> 
+
+  <% hw.links.order(:id).each do |link| %>
+    <br>
+    <%= link_to link.name, link.url %>
+  <% end %>
+
+  <ol>
+    <% hw.problems.order(:number).each do |problem| %>
+      <li>
+        <%= problem.text %>
+        <% if signed_in? && current_user.student? %>
+          <%= link_to task_path(@student_tasks.select{|x| x.problem.id == problem.id}.first) do %>
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          <% end %>
+        <% end %>
+      </li>
+    <% end %>
+  </ol>
+<% end %>

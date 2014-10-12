@@ -1,33 +1,62 @@
-<div style="border: 1px solid black" class="col-md-8 group-name">
-  <h2> <%= @course.name %> </h2>
-  <h3> <%= "#{@course.group_name} группа, #{@term.number} семестр" %> </h3>
-</div>
+<div class="row">
+  <div class="col-md-8 page-heading hwproj-div">
+    <h1> <%= @course.name %> </h1>
+    <h3> <%= "#{@course.group_name} группа" %> </h3>
+  </div>
 
-<div style="border: 1px solid black" class="col-md-4">
-  <h4> <%= @course.teacher.full_name %> </h4>
-  <% if signed_in? && current_user.student? %>
-    <% if @subscription.nil? %> 
-      <%= link_to 'Записаться', students_path(student: {term_id: @term.id}), method: :post, class: 'btn btn-success' %>
-    <% elsif (not @subscription.approved?) %>
-      <div class="alert alert-warning" role="alert">
-        Преподаватель скоро активирует Вашу учётную запись.
-      </div>
+  <div class="col-md-4 hwproj-div" align="right">
+    <h3> <%= @course.teacher.full_name %> </h3>
+    <h3> 
+      <%= mail_to @course.teacher.email do %>
+        <%= @course.teacher.email %>
+      <% end %>
+    </h3>
+
+    <% if signed_in? && current_user.student? %>
+      <% if @subscription.nil? %> 
+        <%= link_to 'Записаться', students_path(student: {term_id: @term.id}), method: :post, class: 'btn btn-success' %>
+      <% elsif (not @subscription.approved?) %>
+        <div class="alert alert-warning" role="alert">
+          Преподаватель скоро активирует Вашу учётную запись.
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>
 
-<div class="col-md-12">
-<ul>
-  <% @term.assignments.each do |assignment| %>
-    <li>
-      <%= assignment.type %>
-      <%= assignment.number %>
-      <ol>
-        <% assignment.problems.each do |problem| %>
-          <li> <%= problem.text %> </li>
+<div class="row">
+  <div class="hidden-xs col-md-12">
+    <ul class="nav nav-tabs" role="tablist">
+      <% @course.terms.reverse.each do |term| %>
+        <% if term == @term %>
+          <li class="active">
+        <% else %>
+          <li>
         <% end %>
-      </ol>
-    </li>
-  <% end %>
-</ul>
+          <%= link_to "#{term.number} семестр", show_term_path(@course.id, term.number) %>
+        </li>
+
+      <% end %>
+      <li> <%= link_to "Добавить семестр", add_term_path(@course.id), method: :put if signed_in? && current_user.teacher?%> </li>
+    </ul>
+    <%= render 'term' %>
+  </div>
+
+  <div class="visible-xs col-xs-12">
+    <ul class="nav nav-tabs" role="tablist">
+      <% @course.terms.reverse.each do |term| %>
+        <% if term == @term %>
+          <li class="active">
+        <% else %>
+          <li>
+        <% end %>
+          <%= link_to "#{term.number} сем.", course_path(id: @course.id, term_number: term.id) %>
+        </li>
+
+      <% end %>
+      <li> <%= link_to "Добавить семестр", add_term_path(@course.id), method: :put %> </li>
+    </ul>
+  <%= render 'term' %>
+  </div>
+
 </div>
