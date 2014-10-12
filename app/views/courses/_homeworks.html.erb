@@ -17,8 +17,8 @@
     <% hw.problems.order(:number).each do |problem| %>
       <li>
         <%= problem.text %>
-        <% if signed_in? && current_user.student? %>
-          <%= link_to task_path(@student_tasks.select{|x| x.problem.id == problem.id}.first) do %>
+        <% if signed_in? && current_user.student? && @student %>
+          <%= link_to @student.tasks.select{|x| x.problem.id == problem.id}.first do %>
             <span class="glyphicon glyphicon-chevron-right"></span>
           <% end %>
         <% end %>
