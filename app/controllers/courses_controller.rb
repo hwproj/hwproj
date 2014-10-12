@@ -12,8 +12,11 @@ class CoursesController < ApplicationController
   def show
     @course = Course.find(params[:id])
 
-    term_number = params[:term_number] || @course.terms.count - 1
-    @term = @course.terms.where(number: term_number).first
+    if params[:term_number]
+      @term = @course.terms.where(number: params[:term_number]).first
+    else
+      @term = @course.terms.last
+    end
 
     raise ActionController::RoutingError.new('Not Found') if @term.nil?
 
