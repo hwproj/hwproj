@@ -6,6 +6,8 @@ class GroupsController < ApplicationController
   end
 
   def show
+    redirect_to courses_path
+    
     if signed_in? && current_user.teacher?
       @students = @group.users
     else
