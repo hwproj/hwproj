@@ -6,6 +6,10 @@ class Problem < ActiveRecord::Base
   accepts_nested_attributes_for :links, reject_if: :all_blank, allow_destroy: true
 
   def name
+    if homework.assignment_type == "test"
+      "Тест #{homework.number}.#{number}"
+    else
       "#{homework.number}.#{number}"
-    end  
+    end
+  end
 end

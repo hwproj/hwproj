@@ -16,13 +16,8 @@
             <% end %>
           <% elsif entry.class.name == "Submission" %>
             <span style="color:#f0ad4e" class="glyphicon glyphicon-exclamation-sign"></span>
-            <% if entry.task.job.assignment.assignment_type == "homework" %>
-              К задаче <%= link_to entry.task.name, entry.task %> добавлены замечания
-            <% else %>
-              Тест: к <%= link_to "решению #{entry.problem.number}", entry %> добавлены замечания
-            <% end %>
+            К задаче <%= link_to entry.task.name, entry.task %> добавлены замечания
           <% end %>
-
           <small>
             <strong><%= entry.updated_at.strftime("%H:%M") %></strong>
             <%= entry.updated_at.strftime("%d.%m.%y") if entry.updated_at.to_date != Time.now.to_date %>
