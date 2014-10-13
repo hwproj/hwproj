@@ -33,6 +33,8 @@ class CoursesController < ApplicationController
     end
 
     @tasks_left = @term.tasks.select{|x| x.status != "accepted"}.count
+
+    @assignments = @term.assignments
   end
 
   def index
