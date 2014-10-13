@@ -24,7 +24,7 @@ class HomeworksController < ApplicationController
     @assignment.problems.each do |problem|
       unless Task.where(problem_id: problem.id).any?
         @assignment.jobs.each do |job|
-          job.tasks.create(student_id: job.student.id, user_id: student.user.id, problem_id: problem.id)
+          job.tasks.create(student_id: job.student.id, user_id: job.student.user.id, problem_id: problem.id)
         end
       end
     end
@@ -34,7 +34,10 @@ class HomeworksController < ApplicationController
 
   def destroy
     term = @assignment.term
+    @assignment.destroy
+    update_assignments_numbers
 
+    redirect_to term.course
   end
 
   private
@@ -56,6 +59,19 @@ class HomeworksController < ApplicationController
         @assignment.problems.each do |problem|
           job.tasks.create(student_id: job.student.id, user_id: student.user.id, problem_id: problem.id)
         end
+      end
+    end
+
+    def update_assignments_numbers
+      homeworks = @assignment.term.homeworks.order(:id)
+      tests = @assignment.term.tests.order(:id)
+
+      for i in 1..homeworks.count
+        homeworks[i - 1].update(number: i)
+      end
+
+      for i in 1..tests.count
+        tests[i - 1].update(number: i)
       end
     end
 
