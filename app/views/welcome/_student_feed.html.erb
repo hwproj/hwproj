@@ -10,16 +10,16 @@
           <% if entry.class.name == "Task" %>
             <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
             <% if entry.job.assignment.assignment_type == "homework" %>
-              Задача <%= link_to entry.name, entry %> принята (<%= "#{entry.job.assignment.term.course.name}, #{entry.job.assignment.term.course.group_name} группа" %>).
+              Задача <%= link_to entry.name, entry %> принята
             <% else %>
-              Тест: <%= link_to "задача #{entry.problem.number}", entry %> принята (<%= "#{entry.job.assignment.term.course.name}, #{entry.job.assignment.term.course.group_name} группа" %>).
+              Тест: <%= link_to "задача #{entry.problem.number}", entry %> принята
             <% end %>
           <% elsif entry.class.name == "Submission" %>
             <span style="color:#f0ad4e" class="glyphicon glyphicon-exclamation-sign"></span>
-            <% if entry.job.assignment.assignment_type == "homework" %>
-              К задаче <%= link_to entry.task.name, entry.task %> добавлены замечания (<%= "#{entry.job.assignment.term.course.name}, #{entry.job.assignment.term.course.group_name} группа" %>).
+            <% if entry.task.job.assignment.assignment_type == "homework" %>
+              К задаче <%= link_to entry.task.name, entry.task %> добавлены замечания
             <% else %>
-              Тест: к <%= link_to "решению #{entry.problem.number}", entry %> добавлены замечания (<%= "#{entry.job.assignment.term.course.name}, #{entry.job.assignment.term.course.group_name} группа" %>).
+              Тест: к <%= link_to "решению #{entry.problem.number}", entry %> добавлены замечания
             <% end %>
           <% end %>
 
