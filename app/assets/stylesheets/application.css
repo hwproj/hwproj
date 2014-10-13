@@ -47,18 +47,22 @@ h3 {
   background-color: #555555;
 }
 
-.accepted {
+.accepted-task {
 	background-color: #7ad67a;
 }
 
-.not_accepted {
+.rejected-task {
 	background-color: #f7716d;
 }
 
-.accepted_partially {
+.task-with-notes {
 	background-color: #ffcb6c;
 }
 
+.task-with-submissions {
+  background-color: #fcf8e3;
+}
+
 .separator {
-	background-color: #eeeeee;
+  background-color: #eeeeee;
 }

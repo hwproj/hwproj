@@ -6,13 +6,13 @@
         <td align="center"><strong>TODO</strong></td>
         <td class="separator"></td>
 
-        <% @term.assignments.each do |assignment| %>
+        <% @assignments.each do |assignment| %>
           <% if assignment.problems.any? %>
             <td align="center" colspan="<%= assignment.problems.count %>">
               <strong>
-                <% if assignment.assignment_type == "test" %>
+                <% if assignment.test? %>
                   <%= "Тест #{assignment.number}" %>
-                <% else %>
+                <% elsif assignment.homework? %>
                   <%= "№#{assignment.number}" %>
                 <% end %>
               </strong>
@@ -26,7 +26,7 @@
         <td></td>
         <td align="center"><%= @tasks_left if @tasks_left != 0 %></td>
         <td class="separator"></td>
-        <% @term.assignments.order(:id).each do |assignment| %>
+        <% @assignments.order(:id).each do |assignment| %>
           <% assignment.problems.order(:number).each do |problem| %>
             <td align="center">
             <%= problem.number %>
@@ -58,19 +58,26 @@
         <% student.jobs.order(:id).each do |job| %>
           <% job.tasks.sort_by{|x| x.problem.number}.each do |task| %>
 
-            <% case task.status when "accepted" %>
-              <td class="accepted"></td>
-              <% when "not_accepted" %>
-              <td class="not_accepted"></td>
-              <% when "not_submitted" %>
-              <td></td>
-              <% when "accepted_partially" %>
-              <td class="accepted_partially"></td>
+            <% if task.accepted? %>
+              <td class="accepted-task">
+
+            <% elsif task.not_accepted? %>
+              <td class="rejected-task">
+
+            <% elsif task.notes.any? %>
+              <td class="task-with-notes">
+
+            <% elsif task.submissions.any? %>
+              <td class="task-with-submissions">
+
+            <% else %>
+              <td>
             <% end %>
+
+            </td>
           <% end %>
 
-          <td class="separator" align="center
-          ">
+          <td class="separator" align="center">
             <% if job.awards.any? %>
               <% case job.awards.last.rank when 1 %>
                 <span style="color:#EEC900" class="glyphicon glyphicon-certificate"></span>
@@ -81,6 +88,7 @@
               <% end %>
             <% end %>
           </td>
+
         <% end %>
       </tr>
     <% end %>
