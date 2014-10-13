@@ -88,7 +88,7 @@
             <%= link_to submission.file.url, class: "btn btn-default", disabled: (not submission.file?) do %>
               <span class="glyphicon glyphicon-cloud-download"></span> <%= "v.#{submission.version}" %>
             <% end %>
-            <% unless submission.url.empty? %>
+            <% unless (not submission.url) || (submission.url.empty?) %>
               <%= link_to submission.url, class: "btn btn-default" do %>
                 <span class="glyphicon glyphicon-link"></span> <%= URI(submission.url).host %>
               <% end %>
