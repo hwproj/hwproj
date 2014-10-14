@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141012191156) do
+ActiveRecord::Schema.define(version: 20141014072612) do
 
   create_table "awards", force: true do |t|
     t.integer  "job_id"
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 20141012191156) do
     t.integer  "homework_id"
     t.text     "text",        limit: 255
     t.integer  "number"
+    t.string   "name"
   end
 
   create_table "students", force: true do |t|

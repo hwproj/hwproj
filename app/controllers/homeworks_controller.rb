@@ -42,7 +42,7 @@ class HomeworksController < ApplicationController
 
   private
     def assignment_params
-      params.require(:homework).permit(:assignment_type, :term_id, problems_attributes: [ :id, :text, :_destroy ], links_attributes: [ :id, :url, :name, :_destroy ])
+      params.require(:homework).permit(:assignment_type, :term_id, problems_attributes: [ :id, :name, :text, :_destroy ], links_attributes: [ :id, :url, :name, :_destroy ])
     end
 
     def enumerate_problems

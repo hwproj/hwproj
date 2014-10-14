@@ -23,6 +23,9 @@
   <ol>
     <% assignment.problems.order(:number).each do |problem| %>
       <li>
+        <% if problem.name && (not problem.blank?) %>
+          <strong> <%= problem.name %> </strong>
+        <% end %>
         <%= problem.text %>
         <% if signed_in? && current_user.student? && @student %>
           <%= link_to @student.tasks.select{|x| x.problem.id == problem.id}.first do %>
