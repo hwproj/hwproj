@@ -29,7 +29,7 @@
         <% @assignments.order(:id).each do |assignment| %>
           <% assignment.problems.order(:number).each do |problem| %>
             <td align="center">
-            <% if problem.name && (not problem.blank?) %>
+            <% if problem.name %>
               <%= problem.name %>
             <% else %>
               <%= problem.number %>
