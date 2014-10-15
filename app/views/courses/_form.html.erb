@@ -1,0 +1,5 @@
+<%= simple_form_for @course do |f| %>
+  <%= f.input :group_name, label: 'Номер группы' %>
+  <%= f.input :name, label: 'Предмет' %>
+  <%= f.button :submit, 'Сохранить', class: 'btn btn-primary' %>
+<% end %>

@@ -1,7 +1,14 @@
 <div class="row">
   <div class="col-md-8 page-heading">
     <h1> <%= @course.name %> </h1>
-    <h3> <%= "#{@course.group_name} группа" %> </h3>
+    <h3>
+      <%= "#{@course.group_name} группа" %>
+      <% if signed_in? && current_user == @course.teacher %>
+        <%= link_to edit_course_path(@course) do %>
+          <span class="glyphicon glyphicon-pencil"></span>
+        <% end %>
+      <% end %>
+    </h3>
 
     <% if @subscription && (not @subscription.approved?) %>
       <div class="alert alert-warning" role="alert">

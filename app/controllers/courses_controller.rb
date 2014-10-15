@@ -1,4 +1,6 @@
 class CoursesController < ApplicationController
+  before_action :set_couse, only: [ :edit, :show, :update ]
+
   def new
     @course = Course.new
   end
@@ -40,6 +42,14 @@ class CoursesController < ApplicationController
   def index
   end
 
+  def edit
+  end
+
+  def update
+    @course.update(course_params)
+    redirect_to @course
+  end
+
   def add_term
     @course = Course.find(params[:id])
     @course.create_term
@@ -50,5 +60,9 @@ class CoursesController < ApplicationController
   private
   def course_params
     params.require(:course).permit(:group_name, :name).merge(teacher_id: current_user.id)
+  end
+
+  def set_couse
+    @course = Course.find(params[:id])
   end
 end
