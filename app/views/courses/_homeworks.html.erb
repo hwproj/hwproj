@@ -23,15 +23,19 @@
   <ol>
     <% assignment.problems.order(:number).each do |problem| %>
       <li>
-        <% if problem.name %>
-          <strong> <%= problem.name %> </strong>
-        <% end %>
-        <%= simple_format problem.text %>
         <% if signed_in? && current_user.student? && @student %>
-          <%= link_to @student.tasks.select{|x| x.problem.id == problem.id}.first do %>
-            <span class="glyphicon glyphicon-chevron-right"></span>
+          <strong>
+            <% task = @student.tasks.select{|x| x.problem.id == problem.id}.first %>
+            <%= link_to task.name, task %>
+          </strong>
+
+        <% else %>
+          <% if problem.name %>
+            <strong> <%= problem.name %> </strong>
           <% end %>
         <% end %>
+
+        <%= problem.text.gsub("\n", "<br />").html_safe %>
       </li>
     <% end %>
   </ol>
