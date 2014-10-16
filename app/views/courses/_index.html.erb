@@ -1,5 +1,5 @@
 <ul>
-	<% Course.all.each do |course| %>
+	<% Course.order(:group_name).each do |course| %>
 		<li><h3> <%= link_to "#{course.group_name} #{course.name}", course %> <br> <%= course.teacher.full_name %> </h3></li>
 	<% end %>
 </ul>
