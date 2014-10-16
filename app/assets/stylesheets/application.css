@@ -66,3 +66,7 @@ h3 {
 .separator {
   background-color: #eeeeee;
 }
+
+.table-responsive {
+  overflow: scroll;
+}
