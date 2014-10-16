@@ -4,4 +4,8 @@
   <br>
 <% end %>
 
-<%= render 'homeworks' %>
+<% if @assignments.any? %>
+  <%= render 'homeworks' %>
+<% else %>
+  <h3>Здесь пока ничего нет.</h3>
+<% end %>

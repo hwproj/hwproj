@@ -21,11 +21,11 @@
   <% end %>
 
   <ol>
-    <% assignment.problems.order(:number).each do |problem| %>
+    <% assignment.problems.order(:id).each do |problem| %>
       <li>
-        <% if signed_in? && current_user.student? && @student %>
+        <% if signed_in? && @student %>
           <strong>
-            <% task = @student.tasks.select{|x| x.problem.id == problem.id}.first %>
+            <% task = @tasks.where(problem_id: problem.id).first %>
             <%= link_to task.name, task %>
           </strong>
 

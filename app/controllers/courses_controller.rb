@@ -34,6 +34,10 @@ class CoursesController < ApplicationController
       @student = @term.students.where(user_id: current_user.id).first
     end
 
+    if @student
+      @tasks = @student.tasks
+    end
+
     @tasks_left = @term.tasks.select{|x| x.status != "accepted"}.count
 
     @assignments = @term.assignments
