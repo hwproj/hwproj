@@ -1,5 +1,4 @@
 class Problem < ActiveRecord::Base
-  validates :text, presence: true
   before_save :clean_name
 
   belongs_to :homework
