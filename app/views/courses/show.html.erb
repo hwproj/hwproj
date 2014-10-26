@@ -59,7 +59,7 @@
         <% else %>
           <li>
         <% end %>
-          <%= link_to "#{term.number} сем.", course_path(id: @course.id, term_number: term.id) %>
+          <%= link_to "#{term.number} сем.", show_term_path(@course.id, term.number) %>
         </li>
 
       <% end %>
