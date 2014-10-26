@@ -65,7 +65,7 @@
   <% if signed_in? && current_user.teacher? %>
     <% if @task.accepted? %>
       <%= link_to "Раззачесть", task_path(@task, task: {status: "accepted_partially"}), method: :put, class: "btn btn-default" %>
-    <% else %>
+    <% elsif @task.submissions.any? %>
       <%= simple_form_for @submissions.first, url: {controller: :submissions, action: :update} do |f| %>
         <%= f.hidden_field :id, value: @submissions.first.id %>
 
