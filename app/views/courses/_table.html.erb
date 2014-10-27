@@ -64,21 +64,22 @@
           <% job.tasks.sort_by{|x| x.problem.number}.each do |task| %>
 
             <% if task.accepted? %>
-              <td class="accepted-task">
+              <td style="padding: 0" class="task accepted-task">
 
             <% elsif task.not_accepted? %>
-              <td class="rejected-task">
+              <td style="padding: 0" class="task rejected-task">
 
             <% elsif task.notes.any? %>
-              <td class="task-with-notes">
+              <td style="padding: 0" class="task task-with-notes">
 
             <% elsif task.submissions.any? %>
-              <td class="task-with-submissions">
+              <td style="padding: 0" class="task task-with-submissions">
 
             <% else %>
-              <td>
+              <td style="padding: 0" class="task">
             <% end %>
 
+              <%= link_to "", task if signed_in? && (current_user.id == @teacher_id || current_user.id == task.user_id) %>
             </td>
           <% end %>
 

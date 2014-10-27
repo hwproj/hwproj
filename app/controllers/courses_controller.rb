@@ -44,6 +44,8 @@ class CoursesController < ApplicationController
     end
 
     @assignments = @term.assignments
+
+    @teacher_id = @course.teacher_id
   end
 
   def index
