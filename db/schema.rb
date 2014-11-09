@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141109144501) do
+ActiveRecord::Schema.define(version: 20141109163634) do
 
   create_table "awards", force: true do |t|
     t.integer  "job_id"
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 20141109144501) do
     t.integer  "homework_id"
     t.integer  "job_id"
     t.integer  "student_id"
+    t.integer  "number"
   end
 
   add_index "tasks", ["job_id"], name: "index_tasks_on_job_id"
