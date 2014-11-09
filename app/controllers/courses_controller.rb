@@ -71,7 +71,7 @@ class CoursesController < ApplicationController
     params.require(:course).permit(:group_name, :name).merge(teacher_id: current_user.id)
   end
 
-  def set_couse
+  def set_course
     @course = Course.find(params[:id])
   end
 end
