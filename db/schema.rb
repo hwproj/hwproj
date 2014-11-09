@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141014072612) do
+ActiveRecord::Schema.define(version: 20141109142810) do
 
   create_table "awards", force: true do |t|
     t.integer  "job_id"
@@ -53,6 +53,8 @@ ActiveRecord::Schema.define(version: 20141014072612) do
     t.datetime "updated_at"
     t.integer  "student_id"
   end
+
+  add_index "jobs", ["student_id"], name: "index_jobs_on_student_id"
 
   create_table "links", force: true do |t|
     t.string   "url"
@@ -113,6 +115,8 @@ ActiveRecord::Schema.define(version: 20141014072612) do
     t.integer  "job_id"
     t.integer  "student_id"
   end
+
+  add_index "tasks", ["job_id"], name: "index_tasks_on_job_id"
 
   create_table "terms", force: true do |t|
     t.integer  "course_id"
