@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :set_couse, only: [ :edit, :show, :update ]
+  before_action :set_course, only: [ :edit, :show, :update ]
 
   def new
     @course = Course.new
