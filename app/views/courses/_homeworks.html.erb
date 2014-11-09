@@ -9,11 +9,11 @@
     <% end %>
 
   <%= assignment.number %>. </strong> <small><%= assignment.created_at.strftime("%d.%m.%y") %> </small>
-  <% if signed_in? && current_user.teacher? %>
+  <% if signed_in? && current_user.id == @teacher_id %>
     <%= link_to edit_homework_path(assignment) do %>
       <span class="glyphicon glyphicon-pencil"></span>
     <% end %>
-  <% end %> 
+  <% end %>
 
   <% assignment.links.order(:id).each do |link| %>
     <br>

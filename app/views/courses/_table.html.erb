@@ -47,7 +47,7 @@
         <td>
           <%= "#{student.user.surname} #{student.user.name}" %>
 
-          <% if signed_in? && current_user.teacher? && (not student.approved?) %>
+          <% if (not student.approved?) && signed_in? && current_user.id == @teacher_id %>
             <%= link_to student_path(student, student: { approved: true }), method: :put do %>
               <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
             <% end %>
