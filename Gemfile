@@ -42,9 +42,10 @@ gem 'bootstrap-will_paginate'
 gem 'carrierwave'
 gem 'fog', '~> 1.20'
 
-# Deploy on Heroku 
+# Deploy on Heroku
 gem 'pg', group: :production
 gem 'rails_12factor', group: :production
+gem 'unicorn'
 
 # Secure keys
 gem 'figaro'
