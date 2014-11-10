@@ -61,7 +61,7 @@
 
         <td class="separator"></td>
         <% student.jobs.order(:id).each do |job| %>
-          <% job.tasks.order(:number).each do |task| %>
+          <% job.tasks.order(:problem_id).each do |task| %>
 
             <% if task.accepted? %>
               <td style="padding: 0" class="task accepted-task">
