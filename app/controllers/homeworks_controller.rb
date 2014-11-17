@@ -24,7 +24,7 @@ class HomeworksController < ApplicationController
     @assignment.problems.each do |problem|
       unless Task.where(problem_id: problem.id).any?
         @assignment.jobs.each do |job|
-          job.tasks.create(student_id: job.student.id, user_id: job.student.user.id, problem_id: problem.id, number: problem.number)
+          job.tasks.create(student_id: job.student.id, user_id: job.student.user.id, problem_id: problem.id)
         end
       end
     end
@@ -57,7 +57,7 @@ class HomeworksController < ApplicationController
         job = student.jobs.create(homework_id: @assignment.id)
 
         @assignment.problems.each do |problem|
-          job.tasks.create(student_id: job.student.id, user_id: student.user.id, problem_id: problem.id, number: problem.number)
+          job.tasks.create(student_id: job.student.id, user_id: student.user.id, problem_id: problem.id)
         end
       end
     end
