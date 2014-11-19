@@ -27,16 +27,23 @@
         <td align="center"><%= @tasks_left if @tasks_left != 0 %></td>
         <td class="separator"></td>
         <% @assignments.order(:id).each do |assignment| %>
-          <% assignment.problems.order(:number).each do |problem| %>
-            <td align="center">
-            <% if problem.name %>
-              <%= problem.name %>
-            <% else %>
-              <%= problem.number %>
+
+          <% if assignment.done? %>
+            <td></td>
+
+          <% else %>
+            <% assignment.problems.order(:number).each do |problem| %>
+              <td align="center">
+              <% if problem.name %>
+                <%= problem.name %>
+              <% else %>
+                <%= problem.number %>
+              <% end %>
+              </td>
             <% end %>
 
-          </td>
           <% end %>
+
           <td class="separator"></td>
         <% end %>
       </tr>
@@ -61,26 +68,30 @@
 
         <td class="separator"></td>
         <% student.jobs.order(:id).each do |job| %>
-          <% job.tasks.order(:problem_id).each do |task| %>
+          <% if job.assignment.done? %>
+            <td class="task accepted-task"></td>
+          <% else %>
+            <% job.tasks.order(:problem_id).each do |task| %>
 
-            <% if task.accepted? %>
-              <td style="padding: 0" class="task accepted-task">
+              <% if task.accepted? %>
+                <td style="padding: 0" class="task accepted-task">
 
-            <% elsif task.not_accepted? %>
-              <td style="padding: 0" class="task rejected-task">
+              <% elsif task.not_accepted? %>
+                <td style="padding: 0" class="task rejected-task">
 
-            <% elsif task.notes.any? %>
-              <td style="padding: 0" class="task task-with-notes">
+              <% elsif task.notes.any? %>
+                <td style="padding: 0" class="task task-with-notes">
 
-            <% elsif task.submissions.any? %>
-              <td style="padding: 0" class="task task-with-submissions">
+              <% elsif task.submissions.any? %>
+                <td style="padding: 0" class="task task-with-submissions">
 
-            <% else %>
-              <td style="padding: 0" class="task">
+              <% else %>
+                <td style="padding: 0" class="task">
+              <% end %>
+
+                <%= link_to "", task if signed_in? && (current_user.id == @teacher_id || current_user.id == task.user_id) %>
+              </td>
             <% end %>
-
-              <%= link_to "", task if signed_in? && (current_user.id == @teacher_id || current_user.id == task.user_id) %>
-            </td>
           <% end %>
 
           <td class="separator" align="center">
