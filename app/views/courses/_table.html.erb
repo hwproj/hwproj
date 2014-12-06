@@ -8,7 +8,12 @@
 
         <% @assignments.order(:id).each do |assignment| %>
           <% if assignment.problems.any? %>
+          <% if assignment.done? %>
+            <td align="center">
+          <% else %>
             <td align="center" colspan="<%= assignment.problems.count %>">
+          <% end %>
+
               <strong>
                 <% if assignment.test? %>
                   <%= "Тест #{assignment.number}" %>
