@@ -46,6 +46,10 @@ class CoursesController < ApplicationController
     @assignments = @term.assignments
 
     @teacher_id = @course.teacher_id
+
+    if params[:names] == "true"
+      @show_tasks_names = true
+    end
   end
 
   def index

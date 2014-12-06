@@ -76,7 +76,7 @@
           <% if job.assignment.done? %>
             <td class="task accepted-task"></td>
           <% else %>
-            <% job.tasks.order(:problem_id).each do |task| %>
+            <% job.tasks.order(:id).each do |task| %>
 
               <% if task.accepted? %>
                 <td style="padding: 0" class="task accepted-task">
@@ -95,6 +95,7 @@
               <% end %>
 
                 <%= link_to "", task if signed_in? && (current_user.id == @teacher_id || current_user.id == task.user_id) %>
+                <%= task.name if @show_tasks_names %>
               </td>
             <% end %>
           <% end %>
