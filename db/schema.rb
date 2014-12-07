@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141117115624) do
+ActiveRecord::Schema.define(version: 20141207131445) do
 
   create_table "awards", force: true do |t|
     t.integer  "job_id"
@@ -113,10 +113,11 @@ ActiveRecord::Schema.define(version: 20141117115624) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "problem_id"
-    t.integer  "status",      default: 0
+    t.integer  "status",         default: 0
     t.integer  "homework_id"
     t.integer  "job_id"
     t.integer  "student_id"
+    t.integer  "problem_number"
   end
 
   add_index "tasks", ["job_id"], name: "index_tasks_on_job_id"
