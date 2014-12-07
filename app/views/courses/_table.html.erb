@@ -76,7 +76,7 @@
           <% if job.assignment.done? %>
             <td class="task accepted-task"></td>
           <% else %>
-            <% job.tasks.order(:id).each do |task| %>
+            <% job.tasks.order(:problem_number).each do |task| %>
 
               <% if task.accepted? %>
                 <td style="padding: 0" class="task accepted-task">
