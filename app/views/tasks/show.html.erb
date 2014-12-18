@@ -6,7 +6,7 @@
     <span style="color:#f0ad4e" class="glyphicon glyphicon-exclamation-sign"></span>
   <% end %>
     Задача <%= @task.name %>
-    
+
   </h2>
 
 </div>
@@ -38,8 +38,8 @@
                 <span style="color:#f0ad4e" class="glyphicon glyphicon-exclamation-sign"></span>
               <% end %>
 
-              <%= note.text %>
-              <small><strong><%= "v.#{note.submission.version}" %></strong><%=", #{note.created_at.strftime("%H:%M %d.%m.%y")}" %></small> 
+              <%= note.text.gsub("\n", "<br />").html_safe %>
+              <small><strong><%= "v.#{note.submission.version}" %></strong><%=", #{note.created_at.strftime("%H:%M %d.%m.%y")}" %></small>
 
               <% if signed_in? && current_user.teacher? %>
                 <% if not note.fixed? %>
@@ -73,7 +73,7 @@
             <%= link_to_add_association 'Добавить замечание', f, :notes, class: "btn btn-warning" %>
             <%= f.submit "Сохранить замечания", class: "btn btn-default" %>
           </div>
-          
+
           <br>
         <% end %>
       <%= link_to "Принять решение", task_path(@task, task: {status: "accepted"}), method: :put, class: "btn btn-success" %>
@@ -95,8 +95,8 @@
               <% end %>
             <% end %>
           </div>
-          <%= submission.text %> 
-          
+          <%= submission.text %>
+
           <small><%= submission.created_at.strftime("%H:%M %d.%m.%y") %></small>
         </h5>
 
