@@ -64,7 +64,10 @@
 
   <% if signed_in? && current_user.teacher? %>
     <% if @task.accepted? %>
-      <%= link_to "Раззачесть", task_path(@task, task: {status: "accepted_partially"}), method: :put, class: "btn btn-default" %>
+      <div class="btn-group">
+        <%= link_to "Принято", '#', class: "btn btn-success", disabled: true %>
+        <%= link_to "Отменить", task_path(@task, task: {status: "accepted_partially"}), method: :put, class: "btn btn-default" %>
+      </div>
     <% else %>
       <% if @task.submissions.any? %>
         <%= simple_form_for @submissions.first, url: {controller: :submissions, action: :update} do |f| %>
@@ -78,8 +81,9 @@
         <% end %>
       <% end %>
 
-      <%= link_to "Принять решение", task_path(@task, task: {status: "accepted"}), method: :put, class: "btn btn-success" %>
+      <%= link_to "Принять", task_path(@task, task: {status: "accepted"}), method: :put, class: "btn btn-success" %>
     <% end %>
+    <br><br>
   <% end %>
 
 
