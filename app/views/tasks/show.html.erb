@@ -65,17 +65,19 @@
   <% if signed_in? && current_user.teacher? %>
     <% if @task.accepted? %>
       <%= link_to "Раззачесть", task_path(@task, task: {status: "accepted_partially"}), method: :put, class: "btn btn-default" %>
-    <% elsif @task.submissions.any? %>
-      <%= simple_form_for @submissions.first, url: {controller: :submissions, action: :update} do |f| %>
-        <%= f.hidden_field :id, value: @submissions.first.id %>
+    <% else %>
+      <% if @task.submissions.any? %>
+        <%= simple_form_for @submissions.first, url: {controller: :submissions, action: :update} do |f| %>
+          <%= f.hidden_field :id, value: @submissions.first.id %>
 
           <div class="links">
             <%= link_to_add_association 'Добавить замечание', f, :notes, class: "btn btn-warning" %>
             <%= f.submit "Сохранить замечания", class: "btn btn-default" %>
           </div>
-
           <br>
         <% end %>
+      <% end %>
+
       <%= link_to "Принять решение", task_path(@task, task: {status: "accepted"}), method: :put, class: "btn btn-success" %>
     <% end %>
   <% end %>
