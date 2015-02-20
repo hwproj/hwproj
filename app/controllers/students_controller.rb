@@ -2,16 +2,16 @@ class StudentsController < ApplicationController
   before_action :set_student, only: [ :update, :destroy ]
   def create
     @student = Student.create(student_params)
-    
+
     @student.term.assignments.each do |assignment|
       job = @student.jobs.create(homework_id: assignment.id)
 
       assignment.problems.each do |problem|
-        job.tasks.create(student_id: job.student.id, user_id: @student.user.id, problem_id: problem.id)
+        job.tasks.create(student_id: job.student.id, user_id: @student.user.id, problem_id: problem.id, problem_number: problem.number)
       end
     end
 
-    redirect_to :back 
+    redirect_to :back
   end
 
   def update
