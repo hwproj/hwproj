@@ -14,4 +14,8 @@ class Student < ActiveRecord::Base
   def table_name
     user.surname + " " + user.name
   end
+
+  def tasks_left_count
+    tasks.where.not(status: 3).count # status: "accepted"
+  end
 end
