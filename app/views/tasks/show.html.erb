@@ -66,7 +66,7 @@
     <% if @task.accepted? %>
       <div class="btn-group">
         <%= link_to "Принято", '#', class: "btn btn-success", disabled: true %>
-        <%= link_to "Отменить", task_path(@task, task: {status: "accepted_partially"}), method: :put, class: "btn btn-default" %>
+        <%= link_to "Отменить", task_path(@task, task: {status: "not_accepted"}), method: :put, class: "btn btn-default" %>
       </div>
     <% else %>
       <% if @task.submissions.any? %>
@@ -82,6 +82,7 @@
       <% end %>
 
       <%= link_to "Принять", task_path(@task, task: {status: "accepted"}), method: :put, class: "btn btn-success" %>
+      <%= link_to "Есть замечания", task_path(@task, task: {status: "accepted_partially"}), method: :put, class: "btn btn-warning" %>
     <% end %>
     <br><br>
   <% end %>
