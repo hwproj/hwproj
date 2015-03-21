@@ -23,6 +23,7 @@ class CoursesController < ApplicationController
     raise ActionController::RoutingError.new('Not Found') if @term.nil?
 
     if signed_in? && current_user.teacher?
+      @teacher = true
       @students = @term.students
     else
       @students = @term.students.select{ |student| student.approved }
@@ -39,11 +40,11 @@ class CoursesController < ApplicationController
     end
 
     @tasks_left = 0
-    @term.students.where(approved:true).each do |student|
+    @term.students.where(approved: true).each do |student|
       @tasks_left += student.tasks_left_count
     end
 
-    @assignments = @term.assignments
+    @assignments = @term.assignments.order(:id)
 
     @teacher_id = @course.teacher_id
 

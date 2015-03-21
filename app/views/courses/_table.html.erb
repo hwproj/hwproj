@@ -6,7 +6,7 @@
         <td align="center"><strong>TODO</strong></td>
         <td class="separator"></td>
 
-        <% @assignments.order(:id).each do |assignment| %>
+        <% @assignments.each do |assignment| %>
           <% if assignment.problems.any? %>
           <% if assignment.done? %>
             <td align="center">
@@ -31,7 +31,7 @@
         <td></td>
         <td align="center"><%= @tasks_left if @tasks_left != 0 %></td>
         <td class="separator"></td>
-        <% @assignments.order(:id).each do |assignment| %>
+        <% @assignments.each do |assignment| %>
 
           <% if assignment.done? %>
             <td></td>
@@ -59,7 +59,7 @@
         <td>
           <%= "#{student.user.surname} #{student.user.name}" %>
 
-          <% if (not student.approved?) && signed_in? && current_user.id == @teacher_id %>
+          <% if @teacher && (not student.approved?) %>
             <%= link_to student_path(student, student: { approved: true }), method: :put do %>
               <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
             <% end %>
@@ -94,7 +94,7 @@
                 <td style="padding: 0" class="task">
               <% end %>
 
-                <%= link_to "", task if signed_in? && (current_user.id == @teacher_id || current_user.id == task.user_id) %>
+                <%= link_to "", task if @student == student || @teacher %>
                 <%= task.name if @show_tasks_names %>
               </td>
             <% end %>

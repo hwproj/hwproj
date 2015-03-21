@@ -1,6 +1,6 @@
 <h2>Задачи</h2>
 
-<% @assignments.order(:created_at).reverse.each do |assignment| %>
+<% @assignments.reverse.each do |assignment| %>
   <strong>
     <% if assignment.homework? %>
       Домашняя работа
