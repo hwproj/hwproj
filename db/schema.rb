@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150321172650) do
+ActiveRecord::Schema.define(version: 20150321180632) do
 
   create_table "awards", force: true do |t|
     t.integer  "job_id"
@@ -113,6 +113,8 @@ ActiveRecord::Schema.define(version: 20150321172650) do
     t.integer  "teacher_id"
     t.string   "url"
   end
+
+  add_index "submissions", ["task_id"], name: "index_submissions_on_task_id"
 
   create_table "tasks", force: true do |t|
     t.datetime "created_at"

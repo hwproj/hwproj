@@ -84,7 +84,7 @@
               <% elsif task.not_accepted? %>
                 <td style="padding: 0" class="task rejected-task">
 
-              <% elsif task.notes.any? %>
+              <% elsif task.accepted_partially? %>
                 <td style="padding: 0" class="task task-with-notes">
 
               <% elsif task.submissions.any? %>
