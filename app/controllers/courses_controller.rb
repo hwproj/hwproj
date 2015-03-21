@@ -40,7 +40,7 @@ class CoursesController < ApplicationController
 
     @tasks_left = 0
     @term.students.where(approved:true).each do |student|
-      @tasks_left += student.tasks.select{|x| x.status != "accepted"}.count
+      @tasks_left += student.tasks_left_count
     end
 
     @assignments = @term.assignments

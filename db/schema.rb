@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150321120532) do
+ActiveRecord::Schema.define(version: 20150321164506) do
 
   create_table "awards", force: true do |t|
     t.integer  "job_id"
@@ -123,6 +123,7 @@ ActiveRecord::Schema.define(version: 20150321120532) do
   add_index "tasks", ["job_id", "problem_number"], name: "index_tasks_on_job_id_and_problem_number"
   add_index "tasks", ["job_id"], name: "index_tasks_on_job_id"
   add_index "tasks", ["problem_id"], name: "index_tasks_on_problem_id"
+  add_index "tasks", ["user_id", "status"], name: "index_tasks_on_user_id_and_status"
 
   create_table "terms", force: true do |t|
     t.integer  "course_id"
