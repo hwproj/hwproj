@@ -9,7 +9,7 @@
     <% end %>
 
   <%= assignment.number %>. </strong> <small><%= assignment.created_at.strftime("%d.%m.%y") %> </small>
-  <% if signed_in? && current_user.id == @teacher_id %>
+  <% if @teacher %>
     <%= link_to edit_homework_path(assignment) do %>
       <span class="glyphicon glyphicon-pencil"></span>
     <% end %>
@@ -23,7 +23,7 @@
   <ol>
     <% assignment.problems.order(:id).each do |problem| %>
       <li>
-        <% if signed_in? && @student %>
+        <% if @student %>
           <strong>
             <% task = @tasks.where(problem_id: problem.id).first %>
             <%= link_to task.name, task %>

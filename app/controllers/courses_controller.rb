@@ -22,7 +22,9 @@ class CoursesController < ApplicationController
 
     raise ActionController::RoutingError.new('Not Found') if @term.nil?
 
-    if signed_in? && current_user.teacher?
+    @teacher_id = @course.teacher_id
+
+    if signed_in? && current_user.teacher? && current_user.id == @teacher_id
       @teacher = true
       @students = @term.students
     else
@@ -45,8 +47,6 @@ class CoursesController < ApplicationController
     end
 
     @assignments = @term.assignments.order(:id)
-
-    @teacher_id = @course.teacher_id
 
     if params[:names] == "true"
       @show_tasks_names = true
