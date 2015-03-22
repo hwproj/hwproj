@@ -75,6 +75,10 @@
         <% student.jobs.order(:id).each do |job| %>
           <% if job.assignment.done? %>
             <td class="task accepted-task"></td>
+          <% elsif job.done? && (@student != student || !@teacher) %>
+              <% job.tasks.size.times do %>
+                <td style="padding: 0" class="task accepted-task"></td>
+              <% end %>
           <% else %>
             <% job.tasks.order(:problem_number).each do |task| %>
 
