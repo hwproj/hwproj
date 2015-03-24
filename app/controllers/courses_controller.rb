@@ -47,10 +47,6 @@ class CoursesController < ApplicationController
     end
 
     @assignments = @term.assignments.order(:id)
-
-    if params[:names] == "true"
-      @show_tasks_names = true
-    end
   end
 
   def index

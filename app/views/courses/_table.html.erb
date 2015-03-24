@@ -69,7 +69,7 @@
             <% end %>
           <% end %>
         </td>
-        <td align="center"><%= student.tasks_left_count %></td>
+        <td align="center"><%= student.tasks_left_count if @student.tasks_left_count != 0 %></td>
 
         <td class="separator"></td>
         <% student.jobs.order(:id).each do |job| %>
@@ -80,23 +80,18 @@
                 <td style="padding: 0" class="task accepted-task"></td>
               <% end %>
           <% else %>
-            <% job.tasks.order(:problem_number).each do |task| %>
-
-              <% if task.accepted? %>
-                <td style="padding: 0" class="task accepted-task">
-
-              <% elsif task.accepted_partially? %>
-                <td style="padding: 0" class="task task-with-notes">
-
-              <% elsif task.waiting? %>
-                <td style="padding: 0" class="task task-with-submissions">
-
-              <% else %>
+            <% job.tasks.order(:problem_number).pluck(:id, :status).each do |id, status| %>
+              <% case status %>
+              <% when 0 %>
                 <td style="padding: 0" class="task">
+              <% when 1 %>
+                <td style="padding: 0" class="task task-with-submissions">
+              <% when 2 %>
+                <td style="padding: 0" class="task task-with-notes">
+              <% when 3 %>
+                <td style="padding: 0" class="task accepted-task">
               <% end %>
-
-                <%= link_to "", task if @student == student || @teacher %>
-                <%= task.name if @show_tasks_names %>
+                <%= link_to "", task_path(id) if @student == student || @teacher %>
               </td>
             <% end %>
           <% end %>
