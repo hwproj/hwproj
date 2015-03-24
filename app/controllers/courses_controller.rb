@@ -23,7 +23,7 @@ class CoursesController < ApplicationController
 
     @teacher_id = @course.teacher_id
 
-    if signed_in? && current_user.teacher? && current_user.id == @teacher_id
+    if signed_in? && current_user.id == @teacher_id
       @teacher = true
       @students = @term.students
     else
@@ -39,7 +39,7 @@ class CoursesController < ApplicationController
     end
 
     @tasks_left = 0
-    @term.students.where(approved: true).each do |student|
+    @students.each do |student|
       @tasks_left += student.tasks_left_count
     end
 
