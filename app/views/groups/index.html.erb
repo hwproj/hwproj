@@ -1,5 +1,0 @@
-<%= render 'groups_list' %>
-
-<% if signed_in? && current_user.teacher? %>
-<%= link_to "Добавить группу", new_group_path, class: "btn btn-primary" %>
-<% end %>
