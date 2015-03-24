@@ -8,7 +8,7 @@ class SubmissionsController < ApplicationController
     redirect_to new_submission_path if params[:submission][:task_id].nil?
 
     @task = Task.find(params[:submission][:task_id])
-    @task.update status: :waiting
+    @task.update status: :waiting if @task.not_submitted? || @task.waiting?
     @submission = Submission.create(submission_params)
     UserMailer.new_submission_notify(@submission).deliver
     redirect_to @submission.task
