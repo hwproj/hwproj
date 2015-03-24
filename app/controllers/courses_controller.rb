@@ -19,7 +19,6 @@ class CoursesController < ApplicationController
     else
       @term = @course.terms.last
     end
-
     raise ActionController::RoutingError.new('Not Found') if @term.nil?
 
     @teacher_id = @course.teacher_id
@@ -30,8 +29,6 @@ class CoursesController < ApplicationController
     else
       @students = @term.students.select{ |student| student.approved }
     end
-
-    @subscription = @term.students.where(user_id: current_user.id).first if signed_in?
 
     if signed_in? && current_user.student?
       @student = @term.students.where(user_id: current_user.id).first
@@ -47,6 +44,8 @@ class CoursesController < ApplicationController
     end
 
     @assignments = @term.assignments.order(:id)
+
+    @terms = @course.terms.reverse
   end
 
   def index

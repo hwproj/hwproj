@@ -3,14 +3,14 @@
     <h1> <%= @course.name %> </h1>
     <h3>
       <%= "#{@course.group_name} группа" %>
-      <% if signed_in? && current_user == @course.teacher %>
+      <% if @teacher %>
         <%= link_to edit_course_path(@course) do %>
           <span class="glyphicon glyphicon-pencil"></span>
         <% end %>
       <% end %>
     </h3>
 
-    <% if @subscription && (not @subscription.approved?) %>
+    <% if @student && (not @student.approved?) %>
       <div class="alert alert-warning" role="alert">
         Преподаватель должен подтвердить Вашу запись.
       </div>
@@ -20,7 +20,7 @@
   <div class="col-md-4" align="right">
     <h3> <%= @course.teacher.full_name %> </h3>
     <h3>
-      <% if (signed_in? && current_user.teacher?) || (@subscription && @subscription.approved?) %>
+      <% if @teacher || @student %>
         <%= mail_to @course.teacher.email do %>
           <%= @course.teacher.email %>
         <% end %>
@@ -28,7 +28,7 @@
     </h3>
 
     <% if signed_in? && current_user.student? %>
-        <%= link_to 'Записаться', students_path(student: {term_id: @term.id}), method: :post, class: 'btn btn-success' if @subscription.nil? %>
+        <%= link_to 'Записаться', students_path(student: {term_id: @term.id}), method: :post, class: 'btn btn-success' if @student.nil? %>
     <% end %>
   </div>
 </div>
@@ -36,8 +36,8 @@
 <div class="row">
   <div class="hidden-xs col-md-12">
     <ul class="nav nav-tabs" role="tablist">
-      <% @course.terms.reverse.each do |term| %>
-        <% if term == @term %>
+      <% @terms.each do |term| %>
+        <% if term.id == @term.id %>
           <li class="active">
         <% else %>
           <li>
@@ -46,15 +46,15 @@
         </li>
 
       <% end %>
-      <li> <%= link_to "Добавить семестр", add_term_path(@course.id), method: :put if signed_in? && current_user.teacher?%> </li>
+      <li> <%= link_to "Добавить семестр", add_term_path(@course.id), method: :put if @teacher %> </li>
     </ul>
     <%= render 'term' %>
   </div>
 
   <div class="visible-xs col-xs-12">
     <ul class="nav nav-tabs" role="tablist">
-      <% @course.terms.reverse.each do |term| %>
-        <% if term == @term %>
+      <% @terms.each do |term| %>
+        <% if term.id == @term.id %>
           <li class="active">
         <% else %>
           <li>
@@ -63,7 +63,7 @@
         </li>
 
       <% end %>
-      <li> <%= link_to "Добавить семестр", add_term_path(@course.id), method: :put if signed_in? && current_user.teacher? %> </li>
+      <li> <%= link_to "Добавить семестр", add_term_path(@course.id), method: :put if @teacher %> </li>
     </ul>
   <%= render 'term' %>
   </div>
