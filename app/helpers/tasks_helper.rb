@@ -3,7 +3,7 @@ module TasksHelper
     if task.notes.any?
       "accepted_partially"
     elsif task.submissions.any?
-      "not_accepted"
+      "waiting"
     else
       "not_submitted"
     end

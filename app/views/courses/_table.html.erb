@@ -85,13 +85,10 @@
               <% if task.accepted? %>
                 <td style="padding: 0" class="task accepted-task">
 
-              <% elsif task.not_accepted? %>
-                <td style="padding: 0" class="task rejected-task">
-
               <% elsif task.accepted_partially? %>
                 <td style="padding: 0" class="task task-with-notes">
 
-              <% elsif task.submissions.any? %>
+              <% elsif task.waiting? %>
                 <td style="padding: 0" class="task task-with-submissions">
 
               <% else %>
