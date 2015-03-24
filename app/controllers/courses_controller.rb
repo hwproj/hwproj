@@ -12,14 +12,14 @@ class CoursesController < ApplicationController
   end
 
   def show
-    @course = Course.find(params[:id])
+    @course = Course.find params[:id]
 
     if params[:term_number]
-      @term = @course.terms.where(number: params[:term_number]).first
+      @term = @course.terms.find_by number: params[:term_number]
     else
       @term = @course.terms.last
     end
-    raise ActionController::RoutingError.new('Not Found') if @term.nil?
+    raise ActionController::RoutingError.new 'Not Found' if @term.nil?
 
     @teacher_id = @course.teacher_id
 
@@ -27,11 +27,11 @@ class CoursesController < ApplicationController
       @teacher = true
       @students = @term.students
     else
-      @students = @term.students.select{ |student| student.approved }
+      @students = @term.students.where approved: true
     end
 
     if signed_in? && current_user.student?
-      @student = @term.students.where(user_id: current_user.id).first
+      @student = @term.students.find_by user_id: current_user.id
     end
 
     if @student
