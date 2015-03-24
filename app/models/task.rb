@@ -4,6 +4,10 @@ class Task < ActiveRecord::Base
   belongs_to :student
   belongs_to :user
 
+  counter_culture :student,
+    :column_name => Proc.new {|model| !model.accepted? ? 'tasks_left_count' : nil },
+    :column_names => { ["NOT tasks.status = ?", 3] => 'tasks_left_count' } # accepted status equals 3
+
   has_many :submissions, dependent: :destroy
   has_many :notes, through: :submissions
 

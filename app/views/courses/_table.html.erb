@@ -69,7 +69,7 @@
             <% end %>
           <% end %>
         </td>
-        <td align="center"><%= student.tasks_left_count if student.tasks_left_count != 0 %></td>
+        <td align="center"><%= student.tasks_left_count %></td>
 
         <td class="separator"></td>
         <% student.jobs.order(:id).each do |job| %>

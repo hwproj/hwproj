@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150321180632) do
+ActiveRecord::Schema.define(version: 20150324083505) do
 
   create_table "awards", force: true do |t|
     t.integer  "job_id"
@@ -96,9 +96,10 @@ ActiveRecord::Schema.define(version: 20150321180632) do
   create_table "students", force: true do |t|
     t.integer  "user_id"
     t.integer  "term_id"
-    t.boolean  "approved",   default: false
+    t.boolean  "approved",         default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "tasks_left_count", default: 0,     null: false
   end
 
   create_table "submissions", force: true do |t|

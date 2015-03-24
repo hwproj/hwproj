@@ -44,6 +44,9 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    after_commit_action (1.0.0)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
     arel (5.0.1.20140414130214)
     autoprefixer-rails (2.1.1.20140710)
       execjs
@@ -66,6 +69,10 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.1)
+    counter_culture (0.1.32)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      after_commit_action (~> 1.0.0)
     devise (3.2.4)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -210,6 +217,7 @@ DEPENDENCIES
   carrierwave
   cocoon
   coffee-rails (~> 4.0.0)
+  counter_culture (~> 0.1.23)
   devise
   figaro
   fog (~> 1.20)

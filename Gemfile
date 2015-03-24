@@ -52,3 +52,6 @@ gem 'figaro'
 
 # Maintenance
 gem 'turnout'
+
+# Counter optimizations
+gem 'counter_culture', '~> 0.1.23'

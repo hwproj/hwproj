@@ -4,7 +4,7 @@ class Term < ActiveRecord::Base
   has_many :students, dependent: :destroy
   has_many :assignments, class_name: 'Homework', dependent: :destroy
   has_many :jobs, through: :assignments
-  has_many :tasks, through: :jobs
+  has_many :tasks, through: :students
   has_many :submissions, through: :tasks
 
   def group_name
