@@ -55,6 +55,7 @@ GEM
       sass (~> 3.2)
     bootstrap-will_paginate (0.0.10)
       will_paginate
+    browser (0.8.0)
     builder (3.2.2)
     carrierwave (0.10.0)
       activemodel (>= 3.2.0)
@@ -214,6 +215,7 @@ DEPENDENCIES
   autoprefixer-rails
   bootstrap-sass (~> 3.2.0.0)
   bootstrap-will_paginate
+  browser
   carrierwave
   cocoon
   coffee-rails (~> 4.0.0)

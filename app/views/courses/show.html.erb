@@ -42,7 +42,7 @@
         <% else %>
           <li>
         <% end %>
-          <%= link_to "#{term.number} семестр", show_term_path(@course.id, term.number) %>
+          <%= link_to "#{term.number} #{browser.mobile? ? "сем." : "семестр"}", show_term_path(@course.id, term.number) %>
         </li>
 
       <% end %>
@@ -50,22 +50,4 @@
     </ul>
     <%= render 'term' %>
   </div>
-
-  <div class="visible-xs col-xs-12">
-    <ul class="nav nav-tabs" role="tablist">
-      <% @terms.each do |term| %>
-        <% if term.id == @term.id %>
-          <li class="active">
-        <% else %>
-          <li>
-        <% end %>
-          <%= link_to "#{term.number} сем.", show_term_path(@course.id, term.number) %>
-        </li>
-
-      <% end %>
-      <li> <%= link_to "Добавить семестр", add_term_path(@course.id), method: :put if @teacher %> </li>
-    </ul>
-  <%= render 'term' %>
-  </div>
-
 </div>
