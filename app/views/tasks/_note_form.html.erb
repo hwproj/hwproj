@@ -1,5 +1,5 @@
 <%= simple_form_for Note.new, remote: true do |f| %>
-  <%= f.input :text, input_html: { rows: 3 }, label: false, placeholder: "Текст замечения" %>
+  <%= f.input :text, input_html: { rows: 3 }, label: false, placeholder: "Текст замечания" %>
   <%= f.hidden_field :submission_id, value: @submission.id %>
-  <%= f.button :submit, "Добавить замечение", class: "btn btn-warning"  %>
+  <%= f.button :submit, "Добавить замечание", class: "btn btn-warning"  %>
 <% end %>
