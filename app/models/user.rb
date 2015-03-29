@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   has_many :tasks
   has_many :submissions, through: :tasks
 
-  accepts_nested_attributes_for :tasks, :reject_if => :all_blank, :allow_destroy => true 
+  accepts_nested_attributes_for :tasks, :reject_if => :all_blank, :allow_destroy => true
 
   before_create do
     self.name = self.name.strip
@@ -30,11 +30,11 @@ class User < ActiveRecord::Base
   end
 
   def deadline_tasks
-    tasks_left.select{ |task| task.created_at > Time.now - 2.weeks && task.created_at < Time.now - 1.weeks }
+    tasks_left.select{ |task| task.created_at > Time.now - 2.weeks && task.created_at < Time.now - 1.weeks && task.student.term.active? }
   end
 
   def overdue_tasks
-    tasks_left.select{ |task| task.created_at < Time.now - 2.weeks }
+    tasks_left.select{ |task| task.created_at < Time.now - 2.weeks && task.student.term.active? }
   end
 
   def student_feed

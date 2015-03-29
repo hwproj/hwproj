@@ -1,6 +1,6 @@
 <%= simple_form_for @submission, html: {multipart: true} do |f| %>
   <%= f.label "Задача" %> <br>
-  <%= f.collection_select :task_id, current_user.tasks.select{|x| x.status != "accepted"}.sort_by{|x| x.name}, :id, :name, label: "Задача" %>
+  <%= f.collection_select :task_id, current_user.tasks.select{|x| x.student.term.active? && x.status != "accepted"}.sort_by{|x| x.name}, :id, :name, label: "Задача" %>
 
   <%= f.input :file, label: "Решение" %>
   <%= f.input :url, label: "Ссылка на решение", placeholder: "Коммит на GitHub, etc" %>
