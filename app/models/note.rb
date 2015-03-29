@@ -1,4 +1,4 @@
 class Note < ActiveRecord::Base
-	validates :text, presence: true
+	validates :text, :submission_id, presence: true
 	belongs_to :submission
 end

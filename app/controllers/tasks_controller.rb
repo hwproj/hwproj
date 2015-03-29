@@ -12,6 +12,7 @@ class TasksController < ApplicationController
 
     @student = @task.student
     @submissions = @task.submissions #reverse order
+    @submission = @submissions.first
   end
 
   def update

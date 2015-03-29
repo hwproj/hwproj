@@ -1,15 +1,18 @@
 <div class="col-md-8">
-  <h2>
-  <% if @task.accepted? %>
-    <span style="color:#5cb85c" class="glyphicon glyphicon-ok-sign"></span>
-  <% elsif @task.accepted_partially? %>
-    <span style="color:#f0ad4e" class="glyphicon glyphicon-exclamation-sign"></span>
-  <% end %>
+  <h2 id="task_title">
+    <div id="text">
+    <% if @task.accepted? %>
+      <span style="color:#5cb85c" class="glyphicon glyphicon-ok-sign"></span>
+    <% elsif @task.accepted_partially? %>
+      <span style="color:#f0ad4e" class="glyphicon glyphicon-exclamation-sign"></span>
+    <% end %>
+
     Задача <%= @task.name %>
 
+    </div>
   </h2>
-
 </div>
+
 <div class="col-md-4">
   <% if current_user.teacher? %>
   <h4 align="right">
@@ -27,39 +30,10 @@
   <% end %>
 
   <% if @task.submissions.any? %>
-
-    <% if @task.notes.any? %>
+    <div id="notes" <%= 'style="display: none"'.html_safe unless @task.notes.any? %>>
       <h3> Замечания </h3>
-          <% @task.notes.order(:id).reverse.each do |note| %>
-            <h5>
-              <% if note.fixed? %>
-                <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
-              <% else %>
-                <span style="color:#f0ad4e" class="glyphicon glyphicon-exclamation-sign"></span>
-              <% end %>
-
-              <%= note.text.gsub("\n", "<br />").html_safe %>
-              <small><strong><%= "v.#{note.submission.version}" %></strong><%=", #{note.created_at.strftime("%H:%M %d.%m.%y")}" %></small>
-
-              <% if signed_in? && current_user.teacher? %>
-                <% if not note.fixed? %>
-                  <%= link_to note_path(note, note: { fixed: true }), method: :put, title: "Принять" do %>
-                    <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
-                  <% end %>
-                <% else %>
-                  <%= link_to note_path(note, note: { fixed: false }), method: :put, title: "Отменить" do %>
-                    <span style="color:#d9534f" class="glyphicon glyphicon-remove"></span>
-                  <% end %>
-                <% end %>
-
-                <%= link_to note_path(note), method: :delete do %>
-                  <span class="glyphicon glyphicon-trash"></span>
-                <% end %>
-              <% end %>
-
-            </h5>
-          <% end %>
-    <% end %>
+      <%= render @task.notes.reverse %>
+    </div>
   <% end %>
 
   <% if signed_in? && current_user.teacher? %>
@@ -70,19 +44,12 @@
       </div>
     <% else %>
       <% if @task.submissions.any? %>
-        <%= simple_form_for @submissions.first, url: {controller: :submissions, action: :update} do |f| %>
-          <%= f.hidden_field :id, value: @submissions.first.id %>
-
-          <div class="links">
-            <%= link_to_add_association 'Добавить замечание', f, :notes, class: "btn btn-warning" %>
-            <%= f.submit "Сохранить замечания", class: "btn btn-default" %>
-          </div>
-          <br>
-        <% end %>
+        <%= render 'note_form' %>
       <% end %>
+      <br>
 
       <%= link_to "Принять", task_path(@task, task: {status: "accepted"}), method: :put, class: "btn btn-success" %>
-      <%= link_to "Есть замечания", task_path(@task, task: {status: "accepted_partially"}), method: :put, class: "btn btn-warning" %>
+      <%= link_to "Принять частично", task_path(@task, task: {status: "accepted_partially"}), method: :put, class: "btn btn-warning" %>
     <% end %>
     <br><br>
   <% end %>

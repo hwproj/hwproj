@@ -14,6 +14,6 @@ Rails.application.routes.draw do
   resources :tasks, only: [ :show, :update ]
   resources :submissions, only: [ :new, :create, :index, :update ]
   resources :problems, only: [ :show ]
-  resources :notes, only: [:update, :destroy ]
+  resources :notes
   resources :links
 end

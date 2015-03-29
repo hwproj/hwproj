@@ -1,0 +1,7 @@
+$('#notes').show();
+$('#notes').append('<%= j render(@note) %>');
+$('#new_note #note_text').val('');
+
+<% if @note.submission.task.notes.count == 1 %>
+  $('#task_title #text').prepend('<span style="color:#f0ad4e" class="glyphicon glyphicon-exclamation-sign"></span>');
+<% end %>
