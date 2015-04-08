@@ -7,6 +7,11 @@ Rails.application.routes.draw do
   get 'courses/:id/terms/:term_number', to: 'courses#show', as: "show_term"
   put 'courses/:id/terms/new', to: 'courses#add_term', as: "add_term"
 
+  # GitHub Authorization callback
+  get 'github/callback'
+  # Webhooks url
+  post 'github/payload'
+
   resources :courses
   resources :students
   resources :homeworks

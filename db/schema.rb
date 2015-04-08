@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150406203059) do
+ActiveRecord::Schema.define(version: 20150408124110) do
 
   create_table "awards", force: true do |t|
     t.integer  "job_id"
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 20150406203059) do
   end
 
   create_table "submissions", force: true do |t|
-    t.text     "text",       limit: 255
+    t.text     "text",           limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "task_id"
@@ -105,6 +105,8 @@ ActiveRecord::Schema.define(version: 20150406203059) do
     t.integer  "student_id"
     t.integer  "teacher_id"
     t.string   "url"
+    t.boolean  "pull_request",               default: false
+    t.integer  "comments_count",             default: 0
   end
 
   add_index "submissions", ["task_id"], name: "index_submissions_on_task_id"

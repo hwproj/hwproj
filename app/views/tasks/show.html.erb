@@ -65,7 +65,7 @@
             <% end %>
             <% unless (not submission.url) || (submission.url.empty?) %>
               <%= link_to submission.url, class: "btn btn-default" do %>
-                <span class="glyphicon glyphicon-link"></span> <%= URI(submission.url).host %>
+                <span class="glyphicon glyphicon-link"></span> <%= submission.pull_request? ? "Pull request" : URI(submission.url).host %>
               <% end %>
             <% end %>
           </div>

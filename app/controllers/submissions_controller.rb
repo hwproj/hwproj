@@ -11,6 +11,22 @@ class SubmissionsController < ApplicationController
     @task.update status: :waiting if @task.not_submitted? || @task.waiting?
     @submission = Submission.create(submission_params)
     UserMailer.new_submission_notify(@submission).deliver
+
+    url = @submission.url unless @submission.url.blank?
+
+    # GitHub pull request hooking
+    begin
+      if url && URI.parse(url).host == "github.com" && url["/pull/"]
+        @submission.update pull_request: true
+
+        session[:submission] = @submission.id
+        client_id = ENV["GITHUB_CLIENT_ID"]
+        redirect_to "https://github.com/login/oauth/authorize?scope=write:repo_hook&client_id=#{ client_id }" and return
+      end
+    rescue => e
+      @submission.update url: ""
+    end
+
     redirect_to @submission.task
   end
 

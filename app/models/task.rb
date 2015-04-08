@@ -15,6 +15,8 @@ class Task < ActiveRecord::Base
 
   accepts_nested_attributes_for :submissions, :reject_if => :all_blank, :allow_destroy => true
 
+  after_save :accept_notes, if: :accepted?
+
   def name
     if problem.name || (not problem.name.blank?)
       name = problem.name
@@ -26,6 +28,11 @@ class Task < ActiveRecord::Base
 
     name
   end
+
+  private
+    def accept_notes
+      self.notes.each{ |note| note.update fixed: true }
+    end
 end
 
 

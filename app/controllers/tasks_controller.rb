@@ -17,12 +17,8 @@ class TasksController < ApplicationController
 
   def update
   	@task.update(params.require(:task).permit(:status))
-    if @task.accepted?
-      @task.notes.each do |note|
-        note.update(fixed: true)
-      end
-      UserMailer.task_accepted_notify(@task).deliver
-    end
+    UserMailer.task_accepted_notify(@task).deliver if @task.accepted?
+
     update_job #needs update
   	redirect_to @task
   end

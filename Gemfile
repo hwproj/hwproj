@@ -58,3 +58,8 @@ gem 'counter_culture', '~> 0.1.23'
 
 # Detect mobile browsers
 gem "browser"
+
+# GitHub authorization
+gem 'octokit'
+gem 'rest-client'
+gem 'json'
