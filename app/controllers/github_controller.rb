@@ -60,13 +60,15 @@ class GithubController < ApplicationController
       submission = get_submission(issue)
       submission.notes.create(text: comment['body'])
       task = submission.task
-      task.accepted_partially unless task.accepted?
+      task.accepted_partially! unless task.accepted?
     end
 
     def diff_comment_event(pull_request)
       submission = get_submission(pull_request)
       comments = JSON.parse(RestClient.get pull_request['review_comments_url'])
       submission.update comments_count: comments.count
+      task = submission.task
+      task.accepted_partially! unless task.accepted?
     end
 
     def get_submission(pull_request)
