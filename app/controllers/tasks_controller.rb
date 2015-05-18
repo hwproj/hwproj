@@ -17,6 +17,7 @@ class TasksController < ApplicationController
 
   def update
   	@task.update(params.require(:task).permit(:status))
+    @task.touch
     UserMailer.task_accepted_notify(@task).deliver if @task.accepted?
 
   	redirect_to @task
