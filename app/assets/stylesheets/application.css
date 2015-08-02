@@ -16,6 +16,11 @@
 
 @import "bootstrap";
 
+@font-face {
+	font-family: "WeblySleek UI";
+	src: font-url("weblysleekuil.ttf") format("truetype");
+}
+
 h1 {
 	font-size: 24px;
 }
@@ -36,7 +41,26 @@ h3 {
 	padding-left: 10px;
 }
 
-.navbar-inverse .navbar-btn {
+.dropdown a {
+	color: #9d9d9d;
+}
+
+.navbar-inverse .navbar-right .navbar-nav li a,
+.navbar-inverse .navbar-header .navbar-brand {
+	color: #aeaeae;
+}
+
+.navbar-inverse .navbar-right .navbar-nav li a:hover,
+.navbar-inverse .navbar-header .navbar-brand:hover {
+	color: #f3f3f3;
+}
+
+/*.navbar-inverse {
+	background-color: #2c3e50;
+	font-family: "WeblySleek UI","Segoe UI","Helvetica Neue", Arial, sans-serif;
+}*/
+
+/*.navbar-inverse .navbar-btn {
   background-color: #444444;
   border-color: #333333;
   color: #999999;
@@ -45,7 +69,7 @@ h3 {
 .navbar-inverse .navbar-btn:hover {
   color: #ffffff;
   background-color: #555555;
-}
+}*/
 
 .accepted-task {
 	background-color: #7ad67a;
