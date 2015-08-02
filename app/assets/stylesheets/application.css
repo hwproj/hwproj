@@ -41,10 +41,6 @@ h3 {
 	padding-left: 10px;
 }
 
-.dropdown a {
-	color: #9d9d9d;
-}
-
 .navbar-inverse .navbar-right .navbar-nav li a,
 .navbar-inverse .navbar-header .navbar-brand {
 	color: #aeaeae;
@@ -53,6 +49,10 @@ h3 {
 .navbar-inverse .navbar-right .navbar-nav li a:hover,
 .navbar-inverse .navbar-header .navbar-brand:hover {
 	color: #f3f3f3;
+}
+
+.navbar-inverse .navbar-right .navbar-nav .dropdown .dropdown-menu a {
+	color: #777;
 }
 
 /*.navbar-inverse {
