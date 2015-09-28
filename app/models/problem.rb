@@ -1,4 +1,5 @@
 class Problem < ActiveRecord::Base
+  before_create :set_number
   before_save :clean_name
 
   belongs_to :homework
@@ -8,7 +9,12 @@ class Problem < ActiveRecord::Base
 
   accepts_nested_attributes_for :links, reject_if: :all_blank, allow_destroy: true
 
-  def clean_name
-    self.name = nil if self.name.blank?
-  end
+  private
+    def set_number
+      self.number = self.homework.problems.count + 1
+    end
+
+    def clean_name
+      self.name = nil if self.name.blank?
+    end
 end

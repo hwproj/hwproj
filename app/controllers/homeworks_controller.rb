@@ -27,6 +27,9 @@ class HomeworksController < ApplicationController
           job.tasks.create(student_id: job.student.id, user_id: job.student.user.id, problem_id: problem.id)
         end
       end
+      problem.tasks.each do |task|
+        task.update(problem_number: task.problem.number)
+      end
     end
 
     redirect_to @assignment.term.course
@@ -46,9 +49,8 @@ class HomeworksController < ApplicationController
     end
 
     def enumerate_problems
-      problems = @assignment.problems
-      for i in 1..problems.count
-        problems[i - 1].update(number: i)
+      @assignment.problems.order(:id).each_with_index do |problem, i|
+        problem.update(number: i + 1)
       end
     end
 
