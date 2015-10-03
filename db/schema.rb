@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150408124110) do
+ActiveRecord::Schema.define(version: 20151003210235) do
 
   create_table "awards", force: true do |t|
     t.integer  "job_id"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20150408124110) do
     t.integer  "teacher_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "active",     default: true
   end
 
   create_table "homeworks", force: true do |t|
@@ -38,6 +39,7 @@ ActiveRecord::Schema.define(version: 20150408124110) do
     t.integer  "term_id"
     t.integer  "assignment_type"
     t.boolean  "done",            default: false
+    t.boolean  "active",          default: true
   end
 
   add_index "homeworks", ["term_id", "id"], name: "index_homeworks_on_term_id_and_id"

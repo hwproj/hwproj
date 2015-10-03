@@ -1,6 +1,6 @@
 class WelcomeController < ApplicationController
   def index
-    @courses = Course.all
+    @courses = Course.all_hash
 
     if signed_in?
       if current_user.student?

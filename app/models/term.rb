@@ -1,4 +1,7 @@
 class Term < ActiveRecord::Base
+  before_create :set_number
+  before_create :finish_previous
+
   belongs_to :course
 
   has_many :students, dependent: :destroy
@@ -22,4 +25,13 @@ class Term < ActiveRecord::Base
   def tests
     assignments.where(assignment_type: "test")
   end
+
+  private
+    def set_number
+      self.number = self.course.terms.count + 1
+    end
+
+    def finish_previous
+      course.terms.last.update active: false if course.terms.any?
+    end
 end

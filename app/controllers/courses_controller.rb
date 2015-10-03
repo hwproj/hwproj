@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: [ :edit, :show, :update ]
+  before_action :set_course, only: [ :edit, :show, :update, :add_term ]
 
   def new
     @course = Course.new
@@ -7,12 +7,12 @@ class CoursesController < ApplicationController
 
   def create
     @course = Course.create(course_params)
-    @course.create_term
+    @course.terms.create()
     redirect_to @course
   end
 
   def show
-    @course = Course.find params[:id]
+    @terms = @course.terms.reverse
 
     if params[:term_number]
       @term = @course.terms.find_by number: params[:term_number]
@@ -34,9 +34,7 @@ class CoursesController < ApplicationController
       @student = @term.students.find_by user_id: current_user.id
     end
 
-    if @student
-      @tasks = @student.tasks
-    end
+    @tasks = @student.tasks if @student
 
     @tasks_left = 0
     @students.each do |student|
@@ -44,11 +42,10 @@ class CoursesController < ApplicationController
     end
 
     @assignments = @term.assignments.order(:id)
-
-    @terms = @course.terms.reverse
   end
 
   def index
+    @courses = Course.all_hash
   end
 
   def edit
@@ -59,9 +56,8 @@ class CoursesController < ApplicationController
     redirect_to @course
   end
 
-  def add_term
-    @course = Course.find(params[:id])
-    @course.create_term
+  def add_term # todo rewrite with ajax
+    @course.terms.create()
 
     redirect_to :back
   end
