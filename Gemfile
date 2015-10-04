@@ -40,7 +40,7 @@ gem 'bootstrap-will_paginate'
 
 # File uploading
 gem 'carrierwave'
-gem 'fog', '~> 1.20'
+gem 'fog', '~> 1.34'
 
 # Deploy on Heroku
 gem 'pg', group: :production
