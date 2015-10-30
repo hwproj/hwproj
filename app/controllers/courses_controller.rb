@@ -25,9 +25,9 @@ class CoursesController < ApplicationController
 
     if signed_in? && current_user.id == @teacher_id
       @teacher = true
-      @students = @term.students
+      @students = @term.students.includes(jobs: :tasks)
     else
-      @students = @term.students.where approved: true
+      @students = @term.students.where(approved: true).includes(jobs: :tasks)
     end
 
     if signed_in? && current_user.student?
@@ -41,7 +41,7 @@ class CoursesController < ApplicationController
       @tasks_left += student.tasks_left_count
     end
 
-    @assignments = @term.assignments.order(:id)
+    @assignments = @term.assignments.order(:id).includes(:problems)
   end
 
   def index
