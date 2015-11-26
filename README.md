@@ -1,5 +1,3 @@
 # HwProj
 
-HwProj — сайт работы с домашними работами.
-
-Когда-нибудь я напишу тут что-нибудь интересное и умное, ага. :)
+Lecturer-students collaboration service with GitHub integration
