@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :courses
   resources :students
   resources :homeworks
+  #resources :messages
 
   resources :tasks, only: [ :show, :update ]
   resources :submissions, only: [ :new, :create, :index, :update ]
