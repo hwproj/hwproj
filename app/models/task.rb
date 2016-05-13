@@ -12,6 +12,9 @@ class Task < ActiveRecord::Base
   has_many :submissions, dependent: :destroy
   has_many :notes, through: :submissions
 
+  #chat
+  has_many :messages, dependent: :destroy
+
   enum status: [ :not_submitted, :waiting, :accepted_partially, :accepted ]
 
   accepts_nested_attributes_for :submissions, :reject_if => :all_blank, :allow_destroy => true

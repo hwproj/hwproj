@@ -23,10 +23,10 @@
   </div>
 <div class="col-md-8">
   <div class="row"><div class="well well-small"> <%= markdown(@task.problem.text) %> </div></div>
-
+</div>
+<div class="col-md-7">
   <% if @is_student && @task.status != "accepted" %>
     <%= link_to "Добавить решение", new_submission_path(problem_id: @task.problem_id, task_id: @task.id), class: "btn btn-primary" %>
-    <br> <br>
   <% end %>
 
   <% if @task.submissions.any? %>
@@ -51,9 +51,13 @@
       <%= link_to "Принять", task_path(@task, task: {status: "accepted"}), method: :put, class: "btn btn-success" %>
       <%= link_to "Принять частично", task_path(@task, task: {status: "accepted_partially"}), method: :put, class: "btn btn-warning" %>
     <% end %>
-    <br><br>
+    
   <% end %>
 
+  <% if signed_in? %>
+    <%= link_to(@chat_button_title, switch_chat_task_path(@task), class: "btn btn-default", id: "chat-button", remote: true) %>
+  <% end %>
+  <br><br>
 
   <% if @task.submissions.any? %>
     <h3>Решения</h3>
@@ -77,3 +81,14 @@
       <% end %>
   <% end %>
 </div>
+
+
+<div class="col-md-7">
+  <br> <br>
+  <% if @is_chat_shown %>
+    <div id="chat-id" style="display:block"> <%= render 'chat' %> </div>
+  <% else %>
+    <div id="chat-id" style="display:none"></div>
+  <% end %>
+</div>
+

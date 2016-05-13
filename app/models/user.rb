@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
 
   belongs_to :group
   has_many :notifications, dependent: :destroy
+  has_many :messages, dependent: :destroy
 
   # when user is teacher
   has_many :courses, foreign_key: "teacher_id" ,dependent: :destroy

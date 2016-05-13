@@ -2,7 +2,7 @@ class Notification < ActiveRecord::Base
   belongs_to :task
   belongs_to :user
 
-  enum event_type: [ :task_accepted, :task_accepted_partially, :added_comments, :new_submission ]
+  enum event_type: [ :task_accepted, :task_accepted_partially, :added_comments, :new_submission, :added_message ]
 
   def Notification.new_event(user:, task:, event_type:, event_time:)
     notification = Notification.where(user: user, task: task, event_type: Notification.event_types[event_type]).last
@@ -25,6 +25,10 @@ class Notification < ActiveRecord::Base
     self.task.notes.where(created_at: self.first_event_time..self.last_event_time).count
   end
 
+  def messages_count
+    self.task.messages.where(created_at: self.first_event_time..self.last_event_time).count
+  end
+
   def new_comments_form
     count = self.comments_count
     if (count >= 11 and count <= 19) or count % 10 >= 5 or count % 10 == 0
@@ -44,6 +48,17 @@ class Notification < ActiveRecord::Base
       "новая версия"
     else
       "новых версии"
+    end
+  end
+
+  def new_messages_form
+    count = self.messages_count
+    if (count >= 11 and count <= 19) or count % 10 >= 5 or count % 10 == 0
+      "новых сообщений"
+    elsif count % 10 == 1
+      "новое сообщение"
+    else
+      "новых сообщения"
     end
   end
 

@@ -1,0 +1,12 @@
+$('#chat-id').html("<%= escape_javascript(render 'chat') %>");
+$('#chat-id').slideToggle("fast");
+
+var chat_on = $('#chat-button').text() == 'Показать чат'
+if (chat_on)
+{
+  $('#chat-button').text('Скрыть чат');
+} 
+else
+{
+  $('#chat-button').text('Показать чат');
+}

@@ -1,0 +1,6 @@
+<%= simple_form_for Message.new, id: "new_message", remote: true do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.hidden_field :task_id, value: @task.id %>
+  <%= f.input :text %>
+  <%= f.button :submit, 'Отправить' %>
+<% end %>

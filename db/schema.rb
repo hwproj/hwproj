@@ -77,6 +77,14 @@ ActiveRecord::Schema.define(version: 20160903073618) do
   add_index "links", ["parent_id", "id"], name: "index_links_on_parent_id_and_id"
   add_index "links", ["parent_id", "parent_type"], name: "index_links_on_parent_id_and_parent_type"
 
+  create_table "messages", force: true do |t|
+    t.text     "text"
+    t.integer  "user_id"
+    t.integer  "task_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "notes", force: true do |t|
     t.boolean  "fixed",                     default: false
     t.datetime "created_at"
