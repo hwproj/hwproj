@@ -20,8 +20,8 @@
     <%= mail_to @student.user.email, @student.user.email %>
   </h4>
   <% end %>
-  </div>
-<div class="col-md-8">
+</div>
+<div class="col-md-7">
   <div class="row"><div class="well well-small"> <%= @task.problem.text %> </div></div>
 
   <% if signed_in? && current_user.id == @task.user_id && @task.status != "accepted" %>
@@ -78,59 +78,53 @@
   <% end %>
 </div>
 
-<div class="container"> 
-    <div class="row">
-        <div class="col-md-5">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <span class="glyphicon glyphicon-comment"></span> Chat
-                </div>
-
-
-                <div class="panel-body">
-                    <ul class="chat">
-
-                      <% @task.messages.each do |message| %>
-                        <% if current_user.id != message.user_id %>
-
-                          <li class="left clearfix"><span class="chat-img pull-left">
-                              <img src="http://placehold.it/50/FA6F57/fff&amp;text=ME" alt="User Avatar" class="img-circle">
-                          </span>
-                              <div class="chat-body clearfix">
-                                  <div class="header">
-                                      <strong class="primary-font"> <%= message.sender_name %> </strong> 
-                                      <small class="pull-right text-muted"> <span class="glyphicon glyphicon-time"></span>
-                                        <%= message.created_at.strftime("%H:%M %d.%m.%y") %></small>
-                                  </div>
-                                  <p>
-                                      <%= message.text %>
-                                  </p>
-                              </div>
-                          </li>
-                        <% else %>
-                          <li class="right clearfix"><span class="chat-img pull-right">
-                              <img src="http://placehold.it/50/55C1E7/fff&amp;text=U" alt="User Avatar" class="img-circle">
-                          </span>
-                              <div class="chat-body clearfix">
-                                  <div class="header">
-                                      <strong class="pull-right primary-font"> <%= message.sender_name %> </strong>
-                                      <small class="text-muted"> <span class="glyphicon glyphicon-time"></span>
-                                       <%= message.created_at.strftime("%H:%M %d.%m.%y") %></small>
-                                  </div>
-                                  <p>
-                                      <%= message.text %>
-                                  </p>
-                              </div>
-                          </li>
-
-                        <% end %>
-                      <% end %>
-                    </ul>
-                </div>
-
-                <%= render 'message_form' %>
-                
-            </div>
-        </div>
+<div class="col-md-5">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <span class="glyphicon glyphicon-comment"></span> Chat
     </div>
-</div>
+
+
+    <div class="panel-body">
+      <ul class="chat">
+
+        <% @task.messages.each do |message| %>
+        <% if current_user.id != message.user_id %>
+
+        <li>
+          <div class="chat-body clearfix">
+
+            <div class="header">
+              <strong class="primary-font"> <%= message.sender_name %> </strong>
+              <small class="pull-right text-muted"> <span class="glyphicon glyphicon-time"></span>
+                <%= message.created_at.strftime("%H:%M %d.%m.%y") %></small>
+              </div>
+              <p>
+                <%= message.text %>
+              </p>
+            </div>
+          </li>
+          <% else %>
+          <li>
+
+            <div class="chat-body clearfix">
+              <div class="header">
+                <strong class="pull-right primaty-font"><%= message.sender_name %></strong>
+                <small class="text-muted"> <span class="glyphicon glyphicon-time"></span>
+                 <%= message.created_at.strftime("%H:%M %d.%m.%y") %></small>
+               </div>
+               <p>
+                <%= message.text %>
+              </p>
+            </div>
+          </li>
+
+          <% end %>
+          <% end %>
+        </ul>
+      </div>
+
+      <%= render 'message_form' %>
+
+    </div>
+  </div>
