@@ -34,14 +34,6 @@ class Task < ActiveRecord::Base
   end
 
 
-
-  def add_message
-    
-
-  end
-
-
-
   private
     def accept_notes
       self.notes.each{ |note| note.update fixed: true }

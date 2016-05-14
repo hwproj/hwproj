@@ -98,7 +98,9 @@
                           </span>
                               <div class="chat-body clearfix">
                                   <div class="header">
-                                      <strong class="primary-font"> <%= User.find(message.user_id).full_name %> </strong> 
+                                      <strong class="primary-font"> <%= message.sender_name %> </strong> 
+                                      <small class="pull-right text-muted"> <span class="glyphicon glyphicon-time"></span>
+                                        <%= message.created_at.strftime("%H:%M %d.%m.%y") %></small>
                                   </div>
                                   <p>
                                       <%= message.text %>
@@ -111,7 +113,9 @@
                           </span>
                               <div class="chat-body clearfix">
                                   <div class="header">
-                                      <strong class="pull-right primary-font"> <%= User.find(message.user_id).full_name %> </strong>
+                                      <strong class="pull-right primary-font"> <%= message.sender_name %> </strong>
+                                      <small class="text-muted"> <span class="glyphicon glyphicon-time"></span>
+                                       <%= message.created_at.strftime("%H:%M %d.%m.%y") %></small>
                                   </div>
                                   <p>
                                       <%= message.text %>
@@ -123,15 +127,9 @@
                       <% end %>
                     </ul>
                 </div>
-                <div class="panel-footer">
-                    <div class="input-group">
-                        <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-warning btn-sm" id="btn-chat">
-                                Send</button>
-                        </span>
-                    </div>
-                </div>
+
+                <%= render 'message_form' %>
+                
             </div>
         </div>
     </div>
