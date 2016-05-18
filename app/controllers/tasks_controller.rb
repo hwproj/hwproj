@@ -6,6 +6,13 @@ class TasksController < ApplicationController
       authenticate_user!
     end
 
+    @is_chat_shown = (params[:chat] == 'on')
+    if (params[:chat] == 'on')
+      @chat_shown = true
+    else
+      @chat_shown = false
+    end
+
     if (not current_user.teacher?) && current_user.id != @task.student.user.id
       raise ActionController::RoutingError.new('Not Found')
     end

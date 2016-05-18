@@ -81,7 +81,22 @@
   <% end %>
 </div>
 
+
+
+
 <div class="col-md-5">
+
+  <% if signed_in?%>
+    <% if @is_chat_shown %>
+      <%= link_to "Скрыть чат", task_path(@task, chat: 'off', method: :get), class: "btn btn-primary" %> 
+    <% else %>
+      <%= link_to "Показать чат", task_path(@task, chat: 'on', method: :get), class: "btn btn-primary" %>
+    <% end %>
+    <br> <br>
+  <% end %>
+
+  <% if signed_in? && @is_chat_shown %>
+
   <div class="panel panel-primary">
     <div class="panel-heading">
       <span class="glyphicon glyphicon-comment"></span> Chat
@@ -130,4 +145,8 @@
       <%= render 'message_form' %>
 
     </div>
+    <% end %>
+
   </div>
+
+  
