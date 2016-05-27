@@ -7,7 +7,7 @@ class MessagesController < ApplicationController
 	def create
 		@message = Message.create(messages_params)
 
-		redirect_to @message.task
+		redirect_to controller: 'tasks', action: 'show', id: @message.task_id, chat: 'on'
 
 	end
 
