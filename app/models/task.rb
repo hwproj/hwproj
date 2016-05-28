@@ -17,7 +17,8 @@ class Task < ActiveRecord::Base
   accepts_nested_attributes_for :submissions, :reject_if => :all_blank, :allow_destroy => true
 
   after_save :accept_notes, if: :accepted?
-  after_save :update_job, if: :accepted?
+  after_save :update_job
+
 
   def name
     if problem.name || (not problem.name.blank?)
@@ -41,12 +42,18 @@ class Task < ActiveRecord::Base
     def update_job
       @job = self.job
       @job.update(done: @job.tasks.select{|x| x.status != "accepted"}.empty?)
-      if @job.done? && @job.assignment.awards.count < 3 && @job.assignment.assignment_type != "test"
-        @job.awards.create(rank: @job.assignment.awards.count + 1)
-
+      if @job.done?
+        if @job.assignment.awards.count < 3 && @job.assignment.assignment_type != "test"
+          @job.awards.create(rank: @job.assignment.awards.count + 1)
+        end
         assignment = @job.assignment
         if assignment.jobs.where(done: false).empty?
           assignment.update(done: true)
+        end
+      else
+        @job.assignment.update(done: false)
+        if @job.awards.count > 0
+          @job.awards.first.destroy
         end
       end
     end
