@@ -15,6 +15,7 @@ class HomeworksController < ApplicationController
   end
 
   def edit
+    @problems = @assignment.problems.sort_by{|x| x.id}
   end
 
   def update
