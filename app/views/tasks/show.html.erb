@@ -20,10 +20,13 @@
     <%= mail_to @student.user.email, @student.user.email %>
   </h4>
   <% end %>
-  </div>
-<div class="col-md-8">
-  <div class="row"><div class="well well-small"> <%= @task.problem.text %> </div></div>
+</div>
 
+<div class="col-md-12">
+  <div class="row"><div class="well well-small"> <%= @task.problem.text %> </div></div>
+</div>
+
+<div class="col-md-7">
   <% if signed_in? && current_user.id == @task.user_id && @task.status != "accepted" %>
     <%= link_to "Добавить решение", new_submission_path(problem_id: @task.problem_id, task_id: @task.id), class: "btn btn-primary" %>
     <br> <br>
@@ -77,3 +80,12 @@
       <% end %>
   <% end %>
 </div>
+
+
+
+
+<div class="col-md-5">
+  <%= render 'chat' %>  
+</div>
+
+  

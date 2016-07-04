@@ -1,6 +1,10 @@
 <div class="row">
   <div class="col-md-8">
-    <h3>Новости</h3>
+
+    <h5> Всего непроверенных задач: <%= @tasks_left_all %> </h5>
+    <h5> Непроверенных задач в актуальных семестрах: <%= @tasks_left_of_last_terms %> </h5>
+
+    <h2>Новости</h2>
     <% @submissions.each do |submission| %>
       <h5>
         <% user = submission.student.user %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151003210235) do
+ActiveRecord::Schema.define(version: 20160512191826) do
 
   create_table "awards", force: true do |t|
     t.integer  "job_id"
@@ -66,6 +66,15 @@ ActiveRecord::Schema.define(version: 20151003210235) do
 
   add_index "links", ["parent_id", "id"], name: "index_links_on_parent_id_and_id"
   add_index "links", ["parent_id", "parent_type"], name: "index_links_on_parent_id_and_parent_type"
+
+  create_table "messages", force: true do |t|
+    t.text     "text"
+    t.string   "sender_name"
+    t.integer  "task_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "notes", force: true do |t|
     t.boolean  "fixed",                     default: false

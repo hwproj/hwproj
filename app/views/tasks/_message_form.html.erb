@@ -1,0 +1,13 @@
+<%= simple_form_for Message.new do |f| %>
+<%= f.hidden_field :sender_name, value: current_user.full_name %>
+<%= f.hidden_field :user_id, value: current_user.id %>
+<%= f.hidden_field :task_id, value: @task.id %>
+<div class="panel-footer">
+    <div class="input-group">
+        <input id="btn-input" name="message[text]" class="form-control input-sm" placeholder="Type your message here...">
+            <span class="input-group-btn">
+                            <button class="btn btn-warning btn-sm" id="btn-chat"> Send</button>  
+            </span>
+    </div>
+ </div>
+<% end %>
