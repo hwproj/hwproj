@@ -7,7 +7,7 @@
 
 <%= simple_form_for @assignment  do |f| %>
 
-  <%= f.simple_fields_for :problems do |problem| %>
+  <%= f.simple_fields_for :problems, @problems do |problem| %>
     <%= render 'problem_fields', f: problem %>
   <% end %>
 
