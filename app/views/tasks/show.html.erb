@@ -2,9 +2,9 @@
   <h2 id="task_title">
     <div id="text">
     <% if @task.accepted? %>
-      <span style="color:#5cb85c" class="glyphicon glyphicon-ok-sign"></span>
+      <span class="glyphicon glyphicon-ok-sign"></span>
     <% elsif @task.accepted_partially? %>
-      <span style="color:#f0ad4e" class="glyphicon glyphicon-exclamation-sign"></span>
+      <span class="glyphicon glyphicon-exclamation-sign"></span>
     <% end %>
 
     Задача <%= @task.name %>

@@ -1,8 +1,8 @@
 <h5 id="note_<%= note.id %>">
   <% if note.fixed? %>
-    <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
+    <span class="glyphicon glyphicon-ok"></span>
   <% else %>
-    <span style="color:#f0ad4e" class="glyphicon glyphicon-exclamation-sign"></span>
+    <span class="glyphicon glyphicon-exclamation-sign"></span>
   <% end %>
 
   <%= note.text.gsub("\n", "<br />").html_safe %>
@@ -11,11 +11,11 @@
   <% if signed_in? && current_user.teacher? %>
     <% if not note.fixed? %>
       <%= link_to note_path(note, note: { fixed: true }), method: :put, title: "Принять", remote: true do %>
-        <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
+        <span class="glyphicon glyphicon-ok"></span>
       <% end %>
     <% else %>
       <%= link_to note_path(note, note: { fixed: false }), method: :put, title: "Отменить", remote: true do %>
-        <span style="color:#d9534f" class="glyphicon glyphicon-remove"></span>
+        <span class="glyphicon glyphicon-remove"></span>
       <% end %>
     <% end %>
 
