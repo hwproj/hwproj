@@ -1,5 +1,9 @@
 <h2>Задачи</h2>
-
+<style>
+pre {
+  overflow: visible;
+}
+</style>
 <% @assignments.reverse.each do |assignment| %>
   <strong>
     <% if assignment.homework? %>
@@ -35,7 +39,7 @@
           <% end %>
         <% end %>
 
-        <%= problem.text.gsub("\n", "<br />").html_safe %>
+        <%= markdown(problem.text) %>
       </li>
     <% end %>
   </ol>

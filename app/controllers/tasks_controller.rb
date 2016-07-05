@@ -1,4 +1,6 @@
 class TasksController < ApplicationController
+  include Markdown
+  helper_method :markdown
   before_action :set_task, only: [ :show, :update ]
 
   def show

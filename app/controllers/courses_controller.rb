@@ -1,4 +1,6 @@
 class CoursesController < ApplicationController
+  include Markdown
+  helper_method :markdown
   before_action :set_course, only: [ :edit, :show, :update, :add_term ]
 
   def new

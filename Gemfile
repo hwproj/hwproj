@@ -63,3 +63,6 @@ gem "browser"
 gem 'octokit'
 gem 'rest-client'
 gem 'json'
+
+# Markdown rendering
+gem 'redcarpet', '~> 3.0.0'
