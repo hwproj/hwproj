@@ -1,9 +1,7 @@
 <%= simple_form_for @assignment do |f| %>
-
-  <% if params[:action] == "new" %>
-    <%= f.association :term, collection: current_user.courses.map{|x| x.terms.last}.sort_by{|x| x.group_name}, label_method: :group_name, label: "Группа" %>
-    <%= f.input :assignment_type, collection: { "Домашняя работа" => :homework, "Тест" => :test }, label: "Тип" %>
-  <% end %>
+  
+  <%= f.association :term, collection: current_user.courses.map{|x| x.terms.last}.sort_by{|x| x.group_name}, label_method: :group_name, label: "Группа" %>
+  <%= f.input :assignment_type, collection: { "Домашняя работа" => :homework, "Тест" => :test }, label: "Тип" %>
 
   <%= f.simple_fields_for :problems do |problem| %>
     <%= render 'problem_fields', f: problem %>
