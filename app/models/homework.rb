@@ -1,5 +1,7 @@
 class Homework < ActiveRecord::Base
-  validates :term_id, :assignment_type, presence: true
+  validates :term_id, presence: {message: 'Выберите группу.'}
+  validates :assignment_type, presence: {message: 'Выберите тип работы.'}
+
   validates_associated :problems
 
   enum assignment_type: [ :homework, :test ]

@@ -7,11 +7,15 @@ class HomeworksController < ApplicationController
 
   def create
     @assignment = Homework.new(assignment_params)
-    @assignment.number = @assignment.term.assignments.select{|x| x.assignment_type == @assignment.assignment_type}.count + 1
-    @assignment.save
-    enumerate_problems
-    create_jobs_and_tasks
-    redirect_to @assignment.term.course
+    if @assignment.valid?
+      @assignment.number = @assignment.term.assignments.select{|x| x.assignment_type == @assignment.assignment_type}.count + 1
+      @assignment.save
+      enumerate_problems
+      create_jobs_and_tasks
+      redirect_to @assignment.term.course
+    else
+      render "new"
+    end
   end
 
   def edit
