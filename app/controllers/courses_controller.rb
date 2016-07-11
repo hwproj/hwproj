@@ -1,7 +1,7 @@
 class CoursesController < ApplicationController
   include Markdown
   helper_method :markdown
-  before_action :set_course, only: [ :edit, :show, :update, :add_term ]
+  before_action :set_course, only: [ :edit, :show, :update, :add_term, :statistics ]
 
   def new
     @course = Course.new
@@ -44,6 +44,25 @@ class CoursesController < ApplicationController
     end
 
     @assignments = @term.assignments.order(:id).includes(:problems)
+  end
+
+  def statistics
+    @terms = @course.terms.reverse
+    @teacher_id = @course.teacher_id
+
+    if signed_in?
+      if current_user.id == @teacher_id
+        @teacher = true
+      elsif current_user.student?
+        @student = @term.students.find_by user_id: current_user.id
+      end
+    end
+
+    @notes_number = @course.notes_number_hash
+    @notes_total = @notes_number.values.sum
+
+    @first_try_accepted_tasks_number = @course.first_try_accepted_tasks_number_hash
+    @first_try_accepted_tasks_total = @first_try_accepted_tasks_number.values.sum
   end
 
   def index

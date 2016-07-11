@@ -12,6 +12,20 @@ class Course < ActiveRecord::Base
     }
   end
 
+  def notes_number_hash
+    Hash[
+      self.terms.zip Term.where(course_id: self.id).collect { |term| term.tasks.
+        collect { |task| task.notes } .flatten.count }
+    ]
+  end
+
+  def first_try_accepted_tasks_number_hash
+    Hash[
+      self.terms.zip Term.where(course_id: self.id).collect { |term| term.tasks.flatten.
+        select { |task| task.accepted? && task.notes.count == 0 } .count }
+    ]
+  end
+
   private
     def finish_terms
       self.terms.each { |term| term.update active: false }
