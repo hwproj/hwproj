@@ -5,6 +5,9 @@ class Course < ActiveRecord::Base
 
   after_save :finish_terms, unless: :active?
 
+  validates :name, presence: {message: 'Введите название.'}
+  validates :group_name, presence: {message: 'Введите номер группы'}
+
   def self.all_hash
     {
       active: Course.where(active: true).order(:group_name),

@@ -9,8 +9,12 @@ class CoursesController < ApplicationController
 
   def create
     @course = Course.create(course_params)
-    @course.terms.create()
-    redirect_to @course
+    if @course.valid?
+      @course.terms.create()
+      redirect_to @course
+    else
+      render "new"
+    end
   end
 
   def show
