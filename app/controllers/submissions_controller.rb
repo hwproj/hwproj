@@ -12,6 +12,8 @@ class SubmissionsController < ApplicationController
     @submission = Submission.create(submission_params)
     UserMailer.new_submission_notify(@submission).deliver
 
+    Notification.create(user: @submission.teacher, submission: @submission, event_type: :new_submission)
+    
     url = @submission.url unless @submission.url.blank?
 
     # GitHub pull request hooking

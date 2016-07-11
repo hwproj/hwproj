@@ -20,6 +20,13 @@ class TasksController < ApplicationController
   def update
   	@task.update(params.require(:task).permit(:status))
     @task.touch
+    if (params[:task][:status] == "accepted")
+      event_type = :task_accepted
+    else
+      event_type = :task_accepted_partially
+    end
+    Notification.create(task: @task, user: @task.user, event_type: event_type)
+    
     UserMailer.task_accepted_notify(@task).deliver if @task.accepted?
 
   	redirect_to @task

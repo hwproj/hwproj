@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151003210235) do
+ActiveRecord::Schema.define(version: 20160711065803) do
 
   create_table "awards", force: true do |t|
     t.integer  "job_id"
@@ -74,6 +74,19 @@ ActiveRecord::Schema.define(version: 20151003210235) do
     t.integer  "submission_id"
     t.text     "text",          limit: 255
   end
+
+  create_table "notifications", force: true do |t|
+    t.integer  "submission_id"
+    t.integer  "task_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "event_type"
+  end
+
+  add_index "notifications", ["submission_id"], name: "index_notifications_on_submission_id"
+  add_index "notifications", ["task_id"], name: "index_notifications_on_task_id"
+  add_index "notifications", ["user_id"], name: "index_notifications_on_user_id"
 
   create_table "problems", force: true do |t|
     t.datetime "created_at"

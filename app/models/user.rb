@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   enum gender: [:male, :female ]
 
   belongs_to :group
+  has_many :notifications, dependent: :destroy
 
   # when user is teacher
   has_many :courses, foreign_key: "teacher_id" ,dependent: :destroy
@@ -35,10 +36,6 @@ class User < ActiveRecord::Base
 
   def overdue_tasks
     tasks_left.select{ |task| task.created_at < Time.now - 2.weeks && task.student.term.active? }
-  end
-
-  def student_feed
-    (tasks.select{|task| task.accepted? } + submissions.select{ |submission| submission.notes.any? }).sort_by{ |entry| entry.updated_at }.reverse
   end
 
   def full_name

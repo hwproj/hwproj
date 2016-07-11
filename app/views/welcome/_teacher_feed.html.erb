@@ -1,31 +1,11 @@
 <div class="row">
   <div class="col-md-8">
     <h3>Новости</h3>
-    <% @submissions.each do |submission| %>
-      <h5>
-        <% user = submission.student.user %>
-        <%= "#{user.full_name} (#{submission.student.term.group_name} гр.)" %>
-        <%= "добавил#{"а" if user.female?} решение " %>
-
-        <%= link_to submission.task.name, submission.task %>
-
-        <% task = submission.task %>
-        <% notes = submission.task.notes %>
-        <% if task.accepted? %>
-          <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
-        <% elsif (notes.any? && notes.order(created_at: :asc).reverse.last.created_at > submission.created_at) || (task.accepted_partially? && task.updated_at > submission.created_at) %>
-          <span style="color:#f0ad4e" class="glyphicon glyphicon-exclamation-sign"></span>
-        <% end %>
-
-        <small>
-          <strong>
-            <%= "(v.#{submission.version})," %>
-            <%= submission.updated_at.strftime("%H:%M") %>
-          </strong>
-          <%= submission.updated_at.strftime("%d.%m.%y") if submission.updated_at.to_date != Time.now.to_date %>
-        </small>
-      </h5>
-    <% end %>
-    <%= will_paginate @submissions, :inner_window => 2, :outer_window => 1 %>
+    <% if @notifications.empty? %>
+      <h4>Нет новостей.</h4>
+    <% else %>
+    	<%= render @notifications %>   
+    <% end %> 
+    <%= will_paginate @notifications, :inner_window => 2, :outer_window => 1 %>
   </div>
 </div>
