@@ -48,8 +48,9 @@
             <% end %>
 
           <% end %>
-
-          <td class="separator"></td>
+          <% if assignment.problems.any? %>
+            <td class="separator"></td>
+          <% end %>
         <% end %>
       </tr>
     </thead>
@@ -98,19 +99,19 @@
               </td>
             <% end %>
           <% end %>
-
-          <td class="separator" align="center">
-            <% if job.awards.any? %>
-              <% case job.awards.last.rank when 1 %>
-                <span style="color:#EEC900" class="glyphicon glyphicon-certificate"></span>
-              <% when 2 %>
-                <span style="color:#B0A6A4" class="glyphicon glyphicon-certificate"></span>
-              <% when 3 %>
-                <span style="color:#D98719" class="glyphicon glyphicon-certificate"></span>
+          <% if job.assignment.problems.any? %>
+            <td class="separator" align="center">
+              <% if job.awards.any? %>
+                <% case job.awards.last.rank when 1 %>
+                  <span style="color:#EEC900" class="glyphicon glyphicon-certificate"></span>
+                <% when 2 %>
+                  <span style="color:#B0A6A4" class="glyphicon glyphicon-certificate"></span>
+                <% when 3 %>
+                  <span style="color:#D98719" class="glyphicon glyphicon-certificate"></span>
+                <% end %>
               <% end %>
-            <% end %>
-          </td>
-
+            </td>
+          <% end %>
         <% end %>
       </tr>
     <% end %>
