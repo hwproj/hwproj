@@ -52,6 +52,7 @@ class GithubController < ApplicationController
     def pull_request_event(pull_request)
       if pull_request['merged']
         submission = get_submission(pull_request)
+        Notificatoin.create(user: submission.student.user, task: submission.task, event_type: task_accepted)
         submission.task.accepted!
       end
     end
@@ -60,7 +61,11 @@ class GithubController < ApplicationController
       submission = get_submission(issue)
       submission.notes.create(text: comment['body'])
       task = submission.task
-      task.accepted_partially! unless task.accepted?
+      unless task.accepted?
+        task.accepted_partially!
+        Notificatoin.create(user: submission.student.user, task: task, event_type: added_comments)
+      end
+
     end
 
     def diff_comment_event(pull_request)
@@ -68,7 +73,10 @@ class GithubController < ApplicationController
       comments = JSON.parse(RestClient.get pull_request['review_comments_url'])
       submission.update comments_count: comments.count
       task = submission.task
-      task.accepted_partially! unless task.accepted?
+      unless task.accepted?
+        task.accepted_partially!
+        Notificatoin.create(user: submission.student.user, task: task, event_type: added_comments)
+      end
     end
 
     def get_submission(pull_request)
