@@ -35,7 +35,11 @@
       <% end %>
     <% else %>
       <span style="color:#f0ad4e" class="glyphicon glyphicon-exclamation-sign"></span>
-      К задаче <%= link_to task.name, task %> добавлены замечания
+      <% if notification.added_comments? %>
+        К задаче <%= link_to task.name, task %> добавлены замечания
+        <% else %>
+        Задача <%= link_to task.name, task %> принята частично
+      <% end %>
     <% end %>
     <small>
       <strong><%= task.updated_at.strftime("%H:%M") %></strong>

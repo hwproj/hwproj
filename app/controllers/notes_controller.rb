@@ -4,9 +4,13 @@ class NotesController < ApplicationController
 
   def create
     @note = Note.new(notes_params)
-    UserMailer.new_notes_notify(@note.submission).deliver unless @note.submission.notes.any?
+    submission = @note.submission
+    unless submission.notes.any?
+      Notification.create(task: submission.task, user: submission.student.user, event_type: :added_comments)
+      UserMailer.new_notes_notify(submission).deliver 
+    end
 
-    @note.submission.task.accepted_partially!
+    submission.task.accepted_partially!
     @note.save
   end
 
