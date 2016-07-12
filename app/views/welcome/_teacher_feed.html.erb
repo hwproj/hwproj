@@ -4,8 +4,10 @@
     <% if @notifications.empty? %>
       <h4>Нет новостей.</h4>
     <% else %>
-    	<%= render @notifications %>   
-    <% end %> 
-    <%= will_paginate @notifications, :inner_window => 2, :outer_window => 1 %>
+    	<div id = "notifications">
+        <%= render @notifications %>
+      </div>   
+      <%= will_paginate @notifications, :inner_window => 2, :outer_window => 1 %>
+    <% end %>
   </div>
 </div>
