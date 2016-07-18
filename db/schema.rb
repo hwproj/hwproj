@@ -76,15 +76,16 @@ ActiveRecord::Schema.define(version: 20160722152952) do
   end
 
   create_table "notifications", force: true do |t|
-    t.integer  "submission_id"
     t.integer  "task_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "event_type"
+    t.boolean  "is_read",          default: false
+    t.datetime "last_event_time"
+    t.datetime "first_event_time"
   end
 
-  add_index "notifications", ["submission_id"], name: "index_notifications_on_submission_id"
   add_index "notifications", ["task_id"], name: "index_notifications_on_task_id"
   add_index "notifications", ["user_id"], name: "index_notifications_on_user_id"
 

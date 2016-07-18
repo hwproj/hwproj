@@ -11,9 +11,8 @@ class SubmissionsController < ApplicationController
     @task.update status: :waiting if @task.not_submitted? || @task.waiting?
     @submission = Submission.create(submission_params)
     UserMailer.new_submission_notify(@submission).deliver
+    Notification.new_event(user: @submission.teacher, task: @submission.task, event_type: :new_submission, event_time: @submission.created_at)
 
-    Notification.create(user: @submission.teacher, submission: @submission, event_type: :new_submission)
-    
     url = @submission.url unless @submission.url.blank?
 
     # GitHub pull request hooking

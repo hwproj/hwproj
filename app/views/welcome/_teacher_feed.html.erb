@@ -1,4 +1,12 @@
 <div class="row">
+  <div class="col-md-2">
+    <h5>
+    <%= link_to "Показать все", root_path( flag: :show_all ) %>
+    </h5>
+    <h5>
+    <%= link_to "Скрыть прочитанные", root_path( flag: :hide_read ) %>
+    </h5>
+  </div>
   <div class="col-md-8">
     <h3>Новости</h3>
     <% if @notifications.empty? %>

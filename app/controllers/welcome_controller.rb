@@ -7,7 +7,7 @@ class WelcomeController < ApplicationController
       if current_user.student?
         @deadline_tasks = current_user.deadline_tasks
         @overdue_tasks = current_user.overdue_tasks
-        end
+      end
     end
   end
 end

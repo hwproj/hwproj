@@ -1,49 +1,40 @@
-<% if current_user.teacher? %>
-  <h5>
-    <% submission = notification.submission %>
-    <% user = submission.student.user %>
-    <%= "#{user.full_name} (#{submission.student.term.group_name} гр.)" %>
-    <%= "добавил#{"а" if user.female?} решение " %>
-
-    <% task = submission.task %>
-    <%= link_to task.name, task %>
-
-    <% notes = task.notes %>
-    <% if task.accepted? %>
-      <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
-    <% elsif (notes.any? && notes.order(created_at: :asc).reverse.last.created_at > submission.created_at) || (task.accepted_partially? && task.updated_at > submission.created_at) %>
-      <span style="color:#f0ad4e" class="glyphicon glyphicon-exclamation-sign"></span>
-    <% end %>
-
-    <small>
-      <strong>
-        <%= "(v.#{submission.version})," %>
-        <%= submission.updated_at.strftime("%H:%M") %>
-      </strong>
-      <%= submission.updated_at.strftime("%d.%m.%y") if submission.updated_at.to_date != Time.now.to_date %>
-    </small>
-  </h5>
-<% else %>
-  <h5>
+<% if @flag == "show_all" ||  (not notification.is_read) %>
+  <h5 id = <%= "notification#{notification.id}"%>>
+    <span><%= check_box_tag "#{notification.id}", 1, notification.is_read, title: "Отметить как прочитанное", data: { behavior: "update-is_read" } %></span>
     <% task = notification.task %>
-    <% if notification.task_accepted? %>
-      <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
-      <% if task.job.assignment.assignment_type == "homework" %>
-        Задача <%= link_to task.name, task %> принята
-      <% else %>
-        Тест: <%= link_to "задача #{task.problem.number}", task %> принята
+    <% if current_user.teacher? %>
+      <% user = task.student.user %>
+      <%= "#{user.full_name} (#{task.student.term.group_name} гр.)" %>
+      <%= "добавил#{"а" if user.female?} #{notification.versions_count} #{notification.new_versions_form} задачи " %>
+
+      <%= link_to task.name, task %>
+
+      <% notes = task.notes %>
+      <% if task.accepted? %>
+        <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
+      <% elsif (notes.any? && notes.order(created_at: :asc).reverse.last.created_at > notification.last_event_time) || (task.accepted_partially? && task.updated_at > notification.last_event_time) %>
+        <span style="color:#f0ad4e" class="glyphicon glyphicon-exclamation-sign"></span>
       <% end %>
     <% else %>
-      <span style="color:#f0ad4e" class="glyphicon glyphicon-exclamation-sign"></span>
-      <% if notification.added_comments? %>
-        К задаче <%= link_to task.name, task %> добавлены замечания
+      <% if notification.task_accepted? %>
+        <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
+        <% if task.job.assignment.assignment_type == "homework" %>
+          Задача <%= link_to task.name, task %> принята
         <% else %>
-        Задача <%= link_to task.name, task %> принята частично
+          Тест: <%= link_to "задача #{task.problem.number}", task %> принята
+        <% end %>
+      <% else %>
+        <span style="color:#f0ad4e" class="glyphicon glyphicon-exclamation-sign"></span>
+        <% if notification.added_comments? %>
+          К задаче <%= link_to task.name, task %> добавлено <%= notification.comments_count %> <%= notification.new_comments_form %>
+          <% else %>
+          Задача <%= link_to task.name, task %> принята частично
+        <% end %>
       <% end %>
-    <% end %>
+  <% end %>
     <small>
-      <strong><%= task.updated_at.strftime("%H:%M") %></strong>
-      <%= task.updated_at.strftime("%d.%m.%y") if task.updated_at.to_date != Time.now.to_date %>
+      <strong><%= notification.last_event_time.strftime("%H:%M") %></strong>
+      <%= notification.last_event_time.strftime("%d.%m.%y") if notification.last_event_time.to_date != Time.now.to_date %>
     </small>
   </h5>
 <% end %>
