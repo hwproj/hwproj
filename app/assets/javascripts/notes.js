@@ -5,4 +5,8 @@ jQuery(document).on('ready page:load',function() {
      		$('#new_note').submit();
      	}
      })
+
+     $('#new_note #note_text').on('input', function() {
+     	$('#submit_button').attr('disabled', $(this).val().trim() == '');
+     })
 });
