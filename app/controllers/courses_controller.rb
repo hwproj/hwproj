@@ -58,7 +58,7 @@ class CoursesController < ApplicationController
       if current_user.id == @teacher_id
         @teacher = true
       elsif current_user.student?
-        @student = @term.students.find_by user_id: current_user.id
+        @student = @terms.first.students.find_by user_id: current_user.id
       end
     end
 
