@@ -99,6 +99,7 @@ h3 {
   background-color: #eeeeee;
 }
 
+
 .glyphicon-remove {
   color: #d9534f;
 }
@@ -116,5 +117,18 @@ h3 {
 } 
 
 .glyphicon-ok-sign {
-  color: #5cb85c;
+    color: #5cb85c;
+}
+
+.read_notification {
+  opacity: 0.5;
+}
+
+.notifications {
+	margin-top: 15px;
+}
+
+.notifications table {
+    border-collapse: separate;
+    border-spacing: 10px 0;
 }

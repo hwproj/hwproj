@@ -52,8 +52,8 @@ class GithubController < ApplicationController
     def pull_request_event(pull_request)
       if pull_request['merged']
         submission = get_submission(pull_request)
-        Notificatoin.create(user: submission.student.user, task: submission.task, event_type: task_accepted)
         submission.task.accepted!
+        Notification.new_event(task: submission.task, user: submission.student.user, event_type: :task_accepted, event_time: submission.task.updated_at)
       end
     end
 
@@ -63,9 +63,8 @@ class GithubController < ApplicationController
       task = submission.task
       unless task.accepted?
         task.accepted_partially!
-        Notificatoin.create(user: submission.student.user, task: task, event_type: added_comments)
+        Notification.new_event(task: task, user: submission.student.user, event_type: :added_comments, event_time: task.updated_at)
       end
-
     end
 
     def diff_comment_event(pull_request)
@@ -75,7 +74,7 @@ class GithubController < ApplicationController
       task = submission.task
       unless task.accepted?
         task.accepted_partially!
-        Notificatoin.create(user: submission.student.user, task: task, event_type: added_comments)
+        Notification.new_event(task: task, user: submission.student.user, event_type: :added_comments, event_time: task.updated_at)
       end
     end
 

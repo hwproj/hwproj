@@ -1,0 +1,88 @@
+<div class="row">
+  <div class="col-md-6">
+    <h1>Новости</h1>
+    <% if browser.mobile? %>
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+          <%= @active_tab_name %>
+          <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <li><%= link_to 'Непрочитанные', section: :unread  %></li>
+          <li><%= link_to 'Показать все', section: :show_all  %></li>
+          <% if current_user.student? %>
+              <li><%= link_to 'Важное', section: :important  %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% else %>
+      <ul class="nav nav-tabs">
+        <% if @section == 'unread' %>
+          <li class = 'active'>
+        <% else %>
+          <li>
+        <% end %>
+        <%= link_to 'Непрочитанные', section: :unread  %>
+        </li>
+        <% if @section == 'show_all' %>
+          <li class = 'active'>
+        <% else %>
+          <li>
+        <% end %>
+        <%= link_to 'Показать все', section: :show_all  %>
+        </li>
+        <% if current_user.student? %>
+          <% if @section == 'important' %>
+            <li class = 'active'>
+          <% else %>
+            <li>
+          <% end %>
+            <%= link_to 'Важное', section: :important  %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+    <% if @section != 'important' %>
+      <div id = "notifications" class="notifications">
+        <% if (@section == 'unread' && current_user.has_unread_notifications) || (@section == 'show_all' && @notifications.any?) %>
+          <%= render @notifications %>
+        <% else %>
+          <%= Notification.no_notifications_message section: @section%>
+        <% end %>
+      </div>
+      <%= will_paginate @notifications, :inner_window => 2, :outer_window => 1 %>
+    <% else %>
+      <div class="notifications">
+        <% if @overdue_tasks.any? || @deadline_tasks.any? %>
+          <% if @deadline_tasks.any? %>
+            <div class="row">
+              <div class="col-md-12">
+                <h3>Дедлайн</h3>
+                <h5>Осталось меньше недели:</h5>
+                <% @deadline_tasks.each do |task| %>
+                    <h5> <span class="glyphicon glyphicon-info-sign"></span>
+                      <%= link_to task.name, task %>
+                    </h5>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+          <% if @overdue_tasks.any? %>
+            <div class="row">
+              <div class="col-md-12">
+                <h3>Просроченные задачи</h3>
+                <% @overdue_tasks.each do |task| %>
+                    <h5> <span class="glyphicon glyphicon-exclamation-sign"></span>
+                      <%= link_to task.name, task %>
+                      (<%= (Time.now.beginning_of_day - task.created_at.beginning_of_day - 2.weeks).to_i / 1.day + 1 %> дн.)
+                    </h5>
+                    <% end %>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <%= Notification.no_notifications_message section: @section %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
