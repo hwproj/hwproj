@@ -53,12 +53,13 @@ class CoursesController < ApplicationController
   def statistics
     @terms = @course.terms.reverse
     @teacher_id = @course.teacher_id
+    @statistics = true
 
     if signed_in?
       if current_user.id == @teacher_id
         @teacher = true
       elsif current_user.student?
-        @student = @terms.first.students.find_by user_id: current_user.id
+        @student = @terms.collect { |term| term.students.where(user_id: current_user.id) }.any?
       end
     end
 
