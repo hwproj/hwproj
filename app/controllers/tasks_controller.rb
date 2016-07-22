@@ -8,13 +8,18 @@ class TasksController < ApplicationController
       authenticate_user!
     end
 
-    if (not current_user.teacher?) && current_user.id != @task.student.user.id
+    course = @task.problem.homework.term.course
+
+    @is_teacher = current_user == course.teacher
+    @is_student = current_user == @task.user
+
+    if @is_student || @is_teacher || current_user.admin?
+      @student     = @task.student
+      @submissions = @task.submissions #reverse order
+      @submission  = @submissions.first
+    else
       raise ActionController::RoutingError.new('Not Found')
     end
-
-    @student = @task.student
-    @submissions = @task.submissions #reverse order
-    @submission = @submissions.first
   end
 
   def update

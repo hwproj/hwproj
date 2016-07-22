@@ -14,7 +14,7 @@
 </div>
 
 <div class="col-md-4">
-  <% if current_user.teacher? %>
+  <% if @is_teacher %>
   <h4 align="right">
     <%= @student.full_name %> <br>
     <%= mail_to @student.user.email, @student.user.email %>
@@ -24,7 +24,7 @@
 <div class="col-md-8">
   <div class="row"><div class="well well-small"> <%= markdown(@task.problem.text) %> </div></div>
 
-  <% if signed_in? && current_user.id == @task.user_id && @task.status != "accepted" %>
+  <% if @is_student && @task.status != "accepted" %>
     <%= link_to "Добавить решение", new_submission_path(problem_id: @task.problem_id, task_id: @task.id), class: "btn btn-primary" %>
     <br> <br>
   <% end %>
@@ -36,7 +36,7 @@
     </div>
   <% end %>
 
-  <% if signed_in? && current_user.teacher? %>
+  <% if @is_teacher %>
     <% if @task.accepted? %>
       <div class="btn-group">
         <%= link_to "Принято", '#', class: "btn btn-success", disabled: true %>
