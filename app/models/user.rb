@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   end
 
   def tasks_left
-    tasks.select{ |task| task.status != "accepted" }
+    tasks.joins(student: :term).where(terms: {active: true}).where.not(status: Task.statuses[:accepted])
   end
 
   def deadline_tasks
@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
   end
 
   def has_tasks
-    tasks.select{|task| task.status != "accepted"}.any?
+    self.tasks_left.any?
   end
 end
 
