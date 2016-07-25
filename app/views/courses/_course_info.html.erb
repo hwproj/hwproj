@@ -9,11 +9,8 @@
         <% end %>
       <% end %>
     </h3>
-
-    <% if @student && (not @student.approved?) %>
-      <div class="alert alert-warning" role="alert">
-        Преподаватель должен подтвердить Вашу запись.
-      </div>
+    <% if !@statistics %>
+      <%= render 'not_approved_label' %>
     <% end %>
   </div>
 
@@ -26,9 +23,8 @@
         <% end %>
       <% end %>
     </h3>
-
-    <% if signed_in? && current_user.student? %>
-        <%= link_to 'Записаться', students_path(student: {term_id: @term.id}), method: :post, class: 'btn btn-success' if @student.nil? %>
+    <% if !@statistics %>
+      <%= render 'enroll_button' %>
     <% end %>
   </div>
 </div>
