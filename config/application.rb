@@ -24,6 +24,9 @@ module Hwproj
       generate.assets false
       generate.view_specs false
     end
+    unless Rails.env.production?
+      ENV['HOST'] = 'hwproj.me'
+    end
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
