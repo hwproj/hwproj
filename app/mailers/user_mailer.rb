@@ -25,4 +25,10 @@ class UserMailer < ActionMailer::Base
     mail(to: @term.course.teacher.email, subject: "Новый студент")
   end
 
+  def invitation(token, email)
+    @token = token
+    @email = email
+    mail(to: email, subject: "Приглашение.")
+  end
+
 end

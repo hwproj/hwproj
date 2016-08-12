@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :students
   resources :homeworks
 
+  resources :invitations, only: [ :new, :create, :edit, :update ]
   resources :tasks, only: [ :show, :update ]
   resources :submissions, only: [ :new, :create, :index, :update ]
   resources :problems, only: [ :show ]
