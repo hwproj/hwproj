@@ -19,7 +19,7 @@
           <h3>Дедлайн</h3>
           <h5>Осталось меньше недели:</h5>
             <% @deadline_tasks.each do |task| %>
-              <h5> <span style="color:#f0ad4e" class="glyphicon glyphicon-info-sign"></span>
+              <h5> <span class="glyphicon glyphicon-info-sign"></span>
                 <%= link_to task.name, task %>
 
               </h5>
@@ -33,7 +33,7 @@
         <div class="col-md-12">
           <h3>Просроченные задачи</h3>
           <% @overdue_tasks.each do |task| %>
-            <h5> <span style="color:#d9534f" class="glyphicon glyphicon-exclamation-sign"></span>
+            <h5> <span class="glyphicon glyphicon-exclamation-sign"></span>
                 <%= link_to task.name, task %>
                 (<%= (Time.now.beginning_of_day - task.created_at.beginning_of_day - 2.weeks).to_i / 1.day + 1 %> дн.)
             </h5>

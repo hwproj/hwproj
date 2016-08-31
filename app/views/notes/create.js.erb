@@ -4,5 +4,5 @@ $('#new_note #note_text').val('');
 $('#new_note #submit_button').attr('disabled', true);
 
 <% if @note.submission.task.notes.count == 1 %>
-  $('#task_title #text').prepend('<span style="color:#f0ad4e" class="glyphicon glyphicon-exclamation-sign"></span>');
+  $('#task_title #text').prepend('<span class="glyphicon glyphicon-exclamation-sign"></span>');
 <% end %>

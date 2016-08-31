@@ -98,3 +98,23 @@ h3 {
 .separator {
   background-color: #eeeeee;
 }
+
+.glyphicon-remove {
+  color: #d9534f;
+}
+
+.glyphicon-ok {
+  color: #5cb85c;
+}
+
+.glyphicon-exclamation-sign {
+  color: #f0ad4e;
+}
+
+.glyphicon-info-sign {
+  color: #f0ad4e;
+} 
+
+.glyphicon-ok-sign {
+  color: #5cb85c;
+}
