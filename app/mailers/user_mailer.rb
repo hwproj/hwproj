@@ -28,7 +28,7 @@ class UserMailer < ActionMailer::Base
   def invitation(token, email)
     @token = token
     @email = email
-    mail(to: email, subject: "Приглашение.")
+    mail(to: email, subject: "Приглашение")
   end
 
 end

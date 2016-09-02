@@ -1,6 +1,6 @@
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3 id="myModalLabel">Приглашение</h3>
+    <h3 id="myModalLabel">Пригласить преподавателя</h3>
 </div>
 
 <%= simple_form_for @invitation, remote: true do |f| %>
@@ -22,7 +22,7 @@
 
   <div class="modal-footer">
     <div class="form-actions">
-      <%= f.button :submit, "Пригласить", class: "btn btn-primary" %>
+      <%= f.button :submit, "Отправить приглашение", class: "btn btn-primary" %>
       <button class="btn" data-dismiss="modal" aria-hidden="true">Закрыть</button>
     </div>
   </div>
