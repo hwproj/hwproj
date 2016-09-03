@@ -22,7 +22,7 @@ class InvitationsController < ApplicationController
   end
 
   def edit
-    @invitation = Invitation.find_by(email: params[:email], activated: false)
+    @invitation = Invitation.find_by(email: params[:email], active: true)
 
     unless (@invitation && BCrypt::Password.new(@invitation.digest).is_password?(params[:id]))
       raise ActionController::RoutingError.new 'Not Found'
@@ -40,10 +40,10 @@ class InvitationsController < ApplicationController
   def update
     @user = User.new(sign_up_params)
     @user.user_type = :teacher
-    invitation = Invitation.find_by!(email: params[:email], activated: false)
+    invitation = Invitation.find_by!(email: params[:email], active: true)
 
     if @user.save
-      invitation.update(activated: true)
+      invitation.update(active: false)
       sign_in(:user, @user)
       redirect_to root_path
     else

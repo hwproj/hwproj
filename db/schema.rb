@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160828142126) do
+ActiveRecord::Schema.define(version: 20160903073618) do
 
   create_table "awards", force: true do |t|
     t.integer  "job_id"
@@ -45,9 +45,9 @@ ActiveRecord::Schema.define(version: 20160828142126) do
   add_index "homeworks", ["term_id", "id"], name: "index_homeworks_on_term_id_and_id"
 
   create_table "invitations", force: true do |t|
-    t.string   "email",                      null: false
-    t.string   "digest",                     null: false
-    t.boolean  "activated",  default: false, null: false
+    t.string   "email"
+    t.string   "digest"
+    t.boolean  "active",     default: true
     t.datetime "created_at"
     t.datetime "updated_at"
   end
