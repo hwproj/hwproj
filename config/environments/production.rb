@@ -71,14 +71,15 @@ Rails.application.configure do
   # Setup for production - deliveries, no errors raised
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default :charset => "utf-8"
 
   config.action_mailer.smtp_settings = {
-    :address   => "smtp.mandrillapp.com",
+    :domain    => ENV['HOST'],
+    :address   => 'smtp.sendgrid.net',
     :port      => 587,
-    :user_name => ENV["MANDRILL_USERNAME"],
-    :password  => ENV["MANDRILL_API_KEY"]
+    :user_name => 'apikey',
+    :password  => ENV["SENDGRID_API_KEY"]
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
