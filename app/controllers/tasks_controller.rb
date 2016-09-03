@@ -20,6 +20,11 @@ class TasksController < ApplicationController
     else
       raise ActionController::RoutingError.new('Not Found')
     end
+    if @is_teacher && @submission
+      Notification.make_read(user: @submission.teacher, task: @task)
+    elsif @is_student
+      Notification.make_read(user: @student.user, task: @task)
+    end
   end
 
   def update
@@ -30,7 +35,7 @@ class TasksController < ApplicationController
     else
       event_type = :task_accepted_partially
     end
-    Notification.create(task: @task, user: @task.user, event_type: event_type)
+    Notification.new_event(task: @task, user: @task.user, event_type: event_type, event_time: @task.updated_at)
     
     UserMailer.task_accepted_notify(@task).deliver if @task.accepted?
 

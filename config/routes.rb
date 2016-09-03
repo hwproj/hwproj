@@ -23,4 +23,5 @@ Rails.application.routes.draw do
   resources :problems, only: [ :show ]
   resources :notes
   resources :links
+  resources :notifications, only: [:update]
 end

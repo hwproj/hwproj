@@ -45,5 +45,9 @@ class User < ActiveRecord::Base
   def has_tasks
     self.tasks_left.any?
   end
+
+  def has_unread_notifications
+    notifications.where(is_read: false).any?
+  end
 end
 

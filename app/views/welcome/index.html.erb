@@ -1,9 +1,5 @@
 <% if signed_in? %>
-  <% if current_user.teacher? %>
-    <%= render 'teacher_feed' %>
-  <% else %>
-    <%= render 'student_feed' %>
-  <% end %>
+    <%= render 'feed' %>
 <% else %>
-<%= render 'guest_feed' %>
+    <%= render 'guest' %>
 <% end %>

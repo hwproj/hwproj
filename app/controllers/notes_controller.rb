@@ -6,12 +6,12 @@ class NotesController < ApplicationController
     @note = Note.new(notes_params)
     submission = @note.submission
     unless submission.notes.any?
-      Notification.create(task: submission.task, user: submission.student.user, event_type: :added_comments)
       UserMailer.new_notes_notify(submission).deliver 
     end
 
     submission.task.accepted_partially!
     @note.save
+    Notification.new_event(task: submission.task, user: submission.student.user, event_type: :added_comments, event_time: @note.created_at)
   end
 
   def update
@@ -21,7 +21,7 @@ class NotesController < ApplicationController
   def destroy
     @task = @note.submission.task
     @note.destroy
-
+    Notification.comment_deleted(task: @task, user: @task.user)
     unless @task.notes.any?
       @task.waiting!
     end

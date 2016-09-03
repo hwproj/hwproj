@@ -8,7 +8,6 @@ class Submission < ActiveRecord::Base
   	belongs_to :teacher, class_name: 'User'
 
 	has_many :notes, dependent: :destroy
-	has_many :notifications, dependent: :destroy
 
 	mount_uploader :file, SubmissionUploader
 
