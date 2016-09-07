@@ -1,0 +1,40 @@
+<%= render 'course_info' %>
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs" role="tablist">
+      <% @terms.each do |term| %>
+        <li><%= link_to "#{term.number} #{browser.mobile? ? "сем." : "семестр"}", show_term_path(@course.id, term.number), remote: true %></li>
+      <% end %>
+      <li> <%= link_to "Добавить семестр", add_term_path(@course.id), method: :put if @teacher %> </li>
+      <li class="active pull-right"> <%= link_to "Статистика", show_statistics_path, remote: true %> </li>
+    </ul>
+  </div>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <td align="center"><strong> <%= "Статистика" %> </strong></td>
+        <td class="separator"></td>
+
+        <td align="center"><strong> <%= "Всего" %> </strong></td>
+
+        <% @terms.each do |term| %>
+          <td align="center"><strong> <%= "#{term.number} семестр" %> </strong></td>
+        <% end %>
+      </tr>
+    </thead>
+
+  <%= render 'statistics_row', row_name: "Комментариев к задачам", data: @notes %>
+  <%= render 'statistics_row', row_name: "Сдано задач с первого раза", 
+                                   data: @first_try_accepted_tasks %>
+  <%= render 'statistics_row', row_name: "Сдано задач", data: @accepted_tasks %>
+  <%= render 'statistics_row', row_name: "Попыток сдать задачи", data: @tries_to_pass_task %>
+  <%= render 'statistics_row', row_name: "Максимум попыток сдать задачу", 
+                                   data: @max_tries_to_pass_task %>
+  <%= render 'statistics_row', row_name: "Максимум попыток сдать задачу среди всех студентов",
+                               data: @max_tries_to_pass_problem %>
+  </table>
+</div>

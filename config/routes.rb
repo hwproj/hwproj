@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   get 'courses/:id/terms/:term_number', to: 'courses#show', as: "show_term"
   put 'courses/:id/terms/new', to: 'courses#add_term', as: "add_term"
+  delete 'courses/:id/terms/remove', to: 'courses#remove_last_term', as: "remove_last_term"
   get 'courses/:id/statistics', to: 'courses#statistics', as: "show_statistics"
 
   # GitHub Authorization callback

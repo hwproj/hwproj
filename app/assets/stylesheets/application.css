@@ -92,13 +92,12 @@ h3 {
 }
 
 .task-with-submissions {
-  background-color: #fcf8e3;
+  background-color: #eee8aa;
 }
 
 .separator {
   background-color: #eeeeee;
 }
-
 
 .glyphicon-remove {
   color: #d9534f;
@@ -131,4 +130,8 @@ h3 {
 .notifications table {
     border-collapse: separate;
     border-spacing: 10px 0;
+}
+
+.destroy-link {
+  color: #f33731;
 }
