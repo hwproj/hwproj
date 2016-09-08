@@ -7,7 +7,7 @@
           <%= @active_tab_name %>
           <span class="caret"></span></button>
         <ul class="dropdown-menu">
-          <li><%= link_to 'Непрочитанные', section: :unread  %></li>
+          <li><%= link_to "Непрочитанные (#{current_user.unread_notifications_count})", section: :unread  %></li>
           <li><%= link_to 'Показать все', section: :show_all  %></li>
           <% if current_user.student? %>
               <li><%= link_to 'Важное', section: :important  %></li>
@@ -21,7 +21,7 @@
         <% else %>
           <li>
         <% end %>
-        <%= link_to 'Непрочитанные', section: :unread  %>
+        <%= link_to "Непрочитанные (#{current_user.unread_notifications_count})", section: :unread  %>
         </li>
         <% if @section == 'show_all' %>
           <li class = 'active'>

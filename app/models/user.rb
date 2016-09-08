@@ -50,5 +50,10 @@ class User < ActiveRecord::Base
   def has_unread_notifications
     notifications.where(is_read: false).any?
   end
+
+  def unread_notifications_count
+    notifications.where(is_read: false).count
+  end
+
 end
 
