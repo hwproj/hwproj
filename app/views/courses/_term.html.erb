@@ -8,4 +8,8 @@
   <%= render 'homeworks' %>
 <% else %>
   <h3>Здесь пока ничего нет.</h3>
+  <% if @teacher && @term.active? && @terms.length > 1%>
+    Возможно, семестр был создан по ошибке и вы хотите
+    <b><%= link_to "удалить его", remove_last_term_path(@course.id), method: :delete, remote: true, class: "destroy-link" %></b>.
+  <% end%>
 <% end %>

@@ -1,6 +1,7 @@
 class Term < ActiveRecord::Base
   before_create :set_number
   before_create :finish_previous
+  after_destroy :activate_previous
 
   belongs_to :course
 
@@ -33,5 +34,9 @@ class Term < ActiveRecord::Base
 
     def finish_previous
       course.terms.last.update active: false if course.terms.any?
+    end
+
+    def activate_previous
+      course.terms.last.update active: true if course.terms.any?
     end
 end
