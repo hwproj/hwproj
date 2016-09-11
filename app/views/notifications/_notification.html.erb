@@ -1,58 +1,56 @@
-<% if @section == "show_all" ||  (not notification.is_read) %>
-  <div id = <%= "notification#{notification.id}"%> class=<%= 'read_notification' if notification.is_read%>>
-  <% task = notification.task %>
-  <% if current_user.teacher? %>
-    <% user = task.student.user %>
+<div id = <%= "notification#{notification.id}"%> class=<%= 'read_notification' if notification.is_read%>>
+<% task = notification.task %>
+<% if current_user.teacher? %>
+  <% user = task.student.user %>
+    <table>
+    <tr>
+      <td><%= gravatar_for user, size: 50 %></td>
+      <td>
       <table>
-      <tr>
-        <td><%= gravatar_for user, size: 50 %></td>
-        <td>
-        <table>
-          <tr>
-            <td><%= user.full_name %>
-              <small>
-                <strong><%= notification.last_event_time.strftime("%H:%M") %></strong>
-                <%= notification.last_event_time.strftime("%d.%m.%y") if notification.last_event_time.to_date != Time.now.to_date %>
-              </small></td>
-          </tr>
-          <tr>
-            <td>
-              <%= notification.versions_count%>
-              <%= notification.new_versions_form%>
-              задачи
-              <%= link_to task.name, task%>
-            </td>
-          </tr>
-        </table>
-        </td>
-        <td>
-          <span><%= check_box_tag "#{notification.id}", 1, notification.is_read, title: "Отметить как прочитанное", data: { behavior: "update-is_read" } %></span>
-        </td>
-      </tr>
+        <tr>
+          <td><%= user.full_name %>
+            <small>
+              <strong><%= notification.last_event_time.strftime("%H:%M") %></strong>
+              <%= notification.last_event_time.strftime("%d.%m.%y") if notification.last_event_time.to_date != Time.now.to_date %>
+            </small></td>
+        </tr>
+        <tr>
+          <td>
+            <%= notification.versions_count%>
+            <%= notification.new_versions_form%>
+            задачи
+            <%= link_to task.name, task%>
+          </td>
+        </tr>
       </table>
+      </td>
+      <td>
+        <span><%= check_box_tag "#{notification.id}", 1, notification.is_read, title: "Отметить как прочитанное", data: { behavior: "update-is_read" } %></span>
+      </td>
+    </tr>
+    </table>
 
-  <% else %>
-    <span><%= check_box_tag "#{notification.id}", 1, notification.is_read, title: "Отметить как прочитанное", data: { behavior: "update-is_read" } %></span>
-      <% if notification.task_accepted? %>
-        <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
-        <% if task.job.assignment.assignment_type == "homework" %>
-          Задача <%= link_to task.name, task %> принята
-        <% else %>
-          Тест: <%= link_to "задача #{task.problem.number}", task %> принята
-        <% end %>
+<% else %>
+  <span><%= check_box_tag "#{notification.id}", 1, notification.is_read, title: "Отметить как прочитанное", data: { behavior: "update-is_read" } %></span>
+    <% if notification.task_accepted? %>
+      <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
+      <% if task.job.assignment.assignment_type == "homework" %>
+        Задача <%= link_to task.name, task %> принята
       <% else %>
-        <span style="color:#f0ad4e" class="glyphicon glyphicon-exclamation-sign"></span>
-        <% if notification.added_comments? %>
-          К задаче <%= link_to task.name, task %> добавлено <%= notification.comments_count %> <%= notification.new_comments_form %>
-        <% else %>
-          Задача <%= link_to task.name, task %> принята частично
-        <% end %>
+        Тест: <%= link_to "задача #{task.problem.number}", task %> принята
       <% end %>
-      <small>
-        <strong><%= notification.last_event_time.strftime("%H:%M") %></strong>
-        <%= notification.last_event_time.strftime("%d.%m.%y") if notification.last_event_time.to_date != Time.now.to_date %>
-      </small>
-  <% end %>
-  </div>
-  <hr>
+    <% else %>
+      <span style="color:#f0ad4e" class="glyphicon glyphicon-exclamation-sign"></span>
+      <% if notification.added_comments? %>
+        К задаче <%= link_to task.name, task %> добавлено <%= notification.comments_count %> <%= notification.new_comments_form %>
+      <% else %>
+        Задача <%= link_to task.name, task %> принята частично
+      <% end %>
+    <% end %>
+    <small>
+      <strong><%= notification.last_event_time.strftime("%H:%M") %></strong>
+      <%= notification.last_event_time.strftime("%d.%m.%y") if notification.last_event_time.to_date != Time.now.to_date %>
+    </small>
 <% end %>
+</div>
+<hr>
