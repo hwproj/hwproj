@@ -85,9 +85,7 @@ class CoursesController < ApplicationController
     @terms = @course.terms.reverse
 
     term_data
-
     respond_to do |format|
-      format.html { redirect_to :back }
       format.js { render :show }
     end
   end
@@ -100,7 +98,6 @@ class CoursesController < ApplicationController
     term_data
 
     respond_to do |format|
-      format.html { redirect_to :show }
       format.js { render :show }
     end
   end
