@@ -27,7 +27,7 @@ class TasksController < ApplicationController
       Notification.make_read(user: @student.user, task: @task)
     end
     
-    @is_chat_shown = params[:chat] == 'on'
+    @is_chat_shown = @task.messages.count > 0
     @chat_button_title = @is_chat_shown ? 'Скрыть чат' : 'Показать чат'
   end
 

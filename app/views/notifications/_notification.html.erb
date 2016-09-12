@@ -17,7 +17,7 @@
         <tr>
           <td>
             <% if notification.added_message? %>
-              К задаче <%= link_to task.name, task_path(task, chat: 'on') %>
+              К задаче <%= link_to task.name, task %>
               добавлено
               <%= notification.messages_count %>
               <%= notification.new_messages_form %>
@@ -51,7 +51,7 @@
       <% case notification.event_type when 'added_comments' %>
         К задаче <%= link_to task.name, task %> добавлено <%= notification.comments_count %> <%= notification.new_comments_form %>
       <% when 'added_message' %>
-        К задаче <%= link_to task.name, task_path(task, chat: 'on') %> добавлено <%= notification.messages_count %> <%= notification.new_messages_form %>
+        К задаче <%= link_to task.name, task %> добавлено <%= notification.messages_count %> <%= notification.new_messages_form %>
       <% else %>
         Задача <%= link_to task.name, task %> принята частично
       <% end %>
