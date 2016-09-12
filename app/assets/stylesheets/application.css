@@ -132,12 +132,7 @@ h3 {
     border-spacing: 10px 0;
 }
 
-#my_message {
-  background-color: #daf2d8;
-  text-align: right;
-}
-
-#collocutors_message {
-  background-color: #d6edfa;
-  text-align: left;
+#chat-table {
+  border-spacing: 8px;
+  border-collapse: separate;
 }

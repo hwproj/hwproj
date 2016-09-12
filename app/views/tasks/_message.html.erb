@@ -1,5 +1,11 @@
-<% message_id = current_user.id != message.user_id ? "collocutors_message" : "my_message" %>
-<% full_name_class = "pull-right" if current_user.id == message.user_id %>
-<strong class=<%= full_name_class %> ><%= message.user.full_name %></strong>
-<small><%= message.created_at.strftime("%H:%M %d.%m.%y") %></small>
-<p id=<%= message_id %> ><%= message.text %></p>
+<tr>
+  <td valign="top" ><%= gravatar_for message.user, size: 35 %></td>
+  <td>
+    <table>
+      <tr><strong><%= message.user.full_name %> </strong>
+      <small><%= message.created_at.strftime("%H:%M") %>
+        <%= message.created_at.strftime("%d.%m.%y") if message.created_at.to_date != Time.now.to_date %></small></tr>
+      <tr><p><%= message.text %></p></tr>
+    </table>
+  </td>
+</tr>

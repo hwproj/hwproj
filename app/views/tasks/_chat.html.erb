@@ -1,7 +1,7 @@
 <h2> Обсуждение </h2>
 
-<div id="chat">
-  <%= render partial: 'message', collection: @task.messages %>              
+<div>
+  <table id="chat-table"><%= render partial: 'message', collection: @task.messages %></table>
 </div>
 
 <%= render 'new_message_form' %>
