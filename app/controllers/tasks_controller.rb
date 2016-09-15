@@ -8,9 +8,9 @@ class TasksController < ApplicationController
       authenticate_user!
     end
 
-    course = @task.problem.homework.term.course
+    @course = @task.problem.homework.term.course
 
-    @is_teacher = current_user == course.teacher
+    @is_teacher = current_user == @course.teacher
     @is_student = current_user == @task.user
 
     if @is_student || @is_teacher || current_user.admin?
