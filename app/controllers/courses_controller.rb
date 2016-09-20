@@ -1,7 +1,7 @@
 class CoursesController < ApplicationController
   include Markdown
   helper_method :markdown
-  before_action :set_course, only: [ :edit, :show, :update, :add_term, :statistics ]
+  before_action :set_course, only: [ :edit, :show, :update, :add_term, :delete_term, :statistics ]
 
   def new
     @course = Course.new
@@ -86,6 +86,11 @@ class CoursesController < ApplicationController
     @course.terms.create()
 
     redirect_to :back
+  end
+
+  def delete_term
+    @course.terms.last.destroy
+    redirect_to @course
   end
 
   private

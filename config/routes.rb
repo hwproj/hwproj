@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get 'courses/:id/terms/:term_number', to: 'courses#show', as: "show_term"
   put 'courses/:id/terms/new', to: 'courses#add_term', as: "add_term"
   get 'courses/:id/statistics', to: 'courses#statistics', as: "show_statistics"
-
+  put 'courses/:id/terms/delete_last', to: 'courses#delete_term', as: "delete_term"
   # GitHub Authorization callback
   get 'github/callback'
   # Webhooks url
