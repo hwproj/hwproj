@@ -4,7 +4,7 @@ This tutorial covers basic commands for cloning and running HwProj on a Linux/ma
 
 ### Install Ruby and Bundler
 
-Install Ruby with [ruby-install](https://github.com/postmodern/ruby-install), it's easier to work with than with RVM. We curretly use Ruby 2.2.3.
+Install Ruby with [ruby-install](https://github.com/postmodern/ruby-install), it's easier to work with than with RVM. We curretly use Ruby 2.2.3. [chruby](https://github.com/postmodern/chruby) switches Ruby versions automatically when `.ruby-version` file is present.
 
 Run `gem install bundler`. Bundler is used to install all needed gems (Ruby libraries) for a project.
 
