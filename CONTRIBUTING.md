@@ -1,47 +1,46 @@
 # Contributing
 
-This tutorial covers basic commands for cloning and running HwProj in a shell on Linux or OS X. It was not tested to run in a Windows envirounment which is very different.
+This tutorial covers basic commands for cloning and running HwProj on a Linux/macOS machine. Windows environment may differ and is not covered here.
 
-### Install required tools
+### Install Ruby and Bundler
+
+Install Ruby with [ruby-install](https://github.com/postmodern/ruby-install), it's easier to work with than with RVM. We curretly use Ruby 2.2.3.
+
+Run `gem install bundler`. Bundler is used to install all needed gems (Ruby libraries) for a project.
+
+Run `echo "gem: --no-document" >> ~/.gemrc` if you want to skip local documentation install which can speed up gems installation.
+
+### Project setup
+
+Fork the [repo](github.com/auduchinok/hwproj) on GitHub.
 
 ```sh
-# Ruby and Ruby Version Manager
-\curl -L https://get.rvm.io | bash -s stable --ruby
-
-# Ruby gems manager
-gem install bundler
-```
-
-### Get and setup HwProj
-
-```sh
-# fork the repo on GitHub
-# clone it using command like the one below
-# git clone git@github.com:auduchinok/hwproj.git 
+git clone git@github.com:auduchinok/hwproj.git
+# and add a git remote for your fork
 
 # change the working directory to the project
 cd hwproj
 
-# install needed ruby gems specified in Gemfile
+# install gems specified in the project Gemfile
 bundle install --without production
 
-# set up a database
+# set up a new database
 rake db:migrate
 ```
 
-### Running (still in the project directory)
+### Running a local server
 
 ```sh
 # launch a local server
 rails s
 
-# launch ruby console with project loaded
+# launch ruby console with loaded app
 rails c
 ```
 
-### Console
+### Rails console
 
-```sh
+```ruby
 # find last user and show the name
 User.last.name
 
