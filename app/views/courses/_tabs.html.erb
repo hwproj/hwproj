@@ -1,0 +1,18 @@
+<ul class="nav nav-tabs" role="tablist">
+  <% @terms.each do |term| %>
+    <% if !@statistics && term.id == @term.id %>
+      <li class="active">
+    <% else %>
+       <li>
+    <% end %>
+    <%= link_to "#{term.number} #{browser.mobile? ? "сем." : "семестр"}", show_term_path(@course.id, term.number) %>
+    </li>
+  <% end %>
+  <li> <%= link_to "Добавить семестр", add_term_path(@course.id), method: :put if @teacher %> </li>
+  <% if @statistics %>
+    <li class="pull-right active">
+  <% else %>
+    <li class="pull-right">
+  <% end %>
+  <%= link_to "Статистика", show_statistics_path %> </li>
+</ul>

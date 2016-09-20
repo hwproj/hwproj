@@ -2,13 +2,7 @@
 
 <div class="row">
   <div class="col-md-12">
-    <ul class="nav nav-tabs" role="tablist">
-      <% @terms.each do |term| %>
-        <li><%= link_to "#{term.number} #{browser.mobile? ? "сем." : "семестр"}", show_term_path(@course.id, term.number) %></li>
-      <% end %>
-      <li> <%= link_to "Добавить семестр", add_term_path(@course.id), method: :put if @teacher %> </li>
-      <li class="active pull-right"> <%= link_to "Статистика", show_statistics_path %> </li>
-    </ul>
+    <%= render 'tabs' %>
   </div>
 </div>
 
