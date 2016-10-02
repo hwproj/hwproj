@@ -23,7 +23,7 @@ class NotesController < ApplicationController
     @note.destroy
     Notification.comment_deleted(task: @task, user: @task.user)
     unless @task.notes.any?
-      @task.waiting!
+      @task.new_submission!
     end
   end
 

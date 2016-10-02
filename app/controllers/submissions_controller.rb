@@ -8,7 +8,8 @@ class SubmissionsController < ApplicationController
     redirect_to new_submission_path if params[:submission][:task_id].nil?
 
     @task = Task.find(params[:submission][:task_id])
-    @task.update status: :waiting if @task.not_submitted? || @task.waiting?
+    @task.update status: :new_submission if @task.not_submitted? || @task.new_submission?
+    @task.update status: :new_submission_with_notes if @task.accepted_partially?
     @submission = Submission.create(submission_params)
     UserMailer.new_submission_notify(@submission).deliver
     Notification.new_event(user: @submission.teacher, task: @submission.task, event_type: :new_submission, event_time: @submission.created_at)

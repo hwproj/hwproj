@@ -1,5 +1,5 @@
 $('#note_<%= @note.id %>').remove();
 
-<% if @task.waiting? %>
+<% if @task.new_submission? %>
   $('#task_title #text').replaceWith('<div id="text"> Задача <%= j @task.name %></div>')
 <% end %>

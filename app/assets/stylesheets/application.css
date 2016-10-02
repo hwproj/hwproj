@@ -88,11 +88,15 @@ h3 {
 }
 
 .task-with-notes {
-	background-color: #ffcb6c;
+    background-color: #ffc346;
 }
 
 .task-with-submissions {
-  background-color: #fcf8e3;
+    background-color: #d0fcc7;
+}
+
+.task-with-new-submissions-and-notes {
+    background-color: #ffefa9;
 }
 
 .separator {
@@ -113,7 +117,7 @@ h3 {
 
 .glyphicon-info-sign {
   color: #f0ad4e;
-} 
+}
 
 .glyphicon-ok-sign {
   color: #5cb85c;
