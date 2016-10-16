@@ -1,13 +1,18 @@
+<% unread_notifications = current_user.unread_notifications_count %>
+<%= javascript_tag do %>
+  var unread_count = <%= unread_notifications %>
+<% end %>
 <div class="row">
   <div class="col-md-6">
     <h1>Новости</h1>
+    <% unread_text = "Непрочитанные#{" (#{unread_notifications})" if (unread_notifications > 0)}" %>
     <% if browser.mobile? %>
       <div class="dropdown">
         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
           <%= @active_tab_name %>
           <span class="caret"></span></button>
         <ul class="dropdown-menu">
-          <li><%= link_to "Непрочитанные (#{current_user.unread_notifications_count})", section: :unread  %></li>
+          <li><%= link_to unread_text,  { section: :unread }, id: :unread  %></li>
           <li><%= link_to 'Показать все', section: :show_all  %></li>
           <% if current_user.student? %>
               <li><%= link_to 'Важное', section: :important  %></li>
@@ -21,7 +26,7 @@
         <% else %>
           <li>
         <% end %>
-        <%= link_to "Непрочитанные (#{current_user.unread_notifications_count})", section: :unread  %>
+        <%= link_to unread_text, { section: :unread }, id: :unread  %>
         </li>
         <% if @section == 'show_all' %>
           <li class = 'active'>
