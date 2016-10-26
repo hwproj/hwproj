@@ -20,7 +20,7 @@ class StudentsController < ApplicationController
   end
 
   def update
-    @student.update(params.require(:student).permit(:approved))
+    @student.update(params.require(:student).permit(:approved, :active))
 
     redirect_to @student.term.course
   end

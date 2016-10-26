@@ -1,3 +1,7 @@
 <% if signed_in? && current_user.student? %>
-  <%= link_to 'Записаться', students_path(student: {term_id: @term.id}), method: :post, class: 'btn btn-success' if @student.nil? %>
+  <% if @student.nil? %>
+    <%= link_to 'Записаться', students_path(student: {term_id: @term.id}), method: :post, class: 'btn btn-success' %>
+  <% else %>
+    <%= link_to 'Записаться', student_path(@student, student: { active: true }), method: :put, class: 'btn btn-success' %>
+  <% end %>
 <% end %>

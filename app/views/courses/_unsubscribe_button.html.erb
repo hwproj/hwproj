@@ -1,0 +1,5 @@
+<% if signed_in? && current_user.student? && @student.approved? %>
+  <%= link_to student_path(@student, student: { approved: false, active: false }), method: :put, data: { confirm: "Вы уверены, что хотите покинуть курс?" } do %>
+    <span class="btn btn-default">Отписаться</span>
+  <% end %>
+<% end %>

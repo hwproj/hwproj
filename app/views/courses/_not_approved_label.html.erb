@@ -1,4 +1,4 @@
-<% if @student && (not @student.approved?) %>
+<% if @student && @student.active? && (not @student.approved?) %>
       <div class="alert alert-warning" role="alert">
         Преподаватель должен подтвердить Вашу запись.
       </div>
