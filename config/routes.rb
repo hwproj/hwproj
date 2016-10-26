@@ -27,4 +27,5 @@ Rails.application.routes.draw do
   resources :notes
   resources :links
   resources :notifications, only: [:update]
+  resources :welcome
 end
