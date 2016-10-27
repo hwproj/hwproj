@@ -33,7 +33,8 @@
                 <li> <%= link_to "Добавить группу", new_course_path %> </li>
                 <li> <%= link_to "Все группы", courses_path %> </li>
                 <li class="divider"></li>
-                <li> <%= link_to "Пригласить преподавателя", new_invitation_path,  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'} %> </li>
+                <li > <%= link_to "Пригласить преподавателя", new_invitation_path, oncontextmenu: "return false",
+                                  remote: true, 'data-toggle': "modal", 'data-target': '#modal-window' %> </li>
               </ul>
             </li>
 
