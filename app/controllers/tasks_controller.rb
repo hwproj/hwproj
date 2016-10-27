@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   include Markdown
-  helper_method :markdown
+  include FormHintHelper
+  helper_method :markdown, :form_hint_for
   before_action :set_task, only: [ :show, :update, :switch_chat]
 
   def show
@@ -26,7 +27,7 @@ class TasksController < ApplicationController
     elsif @is_student
       Notification.make_read(user: @student.user, task: @task)
     end
-    
+
     @is_chat_shown = @task.messages.count > 0
     @chat_button_title = @is_chat_shown ? 'Скрыть чат' : 'Показать чат'
   end
@@ -40,7 +41,7 @@ class TasksController < ApplicationController
       event_type = :task_accepted_partially
     end
     Notification.new_event(task: @task, user: @task.user, event_type: event_type, event_time: @task.updated_at)
-    
+
     UserMailer.task_accepted_notify(@task).deliver if @task.accepted?
 
   	redirect_to @task

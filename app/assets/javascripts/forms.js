@@ -1,8 +1,8 @@
 jQuery(document).on('ready page:load',function() {
-     $('#new_note #note_text').keydown(function(event) {
-     	if (event.which == 13 && !event.ctrlKey && !event.shiftKey) {
+     $('#new_note, #new_message').keydown(function(event) {
+     	if (event.which == 13 && event.shiftKey && !event.ctrlKey) {
      		event.preventDefault();
-     		$('#new_note').submit();
+     		$(this).submit();
      	}
      })
 
