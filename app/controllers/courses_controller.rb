@@ -70,8 +70,12 @@ class CoursesController < ApplicationController
     @notes_number = @course.notes_number_hash
     @notes_total = @notes_number.values.sum
 
+    @accepted_tasks_number = @course.accepted_tasks_number_hash
+    @accepted_tasks_total = @accepted_tasks_number.values.sum
+
     @first_try_accepted_tasks_number = @course.first_try_accepted_tasks_number_hash
     @first_try_accepted_tasks_total = @first_try_accepted_tasks_number.values.sum
+
   end
 
   def index

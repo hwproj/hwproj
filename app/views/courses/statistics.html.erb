@@ -38,5 +38,14 @@
 			<td align="center"><%= @first_try_accepted_tasks_number[term] %></td>
 		<% end %>
 	</tr>
+
+	<tr>
+		<td><%= "Всего сдано задач" %></td>
+		<td class="separator"></td>
+		<td align="center"><%= @accepted_tasks_total %></td>
+		<% @terms.each do |term| %>
+			<td align="center"><%= @accepted_tasks_number[term] %></td>
+		<% end %>
+	</tr>
   </table>
 </div>
