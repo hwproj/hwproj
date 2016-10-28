@@ -1,16 +1,18 @@
 class WelcomeController < ApplicationController
-  @@notifications_desc = true
-  respond_to :js, :html
+  @@unread_notifications_desc = false
+  @@all_notifications_desc = false
 
   def index
     @courses = Course.all_hash
     if signed_in?
       @section = 'unread'
       @section = params[:section] if params[:section]
-      @@notifications_desc = true
-      Rails.logger.debug("My is_desc in index: #{@@notifications_desc.inspect}")
+
+      @@unread_notifications_desc = false
+      @@all_notifications_desc = false
+
       unread_notifications = Notification.where(user_id: current_user.id, is_read: false).order(:last_event_time).paginate(page: params[:page])
-      all_notifications = Notification.where(user_id: current_user.id).order(last_event_time: :desc).paginate(page: params[:page])
+      all_notifications = Notification.where(user_id: current_user.id).order(:last_event_time).paginate(page: params[:page])
       if current_user.student?
         @deadline_tasks = current_user.deadline_tasks
         @overdue_tasks = current_user.overdue_tasks
@@ -30,13 +32,15 @@ class WelcomeController < ApplicationController
 
   def update
     if signed_in?
-      Rails.logger.debug("My object: #{@@notifications_desc.inspect}")
-      @@notifications_desc = !@@notifications_desc
-      Rails.logger.debug("Should not be my object: #{@@notifications_desc.inspect}")
-      if @@notifications_desc
-        @notifications = Notification.where(user_id: current_user.id).order(last_event_time: :desc).paginate(page: params[:page])
-      else
-        @notifications = Notification.where(user_id: current_user.id).order(last_event_time: :asc).paginate(page: params[:page])
+      case params[:section]
+        when 'unread'
+          @@unread_notifications_desc = !@@unread_notifications_desc
+          order = @@unread_notifications_desc ? :desc : :asc
+          @notifications = Notification.where(user_id: current_user.id, is_read: false).order(last_event_time: order).paginate(page: params[:page])
+        when 'show_all'
+          @@all_notifications_desc = !@@all_notifications_desc
+          order = @@all_notifications_desc ? :desc : :asc
+          @notifications = Notification.where(user_id: current_user.id).order(last_event_time: order).paginate(page: params[:page])
       end
     end
   end
