@@ -140,3 +140,15 @@ h3 {
   border-spacing: 8px;
   border-collapse: separate;
 }
+
+.task-grade {
+    color: #333333;
+    text-decoration: none;
+    text-align: center;
+}
+
+.task-grade a {
+    color: #333333;
+    text-decoration: none;
+    text-align: center;
+}

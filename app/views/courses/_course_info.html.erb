@@ -7,6 +7,10 @@
         <%= link_to edit_course_path(@course) do %>
           <span class="glyphicon glyphicon-pencil"></span>
         <% end %>
+        <br>
+        <% if current_user.courses.where(id: @course.id).length != 0 %>
+          <%= link_to "Добавить задание", new_homework_path, class: "btn btn-success" %>
+        <% end %>
       <% end %>
     </h3>
     <% if !@statistics %>

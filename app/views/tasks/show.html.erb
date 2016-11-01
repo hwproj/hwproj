@@ -45,15 +45,23 @@
     <% if @task.accepted? %>
       <div class="btn-group">
         <%= link_to "Принято", '#', class: "btn btn-success", disabled: true %>
-          <%= link_to "Отменить", task_path(@task, task: {status: after_cancel_status(@task)}), method: :put, class: "btn btn-default" %>
+          <%= link_to "Отменить", task_path(@task, task: {status: after_cancel_status(@task), grade: 0}), method: :put, class: "btn btn-default" %>
       </div>
     <% else %>
       <% if @task.submissions.any? %>
         <%= render 'note_form' %>
       <% end %>
       <br>
+      <%= form_for @task do |f| %>
+        <%= f.submit "Принять", class: "btn btn-success" %>
+        <% if (@task.problem.max_grade > 1) then %>
+          <%= f.number_field :grade, min: 1, max: @task.problem.max_grade, value: 1 %>
+        <% else %>
+          <%= f.number_field :grade, type: :hidden, min: 1, max: @task.problem.max_grade, value: 1 %>
+        <% end %>
+        <%= f.text_field :status, type: :hidden, value: "accepted" %>
+      <% end %>
 
-      <%= link_to "Принять", task_path(@task, task: {status: "accepted"}), method: :put, class: "btn btn-success" %>
       <%= link_to "Принять частично", task_path(@task, task: {status: "accepted_partially"}), method: :put, class: "btn btn-warning" %>
     <% end %>
     

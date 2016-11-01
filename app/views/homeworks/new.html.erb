@@ -1,1 +1,2 @@
+<% @grade = current_user.courses.where(id: params[:id]).last.default_max_grade %>
 <%= render 'form' %>

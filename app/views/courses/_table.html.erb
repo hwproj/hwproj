@@ -84,7 +84,8 @@
           <% if job.assignment.done? %>
             <td class="task accepted-task"></td>
           <% else %>
-            <% job.tasks.order(:problem_number).pluck(:id, :status).each do |id, status| %>
+            <% job.tasks.order(:problem_number).pluck(:id, :status, :grade, :problem_id).each do |id, status, grade, problem| %>
+              <% text = "" %>
               <% case status %>
               <% when Task.statuses[:not_submitted] %>
                 <td style="padding: 0" class="task">
@@ -94,10 +95,13 @@
                 <td style="padding: 0" class="task task-with-notes">
               <% when Task.statuses[:accepted] %>
                 <td style="padding: 0" class="task accepted-task">
+                <% if (Problem.find(problem).max_grade > 1) then text = grade.to_s end %>
               <% when Task.statuses[:new_submission_with_notes] %>
                 <td style="padding: 0" class="task task-with-new-submissions-and-notes">
               <% end %>
-                <%= link_to "", task_path(id) if @student == student || @teacher %>
+              <div class="task-grade">
+                <%= link_to_if (@student == student || @teacher), text, task_path(id) %>
+              </div>
               </td>
             <% end %>
           <% end %>

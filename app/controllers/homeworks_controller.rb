@@ -1,8 +1,11 @@
 class HomeworksController < ApplicationController
   before_action :set_assignment, only: [ :edit, :update, :destroy ]
 
+
   def new
     @assignment = Homework.new
+    @assignment.term = get_current_term
+    return @assignment
   end
 
   def create
@@ -14,7 +17,9 @@ class HomeworksController < ApplicationController
       create_jobs_and_tasks
       redirect_to @assignment.term.course
     else
-      render "new"
+      params[:id] = @assignment.term.course_id
+      params[:term_number] = @assignment.term.number
+      render 'new'
     end
   end
 
@@ -23,7 +28,9 @@ class HomeworksController < ApplicationController
   end
 
   def update
-    @assignment.update(assignment_params)
+    p = assignment_params
+    check_grades(p)
+    @assignment.update(p)
     enumerate_problems
 
     @assignment.problems.each do |problem|
@@ -37,7 +44,7 @@ class HomeworksController < ApplicationController
       end
     end
 
-    redirect_to @assignment.term.course
+    redirect_to show_term_path(id: @assignment.term.course_id, term_number: @assignment.term.number)
   end
 
   def destroy
@@ -50,7 +57,7 @@ class HomeworksController < ApplicationController
 
   private
     def assignment_params
-      params.require(:homework).permit(:assignment_type, :term_id, problems_attributes: [ :id, :name, :text, :_destroy ], links_attributes: [ :id, :url, :name, :_destroy ])
+      params.require(:homework).permit(:assignment_type, :term_id, problems_attributes: [ :id, :name, :text, :_destroy, :max_grade ], links_attributes: [ :id, :url, :name, :_destroy ])
     end
 
     def enumerate_problems
@@ -84,5 +91,32 @@ class HomeworksController < ApplicationController
 
     def set_assignment
       @assignment = Homework.find(params[:id])
+    end
+
+    def get_current_term
+      Course.find(params[:id]).terms.where(number: params[:term_number]).last
+    end
+
+    # Checks problems for changing max_grades
+    def check_grades(assignment_params)
+      @assignment.problems.each do |problem|
+        new_p = assignment_params[:problems_attributes].select{|key, p| p[:id].to_i == problem.id and p[:max_grade].to_i != problem.max_grade}.values[0]
+        unless (new_p.nil?)
+          update_students_grades(problem, new_p[:max_grade].to_i)
+        end
+      end
+    end
+
+    # Updates users's grades when teacher changes max_grade for problem
+    def update_students_grades(problem, grade)
+      if (problem.max_grade == 1)
+        Task.where(problem_id: problem.id, status: Task.statuses[:accepted]).find_each do |task|
+          task.update(grade: grade)
+        end
+      else
+        Task.where(problem_id: problem.id, status: Task.statuses[:accepted]).find_each do |task|
+          task.update(grade: [grade, task.grade].min)
+        end
+      end
     end
 end

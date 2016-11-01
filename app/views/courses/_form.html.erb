@@ -1,5 +1,6 @@
 <%= simple_form_for @course do |f| %>
   <%= f.input :group_name, label: 'Номер группы' %>
   <%= f.input :name, label: 'Предмет' %>
+  <%= render 'grades/grade_settings', { f: f, id: :default_max_grade, text: 'Максимальная оценка по умолчанию' } %>
   <%= f.button :submit, 'Сохранить', class: 'btn btn-primary' %>
 <% end %>

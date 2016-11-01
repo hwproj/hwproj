@@ -7,6 +7,7 @@ class Course < ActiveRecord::Base
 
   validates :name, presence: {message: 'Введите название.'}
   validates :group_name, presence: {message: 'Введите номер группы'}
+  validates :default_max_grade, presence: { message: 'Введите оценку по умолчанию' }
 
   def self.all_hash
     {

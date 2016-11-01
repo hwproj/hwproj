@@ -9,6 +9,9 @@ class Problem < ActiveRecord::Base
 
   accepts_nested_attributes_for :links, reject_if: :all_blank, allow_destroy: true
 
+  validates :max_grade, presence: { message: 'Введите максимальную оценку для задачи' }
+  validates :max_grade, numericality: true
+
   private
     def set_number
       self.number = self.homework.problems.count + 1

@@ -1,6 +1,6 @@
 <%= simple_form_for @assignment do |f| %>
-  
-  <%= f.association :term, collection: current_user.courses.map{|x| x.terms.last}.sort_by{|x| x.group_name}, label_method: :group_name, label: "Группа" %>
+
+  <%= f.association :term, as: :hidden, collection: [ @assignment.term ], include_blank: false, label_method: :group_name, label: "Группа" %>
   <%= f.input :assignment_type, collection: { "Домашняя работа" => :homework, "Тест" => :test }, label: "Тип" %>
 
   <%= f.simple_fields_for :problems do |problem| %>

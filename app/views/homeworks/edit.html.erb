@@ -7,9 +7,13 @@
 
 <%= simple_form_for @assignment  do |f| %>
 
+  <% index = 0 %>
   <%= f.simple_fields_for :problems, @problems do |problem| %>
+    <% @grade = @assignment.problems[index].max_grade %>
     <%= render 'problem_fields', f: problem %>
+    <% index += 1 %>
   <% end %>
+  <% @grade = @assignment.term.course.default_max_grade %>
 
   <%= f.simple_fields_for :links do |link| %>
     <%= render 'link_fields', f: link %>

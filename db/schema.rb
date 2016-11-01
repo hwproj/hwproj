@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160903073618) do
+ActiveRecord::Schema.define(version: 20161031163243) do
 
   create_table "awards", force: true do |t|
     t.integer  "job_id"
@@ -28,7 +28,8 @@ ActiveRecord::Schema.define(version: 20160903073618) do
     t.integer  "teacher_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "active",     default: true
+    t.boolean  "active",            default: true
+    t.integer  "default_max_grade", default: 1,    null: false
   end
 
   create_table "homeworks", force: true do |t|
@@ -114,6 +115,7 @@ ActiveRecord::Schema.define(version: 20160903073618) do
     t.text     "text",        limit: 255
     t.integer  "number"
     t.string   "name"
+    t.integer  "max_grade",               default: 1, null: false
   end
 
   add_index "problems", ["homework_id", "id"], name: "index_problems_on_homework_id_and_id"
@@ -155,6 +157,7 @@ ActiveRecord::Schema.define(version: 20160903073618) do
     t.integer  "job_id"
     t.integer  "student_id"
     t.integer  "problem_number"
+    t.integer  "grade",          default: 0, null: false
   end
 
   add_index "tasks", ["job_id", "problem_number"], name: "index_tasks_on_job_id_and_problem_number"
