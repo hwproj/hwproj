@@ -136,6 +136,10 @@ h3 {
     border-spacing: 10px 0;
 }
 
+#markdown_hint {
+	text-align: right;
+}
+
 #chat-table {
   border-spacing: 8px;
   border-collapse: separate;

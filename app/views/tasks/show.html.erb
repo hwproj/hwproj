@@ -56,7 +56,7 @@
       <%= link_to "Принять", task_path(@task, task: {status: "accepted"}), method: :put, class: "btn btn-success" %>
       <%= link_to "Принять частично", task_path(@task, task: {status: "accepted_partially"}), method: :put, class: "btn btn-warning" %>
     <% end %>
-    
+
   <% end %>
 
   <% if signed_in? %>
@@ -82,11 +82,9 @@
 
           <small><%= submission.created_at.strftime("%H:%M %d.%m.%y") %></small>
         </h5>
-
       <% end %>
   <% end %>
 </div>
-
 
 <div class="col-md-7">
   <br> <br>
@@ -96,4 +94,3 @@
     <div id="chat-id" style="display:none"></div>
   <% end %>
 </div>
-
