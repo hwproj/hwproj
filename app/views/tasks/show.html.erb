@@ -49,7 +49,19 @@
       </div>
     <% else %>
       <% if @task.submissions.any? %>
-        <%= render 'note_form' %>
+        <ul class="nav nav-tabs">
+          <li class="active"><a data-toggle="tab" href="#note-form">Редактирование</a></li>
+          <li><a data-toggle="tab" href="#note-preview">Превью</a></li>
+        </ul>
+        <div class="tab-content">
+          <br>
+          <div id="note-form" class="tab-pane fade in active">
+            <%= render 'note_form' %>
+          </div>
+          <div id="note-preview" class="tab-pane fade">
+            <p id="note-preview-text"></p>
+          </div>
+        </div>
       <% end %>
       <br>
 

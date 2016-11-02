@@ -1,5 +1,12 @@
 $('#notes').show();
 $('#notes').append('<%= j render(@note) %>');
+
+var converter = new Showdown.converter();
+var note_element = $("#notes .markdown").last();
+var markdown_note = converter.makeHtml(note_element.html());
+note_element.html(markdown_note);
+note_element.find("p").replaceWith(note_element.find("p").html());
+
 $('#new_note #note_text').val('');
 $('#new_note #submit_button').attr('disabled', true);
 

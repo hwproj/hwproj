@@ -5,6 +5,6 @@ module FormHintHelper
 
   def markdown_hint_link
     "Поддерживается #{ link_to 'markdown', markdown_modal_path,  {:remote => true, 'data-toggle' =>
-    'modal', 'data-target' => '#modal-window'} }".html_safe
+    'modal', :oncontextmenu => 'return false','data-target' => '#modal-window'} }".html_safe
   end
 end

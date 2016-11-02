@@ -4,4 +4,16 @@
   <table id="chat-table"><%= render partial: 'message', collection: @task.messages %></table>
 </div>
 
-<%= render 'new_message_form' %>
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#message-form">Редактирование</a></li>
+  <li><a data-toggle="tab" href="#message-preview">Превью</a></li>
+</ul>
+<div class="tab-content">
+  <br>
+  <div id="message-form" class="tab-pane fade in active">
+    <%= render 'new_message_form' %>
+  </div>
+  <div id="message-preview" class="tab-pane fade">
+    <p id="message-preview-text"></p>
+  </div>
+</div>

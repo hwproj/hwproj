@@ -18,4 +18,5 @@
 //= require cocoon
 
 //= require jquery
+//= require showdown
 //= require bootstrap-sprockets

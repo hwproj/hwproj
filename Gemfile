@@ -66,3 +66,4 @@ gem 'json'
 
 # Markdown rendering
 gem 'redcarpet', '~> 3.0.0'
+gem 'showdown-rails'
