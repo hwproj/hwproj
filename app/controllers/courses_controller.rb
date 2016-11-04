@@ -72,6 +72,12 @@ class CoursesController < ApplicationController
     @first_try_accepted_tasks_number = @course.first_try_accepted_tasks_number_hash
     @first_try_accepted_tasks_total = @first_try_accepted_tasks_number.values.sum
 
+    @attempts_to_pass_tasks_number = @course.attempts_to_pass_tasks_number_hash
+    @attempts_to_pass_tasks_total = @attempts_to_pass_tasks_number.values.sum
+
+    @maximum_number_of_attempts_to_pass_task_number = @course.maximum_number_of_attempts_to_pass_task_number_hash
+    @maximum_number_of_attempts_to_pass_task_total = @maximum_number_of_attempts_to_pass_task_number.values.sum
+
   end
 
   def index

@@ -31,6 +31,15 @@
 	</tr>
 
 	<tr>
+		<td><%= "Всего сдано задач" %></td>
+		<td class="separator"></td>
+		<td align="center"><%= @accepted_tasks_total %></td>
+		<% @terms.each do |term| %>
+			<td align="center"><%= @accepted_tasks_number[term] %></td>
+		<% end %>
+	</tr>
+
+	<tr>
 		<td><%= "Сдано задач с первого раза" %></td>
 		<td class="separator"></td>
 		<td align="center"><%= @first_try_accepted_tasks_total %></td>
@@ -40,12 +49,22 @@
 	</tr>
 
 	<tr>
-		<td><%= "Всего сдано задач" %></td>
+		<td><%= "Всего попыток сдать задачи" %></td>
 		<td class="separator"></td>
-		<td align="center"><%= @accepted_tasks_total %></td>
+		<td align="center"><%= @attempts_to_pass_tasks_total %></td>
 		<% @terms.each do |term| %>
-			<td align="center"><%= @accepted_tasks_number[term] %></td>
+			<td align="center"><%= @attempts_to_pass_tasks_number[term] %></td>
 		<% end %>
 	</tr>
+
+	<tr>
+		<td><%= "Максимальное число попыток сдать одну задачу" %></td>
+		<td class="separator"></td>
+		<td align="center"><%= @maximum_number_of_attempts_to_pass_task_total %></td>
+		<% @terms.each do |term| %>
+			<td align="center"><%= @maximum_number_of_attempts_to_pass_task_number[term] %></td>
+		<% end %>
+	</tr>
+
   </table>
 </div>
