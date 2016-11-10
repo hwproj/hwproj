@@ -67,27 +67,21 @@ class CoursesController < ApplicationController
       end
     end
 
-    @notes_number = @course.notes_number_hash
-    @notes_total = @notes_number.values.sum
+    @notes = @terms.map { |term| term.notes_count }
+    @notes_total = @notes.sum
 
-    @accepted_tasks_number = @course.accepted_tasks_number_hash
-    @accepted_tasks_total = @accepted_tasks_number.values.sum
+    @accepted_tasks = @terms.map { |term| term.accepted_tasks_count }
+    @accepted_tasks_total = @accepted_tasks.sum
 
-    @first_try_accepted_tasks_number = @course.first_try_accepted_tasks_number_hash
-    @first_try_accepted_tasks_total = @first_try_accepted_tasks_number.values.sum
+    @attempts_to_pass = @terms.map { |term| term.submissions_count.sum }
+    @attempts_to_pass_total = @attempts_to_pass.sum
 
-    @attempts_to_pass_tasks_number = @course.attempts_to_pass_tasks_number_hash
-    @attempts_to_pass_tasks_total = @attempts_to_pass_tasks_number.values.sum
+    @max_attempts_to_pass_one_task = @terms.map { |term| term.submissions_count.max }
+    @max_attempts_to_pass_one_task_total = @max_attempts_to_pass_one_task.max
 
-    @maximum_number_of_attempts_to_pass_task_number = @course.maximum_number_of_attempts_to_pass_task_number_hash
-    @maximum_number_of_attempts_to_pass_task_total = @maximum_number_of_attempts_to_pass_task_number.values.max
+    @problems_with_min_attempts_to_pass = @terms.map { |term| term.min_attempts_to_pass_problem.problem.get_name }
 
-    @problem_with_minimum_number_of_attempts_number = @course.problem_with_minimum_number_of_attempts_number_hash
-    @problem_with_minimum_number_of_attempts_total = @problem_with_minimum_number_of_attempts_number.values.min.name
-
-    @problem_with_maximum_number_of_attempts_number = @course.problem_with_maximum_number_of_attempts_number_hash
-    @problem_with_maximum_number_of_attempts_total = @problem_with_maximum_number_of_attempts_number.values.max.name
-
+    @problems_with_max_attempts_to_pass = @terms.map { |term| term.max_attempts_to_pass_problem.problem.get_name }
   end
 
   def index

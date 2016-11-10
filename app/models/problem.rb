@@ -12,6 +12,16 @@ class Problem < ActiveRecord::Base
   def displaying_name
     name ? name : number
   end
+  
+  def get_name
+    if self.name && (not self.name.blank?)
+      name = self.name
+    else
+      name = "#{self.homework.number}.#{self.number}"
+    end
+    name =  "Тест, " + name if self.homework.test?
+    name
+  end
 
   private
     def set_number

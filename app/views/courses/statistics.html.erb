@@ -60,9 +60,9 @@
 	<tr>
 		<td><%= "Максимальное число попыток сдать одну задачу" %></td>
 		<td class="separator"></td>
-		<td align="center"><%= @maximum_number_of_attempts_to_pass_task_total %></td>
+		<td align="center"><%= @maximum_of_attempts_to_pass_task_total %></td>
 		<% @terms.each do |term| %>
-			<td align="center"><%= @maximum_number_of_attempts_to_pass_task_number[term] %></td>
+			<td align="center"><%= @maximum_of_attempts_to_pass_task_number[term] %></td>
 		<% end %>
 	</tr>
 
@@ -71,7 +71,7 @@
 		<td class="separator"></td>
 		<td align="center"><%= @problem_with_minimum_number_of_attempts_total %></td>
 		<% @terms.each do |term| %>
-			<td align="center"><%= @problem_with_minimum_number_of_attempts_number[term].name %></td>
+			<td align="center"><%= @problem_with_minimum_number_of_attempts[term].get_name %></td>
 		<% end %>
 	</tr>
 
@@ -80,7 +80,7 @@
 		<td class="separator"></td>
 		<td align="center"><%= @problem_with_maximum_number_of_attempts_total %></td>
 		<% @terms.each do |term| %>
-			<td align="center"><%= @problem_with_maximum_number_of_attempts_number[term].name %></td>
+			<td align="center"><%= @problem_with_maximum_number_of_attempts[term].get_name %></td>
 		<% end %>
 	</tr>
 
