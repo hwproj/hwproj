@@ -78,6 +78,12 @@ class CoursesController < ApplicationController
     @maximum_number_of_attempts_to_pass_task_number = @course.maximum_number_of_attempts_to_pass_task_number_hash
     @maximum_number_of_attempts_to_pass_task_total = @maximum_number_of_attempts_to_pass_task_number.values.max
 
+    @problem_with_minimum_number_of_attempts_number = @course.problem_with_minimum_number_of_attempts_number_hash
+    @problem_with_minimum_number_of_attempts_total = @problem_with_minimum_number_of_attempts_number.values.min.name
+
+    @problem_with_maximum_number_of_attempts_number = @course.problem_with_maximum_number_of_attempts_number_hash
+    @problem_with_maximum_number_of_attempts_total = @problem_with_maximum_number_of_attempts_number.values.max.name
+
   end
 
   def index
