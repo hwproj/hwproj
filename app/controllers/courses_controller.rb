@@ -75,14 +75,14 @@ class CoursesController < ApplicationController
     @attempts_to_pass_tasks_number = @course.attempts_to_pass_tasks_number_hash
     @attempts_to_pass_tasks_total = @attempts_to_pass_tasks_number.values.sum
 
-    @maximum_number_of_attempts_to_pass_task_number = @course.maximum_number_of_attempts_to_pass_task_number_hash
-    @maximum_number_of_attempts_to_pass_task_total = @maximum_number_of_attempts_to_pass_task_number.values.max
+    @maximum_of_attempts_to_pass_task_number = @course.maximum_of_attempts_to_pass_task_number_hash
+    @maximum_of_attempts_to_pass_task_total = @maximum_of_attempts_to_pass_task_number.values.max
 
-    @problem_with_minimum_number_of_attempts_number = @course.problem_with_minimum_number_of_attempts_number_hash
-    @problem_with_minimum_number_of_attempts_total = @problem_with_minimum_number_of_attempts_number.values.min.name
+    @problem_with_minimum_number_of_attempts = @course.problem_with_minimum_number_of_attempts_hash
+    @problem_with_minimum_number_of_attempts_total = @problem_with_minimum_number_of_attempts.values.min.get_name
 
-    @problem_with_maximum_number_of_attempts_number = @course.problem_with_maximum_number_of_attempts_number_hash
-    @problem_with_maximum_number_of_attempts_total = @problem_with_maximum_number_of_attempts_number.values.max.name
+    @problem_with_maximum_number_of_attempts = @course.problem_with_maximum_number_of_attempts_hash
+    @problem_with_maximum_number_of_attempts_total = @problem_with_maximum_number_of_attempts.values.max.get_name
 
   end
 

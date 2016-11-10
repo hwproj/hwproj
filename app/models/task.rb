@@ -24,7 +24,7 @@ class Task < ActiveRecord::Base
 
 
   def name
-    if problem.name || (not problem.name.blank?)
+    if problem.name && (not problem.name.blank?)
       name = problem.name
     else
       name = "#{problem.homework.number}.#{problem.number}"
