@@ -79,10 +79,10 @@ class CoursesController < ApplicationController
     @maximum_of_attempts_to_pass_task_total = @maximum_of_attempts_to_pass_task_number.values.max
 
     @problem_with_minimum_number_of_attempts = @course.problem_with_minimum_number_of_attempts_hash
-    @problem_with_minimum_number_of_attempts_total = @problem_with_minimum_number_of_attempts.values.min.get_name
+    @problem_with_minimum_number_of_attempts_total = @problem_with_minimum_number_of_attempts.values.min
 
     @problem_with_maximum_number_of_attempts = @course.problem_with_maximum_number_of_attempts_hash
-    @problem_with_maximum_number_of_attempts_total = @problem_with_maximum_number_of_attempts.values.max.get_name
+    @problem_with_maximum_number_of_attempts_total = @problem_with_maximum_number_of_attempts.values.max
 
   end
 
