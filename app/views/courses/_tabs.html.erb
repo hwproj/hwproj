@@ -10,6 +10,7 @@
   <% end %>
   <li> <%= link_to "Добавить семестр", add_term_path(@course.id), method: :put if @teacher %> </li>
   <li> <%= link_to "Удалить последний семестр", delete_term_path(@course.id), method: :put, data: { confirm: "Вы уверены, что хотите удалить семестр?" } if (@teacher && @course.terms.count > 1) %> </li>
+  <%= render 'colouring_legend' %>
   <% if @statistics %>
     <li class="pull-right active">
   <% else %>
