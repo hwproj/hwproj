@@ -1,3 +1,7 @@
+<%= javascript_tag do %>
+  var submission_form_type = "<%= current_user.submission_form_type[1] %>"
+<% end %>
+
 <div class="col-md-8">
   <p>
     <%= link_to 'Назад к курсу', @course %>
@@ -49,6 +53,8 @@
       </div>
     <% else %>
       <% if @task.submissions.any? %>
+        <span style="cursor:pointer; font-size: 1.2em; color:#A9A9A9" class="pull-right glyphicon glyphicon-wrench"></span>
+        <br>
         <%= render 'note_form' %>
       <% end %>
       <br>
@@ -56,7 +62,7 @@
       <%= link_to "Принять", task_path(@task, task: {status: "accepted"}), method: :put, class: "btn btn-success" %>
       <%= link_to "Принять частично", task_path(@task, task: {status: "accepted_partially"}), method: :put, class: "btn btn-warning" %>
     <% end %>
-    
+
   <% end %>
 
   <% if signed_in? %>
@@ -87,13 +93,33 @@
   <% end %>
 </div>
 
+<div id="popover_content_wrapper" style="display: none">
+<h4>  Настройка отправки</h4>
+  <% User.submission_form_types.keys.each do |key| %>
+  <div>
+    <%= radio_button_tag "submission_form_type",  key, current_user.settings[:submission_form_type][0].to_i == User.submission_form_types[key]  %>
+
+    <% case key %>
+    <% when "shift_enter" %>
+      Shift+Enter
+    <% when "ctrl_enter" %>
+      Ctrl+Enter
+    <% when "enter" %>
+      Enter
+    <% end %>
+  </div>
+ <% end %>
+</div>
+
 
 <div class="col-md-7">
   <br> <br>
-  <% if @is_chat_shown %>
-    <div id="chat-id" style="display:block"> <%= render 'chat' %> </div>
-  <% else %>
-    <div id="chat-id" style="display:none"></div>
-  <% end %>
+  <div id="chat-id" style="display:
+    <% if @is_chat_shown %>
+      block
+    <% else %>
+      none
+    <% end %>">
+     <%= render 'chat' %>
+  </div>
 </div>
-

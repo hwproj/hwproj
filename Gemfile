@@ -64,5 +64,8 @@ gem 'octokit'
 gem 'rest-client'
 gem 'json'
 
+# User settings
+gem 'storext'
+
 # Markdown rendering
 gem 'redcarpet', '~> 3.0.0'
