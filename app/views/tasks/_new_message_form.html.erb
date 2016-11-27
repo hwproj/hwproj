@@ -1,7 +1,7 @@
 <%= simple_form_for Message.new, remote: true do |f| %>
   <%= f.hidden_field :user_id, value: current_user.id %>
   <%= f.hidden_field :task_id, value: @task.id %>
-  <%= f.hint markdown_hint_link, id: "markdown_hint" %>
-  <%= f.input :text, label: false, placeholder: "Текст сообщения", hint: form_hint_for("сообщение") %>
+  <%= f.input :text, label: false, placeholder: "Текст сообщения", input_html: { rows: 4 }, hint: form_hint_for("сообщение") %>
+  <%= f.hint markdown_hint_link, class: "pull-right" %>
   <%= f.button :submit, 'Отправить' %>
 <% end %>

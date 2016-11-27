@@ -1,0 +1,23 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <ul class="nav nav-tabs form-tabs">
+      <li class="active"><a data-toggle="tab" href="#<%= comment %>-form">Редактирование</a></li>
+      <li><a data-toggle="tab" href="#<%= comment %>-preview">Предпросмотр</a></li>
+      <span style="cursor:pointer; font-size: 1.2em; color:#A9A9A9" class="pull-right glyphicon glyphicon-wrench"></span>
+    </ul>
+  </div>
+  <div class="panel-body">
+    <div class="tab-content">
+      <div id="<%= comment %>-form" class="tab-pane fade in active">
+        <% if comment == "note" %>
+          <%= render "note_form" %>
+        <% else %>
+          <%= render "new_message_form" %>
+        <% end %>
+      </div>
+      <div id="<%= comment %>-preview" class="tab-pane fade">
+        <p id="<%= comment %>-preview-text"></p>
+      </div>
+    </div>
+  </div>
+</div>

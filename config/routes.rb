@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => { registrations: 'registrations' }
 
-  get 'tasks/:id/markdown', to: 'tasks#markdown_help_model', as: "markdown_modal"
+  get 'tasks/:id/markdown', to: 'modals#markdown_help_modal', as: "markdown_modal"
   get 'courses/:id/terms/:term_number', to: 'courses#show', as: "show_term"
   put 'courses/:id/terms/new', to: 'courses#add_term', as: "add_term"
   get 'courses/:id/statistics', to: 'courses#statistics', as: "show_statistics"

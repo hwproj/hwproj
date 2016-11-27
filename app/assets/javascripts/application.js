@@ -13,10 +13,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require showdown
 //= require_tree .
 
 //= require cocoon
 
 //= require jquery
-//= require showdown
 //= require bootstrap-sprockets

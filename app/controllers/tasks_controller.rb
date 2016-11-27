@@ -47,13 +47,6 @@ class TasksController < ApplicationController
   	redirect_to @task
   end
 
-  def markdown_help_model
-    respond_to do |format|
-      format.html
-      format.js
-    end
-  end
-
   private
     def set_task
       @task = Task.find(params[:id])

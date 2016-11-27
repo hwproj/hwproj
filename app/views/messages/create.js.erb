@@ -1,8 +1,2 @@
 $("#chat-table").append("<%=  j (render partial: 'tasks/message', object: @message) %>");
-
-var converter = new Showdown.converter();
-var message_element = $("#chat-table .markdown").last();
-var markdown_message = converter.makeHtml(message_element.html());
-message_element.html(markdown_message);
-
 $("#new_message")[0].reset();

@@ -5,7 +5,7 @@
       <tr><strong><%= message.user.full_name %> </strong>
       <small><%= message.created_at.strftime("%H:%M") %>
         <%= message.created_at.strftime("%d.%m.%y") if message.created_at.to_date != Time.now.to_date %></small></tr>
-      <p class="markdown"><%= message.text %></p>
+      <tr><div class="markdown"><%= message.text.html_safe %></div></tr>
     </table>
   </td>
 </tr>
