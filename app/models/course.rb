@@ -29,35 +29,35 @@ class Course < ActiveRecord::Base
       ]
   end
 
-  def first_try_accepted_tasks_number_hash
+  def first_try_accepted_number_hash
     Hash[
       self.terms.zip Term.where(course_id: self.id).collect { |term| term.tasks.flatten.
         select { |task| task.accepted? && task.notes.count == 0 } .count }
     ]
   end
 
-  def attempts_to_pass_tasks_number_hash
+  def attempts_to_pass_number_hash
     Hash[
       self.terms.zip Term.where(course_id: self.id).collect { |term| term.tasks.
         collect { |task| task.submissions } .flatten.count }
     ]
   end
 
-  def maximum_of_attempts_to_pass_task_number_hash
+  def max_of_attempts_to_pass_number_hash
     Hash[
       self.terms.zip Term.where(course_id: self.id).collect { |term| term.tasks.
         max_by { |task| task.submissions.count } .submissions.count }
       ]
   end
 
-  def problem_with_minimum_number_of_attempts_hash
+  def min_attempts_number_problem_hash
     Hash[
       self.terms.zip Term.where(course_id: self.id).collect { |term| term.tasks.
         min_by { |task| task.submissions.count } .problem }
       ]
   end
 
-  def problem_with_maximum_number_of_attempts_hash
+  def max_attempts_number_problem_hash
     Hash[
       self.terms.zip Term.where(course_id: self.id).collect { |term| term.tasks.
         max_by { |task| task.submissions.count } .problem }
