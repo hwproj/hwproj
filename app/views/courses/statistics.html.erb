@@ -21,70 +21,25 @@
       </tr>
     </thead>
 
-	<tr>
-		<td><%= "Комментариев к задачам" %></td>
-		<td class="separator"></td>
-		<td align="center"><%= @notes_total %></td>
-		<% @terms.each do |term| %>
-			<td align="center"><%= @notes_number[term] %></td>
-		<% end %>
-	</tr>
+  <%= get_statistic_text("Комментариев к задачам", @notes_total, ->(term){ @notes_number[term] }, @terms) %>
 
-	<tr>
-		<td><%= "Всего сдано задач" %></td>
-		<td class="separator"></td>
-		<td align="center"><%= @accepted_tasks_total %></td>
-		<% @terms.each do |term| %>
-			<td align="center"><%= @accepted_tasks_number[term] %></td>
-		<% end %>
-	</tr>
+  <%= get_statistic_text("Всего сдано задач", @accepted_tasks_total, ->(term){ @accepted_tasks_number[term] }, @terms) %>
 
-	<tr>
-		<td><%= "Сдано задач с первого раза" %></td>
-		<td class="separator"></td>
-		<td align="center"><%= @first_try_accepted_tasks_total %></td>
-		<% @terms.each do |term| %>
-			<td align="center"><%= @first_try_accepted_tasks_number[term] %></td>
-		<% end %>
-	</tr>
+  <%= get_statistic_text("Сдано задач с первого раза", @first_try_accepted_total, ->(term){ @first_try_accepted_number[term] }, @terms) %>
 
-	<tr>
-		<td><%= "Всего попыток сдать задачи" %></td>
-		<td class="separator"></td>
-		<td align="center"><%= @attempts_to_pass_tasks_total %></td>
-		<% @terms.each do |term| %>
-			<td align="center"><%= @attempts_to_pass_tasks_number[term] %></td>
-		<% end %>
-	</tr>
+  <%= get_statistic_text("Всего попыток сдать задачи", @attempts_to_pass_total, ->(term){ @attempts_to_pass_number[term] }, @terms) %>
 
-	<tr>
-		<td><%= "Максимальное число попыток сдать одну задачу" %></td>
-		<td class="separator"></td>
-		<td align="center"><%= @maximum_of_attempts_to_pass_task_total %></td>
-		<% @terms.each do |term| %>
-			<td align="center"><%= @maximum_of_attempts_to_pass_task_number[term] %></td>
-		<% end %>
-	</tr>
+  <%= get_statistic_text("Максимальное число попыток сдать одну задачу", @max_of_attempts_to_pass_total, ->(term){ @max_of_attempts_to_pass_number[term] }, @terms) %>
 
-	<tr>
-		<td><%= "Номер задачи с минимальным количеством попыток среди всех студентов" %></td>
-		<td class="separator"></td>
-		<td align="center"><%= "#{@problem_with_minimum_number_of_attempts_total.homework.term.number}.
-		#{@problem_with_minimum_number_of_attempts_total.get_name}" %></td>
-		<% @terms.each do |term| %>
-			<td align="center"><%=@problem_with_minimum_number_of_attempts[term].get_name %></td>
-		<% end %>
-	</tr>
+  <%= get_statistic_text("Задача с минимальным количеством попыток", 
+    "#{@min_attempts_number_problem_total.homework.term.number}.
+    #{@min_attempts_number_problem_total.get_name}", 
+    ->(term){ @min_attempts_number_problem[term].get_name }, @terms) %>
 
-	<tr>
-		<td><%= "Номер задачи с максимальным количеством попыток среди всех студентов" %></td>
-		<td class="separator"></td>
-		<td align="center"><%= "#{@problem_with_maximum_number_of_attempts_total.homework.term.number}.
-		#{@problem_with_maximum_number_of_attempts_total.get_name}" %></td>
-		<% @terms.each do |term| %>
-			<td align="center"><%= @problem_with_maximum_number_of_attempts[term].get_name %></td>
-		<% end %>
-	</tr>
+  <%= get_statistic_text("Задачи с максимальным количеством попыток", 
+    "#{@max_attempts_number_problem_total.homework.term.number}.
+    #{@max_attempts_number_problem_total.get_name}", 
+    ->(term){ @max_attempts_number_problem[term].get_name }, @terms) %>
 
   </table>
 </div>
