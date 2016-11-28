@@ -4,6 +4,10 @@
   <br>
 <% end %>
 
+<% if (@student && @student.approved?) || @teacher %>
+  <%= render 'course_settings' %>
+<% end %>
+
 <% if @assignments.any? %>
   <%= render 'homeworks' %>
 <% else %>
