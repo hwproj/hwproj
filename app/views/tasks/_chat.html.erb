@@ -1,7 +1,14 @@
-<h2> Обсуждение </h2>
-
-<div>
-  <table id="chat-table"><%= render partial: 'message', collection: @task.messages %></table>
+<div class="container" id="chat-table">
+  <h1 class="page-header">Обсуждение </h1>
+  <%= render partial: 'message', collection: @task.messages %>
+  <div class="row" id="form-row">
+    <div class="col-sm-1">
+      <div class="thumbnail">
+        <%= gravatar_for current_user %>
+      </div>
+    </div>
+    <div class="col-sm-6">
+        <%= render 'new_message_form' %>
+    </div>
+  </div>
 </div>
-
-<%= render 'new_message_form' %>

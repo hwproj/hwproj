@@ -1,11 +1,32 @@
-<tr>
-  <td valign="top" ><%= gravatar_for message.user, size: 35 %></td>
-  <td>
-    <table>
-      <tr><strong><%= message.user.full_name %> </strong>
-      <small><%= message.created_at.strftime("%H:%M") %>
-        <%= message.created_at.strftime("%d.%m.%y") if message.created_at.to_date != Time.now.to_date %></small></tr>
-      <tr><p><%= message.text %></p></tr>
-    </table>
-  </td>
-</tr>
+<div class="row">
+  <div class="col-sm-1 <% if message.user != current_user%> pull-right <% end %> ">
+    <div class="thumbnail">
+      <%= gravatar_for message.user %>
+    </div>
+  </div>
+  <div class="col-sm-6<% if message.user != current_user%> pull-right <% end %> ">
+    <div class="panel message-panel panel-default">
+      <div class="panel-heading
+      <% if message.user != current_user%>
+        right-arrow
+      <% else %>
+        left-arrow
+      <% end %> ">
+        <strong><%=message.user.full_name %></strong>
+        <span class="text-muted">прокомментировал
+          <% if message.created_at.to_date != Time.now.to_date %>
+            <%= message.created_at.strftime("%d %b %Y") %>
+          <% else %>
+            в <%= message.created_at.strftime("%H:%M") %>
+          <% end %>
+        </span>
+        <% if message.user == current_user%>
+          <span class="glyphicon glyphicon-pencil pull-right"></span>
+        <% end %>
+      </div>
+      <div class="panel-body">
+        <%= message.text %>
+      </div>
+    </div>
+  </div>
+</div>

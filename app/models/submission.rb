@@ -13,5 +13,5 @@ class Submission < ActiveRecord::Base
 
 	default_scope -> { order('created_at DESC') }
 
-	accepts_nested_attributes_for :notes, :reject_if => :all_blank, :allow_destroy => true   
+	accepts_nested_attributes_for :notes, :reject_if => :all_blank, :allow_destroy => true
 end

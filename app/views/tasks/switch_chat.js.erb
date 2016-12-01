@@ -5,7 +5,10 @@ var chat_on = $('#chat-button').text() == 'Показать чат'
 if (chat_on)
 {
   $('#chat-button').text('Скрыть чат');
-} 
+  $('html, body').animate({
+          scrollTop: $("#new_message").offset().top
+      }, 500);
+}
 else
 {
   $('#chat-button').text('Показать чат');
