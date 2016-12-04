@@ -1,7 +1,7 @@
 class CoursesController < ApplicationController
   include Markdown
   helper_method :markdown
-  before_action :set_course, only: [ :edit, :show, :update, :add_term, :delete_term, :statistics ]
+  before_action :set_course, only: [ :edit, :show, :update, :add_term, :delete_term, :destroy, :statistics ]
 
   def new
     @course = Course.new
@@ -93,9 +93,14 @@ class CoursesController < ApplicationController
     redirect_to @course
   end
 
+  def destroy
+    @course.destroy
+    redirect_to courses_path
+  end
+
   private
   def course_params
-    params.require(:course).permit(:group_name, :name).merge(teacher_id: current_user.id)
+    params.require(:course).permit(:group_name, :name, :active).merge(teacher_id: current_user.id)
   end
 
   def set_course

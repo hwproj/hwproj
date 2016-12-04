@@ -36,6 +36,6 @@ class Term < ActiveRecord::Base
     end
 
     def make_active_previous
-      course.terms.last.update active: true if course.terms.any?
+      course.terms.last.update active: true if course.terms.count > 1
     end
 end

@@ -15,14 +15,18 @@
   </div>
 
   <div class="col-md-4" align="right">
-    <h3> <%= @course.teacher.full_name %> </h3>
-    <h3>
-      <% if @teacher || @student %>
-        <%= mail_to @course.teacher.email do %>
-          <%= @course.teacher.email %>
+    <% if !@teacher %>
+      <h3> <%= @course.teacher.full_name %> </h3>
+      <h3>
+        <% if !@student.nil? && @student.active? %>
+          <%= mail_to @course.teacher.email do %>
+            <%= @course.teacher.email %>
+          <% end %>
         <% end %>
-      <% end %>
-    </h3>
+      </h3>
+    <% else %>
+      <%= render 'management_button' %>
+    <% end %>
     <% if !@statistics %>
       <%= render 'enroll_button' %>
     <% end %>
