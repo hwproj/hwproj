@@ -1,7 +1,7 @@
 class CoursesController < ApplicationController
   include Markdown
   helper_method :markdown
-  before_action :set_course, only: [ :edit, :show, :update, :add_term, :delete_term, :statistics ]
+  before_action :set_course, only: [ :edit, :show, :update, :add_term, :delete_term, :statistics, :settings ]
 
   def new
     @course = Course.new
@@ -72,6 +72,10 @@ class CoursesController < ApplicationController
 
   def index
     @courses = Course.all_hash
+  end
+
+  def settings
+
   end
 
   def edit
