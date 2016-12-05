@@ -1,5 +1,5 @@
 class HomeworksController < ApplicationController
-  before_action :set_assignment, only: [ :edit, :update, :destroy ]
+  before_action :set_assignment, :check_edit_permissions, only: [ :edit, :update, :destroy ]
 
   def new
     @assignment = Homework.new
@@ -84,5 +84,10 @@ class HomeworksController < ApplicationController
 
     def set_assignment
       @assignment = Homework.find(params[:id])
+    end
+
+    def check_edit_permissions
+      redirect_to security_error_path unless
+          ErrorsController.has_edit_course_permissions(current_user, @assignment.term.course)
     end
 end
