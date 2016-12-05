@@ -1,5 +1,5 @@
-<div class="table-responsive">
-  <table class="table table-bordered table-condensed">
+<div id="course_table" class="table-responsive" style="overflow-x: auto;">
+  <table class="table table-bordered table-condensed" style="margin: 0">
     <thead>
       <tr>
         <td align="center"><strong>Студент</strong></td>
@@ -57,7 +57,7 @@
 
     <% @students.sort_by{|x| x.user.surname}.each do |student| %>
       <tr>
-        <td>
+        <td style="white-space: nowrap">
           <%= "#{student.user.surname} #{student.user.name}" %>
 
           <% if @teacher && (not student.approved?) %>

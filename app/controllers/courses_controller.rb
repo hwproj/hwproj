@@ -8,7 +8,7 @@ class CoursesController < ApplicationController
   end
 
   def create
-    @course = Course.create(course_params)
+    @course = Course.create(course_params.merge(teacher_id: current_user.id))
     if @course.valid?
       @course.terms.create()
       redirect_to @course
@@ -95,7 +95,7 @@ class CoursesController < ApplicationController
 
   private
   def course_params
-    params.require(:course).permit(:group_name, :name, :default_max_grade).merge(teacher_id: current_user.id)
+    params.require(:course).permit(:group_name, :name, :default_max_grade)
   end
 
   def set_course

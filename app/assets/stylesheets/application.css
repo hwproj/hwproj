@@ -152,3 +152,117 @@ h3 {
     text-decoration: none;
     text-align: center;
 }
+
+/*--------------------------------------------*/
+/* Button for new homework wihout animated showing text */
+
+.button-add-hw {
+    display: inline-block;
+    width: auto;
+}
+
+.button-add-hw-plus {
+    display: inline-block;
+    width: 1em;
+    -webkit-transition: -webkit-transform 0.5s;
+    -moz-transition: -moz-transform 0.5s;
+    -o-transition: -o-transform 0.5s;
+    transition: transform 0.5s;
+}
+
+.button-add-hw-content, .button-add-hw-content .button-add-hw-inner {
+    display: inline;
+    width: 0;
+}
+
+.button-add-hw-content {
+    white-space: nowrap;
+}
+
+.button-add-hw-content .button-add-hw-inner {
+    margin-left: 5px;
+    display: none;
+}
+
+.button-add-hw:hover .button-add-hw-content .button-add-hw-inner {
+    display: inline;
+}
+
+.button-add-hw:hover .button-add-hw-plus {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+
+/*--------------------------------------------*/
+
+/*--------------------------------------------*/
+/* Button for new homework with animated showing text */
+/* Width before hover and after must be hardcoded. Transition does not work with width: auto */
+/*
+.button-add-hw {
+    margin-bottom: 3px;
+    display: inline-block;
+    width: 23px;
+    -webkit-transition: width 0.5s ease-in;
+    -moz-transition: width 0.5s ease-in;
+    -o-transition: width 0.5s ease-in;
+    transition: 0.5s ease-in;
+    overflow: hidden;
+}
+
+.button-add-hw-plus {
+    display: inline-block;
+    position: absolute;
+    left: 5px;
+    width: 1em;
+    -webkit-transition: -webkit-transform 0.5s;
+    -moz-transition: -moz-transform 0.5s;
+    -o-transition: -o-transform 0.5s;
+    transition: transform 0.5s;
+}
+
+.button-add-hw-content, .button-add-hw-content .inner {
+    display: inline;
+    width: 0;
+}
+
+.button-add-hw-content {
+    margin-left: 2px;
+    white-space: nowrap;
+    display: inline;
+    width: 0;
+
+}
+
+.button-add-hw-content .inner {
+    margin-left: 20px;
+    width: 0;
+    overflow: hidden;
+    display: inline;
+    transition: width 0.5s ease-in;
+}
+
+.button-add-hw:hover {
+    width: 150px;
+    -webkit-transition: width 0.5s ease-out;
+    -moz-transition: width 0.5s ease-out;
+    -o-transition: width 0.5s ease-out;
+    transition: all 0.5s ease-out;
+}
+
+.button-add-hw:hover .button-add-hw-content .inner {
+
+    overflow: visible;
+    display: inline;
+}
+
+.button-add-hw:hover .button-add-hw-plus {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+*/
+/*--------------------------------------------*/
