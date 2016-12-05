@@ -1,5 +1,25 @@
-<h3>Текущие курсы:</h3>
-<%= render 'courses/courses', { courses: @courses[:active] } %>
-
-<h3>Завершённые курсы:</h3>
-<%= render 'courses/courses', { courses: @courses[:finished] } %>
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="active">
+        <a data-toggle="tab" href="#active">Текущие курсы</a>
+      </li>
+      <li>
+        <a data-toggle="tab" href="#finished">Завершённые курсы</a>
+      </li>
+    </ul>
+  </div>
+</div>
+<br/>
+<div class="row">
+  <div class="col-md-12">
+    <div class="tab-content">
+      <div id="active" class="tab-pane fade in active">
+        <%= render 'courses/courses', { courses: @courses[:active] } %>
+      </div>
+      <div id="finished" class="tab-pane fade">
+        <%= render 'courses/courses', { courses: @courses[:finished] } %>
+      </div>
+    </div>
+  </div>
+</div>
