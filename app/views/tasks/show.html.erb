@@ -25,75 +25,77 @@
     <%= mail_to @student.user.email, @student.user.email %>
   </h4>
   <% end %>
-  </div>
+</div>
 <div class="col-md-8">
-  <div class="row"><div class="well well-small"> <%= markdown(@task.problem.text) %> </div></div>
-</div>
-<div class="col-md-7">
-  <% if @is_student && @task.status != "accepted" %>
-    <%= link_to "Добавить решение", new_submission_path(problem_id: @task.problem_id, task_id: @task.id), class: "btn btn-primary" %>
-  <% end %>
-
-  <% if @task.submissions.any? %>
-    <div id="notes" <%= 'style="display: none"'.html_safe unless @task.notes.any? %>>
-      <h3> Замечания </h3>
-      <%= render @task.notes.reverse %>
-    </div>
-  <% end %>
-
-  <% if @is_teacher %>
-    <% if @task.accepted? %>
-      <div class="btn-group">
-        <%= link_to "Принято", '#', class: "btn btn-success", disabled: true %>
-          <%= link_to "Отменить", task_path(@task, task: {status: after_cancel_status(@task)}), method: :put, class: "btn btn-default" %>
-      </div>
-    <% else %>
-      <% if @task.submissions.any? %>
-        <%= render 'note_form' %>
-      <% end %>
-      <br>
-
-      <%= link_to "Принять", task_path(@task, task: {status: "accepted"}), method: :put, class: "btn btn-success" %>
-      <%= link_to "Принять частично", task_path(@task, task: {status: "accepted_partially"}), method: :put, class: "btn btn-warning" %>
+  <div class="col-md-8">
+    <div class="row"><div class="well well-small"> <%= markdown(@task.problem.text) %> </div></div>
+  </div>
+  <div class="col-md-7">
+    <% if @is_student && @task.status != "accepted" %>
+      <%= link_to "Добавить решение", new_submission_path(problem_id: @task.problem_id, task_id: @task.id), class: "btn btn-primary" %>
     <% end %>
-    
-  <% end %>
 
-  <% if signed_in? %>
-    <%= link_to(@chat_button_title, switch_chat_task_path(@task), class: "btn btn-default", id: "chat-button", remote: true) %>
-  <% end %>
-  <br><br>
+    <% if @task.submissions.any? %>
+      <div id="notes" <%= 'style="display: none"'.html_safe unless @task.notes.any? %>>
+        <h3> Замечания </h3>
+        <%= render @task.notes.reverse %>
+      </div>
+    <% end %>
 
-  <% if @task.submissions.any? %>
-    <h3>Решения</h3>
-      <% @task.submissions.each do |submission| %>
-        <h5>
-          <div class="btn-group">
-            <%= link_to submission.file.url, class: "btn btn-default", disabled: (not submission.file?) do %>
-              <span class="glyphicon glyphicon-cloud-download"></span> <%= "v.#{submission.version}" %>
-            <% end %>
-            <% unless (not submission.url) || (submission.url.empty?) %>
-              <%= link_to submission.url, class: "btn btn-default" do %>
-                <span class="glyphicon glyphicon-link"></span> <%= submission.pull_request? ? "Pull request" : URI(submission.url).host %>
-              <% end %>
-            <% end %>
-          </div>
-          <%= submission.text %>
+    <% if @is_teacher %>
+      <% if @task.accepted? %>
+        <div class="btn-group">
+          <%= link_to "Принято", '#', class: "btn btn-success", disabled: true %>
+            <%= link_to "Отменить", task_path(@task, task: {status: after_cancel_status(@task)}), method: :put, class: "btn btn-default" %>
+        </div>
+      <% else %>
+        <% if @task.submissions.any? %>
+          <%= render 'note_form' %>
+        <% end %>
+        <br>
 
-          <small><%= submission.created_at.strftime("%H:%M %d.%m.%y") %></small>
-        </h5>
-
+        <%= link_to "Принять", task_path(@task, task: {status: "accepted"}), method: :put, class: "btn btn-success" %>
+        <%= link_to "Принять частично", task_path(@task, task: {status: "accepted_partially"}), method: :put, class: "btn btn-warning" %>
       <% end %>
-  <% end %>
-</div>
+      
+    <% end %>
+
+    <% if signed_in? %>
+      <%= link_to(@chat_button_title, switch_chat_task_path(@task), class: "btn btn-default", id: "chat-button", remote: true) %>
+    <% end %>
+    <br><br>
+
+    <% if @task.submissions.any? %>
+      <h3>Решения</h3>
+        <% @task.submissions.each do |submission| %>
+          <h5>
+            <div class="btn-group">
+              <%= link_to submission.file.url, class: "btn btn-default", disabled: (not submission.file?) do %>
+                <span class="glyphicon glyphicon-cloud-download"></span> <%= "v.#{submission.version}" %>
+              <% end %>
+              <% unless (not submission.url) || (submission.url.empty?) %>
+                <%= link_to submission.url, class: "btn btn-default" do %>
+                  <span class="glyphicon glyphicon-link"></span> <%= submission.pull_request? ? "Pull request" : URI(submission.url).host %>
+                <% end %>
+              <% end %>
+            </div>
+            <%= submission.text %>
+
+            <small><%= submission.created_at.strftime("%H:%M %d.%m.%y") %></small>
+          </h5>
+
+        <% end %>
+    <% end %>
+  </div>
 
 
-<div class="col-md-7">
-  <br> <br>
-  <% if @is_chat_shown %>
-    <div id="chat-id" style="display:block"> <%= render 'chat' %> </div>
-  <% else %>
-    <div id="chat-id" style="display:none"></div>
-  <% end %>
+  <div class="col-md-7">
+    <br> <br>
+    <% if @is_chat_shown %>
+      <div id="chat-id" style="display:block"> <%= render 'chat' %> </div>
+    <% else %>
+      <div id="chat-id" style="display:none"></div>
+    <% end %>
+  </div>
 </div>
 
