@@ -62,7 +62,7 @@ private
   end
 
   def sign_up_params
-    params.require(:user).permit(:name, :surname, :gender, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :surname, :email, :password, :password_confirmation)
   end
 
   def render_registration
