@@ -1,11 +1,10 @@
 class User < ActiveRecord::Base
-  validates :name, :surname, :gender, presence: true
+  validates :name, :surname, presence: true
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
   enum user_type: [ :student, :teacher ]
-  enum gender: [:male, :female ]
 
   belongs_to :group
   has_many :notifications, dependent: :destroy
