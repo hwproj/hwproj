@@ -1,5 +1,5 @@
-<div class="table-responsive">
-  <table class="table table-bordered table-condensed">
+<div id="course_table" class="table-responsive" style="overflow-x: auto;">
+  <table class="table table-bordered table-condensed" style="margin: 0">
     <thead>
       <tr>
         <td align="center"><strong>Студент</strong></td>
@@ -39,11 +39,7 @@
           <% else %>
             <% assignment.problems.order(:number).each do |problem| %>
               <td align="center">
-              <% if problem.name %>
-                <%= problem.name %>
-              <% else %>
-                <%= problem.number %>
-              <% end %>
+                <%= problem.get_displaying_name %>
               </td>
             <% end %>
 
@@ -57,8 +53,8 @@
 
     <% @students.sort_by{|x| x.user.surname}.each do |student| %>
       <tr>
-        <td>
-          <%= "#{student.user.surname} #{student.user.name}" %>
+        <td style="white-space: nowrap" title="<%= "#{student.user.surname} #{student.user.name}" %>">
+          <%= "#{student.user.surname} #{student.user.name[0]}." %>
 
           <% if @teacher && (not student.approved?) %>
             <%= link_to student_path(student, student: { approved: true }), method: :put do %>
