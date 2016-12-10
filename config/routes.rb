@@ -4,10 +4,12 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => { registrations: 'registrations' }
 
+  get 'courses/:id', to: 'courses#show_course', as: "show_course"
   get 'courses/:id/terms/:term_number', to: 'courses#show', as: "show_term"
   put 'courses/:id/terms/new', to: 'courses#add_term', as: "add_term"
   get 'courses/:id/statistics', to: 'courses#statistics', as: "show_statistics"
   put 'courses/:id/terms/delete_last', to: 'courses#delete_term', as: "delete_term"
+  get 'courses/:id/terms/:term_number/homeworks/new', to: 'homeworks#new', as: "new_homework"
   # GitHub Authorization callback
   get 'github/callback'
   # Webhooks url
