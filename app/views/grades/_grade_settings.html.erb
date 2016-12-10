@@ -3,6 +3,6 @@
   <%= label_tag :has_grade_label, "Включить оценку" %>
   <%= check_box_tag :has_grade, 1, @grade > 1 , data: { behavior: "update-has_grade" } %>
   <div id="grade" <%= "style=display:none" if @grade == 1 %>>
-    <%= f.input id, label: text, input_html: { min: 2, max: 100, value: @grade } %>
+    <%= f.input id, label: text, input_html: { min: 2, max: 10, value: @grade } %>
   </div>
 </div>
