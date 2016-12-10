@@ -140,3 +140,46 @@ h3 {
   border-spacing: 8px;
   border-collapse: separate;
 }
+
+/* Class for button with rotating sign. Content shows when sign is hovering */
+.button-add-hw {
+    display: inline-block;
+    width: auto;
+}
+
+/* Class for rotating sign */
+.button-add-hw-sign {
+    display: inline-block;
+    width: 1em;
+    -webkit-transition: -webkit-transform 0.5s;
+    -moz-transition: -moz-transform 0.5s;
+    -o-transition: -o-transform 0.5s;
+    transition: transform 0.5s;
+}
+
+/* Classes for divs of content. Div with inner class includes in div with content's class. */
+/* Content must be in inner div. */
+.button-add-hw-content, .button-add-hw-content .button-add-hw-inner {
+    display: inline;
+    width: 0;
+}
+
+.button-add-hw-content {
+    white-space: nowrap;
+}
+
+.button-add-hw-content .button-add-hw-inner {
+    margin-left: 5px;
+    display: none;
+}
+
+.button-add-hw:hover .button-add-hw-content .button-add-hw-inner {
+    display: inline;
+}
+
+.button-add-hw:hover .button-add-hw-sign {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}

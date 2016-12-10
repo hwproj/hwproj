@@ -1,8 +1,17 @@
 class HomeworksController < ApplicationController
   before_action :set_assignment, only: [ :edit, :update, :destroy ]
 
+  @@old_hw = nil
+
   def new
+    unless (@@old_hw.nil?)
+      @assignment = @@old_hw
+      @@old_hw = nil
+      return @assignment
+    end
     @assignment = Homework.new
+    @assignment.term = get_current_term
+    return @assignment
   end
 
   def create
@@ -14,7 +23,8 @@ class HomeworksController < ApplicationController
       create_jobs_and_tasks
       redirect_to @assignment.term.course
     else
-      render "new"
+      @@old_hw = @assignment
+      redirect_to :back
     end
   end
 
@@ -84,5 +94,9 @@ class HomeworksController < ApplicationController
 
     def set_assignment
       @assignment = Homework.find(params[:id])
+    end
+
+    def get_current_term
+      Course.find(params[:id]).terms.where(number: params[:term_number]).last
     end
 end
