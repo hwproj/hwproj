@@ -1,9 +1,21 @@
-<h2>Задачи</h2>
+<h2 style="margin: 10px 5px 5px 0; display: inline-block;">Задачи </h2>
+<% if (not current_user.nil?) and current_user.courses.where(id: @course.id).length != 0 %>
+  <div class="btn-group btn-group-xs button-add-hw" style="margin: 0 0 5px 0;"> <%#btn-group btn-group-xs %>
+    <%= link_to new_homework_path, class: "btn btn-success button-add-hw" do%>
+        <div class="button-add-hw-sign"><div class='glyphicon glyphicon-plus'></div></div>
+        <div class="button-add-hw-content"><div class="button-add-hw-inner">Добавить задание</div></div>
+    <% end %>
+  </div>
+<% end %>
+<br>
 <style>
 pre {
   overflow: visible;
 }
 </style>
+<% unless @assignments.any? %>
+    <h3>Здесь пока ничего нет.</h3>
+<% end %>
 <% @assignments.reverse.each do |assignment| %>
   <strong>
     <% if assignment.homework? %>
