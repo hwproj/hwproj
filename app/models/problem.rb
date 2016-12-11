@@ -12,7 +12,7 @@ class Problem < ActiveRecord::Base
   def displaying_name
     name ? name : number
   end
-  
+
   def get_name
     if self.name && (not self.name.blank?)
       name = self.name
