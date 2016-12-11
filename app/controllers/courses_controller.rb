@@ -1,14 +1,14 @@
 class CoursesController < ApplicationController
   include Markdown
   helper_method :markdown
-  before_action :set_course, only: [ :edit, :show, :update, :add_term, :delete_term, :statistics ]
+  before_action :set_course, only: [ :edit, :show, :show_course, :update, :add_term, :delete_term, :statistics ]
 
   def new
     @course = Course.new
   end
 
   def create
-    @course = Course.create(course_params)
+    @course = Course.create(course_params.merge(teacher_id: current_user.id))
     if @course.valid?
       @course.terms.create()
       redirect_to @course
@@ -20,11 +20,7 @@ class CoursesController < ApplicationController
   def show
     @terms = @course.terms.reverse
 
-    if params[:term_number]
-      @term = @course.terms.find_by number: params[:term_number]
-    else
-      @term = @course.terms.last
-    end
+    @term = @course.terms.find_by(number: params[:term_number])
     raise ActionController::RoutingError.new 'Not Found' if @term.nil?
 
     @teacher_id = @course.teacher_id
@@ -48,6 +44,10 @@ class CoursesController < ApplicationController
     end
 
     @assignments = @term.assignments.order(:id).includes(:problems)
+  end
+
+  def show_course
+    redirect_to show_term_path(term_number: @course.terms.last.number)
   end
 
   def statistics
@@ -95,7 +95,7 @@ class CoursesController < ApplicationController
 
   private
   def course_params
-    params.require(:course).permit(:group_name, :name).merge(teacher_id: current_user.id)
+    params.require(:course).permit(:group_name, :name, :default_max_grade)
   end
 
   def set_course

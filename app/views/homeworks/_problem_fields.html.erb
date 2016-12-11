@@ -1,5 +1,6 @@
 <div class='nested-fields'>
   <%= f.input :name, label: "Имя (опционально)" %>
+  <%= render 'grades/grade_settings', { f: f, id: :max_grade, text: 'Максимальная оценка' } %>
   <%= f.input :text, label: "Условие", input_html: { rows: 3 }%>
   <%= link_to_remove_association "Удалить задачу", f, class: "btn btn-danger" %>
 </div>

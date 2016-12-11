@@ -33,7 +33,7 @@ class TasksController < ApplicationController
   end
 
   def update
-  	@task.update(params.require(:task).permit(:status))
+  	@task.update(params.require(:task).permit(:status, :grade))
     @task.touch
     if (params[:task][:status] == "accepted")
       event_type = :task_accepted

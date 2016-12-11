@@ -1,3 +1,9 @@
+<script>
+  $(document).ready( function(){
+    $('[data-toggle="tooltip"]').tooltip({container: 'body'});
+    $('[name="with_tooltip"]').tooltip({container: 'body'});
+  });
+</script>
 <div class="col-md-8">
   <p>
     <%= link_to 'Назад к курсу', @course %>
@@ -45,23 +51,38 @@
     <% if @task.accepted? %>
       <div class="btn-group">
         <%= link_to "Принято", '#', class: "btn btn-success", disabled: true %>
-          <%= link_to "Отменить", task_path(@task, task: {status: after_cancel_status(@task)}), method: :put, class: "btn btn-default" %>
+          <%= link_to "Отменить", task_path(@task, task: {status: after_cancel_status(@task), grade: 0}), method: :put, class: "btn btn-default" %>
       </div>
     <% else %>
       <% if @task.submissions.any? %>
         <%= render 'note_form' %>
       <% end %>
       <br>
-
-      <%= link_to "Принять", task_path(@task, task: {status: "accepted"}), method: :put, class: "btn btn-success" %>
+      <div class="btn-group" role="group">
+        <%= link_to "Принять", task_path(@task, task: { status: "accepted", grade: @task.problem.max_grade }), method: :put, class: "btn btn-success", "data-toggle": "tooltip", "data-placement": "left", title: (@task.problem.max_grade > 1 ? "На полный балл" : "") %>
+        <% if @task.problem.max_grade > 1 %>
+          <button name="with_tooltip" type="button" class="btn btn-success dropdown-toggle" style="width: auto" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-placement="top" title="Выбрать оценку">
+            <span class="caret"></span>
+            <span class="sr-only">Toggle Dropdown</span>
+          </button>
+          <ul class="dropdown-menu">
+            <% (1..@task.problem.max_grade).each do |x| %>
+              <li><%= link_to "#{x} #{ x == 1 ? "балл" : x < 5 ? "балла" : "баллов"}", task_path(@task, task: { status: "accepted", grade: x }), method: :put %></li>
+            <% end %>
+          </ul>
+        <% end %>
       <%= link_to "Принять частично", task_path(@task, task: {status: "accepted_partially"}), method: :put, class: "btn btn-warning" %>
+      </div>
     <% end %>
+
+
     
   <% end %>
 
   <% if signed_in? %>
-    <%= link_to(@chat_button_title, switch_chat_task_path(@task), class: "btn btn-default", id: "chat-button", remote: true) %>
+      <%= link_to(@chat_button_title, switch_chat_task_path(@task), class: "btn btn-default", id: "chat-button", remote: true) %>
   <% end %>
+
   <br><br>
 
   <% if @task.submissions.any? %>
