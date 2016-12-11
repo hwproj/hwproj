@@ -9,7 +9,7 @@ class Problem < ActiveRecord::Base
 
   accepts_nested_attributes_for :links, reject_if: :all_blank, allow_destroy: true
 
-   def get_name
+  def get_name
     if self.name && (not self.name.blank?)
       name = self.name
     else
