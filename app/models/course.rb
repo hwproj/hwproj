@@ -45,21 +45,24 @@ class Course < ActiveRecord::Base
 
   def max_of_attempts_to_pass_number_hash
     Hash[
-      self.terms.zip Term.where(course_id: self.id).collect { |term| term.tasks.
+      self.terms.zip Term.where(course_id: self.id).
+      select { |term| term.tasks.count > 0 }.collect { |term| term.tasks.
         max_by { |task| task.submissions.count } .submissions.count }
       ]
   end
 
   def min_attempts_number_problem_hash
     Hash[
-      self.terms.zip Term.where(course_id: self.id).collect { |term| term.tasks.
+      self.terms.zip Term.where(course_id: self.id).
+      select { |term| term.tasks.count > 0 }.collect { |term| term.tasks.
         min_by { |task| task.submissions.count } .problem }
       ]
   end
 
   def max_attempts_number_problem_hash
     Hash[
-      self.terms.zip Term.where(course_id: self.id).collect { |term| term.tasks.
+      self.terms.zip Term.where(course_id: self.id).
+      select { |term| term.tasks.count > 0 }.collect { |term| term.tasks.
         max_by { |task| task.submissions.count } .problem }
       ]
   end
