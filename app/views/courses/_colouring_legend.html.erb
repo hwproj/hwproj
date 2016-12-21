@@ -1,0 +1,21 @@
+<a style="padding: 10px 4px 4px 4px " data-placement="bottom" data-toggle="popover" data-trigger="hover" data-container="body" data-placement="right" type="button" data-html="true" href="#" id="legend">
+    <span style="font-size: 16px;" class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+</a>
+<div id="popover-content" class="hide">
+  <ul class="list-group">
+    <li class="list-group-item task-with-submissions">Загружено решение</li>
+    <li class="list-group-item task-with-notes">Есть замечания</li>
+    <li class="list-group-item task-with-new-submissions-and-notes">Загружено новое решение</li>
+    <li class="list-group-item accepted-task">Решение принято</li>
+  </ul>
+</div>
+
+<script type="text/javascript">
+$("[data-toggle=popover]").popover({
+    html: true, 
+    content:
+        function() {
+          return $('#popover-content').html();
+        }
+});
+</script> 
