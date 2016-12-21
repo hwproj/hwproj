@@ -37,7 +37,7 @@ class CoursesController < ApplicationController
     end
 
     if signed_in? && current_user.student?
-      @student = @term.students.find_by user_id: current_user.id
+      @student = @term.students.find_by user: current_user
     end
 
     @tasks = @student.tasks if @student
@@ -59,7 +59,7 @@ class CoursesController < ApplicationController
       if current_user.id == @teacher_id
         @teacher = true
       elsif current_user.student?
-        @student = @terms.collect { |term| term.students.where(user_id: current_user.id) }.flatten.any?
+        @student = Student.where(approved: true,  user_id: current_user, term: @terms).any?
       end
     end
 
