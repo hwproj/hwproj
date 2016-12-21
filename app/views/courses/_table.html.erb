@@ -39,7 +39,7 @@
           <% else %>
             <% assignment.problems.order(:number).each do |problem| %>
               <td align="center">
-                <%= problem.get_displaying_name %>
+                <%= problem.displaying_name %>
               </td>
             <% end %>
 
@@ -53,8 +53,8 @@
 
     <% @students.sort_by{|x| x.user.surname}.each do |student| %>
       <tr>
-        <td style="white-space: nowrap" title="<%= "#{student.user.surname} #{student.user.name}" %>">
-          <%= "#{student.user.surname} #{student.user.name[0]}." %>
+        <td style="white-space: nowrap">
+          <%= "#{student.user.surname} #{student.user.name}" %>
 
           <% if @teacher && (not student.approved?) %>
             <%= link_to student_path(student, student: { approved: true }), method: :put do %>

@@ -9,7 +9,7 @@ class Problem < ActiveRecord::Base
 
   accepts_nested_attributes_for :links, reject_if: :all_blank, allow_destroy: true
 
-  def get_displaying_name
+  def displaying_name
     name ? name : number
   end
 
