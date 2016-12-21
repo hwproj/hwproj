@@ -3,7 +3,7 @@
     <% if @course.active? %>
       <%= link_to 'Завершить курс', course_path(@course, course: { active: false }), method: :put, data: { confirm: 'Вы уверены, что хотите завершить курс?' }, class: 'btn btn-default', style: 'color:inherit' %>
     <% else %>
-      <%= link_to 'Сделать курс активным вновь', course_path(@course, course: { active: true }), method: :put, data: { confirm: 'Вы уверены, что сделать курс снова активным?' }, class: 'btn btn-default', style: 'color:green' %>
+      <%= link_to 'Возобновить курс', course_path(@course, course: { active: true }), method: :put, class: 'btn btn-default', style: 'color:green' %>
     <% end %>
 	  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	    <span class="caret"></span>
