@@ -18,7 +18,7 @@
     <% if !@teacher %>
       <h3> <%= @course.teacher.full_name %> </h3>
       <h3>
-        <% if !@student.nil? %>
+        <% if @student %>
           <%= mail_to @course.teacher.email do %>
             <%= @course.teacher.email %>
           <% end %>

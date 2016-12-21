@@ -51,7 +51,7 @@ class CoursesController < ApplicationController
   end
 
   def statistics
-    @terms = @course.terms.reverse
+    @terms = @course.terms
     @teacher_id = @course.teacher_id
     @statistics = true
 
@@ -59,7 +59,7 @@ class CoursesController < ApplicationController
       if current_user.id == @teacher_id
         @teacher = true
       elsif current_user.student?
-        @student = @terms.collect { |term| term.students.where(user_id: current_user.id) }.any?
+        @student = @terms.collect { |term| term.students.where(user_id: current_user.id) }.flatten.any?
       end
     end
 
