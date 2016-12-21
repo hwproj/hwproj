@@ -1,4 +1,7 @@
 class StudentsController < ApplicationController
+  include ErrorsHelper
+  include PermissionsHelper
+
   before_action :set_student, only: [ :update, :destroy ]
   before_action :check_permissions, only: [ :update, :destroy ]
 
@@ -39,7 +42,7 @@ class StudentsController < ApplicationController
     end
 
     def check_permissions
-      redirect_to security_error_path unless
-          ErrorsController.has_edit_course_permissions(current_user, @student.term.course)
+      Errors.forbidden(self) unless
+          Permissions.has_edit_course_permissions?(current_user, @student.term.course)
     end
 end

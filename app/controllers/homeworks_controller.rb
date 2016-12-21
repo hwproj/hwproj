@@ -1,4 +1,7 @@
 class HomeworksController < ApplicationController
+  include ErrorsHelper
+  include PermissionsHelper
+
   before_action :set_assignment, :check_edit_permissions, only: [ :edit, :update, :destroy ]
 
   def new
@@ -87,7 +90,7 @@ class HomeworksController < ApplicationController
     end
 
     def check_edit_permissions
-      redirect_to security_error_path unless
-          ErrorsController.has_edit_course_permissions(current_user, @assignment.term.course)
+      Errors.forbidden(self) unless
+          Permissions.has_edit_course_permissions?(current_user, @assignment.term.course)
     end
 end

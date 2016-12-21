@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   put 'courses/:id/terms/new', to: 'courses#add_term', as: "add_term"
   get 'courses/:id/statistics', to: 'courses#statistics', as: "show_statistics"
   put 'courses/:id/terms/delete_last', to: 'courses#delete_term', as: "delete_term"
-  get '403', to: 'errors#security_error', as: "security_error"
   # GitHub Authorization callback
   get 'github/callback'
   # Webhooks url

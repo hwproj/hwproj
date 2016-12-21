@@ -1,5 +1,7 @@
 class CoursesController < ApplicationController
   include Markdown
+  include ErrorsHelper
+  include PermissionsHelper
   helper_method :markdown
 
   before_action :set_course, only: [ :edit, :show, :update, :add_term, :delete_term, :destroy, :statistics ]
@@ -110,7 +112,7 @@ class CoursesController < ApplicationController
   end
 
   def check_edit_permissions
-    redirect_to security_error_path unless
-        ErrorsController.has_edit_course_permissions(current_user, @course)
+    Errors.forbidden(self) unless
+        Permissions.has_edit_course_permissions?(current_user, @course)
   end
 end
