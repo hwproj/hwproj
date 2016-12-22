@@ -1,31 +1,33 @@
 <h2>Редактировать профиль</h2>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
+<div class="col-md-4">
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :name, label: "Имя", autofocus: true, required: false %>
-    <%= f.input :surname, label: "Фамилия", required: false %>
+    <div class="form-inputs">
+      <%= f.input :name, label: "Имя", autofocus: true, required: false %>
+      <%= f.input :surname, label: "Фамилия", required: false %>
 
-    <%= f.input :email, label: "Email" %>
+      <%= f.input :email, label: "Email" %>
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Ожидает подтверждения: <%= resource.unconfirmed_email %></p>
-    <% end %>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <p>Ожидает подтверждения: <%= resource.unconfirmed_email %></p>
+      <% end %>
 
-    <%= f.input :password, label: "Пароль", autocomplete: "off", hint: "Оставьте пустым, если не хотите менять пароль", required: false %>
-    <%= f.input :password_confirmation, label: "Подтверждение", hint: "Оставьте пустым, если не хотите менять пароль", required: false %>
-    <%= f.input :current_password, label: "Текущий пароль", hint: "Введите текущий пароль, чтобы сохранить изменения" %>
-  </div>
-  <br>
+      <%= f.input :password, label: "Пароль", autocomplete: "off", hint: "Оставьте пустым, если не хотите менять пароль", required: false %>
+      <%= f.input :password_confirmation, label: "Подтверждение", hint: "Оставьте пустым, если не хотите менять пароль", required: false %>
+      <%= f.input :current_password, label: "Текущий пароль", hint: "Введите текущий пароль, чтобы сохранить изменения" %>
+    </div>
+    <br>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Сохранить", class: "btn btn-primary" %>
-  </div>
-<% end %>
+    <div class="form-actions">
+      <%= f.button :submit, "Сохранить", class: "btn btn-primary" %>
+    </div>
+  <% end %>
 
-<h3>Удалить аккаунт</h3>
+  <h3>Удалить аккаунт</h3>
 
-<p>Unhappy? <%= link_to "Удалить мой аккаунт", registration_path(resource_name), data: { confirm: "Вы уверены?" }, method: :delete %></p>
+  <p>Unhappy? <%= link_to "Удалить мой аккаунт", registration_path(resource_name), data: { confirm: "Вы уверены?" }, method: :delete %></p>
 
-<%= link_to "Назад", :back %>
+  <%= link_to "Назад", :back %>
+</div>
