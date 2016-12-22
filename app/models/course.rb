@@ -22,13 +22,6 @@ class Course < ActiveRecord::Base
     ]
   end
 
-  def accepted_tasks_number_hash
-      Hash[
-        self.terms.zip Term.where(course_id: self.id).collect { |term| term.tasks.flatten.
-          select { |task| task.accepted?} .count }
-      ]
-  end
-
   def first_try_accepted_number_hash
     Hash[
       self.terms.zip Term.where(course_id: self.id).collect { |term| term.tasks.flatten.
