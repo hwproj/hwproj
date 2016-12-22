@@ -24,18 +24,8 @@ class Task < ActiveRecord::Base
 
 
   def name
-    if problem.name || (not problem.name.blank?)
-      name = problem.name
-    else
-      name = "#{problem.homework.number}.#{problem.number}"
-    end
-
-    name = "Тест, " + name if problem.homework.test?
-
-    name
+    problem.get_name
   end
-
-
 
   private
     def accept_notes
