@@ -29,7 +29,7 @@ class RegistrationsController < Devise::RegistrationsController
       end
 
       def after_update_path_for(resource)
-        stored_location_for(resource)
+        current_user
       end
 
   private
