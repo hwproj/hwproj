@@ -22,6 +22,16 @@ class RegistrationsController < Devise::RegistrationsController
   #   redirect_to @group
   # end
 
+  protected
+
+      def update_resource(resource, params)
+        resource.update_without_password(params)
+      end
+
+      def after_update_path_for(resource)
+        stored_location_for(resource)
+      end
+
   private
 
     # def add_tasks
@@ -46,6 +56,8 @@ class RegistrationsController < Devise::RegistrationsController
     end
 
     def account_update_params
-      params.require(:user).permit(:name, :surname, :gender, :email, :password, :password_confirmation, :current_password)
+      params.require(:user).permit(:name, :surname, :gender, :email, :password, :password_confirmation, :current_password, :submission_form_type)
     end
+
+
 end

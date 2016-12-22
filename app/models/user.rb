@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   include Storext.model
 
   store_attributes :settings do
-    submission_form_type Array[String], default: ["0","Shift+Enter"]
+    submission_form_type String, default: "Shift+Enter"
   end
 
   before_create do

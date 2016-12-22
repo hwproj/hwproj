@@ -8,4 +8,15 @@ module TasksHelper
       "not_submitted"
     end
   end
+
+  def idTypeOfSubmissionInEnum(type)
+    case (type)
+    when "Shift+Enter"
+      return 0;
+    when "Ctrl+Enter"
+      return 1;
+    when "Enter"
+      return 2;
+    end
+  end
 end

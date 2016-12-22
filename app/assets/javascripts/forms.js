@@ -34,9 +34,9 @@ jQuery(document).on('ready page:load page:restore', function() {
      });
 
      $('#new_note, #new_message').keydown(function(event) {
-       if (submission_form_type == "Ctrl+Enter" && event.which == 13 && event.ctrlKey ||
-           submission_form_type == "Shift+Enter" && event.which == 13 && event.shiftKey ||
-           submission_form_type == "Enter" && event.which == 13 && !event.ctrlKey && !event.shiftKey)
+       if (submit_shortcut == "Ctrl+Enter" && event.which == 13 && event.ctrlKey ||
+           submit_shortcut == "Shift+Enter" && event.which == 13 && event.shiftKey ||
+           submit_shortcut == "Enter" && event.which == 13 && !event.ctrlKey && !event.shiftKey)
            {
              event.preventDefault();
              $(this).submit();
@@ -51,9 +51,9 @@ jQuery(document).on('ready page:load page:restore', function() {
     {
       $(".help-block").each(function() {
         var $this = $(this);
-        $this.text($this.text().replace(submission_form_type, str1).replace(str2, str3))
+        $this.text($this.text().replace(submit_shortcut, str1).replace(str2, str3))
       });
-      submission_form_type = str1;
+      submit_shortcut = str1;
     }
 
     $("body").on('change', "[name=submission_form_type]", function(){
@@ -72,7 +72,7 @@ jQuery(document).on('ready page:load page:restore', function() {
         replaceHints("Enter", "Enter –", "Shift+Enter –");
       }
 
-//This is the magic that`s needed for correct work of popover
+//--------This is the magic that`s needed for correct work of popover----------
       $(".popover-content [name=submission_form_type]").each(function() {
         this.removeAttribute("checked");
       });
@@ -81,5 +81,13 @@ jQuery(document).on('ready page:load page:restore', function() {
 
       $("#popover_content_wrapper").html($(".popover-content").html());
       $(".popover-content").html($("#popover_content_wrapper").html());
+//-----------------------------------------------------------------------------
+
+    $.ajax({
+      type : 'PUT',
+      url : '/users',
+      data : {'user' : { 'submission_form_type':  submit_shortcut }}
+    })
+
     });
 });

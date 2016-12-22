@@ -1,5 +1,5 @@
 <%= javascript_tag do %>
-  var submission_form_type = "<%= current_user.submission_form_type[1] %>"
+  var submit_shortcut = "<%= current_user.submission_form_type %>"
 <% end %>
 
 <div class="col-md-8">
@@ -97,8 +97,7 @@
 <h4>  Настройка отправки</h4>
   <% User.submission_form_types.keys.each do |key| %>
   <div>
-    <%= radio_button_tag "submission_form_type",  key, current_user.settings[:submission_form_type][0].to_i == User.submission_form_types[key]  %>
-
+    <%= radio_button_tag "submission_form_type",  key, idTypeOfSubmissionInEnum(current_user.submission_form_type) == User.submission_form_types[key]  %>
     <% case key %>
     <% when "shift_enter" %>
       Shift+Enter
@@ -109,6 +108,7 @@
     <% end %>
   </div>
  <% end %>
+
 </div>
 
 
