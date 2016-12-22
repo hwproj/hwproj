@@ -47,9 +47,14 @@
       </ul>
     <% end %>
     <% if @section != 'important' %>
+      <div id = "change_order">
+        <% if (@section == 'unread' && current_user.has_unread_notifications) || (@section == 'show_all' && @notifications.any?) %>
+            <%= link_to "В обратном порядке", welcome_path(0, page: 1, section: @section), id: "change_link", method: :patch, remote: true%>
+        <%end%>
+      </div>
       <div id = "notifications" class="notifications">
         <% if (@section == 'unread' && current_user.has_unread_notifications) || (@section == 'show_all' && @notifications.any?) %>
-          <%= render @notifications %>
+            <%= render @notifications %>
         <% else %>
           <%= Notification.no_notifications_message section: @section%>
         <% end %>
