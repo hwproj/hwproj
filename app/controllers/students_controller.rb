@@ -1,5 +1,10 @@
 class StudentsController < ApplicationController
+  include ErrorsHelper
+  include PermissionsHelper
+
   before_action :set_student, only: [ :update, :destroy ]
+  before_action :check_permissions, only: [ :update, :destroy ]
+
   def create
     @student = Student.create(student_params)
 
@@ -34,5 +39,10 @@ class StudentsController < ApplicationController
 
     def set_student
       @student = Student.find(params[:id])
+    end
+
+    def check_permissions
+      Errors.forbidden(self) unless
+          Permissions.has_edit_course_permissions?(current_user, @student.term.course)
     end
 end
