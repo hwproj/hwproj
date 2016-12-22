@@ -68,7 +68,7 @@
 
           <% if @teacher && student.approved? %>
             <%= link_to student, method: :delete, data: { confirm: 'Are you sure?' } do %>
-              <span style="color:#d9534f" class="glyphicon glyphicon-remove"></span>
+              <span style="color:#d9534f" class="remove-user glyphicon glyphicon-remove"></span>
             <% end %>
           <% end %>
 
