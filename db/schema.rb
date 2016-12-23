@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160903073618) do
+ActiveRecord::Schema.define(version: 20161215134838) do
 
   create_table "awards", force: true do |t|
     t.integer  "job_id"
@@ -193,6 +193,8 @@ ActiveRecord::Schema.define(version: 20160903073618) do
     t.boolean  "approved",               default: false
     t.string   "github_access_token"
     t.boolean  "admin",                  default: false
+    t.string   "provider"
+    t.string   "uid"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

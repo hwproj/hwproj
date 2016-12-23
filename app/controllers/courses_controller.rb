@@ -83,6 +83,7 @@ class CoursesController < ApplicationController
 
     @problems_with_max_attempts_to_pass = @terms.map { |term| term.max_attempts_to_pass_problem.problem.get_name }
 
+
   end
 
   def index

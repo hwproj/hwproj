@@ -26,6 +26,14 @@ class Term < ActiveRecord::Base
     assignments.where(assignment_type: "test")
   end
 
+  def accepted_tasks_count
+    tasks.where(status: :accepted).count
+  end
+
+  def notes_count
+    tasks.notes.count
+  end
+
   private
     def set_number
       self.number = self.course.terms.count + 1

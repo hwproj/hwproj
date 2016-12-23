@@ -21,13 +21,9 @@
       </tr>
     </thead>
 
-  <%= get_statistic_text("Комментариев к задачам", @notes_total, ->(term){ @notes_number(term) }, @terms) %>
+  <%= statistics_line("Принято задач", @notes_count_total, @notes_count) %>
 
-  <%= get_statistic_text("Всего сдано задач", @accepted_tasks_total, ->(term){ @accepted_tasks_number(term) }, @terms) %>
-
-  <%= get_statistic_text("Сдано задач с первого раза", @first_try_accepted_total, ->(term){ @first_try_accepted_number(term) }, @terms) %>
-
-  <%= get_statistic_text("Всего попыток сдать задачи", @attempts_to_pass_total, ->(term){ @attempts_to_pass_number(term) }, @terms) %>
+  <%= statistics_line("Принято задач", @accepted_tasks_total, @accepted_tasks) %>
 
   </table>
 </div>
