@@ -25,11 +25,21 @@ class RegistrationsController < Devise::RegistrationsController
   protected
 
       def update_resource(resource, params)
-        resource.update_without_password(params)
+        update_params = account_update_params
+        if (update_params[:submission_form_type])
+          resource.update_without_password(update_params)
+        else
+          resource.update_with_password(update_params)
+        end
       end
 
       def after_update_path_for(resource)
-        current_user
+        update_params = account_update_params
+        if (update_params[:submission_form_type])
+          return session[:task_url]
+        else
+          return "/"
+        end
       end
 
   private
@@ -58,6 +68,4 @@ class RegistrationsController < Devise::RegistrationsController
     def account_update_params
       params.require(:user).permit(:name, :surname, :gender, :email, :password, :password_confirmation, :current_password, :submission_form_type)
     end
-
-
 end
