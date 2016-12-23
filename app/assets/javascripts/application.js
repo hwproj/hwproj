@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require showdown
 //= require_tree .
 
 //= require cocoon

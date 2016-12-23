@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => { registrations: 'registrations' }
 
+  get 'tasks/:id/markdown', to: 'modals#markdown_help_modal', as: "markdown_modal"
   get 'courses/:id/terms/:term_number', to: 'courses#show', as: "show_term"
   put 'courses/:id/terms/new', to: 'courses#add_term', as: "add_term"
   get 'courses/:id/statistics', to: 'courses#statistics', as: "show_statistics"
@@ -21,7 +22,7 @@ Rails.application.routes.draw do
   resources :tasks, only: [ :show, :update ] { member { get 'switch_chat' } }
 
   resources :messages
-  
+
   resources :submissions, only: [ :new, :create, :index, :update ]
   resources :problems, only: [ :show ]
   resources :notes

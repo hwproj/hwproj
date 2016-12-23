@@ -4,4 +4,4 @@
   <table id="chat-table"><%= render partial: 'message', collection: @task.messages %></table>
 </div>
 
-<%= render 'new_message_form' %>
+<%= render partial: "tabs_for_form", locals: {comment: "message"} %>

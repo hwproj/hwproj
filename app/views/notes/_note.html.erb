@@ -5,7 +5,7 @@
     <span class="glyphicon glyphicon-exclamation-sign"></span>
   <% end %>
 
-  <%= note.text.gsub("\n", "<br />").html_safe %>
+  <span class="markdown"><%= note.text.gsub("\n", "<br />").html_safe %></span>
   <small><strong><%= "v.#{note.submission.version}" %></strong><%=", #{note.created_at.strftime("%H:%M %d.%m.%y")}" %></small>
 
   <% if signed_in? && current_user.teacher? %>

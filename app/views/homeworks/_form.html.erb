@@ -1,20 +1,33 @@
-<%= simple_form_for @assignment do |f| %>
-  
-  <%= f.association :term, collection: current_user.courses.map{|x| x.terms.last}.sort_by{|x| x.group_name}, label_method: :group_name, label: "Группа" %>
-  <%= f.input :assignment_type, collection: { "Домашняя работа" => :homework, "Тест" => :test }, label: "Тип" %>
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" href="#new_homework-form">Редактирование</a></li>
+      <li><a data-toggle="tab" href="#new_homework-preview">Предпросмотр</a></li>
+    </ul>
+    <div class="tab-content">
+      <div id="new_homework-form" class="tab-pane fade in active">
+        <%= simple_form_for @assignment do |f| %>
 
-  <%= f.simple_fields_for :problems do |problem| %>
-    <%= render 'problem_fields', f: problem %>
-  <% end %>
+          <%= f.association :term, collection: current_user.courses.map{|x| x.terms.last}.sort_by{|x| x.group_name}, label_method: :group_name, label: "Группа" %>
+          <%= f.input :assignment_type, collection: { "Домашняя работа" => :homework, "Тест" => :test }, label: "Тип" %>
 
-  <%= f.simple_fields_for :links do |link| %>
-    <%= render 'link_fields', f: link %>
-  <% end %>
+          <%= f.simple_fields_for :problems do |problem| %>
+            <%= render 'problem_fields', f: problem %>
+          <% end %>
 
-  <div class="links">
-    <%= link_to_add_association 'Добавить задачу', f, :problems, class: "btn btn-default" %>
-    <%= link_to_add_association 'Добавить ссылку', f, :links, class: "btn btn-default" %>
-  </div>
+          <%= f.simple_fields_for :links do |link| %>
+            <%= render 'link_fields', f: link %>
+          <% end %>
 
-  <%= f.button :submit, "Сохранить работу", class: "btn btn-primary" %>
-<% end %>
+          <div class="links">
+            <br>
+            <%= link_to_add_association 'Добавить задачу', f, :problems, class: "btn btn-default" %>
+            <%= link_to_add_association 'Добавить ссылку', f, :links, class: "btn btn-default" %>
+          </div>
+          <br>
+
+          <%= f.button :submit, "Сохранить работу", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+      <div id="new_homework-preview" class="tab-pane fade">
+        <p id="new_homework-preview-text"></p>
+      </div>
+    </div>

@@ -37,8 +37,23 @@ h3 {
 	margin-top: 0;
 }
 
-.navbar {
-	padding-left: 10px;
+.panel-heading {
+	padding-left: 9px;
+	padding-top: 6px;
+	padding-bottom: 0px;
+}
+
+.form-tabs {
+	border: none;
+}
+
+.panel-body {
+	padding: 9px 7px 9px;
+}
+
+.form-tabs>li>a {
+    padding-top: 9px;
+    padding-bottom: 7px;
 }
 
 .navbar-inverse .navbar-right .navbar-nav li a,
@@ -139,4 +154,12 @@ h3 {
 #chat-table {
   border-spacing: 8px;
   border-collapse: separate;
+}
+
+#message-preview-text {
+	min-height: 159px;
+}
+
+#note-preview-text {
+	min-height: 159px;
 }
