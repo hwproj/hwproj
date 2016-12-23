@@ -15,32 +15,49 @@ class Course < ActiveRecord::Base
     }
   end
 
-  def notes_number_hash
-    Hash[
-      self.terms.zip Term.where(course_id: self.id).collect { |term| term.tasks.
-        collect { |task| task.notes } .flatten.count }
-    ]
+  # def notes_number_hash
+  #   Hash[
+  #     self.terms.zip Term.where(course_id: self.id).collect { |term| term.tasks.
+  #       collect { |task| task.notes } .flatten.count }
+  #   ]
+  # end
+
+  def notes_number
+    # Note.where(course_id: self.id, term: terms).count
+    notes.count
   end
 
-  def accepted_tasks_number_hash
-      Hash[
-        self.terms.zip Term.where(course_id: self.id).collect { |term| term.tasks.flatten.
-          select { |task| task.accepted?} .count }
-      ]
+  # def accepted_tasks_number_hash
+  #     Hash[
+  #       self.terms.zip Term.where(course_id: self.id).collect { |term| term.tasks.flatten.
+  #         select { |task| task.accepted?} .count }
+  #     ]
+  # end
+
+  def accepted_tasks_count
+    tasks.where(status: :accepted).count
   end
 
-  def first_try_accepted_number_hash
-    Hash[
-      self.terms.zip Term.where(course_id: self.id).collect { |term| term.tasks.flatten.
-        select { |task| task.accepted? && task.notes.count == 0 } .count }
-    ]
+  # def first_try_accepted_number_hash
+  #   Hash[
+  #     self.terms.zip Term.where(course_id: self.id).collect { |term| term.tasks.flatten.
+  #       select { |task| task.accepted? && task.notes.count == 0 } .count }
+  #   ]
+  # end
+
+  def first_try_accepted_number(term)
+    Task.where(course_id: self.id, term: term, accepted: true, notes: 0).count
   end
 
-  def attempts_to_pass_number_hash
-    Hash[
-      self.terms.zip Term.where(course_id: self.id).collect { |term| term.tasks.
-        collect { |task| task.submissions } .flatten.count }
-    ]
+  # def attempts_to_pass_number_hash
+  #   Hash[
+  #     self.terms.zip Term.where(course_id: self.id).collect { |term| term.tasks.
+  #       collect { |task| task.submissions } .flatten.count }
+  #   ]
+  # end
+
+  def attempts_to_pass_number(term)
+    Submissions.where(course_id: self.id, term: @terms).count
   end
 
   def max_of_attempts_to_pass_number_hash
@@ -51,9 +68,15 @@ class Course < ActiveRecord::Base
       ]
   end
 
+  def max_of_attempts_to_pass_number
+    Hash[ self.terms.zip Submissions.where(course_id: self.id, term: @terms, task: @tasks)]
+  end
+
   def min_attempts_number_problem_hash
+    Term.select(:tasks).where(course_id: self.id).
+
     Hash[
-      self.terms.zip Term.where(course_id: self.id).
+      self.terms.zip Term.select(:tasks).where(course_id: self.id).
       select { |term| term.tasks.count > 0 }.collect { |term| term.tasks.
         min_by { |task| task.submissions.count } .problem }
       ]
