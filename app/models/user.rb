@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   enum user_type: [ :student, :teacher ]
   enum gender: [:male, :female ]
+  enum submission_form_type: [:shift_enter, :ctrl_enter, :enter ]
 
   belongs_to :group
   has_many :notifications, dependent: :destroy
@@ -21,6 +22,13 @@ class User < ActiveRecord::Base
   has_many :submissions, through: :tasks
 
   accepts_nested_attributes_for :tasks, :reject_if => :all_blank, :allow_destroy => true
+
+  serialize :settings, JSON
+  include Storext.model
+
+  store_attributes :settings do
+    submission_form_type String, default: "Shift+Enter"
+  end
 
   before_create do
     self.name = self.name.strip
@@ -56,4 +64,3 @@ class User < ActiveRecord::Base
   end
 
 end
-

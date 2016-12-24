@@ -9,6 +9,7 @@ class TasksController < ApplicationController
       authenticate_user!
     end
 
+    session[:task_url] = "/tasks/" + @task.id.to_s
     @course = @task.problem.homework.term.course
 
     @is_teacher = current_user == @course.teacher

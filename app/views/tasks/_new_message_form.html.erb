@@ -1,6 +1,6 @@
 <%= simple_form_for Message.new, remote: true do |f| %>
   <%= f.hidden_field :user_id, value: current_user.id %>
   <%= f.hidden_field :task_id, value: @task.id %>
-  <%= f.input :text, label: false, placeholder: "Текст сообщения", hint: form_hint_for("сообщение") %>
+  <%= f.input :text, label: false, placeholder: "Текст сообщения", input_html: { rows: 4 }, hint: form_hint_for("сообщение", current_user.submission_form_type) %>
   <%= f.button :submit, 'Отправить' %>
 <% end %>
