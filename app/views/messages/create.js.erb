@@ -1,2 +1,3 @@
-$("#chat-table").append("<%=  j (render partial: 'tasks/message', object: @message) %>");
+$("<%=  j (render partial: 'tasks/message', object: @message) %>").insertBefore($("#form-row"));
 $("#new_message")[0].reset();
+console.log($("#chat-table").last().val());
