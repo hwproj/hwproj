@@ -147,8 +147,8 @@ h3 {
 }
 
 .message-panel .panel-body {
-  padding: 0px;
-  padding-left: 15px;
+  padding: 0px 15px;
+  word-break:break-all;
 }
 
 .left-arrow, .right-arrow  {

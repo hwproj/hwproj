@@ -6,26 +6,20 @@
   </div>
   <div class="col-sm-6<% if message.user != current_user%> pull-right <% end %> ">
     <div class="panel message-panel panel-default">
-      <div class="panel-heading
-      <% if message.user != current_user%>
-        right-arrow
-      <% else %>
-        left-arrow
-      <% end %> ">
+      <div class="<%= "panel-heading #{message.user != current_user ? "right" :
+                 "left"}-arrow".squish %>">
         <strong><%=message.user.full_name %></strong>
-        <span class="text-muted">прокомментировал
-          <% if message.created_at.to_date != Time.now.to_date %>
-            <%= message.created_at.strftime("%d %b %Y") %>
-          <% else %>
-            в <%= message.created_at.strftime("%H:%M") %>
-          <% end %>
-        </span>
+        <span class="text-muted"><%= "прокомментировал #{message.created_at.to_date != Time.now.to_date ?
+         message.created_at.strftime("%d %b %Y") : "в " + message.created_at.strftime("%H:%M")}".squish %></span>
         <% if message.user == current_user%>
           <span class="glyphicon glyphicon-pencil pull-right"></span>
         <% end %>
       </div>
       <div class="panel-body">
-        <%= message.text %>
+
+          <%= message.text %>
+
+        <%= hidden_field_tag 'message-id-field', message.id.to_s %>
       </div>
     </div>
   </div>

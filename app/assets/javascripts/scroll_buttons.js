@@ -2,15 +2,13 @@ jQuery(document).on('ready page:load page:restore', function() {
     var windowScrollCoordinates = 0;
     jQuery.fn.extend({
         linkWidth: function() {
-            var totalContentWidth = jQuery('#chat-table').outerWidth();
-
-            var width = jQuery(window).width() / 2 - totalContentWidth / 2;
-            if (width < 30) {
+            var width = jQuery(window).width() / 40;
+            if (width < 15) {
                 return false;
             } else {
                 $(this).css({
-                    'padding-right': width / 2,
-                    'padding-left': width / 2
+                    'padding-right': width,
+                    'padding-left': width
                 });
                 return true;
             }
@@ -18,8 +16,8 @@ jQuery(document).on('ready page:load page:restore', function() {
     });
 
     jQuery.fn.extend({
-        updateLink: function() {
-            if ($(window).scrollTop() >= 50) {
+        updateLink: function(coordinate) {
+            if ($(window).scrollTop() >= coordinate && $(this).linkWidth()) {
                 $(this).fadeIn(300);
             } else {
                 $(this).fadeOut(300);
@@ -37,22 +35,24 @@ jQuery(document).on('ready page:load page:restore', function() {
         predLink.css({
             'padding-top': $(window).height() - 35
         });
-        predLink.linkWidth();
-        topLink.linkWidth();
 
         $(window).resize(function() {
-            predLink.linkWidth();
-            topLink.linkWidth();
+            if ($(window).scrollTop() == 0) {
+                predLink.updateLink(0);
+            } else {
+                topLink.updateLink(50);
+            }
         });
 
         $(window).scroll(function() {
-            if ($(window).scrollTop() == 0) {
-                topLink.hide();
-                predLink.show();
-            } else if (predLink.is(':visible')) {
-                predLink.hide();
-            }
-            topLink.updateLink();
+          if ($(window).scrollTop() == 0) {
+              predLink.updateLink(0);
+          } else {
+              if (predLink.is(":visible")) {
+                predLink.fadeOut(300);
+              }
+              topLink.updateLink(50);
+          }
         });
 
         topLink.click(function() {
