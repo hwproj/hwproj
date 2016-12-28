@@ -34,7 +34,7 @@ class Term < ActiveRecord::Base
     tasks.map{ |task| task.notes_count }.sum
   end
 
-  def submissions_count
+  def tasks_submissions_count_list
     tasks.map{ |task| task.submissions_count }
   end
 
