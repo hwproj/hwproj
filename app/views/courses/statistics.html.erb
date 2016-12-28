@@ -27,25 +27,11 @@
 
   <%= statistics_line("Попыток сдать задачи", @attempts_to_pass_total, @attempts_to_pass) %>
 
-  <%= statistics_line("Максимальное число попыток сдать одну задачу ", @max_attempts_to_pass_one_task_total, @max_attempts_to_pass_one_task) %>
+  <%= statistics_line("Максимальное число попыток сдать одну задачу ", @max_attempts_total, @max_attempts) %>
 
-  <tr>
-    <td><%= "Задача с минимальным количеством попыток" %></td>
-    <td class="separator"></td>
-    <td align="center"><%= "  " %></td>
-    <% for i in 0..@terms.count - 1%>
-      <td align="center"><%= @problems_with_min_attempts_to_pass[i] %></td>
-    <% end %> 
-  </tr>
+  <%= problem_with_max_or_min_attempts_line("Задача с минимальным количеством попыток", @problems_with_min_attempts_to_pass) %>
 
-   <tr>
-    <td><%= "Задача с максимальным количеством попыток" %></td>
-    <td class="separator"></td>
-    <td align="center"><%= "  " %></td>
-    <% for i in 0..@terms.count - 1%>
-      <td align="center"><%= @problems_with_max_attempts_to_pass[i] %></td>
-    <% end %> 
-  </tr>
+  <%= problem_with_max_or_min_attempts_line("Задача с максимальным количеством попыток", @problems_with_max_attempts_to_pass) %>
 
   </table>
 </div>

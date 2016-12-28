@@ -27,7 +27,7 @@ class Term < ActiveRecord::Base
   end
 
   def accepted_tasks_count
-    tasks.map{ |task| task.accepted? }.count
+    tasks.select{ |task| task.accepted? }.count
   end
 
   def notes_count

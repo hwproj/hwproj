@@ -76,8 +76,8 @@ class CoursesController < ApplicationController
     @attempts_to_pass = @terms.map { |term| term.submissions_count.sum }
     @attempts_to_pass_total = @attempts_to_pass.sum
 
-    @max_attempts_to_pass_one_task = @terms.map { |term| term.submissions_count.max }
-    @max_attempts_to_pass_one_task_total = @max_attempts_to_pass_one_task.max
+    @max_attempts = @terms.map { |term| term.submissions_count.max }
+    @max_attempts_total = @max_attempts.max
 
     @problems_with_min_attempts_to_pass = @terms.map { |term| term.min_attempts_to_pass_problem.problem.get_name }
 
