@@ -27,11 +27,23 @@ class Term < ActiveRecord::Base
   end
 
   def accepted_tasks_count
-    tasks.where(status: :accepted).count
+    tasks.map{ |task| task.accepted? }.count
   end
 
   def notes_count
-    tasks.notes.count
+    tasks.map{ |task| task.notes_count }.sum
+  end
+
+  def submissions_count
+    tasks.map{ |task| task.submissions_count }
+  end
+
+  def min_attempts_to_pass_problem
+    tasks.min_by{ |task| task.submissions_count }
+  end
+
+  def max_attempts_to_pass_problem
+    tasks.max_by{ |task| task.submissions_count }
   end
 
   private

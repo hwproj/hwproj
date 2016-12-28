@@ -27,6 +27,14 @@ class Task < ActiveRecord::Base
     problem.get_name
   end
 
+  def notes_count
+    self.notes.count
+  end
+
+  def submissions_count
+    self.submissions.count
+  end
+
   private
     def accept_notes
       self.notes.each{ |note| note.update fixed: true }
