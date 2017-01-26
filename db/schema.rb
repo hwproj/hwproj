@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160903073618) do
+ActiveRecord::Schema.define(version: 20161207104355) do
 
   create_table "awards", force: true do |t|
     t.integer  "job_id"
@@ -189,7 +189,6 @@ ActiveRecord::Schema.define(version: 20160903073618) do
     t.string   "last_sign_in_ip"
     t.integer  "user_type",              default: 0
     t.integer  "group_id"
-    t.integer  "gender"
     t.boolean  "approved",               default: false
     t.string   "github_access_token"
     t.boolean  "admin",                  default: false
