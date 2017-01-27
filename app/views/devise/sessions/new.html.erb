@@ -1,19 +1,21 @@
 <h2>Вход</h2>
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: {:class => 'form-horizontal' }) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email, label: "Email", required: false, autofocus: true %>
-    <%= f.input :password, label: "Пароль" %>
-    <%= f.input :remember_me, label: "Оставаться в системе", as: :boolean if devise_mapping.rememberable? %>
-  </div>
+<div class="col-md-4">
+  <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: {:class => 'form-horizontal' }) do |f| %>
+    <div class="form-inputs">
+      <%= f.input :email, label: "Email", required: false, autofocus: true %>
+      <%= f.input :password, label: "Пароль" %>
+      <%= f.input :remember_me, label: "Оставаться в системе", as: :boolean if devise_mapping.rememberable? %>
+    </div>
+
+    <br>
+
+    <div class="form-actions">
+      <%= f.button :submit, "Вход", class: "btn btn-primary" %>
+    </div>
+  <% end %>
 
   <br>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Вход", class: "btn btn-primary" %>
-  </div>
-<% end %>
-
-<br>
-
-<%= render "devise/shared/links" %>
+  <%= render "devise/shared/links" %>
+</div>
