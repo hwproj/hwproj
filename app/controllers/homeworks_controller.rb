@@ -3,6 +3,7 @@ class HomeworksController < ApplicationController
 
   def new
     @assignment = Homework.new
+    @assignment.term = Term.find(params[:term_id])
   end
 
   def create

@@ -16,7 +16,20 @@
   			<% if user_signed_in? %>
 
           <% if current_user.teacher? %>
-            <li> <%= link_to "Добавить задание", new_homework_path if current_user.courses.any? %> </li>
+          
+            <% if current_user.courses.count == 1 %>
+              <li> <%= link_to "Добавить задание", new_homework_path(term_id: current_user.courses.last.terms.last.id) %> </li>
+            <% elsif current_user.courses.count > 1 %>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Добавить задание <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+
+                  <% current_user.courses.order(:group_name).each do |course| %>
+                    <li> <%= link_to course.group_name,  new_homework_path(term_id: course.terms.last.id) %> </li>
+                  <% end %>
+                </ul> 
+              </li>              
+            <% end %>
 
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Группы <span class="caret"></span></a>
