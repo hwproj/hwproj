@@ -18,15 +18,7 @@
     <h3> <%= @course.teacher.full_name %> </h3>
     <h3>
       <% if @teacher || @student %>
-        <% if @course.teacher.additional_email.to_s.empty? %>
-          <%= mail_to @course.teacher.email do %>
-            <%= @course.teacher.email %>
-          <% end %>
-        <% else %>
-          <%= mail_to @course.teacher.additional_email do %>
-            <%= @course.teacher.additional_email %>
-          <% end %>
-        <% end %>
+        <%= render partial: "layouts/emails", locals: {user: @course.teacher} %>
       <% end %>
     </h3>
     <% if !@statistics %>
