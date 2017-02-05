@@ -56,7 +56,7 @@ class User < ActiveRecord::Base
   end
 
   def public_email
-    public_email = (additional_email.blank?) ? email : additional_email
+    (additional_email.blank?) ? email : additional_email
   end
 
 end
