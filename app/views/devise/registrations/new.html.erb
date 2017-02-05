@@ -6,7 +6,8 @@
   <div class="form-inputs">
     <%= f.input :name, label: "Имя", autofocus: true %>
     <%= f.input :surname, label: "Фамилия" %>
-    <%= f.input :email %>
+    <%= f.input :email, label: "Основной email", hint: "Ваш основной email будет использоваться для получения уведомлений" %>
+    <%= f.input :additional_email, label: "Дополнительный email", hint: "Этот email будет использоваться как контактный", required: false %>
     <%= f.input :gender, collection: { "мужской" => :male, "женский" => :female }, label: "Пол" %> 
     <%= f.input :password, label: "Пароль" %>
     <%= f.input :password_confirmation, label: "Подтверждение" %>

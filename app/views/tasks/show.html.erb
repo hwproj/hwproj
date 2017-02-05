@@ -22,7 +22,7 @@
   <% if @is_teacher %>
   <h4 align="right">
     <%= @student.full_name %> <br>
-    <%= mail_to @student.user.email, @student.user.email %>
+    <%= mail_to @student.user.additional_email, @student.user.additional_email %>
   </h4>
   <% end %>
   </div>
