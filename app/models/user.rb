@@ -55,5 +55,13 @@ class User < ActiveRecord::Base
     notifications.where(is_read: false).count
   end
 
+  def public_email
+    if additional_email.blank?
+      public_email = email
+    else
+      public_email = additional_email
+    end
+  end
+
 end
 

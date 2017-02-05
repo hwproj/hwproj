@@ -1,5 +1,0 @@
-<% if user.additional_email.blank? %>
-  <%= mail_to user.email, user.email %>
-<% else %>
-  <%= mail_to user.additional_email, user.additional_email %>
-<% end %>

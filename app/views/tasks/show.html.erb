@@ -22,7 +22,7 @@
   <% if @is_teacher %>
   <h4 align="right">
     <%= @student.full_name %> <br>
-    <%= render partial: "layouts/emails", locals: {user: @student.user} %> 
+    <%= mail_to @student.user.public_email, @student.user.public_email %>
   </h4>
   <% end %>
   </div>

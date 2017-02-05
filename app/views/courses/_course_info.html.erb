@@ -18,7 +18,7 @@
     <h3> <%= @course.teacher.full_name %> </h3>
     <h3>
       <% if @teacher || @student %>
-        <%= render partial: "layouts/emails", locals: {user: @course.teacher} %>
+        <%= mail_to @course.teacher.public_email, @course.teacher.public_email %>
       <% end %>
     </h3>
     <% if !@statistics %>
