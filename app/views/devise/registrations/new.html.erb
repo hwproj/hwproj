@@ -7,7 +7,7 @@
     <%= f.input :name, label: "Имя", autofocus: true %>
     <%= f.input :surname, label: "Фамилия" %>
     <%= f.input :email, label: "Основной email", hint: "Ваш основной email будет использоваться для получения уведомлений" %>
-    <%= f.input :additional_email, label: "Дополнительный email", hint: "Этот email будет использоваться как контактный. Оставьте пустым, если не хотите менять пароль", required: false %>
+    <%= f.input :additional_email, label: "Дополнительный email", hint: "Оставьте пустым, если не хотите менять email", required: false %>
     <%= f.input :gender, collection: { "мужской" => :male, "женский" => :female }, label: "Пол" %> 
     <%= f.input :password, label: "Пароль" %>
     <%= f.input :password_confirmation, label: "Подтверждение" %>
