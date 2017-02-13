@@ -1,30 +1,37 @@
-<div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3 id="myModalLabel">Пригласить преподавателя</h3>
-</div>
-
-<%= simple_form_for @invitation, remote: true do |f| %>
-
-  <div class="modal-body">  
-    
-    <% if @notice %>
-      <div class="alert alert-success" role="alert">
-        <%= @notice %>
+<div class=col-md-8>
+  <div style=background-color:white>
+    <div border-radius: 10px;>
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h3 id="myModalLabel">Пригласить преподавателя</h3>
       </div>
-    <% end %>
 
-    <%= f.error_notification %>
+      <%= simple_form_for @invitation, remote: true do |f| %>
 
-    <div class="form-inputs">
-      <%= f.input :email %>
+        <div class="modal-body">  
+          
+          <% if @notice %>
+            <div class="alert alert-success" role="alert">
+              <%= @notice %>
+            </div>
+          <% end %>
+
+          <%= f.error_notification %>
+
+          <div class="form-inputs">
+            <%= f.input :email %>
+          </div>
+
+          <br>
+        </div>
+
+        <div class="modal-footer">
+          <div class="form-actions">
+            <%= f.button :submit, "Отправить приглашение", class: "btn btn-primary" %>
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Закрыть</button>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
-
-  <div class="modal-footer">
-    <div class="form-actions">
-      <%= f.button :submit, "Отправить приглашение", class: "btn btn-primary" %>
-      <button class="btn" data-dismiss="modal" aria-hidden="true">Закрыть</button>
-    </div>
-  </div>
-
-<% end %>
+</div>
