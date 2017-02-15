@@ -55,7 +55,7 @@ class CoursesController < ApplicationController
   end
 
   def statistics
-    @terms = @course.terms
+    @terms = @course.terms.select { |term| term.tasks.count > 0 }
     @teacher_id = @course.teacher_id
     @statistics = true
 
@@ -72,6 +72,9 @@ class CoursesController < ApplicationController
 
     @accepted_tasks = @terms.map { |term| term.accepted_tasks_count }
     @accepted_tasks_total = @accepted_tasks.sum
+
+    @first_try_accepted_tasks = @terms.map { |term| term.first_try_accepted_tasks_count }
+    @first_try_accepted_tasks_total = @first_try_accepted_tasks.sum
 
     @attempts_to_pass = @terms.map { |term| term.tasks_submissions_count_list.sum }
     @attempts_to_pass_total = @attempts_to_pass.sum

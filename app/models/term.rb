@@ -27,7 +27,11 @@ class Term < ActiveRecord::Base
   end
 
   def accepted_tasks_count
-    tasks.select{ |task| task.accepted? }.count
+    tasks.where(status: Task.statuses[:accepted]).count
+  end
+
+  def first_try_accepted_tasks_count
+    tasks.select{ |task| task.accepted? && task.notes.count == 0 }.count
   end
 
   def notes_count
