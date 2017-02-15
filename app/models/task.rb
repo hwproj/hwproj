@@ -12,6 +12,9 @@ class Task < ActiveRecord::Base
   has_many :submissions, dependent: :destroy
   has_many :notes, through: :submissions
 
+  scope :accepted, -> { where(status: self.statuses[:accepted]) }
+  scope :without_notes, -> { includes(:notes).where(notes: { id: nil }) } 
+
   #chat
   has_many :messages, dependent: :destroy
 
