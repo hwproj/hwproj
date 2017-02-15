@@ -26,6 +26,30 @@ class Term < ActiveRecord::Base
     assignments.where(assignment_type: "test")
   end
 
+  def accepted_tasks_count
+    tasks.accepted.count
+  end
+
+  def first_try_accepted_tasks_count
+    tasks.accepted.without_notes.count
+  end
+
+  def notes_count
+    tasks.map{ |task| task.notes_count }.sum
+  end
+
+  def tasks_submissions_count_list
+    tasks.map{ |task| task.submissions_count }
+  end
+
+  def min_attempts_to_pass_problem
+    tasks.min_by{ |task| task.submissions_count }
+  end
+
+  def max_attempts_to_pass_problem
+    tasks.max_by{ |task| task.submissions_count }
+  end
+
   private
     def set_number
       self.number = self.course.terms.count + 1

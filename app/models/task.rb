@@ -12,6 +12,9 @@ class Task < ActiveRecord::Base
   has_many :submissions, dependent: :destroy
   has_many :notes, through: :submissions
 
+  scope :accepted, -> { where(status: self.statuses[:accepted]) }
+  scope :without_notes, -> { includes(:notes).where(notes: { id: nil }) } 
+
   #chat
   has_many :messages, dependent: :destroy
 
@@ -24,18 +27,16 @@ class Task < ActiveRecord::Base
 
 
   def name
-    if problem.name || (not problem.name.blank?)
-      name = problem.name
-    else
-      name = "#{problem.homework.number}.#{problem.number}"
-    end
-
-    name = "Тест, " + name if problem.homework.test?
-
-    name
+    problem.get_name
   end
 
+  def notes_count
+    self.notes.count
+  end
 
+  def submissions_count
+    self.submissions.count
+  end
 
   private
     def accept_notes

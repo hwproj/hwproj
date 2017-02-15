@@ -55,7 +55,7 @@ class CoursesController < ApplicationController
   end
 
   def statistics
-    @terms = @course.terms
+    @terms = @course.terms.select { |term| term.tasks.count > 0 }
     @teacher_id = @course.teacher_id
     @statistics = true
 
@@ -67,11 +67,25 @@ class CoursesController < ApplicationController
       end
     end
 
-    @notes_number = @course.notes_number_hash
-    @notes_total = @notes_number.values.sum
+    @notes = @terms.map { |term| term.notes_count }
+    @notes_total = @notes.sum
 
-    @first_try_accepted_tasks_number = @course.first_try_accepted_tasks_number_hash
-    @first_try_accepted_tasks_total = @first_try_accepted_tasks_number.values.sum
+    @accepted_tasks = @terms.map { |term| term.accepted_tasks_count }
+    @accepted_tasks_total = @accepted_tasks.sum
+
+    @first_try_accepted_tasks = @terms.map { |term| term.first_try_accepted_tasks_count }
+    @first_try_accepted_tasks_total = @first_try_accepted_tasks.sum
+
+    @attempts_to_pass = @terms.map { |term| term.tasks_submissions_count_list.sum }
+    @attempts_to_pass_total = @attempts_to_pass.sum
+
+    @max_attempts = @terms.map { |term| term.tasks_submissions_count_list.max }
+    @max_attempts_total = @max_attempts.max
+
+    @problems_with_min_attempts_to_pass = @terms.map { |term| term.min_attempts_to_pass_problem.problem.get_name }
+
+    @problems_with_max_attempts_to_pass = @terms.map { |term| term.max_attempts_to_pass_problem.problem.get_name }
+
   end
 
   def index

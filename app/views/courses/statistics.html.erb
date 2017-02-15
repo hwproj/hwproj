@@ -13,7 +13,7 @@
         <td align="center"><strong> <%= "Статистика" %> </strong></td>
         <td class="separator"></td>
 
-        <td align="center"><strong> <%= "Всего" %> </strong></td>
+        <td align="center"><strong> <%= "Все семестры" %> </strong></td>
 
         <% @terms.each do |term| %>
           <td align="center"><strong> <%= "#{term.number} семестр" %> </strong></td>
@@ -21,22 +21,20 @@
       </tr>
     </thead>
 
-	<tr>
-		<td><%= "Комментариев к задачам" %></td>
-		<td class="separator"></td>
-		<td align="center"><%= @notes_total %></td>
-		<% @terms.each do |term| %>
-			<td align="center"><%= @notes_number[term] %></td>
-		<% end %>
-	</tr>
+  <%= statistics_line("Комментариев к задачам", @notes, @notes_total) %>
 
-	<tr>
-		<td><%= "Сдано задач с первого раза" %></td>
-		<td class="separator"></td>
-		<td align="center"><%= @first_try_accepted_tasks_total %></td>
-		<% @terms.each do |term| %>
-			<td align="center"><%= @first_try_accepted_tasks_number[term] %></td>
-		<% end %>
-	</tr>
+  <%= statistics_line("Принято задач", @accepted_tasks, @accepted_tasks_total) %>
+
+  <%= statistics_line("Сдано с первого раза", @first_try_accepted_tasks, @first_try_accepted_tasks_total) %>
+
+  <%= statistics_line("Попыток сдать задачи", @attempts_to_pass, @attempts_to_pass_total) %>
+
+  <%= statistics_line("Максимальное число попыток сдать одну задачу ", @max_attempts, @max_attempts_total) %>
+
+  <%= statistics_line("Задача с минимальным количеством попыток", @problems_with_min_attempts_to_pass, '') %>
+
+  <%= statistics_line("Задача с максимальным количеством попыток", @problems_with_max_attempts_to_pass, '') %>
+
   </table>
 </div>
+
