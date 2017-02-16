@@ -87,7 +87,12 @@ class CoursesController < ApplicationController
   end
 
   def add_term # todo rewrite with ajax
+    previous_term = @course.terms.last
     @course.terms.create()
+    previous_term.students.where(approved: true).each do |student|
+      new_student = @course.terms.last.students.create(term_id: @course.terms.last.number, user_id: student.user_id, approved: true)
+
+    end
 
     redirect_to :back
   end
