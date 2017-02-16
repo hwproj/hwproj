@@ -56,19 +56,19 @@
         <td style="white-space: nowrap">
           <%= "#{student.user.surname} #{student.user.name}" %>
 
-          <% if @teacher && (not student.approved?) %>
-            <%= link_to student_path(student, student: { approved: true }), method: :put do %>
-              <span class="glyphicon glyphicon-ok"></span>
-            <% end %>
+          <% if @teacher %>
+            <% if student.approved? %>
+              <%= link_to student_path(student, student: { approved: false, active: false }), method: :put, data: { confirm: 'Вы уверены, что хотите удалить студента?' } do %>
+                <span class="glyphicon glyphicon-remove"></span>
+              <% end %>
+            <% else %>
+              <%= link_to student_path(student, student: { approved: true }), method: :put do %>
+                <span class="glyphicon glyphicon-ok"></span>
+              <% end %>
 
-            <%= link_to student, method: :delete do %>
-              <span class="glyphicon glyphicon-remove"></span>
-            <% end %>
-          <% end %>
-
-          <% if @teacher && student.approved? %>
-            <%= link_to student, method: :delete, data: { confirm: 'Are you sure?' } do %>
-              <span style="color:#d9534f" class="glyphicon glyphicon-remove"></span>
+              <%= link_to student_path(student, student: { active: false }), method: :put do %>
+                <span class="glyphicon glyphicon-remove"></span>
+              <% end %>
             <% end %>
           <% end %>
 

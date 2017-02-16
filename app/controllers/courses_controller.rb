@@ -35,7 +35,7 @@ class CoursesController < ApplicationController
 
     if signed_in? && current_user.id == @teacher_id
       @teacher = true
-      @students = @term.students.includes(jobs: :tasks)
+      @students = @term.students.where(active: true).includes(jobs: :tasks)
     else
       @students = @term.students.where(approved: true).includes(jobs: :tasks)
     end

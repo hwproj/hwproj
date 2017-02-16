@@ -28,7 +28,11 @@
       <%= render 'management_button' %>
     <% end %>
     <% if !@statistics %>
-      <%= render 'enroll_button' %>
+      <% if !@student || (@student && !@student.active?) %>
+        <%= render 'enroll_button' %>
+      <% elsif @student && @student.approved? %>
+        <%= render 'unsubscribe_button' %>
+      <% end %>
     <% end %>
   </div>
 </div>
