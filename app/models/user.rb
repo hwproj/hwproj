@@ -2,7 +2,8 @@ class User < ActiveRecord::Base
   validates :name, :surname, :gender, presence: true
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, omniauth_providers: [ :google_oauth2 ]
 
   enum user_type: [ :student, :teacher ]
   enum gender: [:male, :female ]
@@ -53,6 +54,15 @@ class User < ActiveRecord::Base
 
   def unread_notifications_count
     notifications.where(is_read: false).count
+  end 
+
+  def self.from_omniauth(auth)
+    where(provider: auth[:provider], uid: auth[:uid]).first_or_create do |user|
+      user.email = auth[:info][:email]
+      user.password = Devise.friendly_token[0,20]
+      user.name = auth[:info][:first_name]   
+      user.surname = auth[:info][:last_name]       
+    end
   end
 
 end
