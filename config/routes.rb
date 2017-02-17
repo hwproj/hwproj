@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
-  devise_for :users, :controllers => { registrations: 'registrations', omniauth_callbacks: 'callbacks' }
+  devise_for :users, controllers: { registrations: 'registrations', omniauth_callbacks: 'omniauth_callbacks' }
 
   get 'courses/:id/terms/:term_number', to: 'courses#show', as: "show_term"
   put 'courses/:id/terms/new', to: 'courses#add_term', as: "add_term"
