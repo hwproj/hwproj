@@ -33,13 +33,12 @@
       </table>
       </td>
       <td>
-        <span><%= check_box_tag "#{notification.id}", 1, notification.is_read, title: notification_title, data: { behavior: "update-is_read" } %></span>
+        <span><%= link_to (notification.is_read ? 'Непрочитанные' : 'читать'), '#', data: { behavior: "update-is_read"}, id: notification.id, class: "btn btn-success #{notification.is_read ? 'read' : 'unread'}" %></span>
       </td>
     </tr>
     </table>
 
-<% else %>
-  <span><%= check_box_tag "#{notification.id}", 1, notification.is_read, title: notification_title, data: { behavior: "update-is_read" } %></span>
+<% else %>  
     <% if notification.task_accepted? %>
       <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
       <% if task.job.assignment.assignment_type == "homework" %>
@@ -61,6 +60,7 @@
       <strong><%= notification.last_event_time.strftime("%H:%M") %></strong>
       <%= notification.last_event_time.strftime("%d.%m.%y") if notification.last_event_time.to_date != Time.now.to_date %>
     </small>
+  <span><%= link_to (notification.is_read ? 'Непрочитанные' : 'читать'), '#', data: { behavior: "update-is_read"}, id: notification.id, class: "btn btn-success #{notification.is_read ? 'read' : 'unread'}" %></span>
 <% end %>
 </div>
 <hr>
