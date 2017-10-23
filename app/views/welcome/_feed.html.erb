@@ -48,6 +48,11 @@
     <% end %>
     <% if @section != 'important' %>
       <div id = "notifications" class="notifications">
+        <% if @notifications.many? %>
+          <div class="text-center">
+            <%= sortable_link_to(sort_order, section: @section) %>
+          </div>
+        <% end %>
         <% if (@section == 'unread' && current_user.has_unread_notifications) || (@section == 'show_all' && @notifications.any?) %>
           <%= render @notifications %>
         <% else %>
