@@ -13,9 +13,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
 
 //= require cocoon
 
-//= require jquery
 //= require bootstrap-sprockets
+//= require forms
+//= require welcome
+//= require tooltips-initializer
