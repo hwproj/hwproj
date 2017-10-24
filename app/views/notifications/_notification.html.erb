@@ -1,6 +1,5 @@
-<div id = <%= "notification#{notification.id}"%> <%= 'class=read_notification' if notification.is_read%>>
+<div id="<%= dom_id(notification) %>" <%= 'class=read_notification' if notification.is_read %> >
 <% task = notification.task %>
-<% notification_title = "Отметить как #{"не" if notification.is_read?}прочитанное" %>
 <% if current_user.teacher? %>
   <% user = task.student.user %>
     <table>
@@ -33,13 +32,12 @@
       </table>
       </td>
       <td>
-        <span><%= check_box_tag "#{notification.id}", 1, notification.is_read, title: notification_title, data: { behavior: "update-is_read" } %></span>
+        <%= render 'notifications/form', resource: notification %>
       </td>
     </tr>
     </table>
 
 <% else %>
-  <span><%= check_box_tag "#{notification.id}", 1, notification.is_read, title: notification_title, data: { behavior: "update-is_read" } %></span>
     <% if notification.task_accepted? %>
       <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
       <% if task.job.assignment.assignment_type == "homework" %>
@@ -61,6 +59,9 @@
       <strong><%= notification.last_event_time.strftime("%H:%M") %></strong>
       <%= notification.last_event_time.strftime("%d.%m.%y") if notification.last_event_time.to_date != Time.now.to_date %>
     </small>
+    <div class="pull-right">
+      <%= render 'notifications/form', resource: notification %>
+    </div>
 <% end %>
-</div>
 <hr>
+</div>

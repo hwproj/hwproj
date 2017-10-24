@@ -1,0 +1,1 @@
+<%= link_to "Непрочитанные#{" (#{unread_notifications_count})" if unread_notifications_count.nonzero?}", root_path(section: :unread), id: 'unread' %>

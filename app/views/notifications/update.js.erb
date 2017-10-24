@@ -1,0 +1,2 @@
+$("<%= css_id(resource) %>").replaceWith("<%= j render 'notification', notification: resource %>");
+$("#unread").replaceWith("<%= j render 'unread_link', unread_notifications_count: current_user.unread_notifications_count %>");
